@@ -6,7 +6,12 @@ import { SmoothAnchor } from "./_hub/SmoothAnchor";
 import { HomeHeader } from "./_hub/HomeHeader";
 import { HeroViz } from "./_hub/HeroViz";
 import { SeguroCompare } from "./_hub/svg/SeguroCompare";
-import { PrevidenciaStackClient as PrevidenciaStack } from "./_hub/scenes/clients";
+import {
+  GlobeClient as Globe,
+  AltLayersClient as AltLayers,
+  WorkshopRoomClient as WorkshopRoom,
+  PrevidenciaStackClient as PrevidenciaStack,
+} from "./_hub/scenes/clients";
 import { PortalMock } from "./_hub/PortalMock";
 import { MentoriaSection } from "./_hub/MentoriaSection";
 
@@ -56,6 +61,7 @@ export default function HubPage() {
       <S07_Previdencia />
       <S08_Workshops />
       <ConhecaInvestimentos />
+      <HomeEquipe />
       <HomeClosing />
     </main>
   );
@@ -203,15 +209,14 @@ function S03_Internacionais() {
   return (
     <section id="internacionais" style={{ backgroundColor: "#F5F7FA" }} className="py-20 md:py-28">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-          <div className="col-span-12 md:col-span-4">
+        <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
+          {/* Copy */}
+          <div className="col-span-12 md:col-span-5 order-2 md:order-1">
             <SectionTag label="Onde o capital mora" />
-            <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-tight tracking-tight" style={{ color: "#2E4659" }}>
+            <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-tight tracking-tight mb-6" style={{ color: "#2E4659" }}>
               Patrimônio<br />em dólar.
             </h2>
-          </div>
-          <div className="col-span-12 md:col-span-7 md:col-start-6">
-            <p className="text-[1.0rem] leading-[1.65] mb-5" style={{ color: "#6B7B8D" }}>
+            <p className="text-[1.0rem] leading-[1.65] mb-4" style={{ color: "#6B7B8D" }}>
               O dólar é a moeda de reserva global e a base dos maiores mercados financeiros do mundo.
             </p>
             <p className="text-[0.95rem] leading-[1.65] mb-4" style={{ color: "#6B7B8D" }}>
@@ -227,6 +232,12 @@ function S03_Internacionais() {
             <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
               Quero diversificar globalmente <Arrow />
             </Link>
+          </div>
+          {/* Globo */}
+          <div className="col-span-12 md:col-span-6 md:col-start-7 order-1 md:order-2">
+            <div className="w-full aspect-square">
+              <Globe className="w-full h-full" />
+            </div>
           </div>
         </div>
       </div>
@@ -326,22 +337,33 @@ function S06_Alternativos() {
   return (
     <section id="alternativos" className="bg-white py-20 md:py-28">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-          <div className="col-span-12 md:col-span-4">
-            <SectionTag label="Fora da prateleira" />
-            <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-tight tracking-tight" style={{ color: "#2E4659" }}>
-              Produtos<br />alternativos.
-            </h2>
+        <SectionTag label="Fora da prateleira" />
+        {/* Canvas com título sobreposto */}
+        <div className="mt-4 relative">
+          <div className="w-full aspect-[16/10] md:aspect-[16/9] relative">
+            <div className="absolute inset-0">
+              <AltLayers className="w-full h-full" />
+            </div>
+            <div className="absolute left-0 bottom-0 p-2 md:p-6 max-w-[20ch]">
+              <h2 className="text-[clamp(2rem,4.5vw,4rem)] font-bold leading-[0.96] tracking-tight" style={{ color: "#2E4659" }}>
+                Produtos<br />alternativos.
+              </h2>
+            </div>
           </div>
-          <div className="col-span-12 md:col-span-7 md:col-start-6">
-            <p className="text-[1.0rem] leading-[1.65] mb-5" style={{ color: "#6B7B8D" }}>
+        </div>
+        {/* Copy + CTA abaixo */}
+        <div className="mt-10 grid grid-cols-12 gap-10 md:gap-12 items-start">
+          <div className="col-span-12 md:col-span-6">
+            <p className="text-[1.0rem] leading-[1.65] mb-4" style={{ color: "#6B7B8D" }}>
               O que o private banking acessa e seu gerente nunca te ofereceu,
               porque não está na grade dele.
             </p>
-            <p className="text-[0.95rem] leading-[1.65] mb-8" style={{ color: "#6B7B8D" }}>
+            <p className="text-[0.95rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>
               Fundos exclusivos, crédito privado estruturado, private equity, real estate.
               Estruturas fora da prateleira de banco.
             </p>
+          </div>
+          <div className="col-span-12 md:col-span-6 flex md:justify-end md:items-end">
             <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
               Ver alternativos em detalhe <Arrow />
             </Link>
@@ -401,29 +423,143 @@ function S08_Workshops() {
   return (
     <section id="workshops" className="bg-white py-20 md:py-28">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-          <div className="col-span-12 md:col-span-4">
+        <div className="grid grid-cols-12 gap-8 items-end mb-10">
+          <div className="col-span-12 md:col-span-7">
             <SectionTag label="Para grupos" />
             <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-tight tracking-tight" style={{ color: "#2E4659" }}>
               Treinamentos<br />e workshops.
             </h2>
           </div>
-          <div className="col-span-12 md:col-span-7 md:col-start-6">
-            <p className="text-[1.0rem] leading-[1.65] mb-8" style={{ color: "#6B7B8D" }}>
-              Conteúdo financeiro estratégico, desenvolvido para atender às necessidades
-              específicas de executivos, gestores, conselhos, sindicatos e equipes corporativas.
-            </p>
+          <p className="col-span-12 md:col-span-5 text-[1.0625rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>
+            Conteúdo financeiro estratégico, desenvolvido para atender às necessidades
+            específicas de executivos, gestores, conselhos, sindicatos e equipes corporativas.
+          </p>
+        </div>
+        {/* Cena wide */}
+        <div className="w-full aspect-[16/8] md:aspect-[16/7]">
+          <WorkshopRoom className="w-full h-full" />
+        </div>
+        <div className="mt-10 grid grid-cols-12 gap-8 items-end">
+          <div className="col-span-12 md:col-span-7">
             <ProofRow items={[
               { k: "Formato curto", v: "1 a 3h" },
               { k: "Programa",      v: "1 a 2 sessões" },
               { k: "Modalidade",    v: "Presencial · remoto" },
             ]} />
-            <div className="mt-8">
-              <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
-                Conversar sobre um workshop <Arrow />
-              </Link>
-            </div>
           </div>
+          <div className="col-span-12 md:col-span-5 flex md:justify-end">
+            <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
+              Conversar sobre um workshop <Arrow />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ================================================================
+   Equipe
+   ================================================================ */
+
+const TEAM = [
+  {
+    name: "Lucas Midlej",
+    role: "Sócio-fundador",
+    bio: "Advogado com atuação focada no cruzamento entre direito e mercado financeiro. Especialista em planejamento patrimonial, estruturas societárias e assessoria estratégica para investidores, empresários e famílias.",
+    photo: "/lucas.jpeg",
+    initials: "LM",
+  },
+  {
+    name: "Breno Barreto",
+    role: "Sócio",
+    bio: "Responsável pela operação e governança da consultoria. Coordena processos, inovação e segurança das estruturas implementadas, garantindo eficiência e conformidade em cada solução entregue.",
+    photo: "/breno.jpeg",
+    initials: "BB",
+  },
+  {
+    name: "Allan Guilherme",
+    role: "Sócio · Consultor CVM",
+    bio: "Credenciado pela Comissão de Valores Mobiliários. Atua em análise de investimentos, alocação de ativos e estratégias de preservação e crescimento patrimonial para pessoas físicas e jurídicas.",
+    photo: "/allan2.jpeg",
+    initials: "AG",
+  },
+  {
+    name: "Henrique Sgarioni",
+    role: "Gestor Comercial",
+    bio: "MBA em Finanças, Investimentos e Offshore. Especialista em soluções nacionais e internacionais, com foco em planejamento patrimonial, proteção de patrimônio e relacionamento com clientes.",
+    photo: "/henrique.jpeg",
+    initials: "HS",
+  },
+  {
+    name: "Guilherme José",
+    role: "Diretor de Tecnologia",
+    bio: "Graduado na área de tecnologia pela Universidade de Brasília. Responsável pelos sistemas, automação de processos e coordenação de projetos da Midlej — trazendo rigor analítico e visão sistêmica para a operação da consultoria.",
+    photo: "/Guilherme.jpeg",
+    initials: "GJ",
+  },
+];
+
+function HomeEquipe() {
+  return (
+    <section id="equipe" className="bg-white py-20 md:py-28">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
+        <div className="mb-14">
+          <SectionTag label="Nossa equipe" />
+          <h2
+            className="text-[clamp(2rem,4vw,3.25rem)] font-bold leading-tight tracking-tight"
+            style={{ color: "#2E4659" }}
+          >
+            Profissionais com visão integrada.
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {TEAM.map((member) => (
+            <div
+              key={member.name}
+              className="flex flex-row gap-6 p-7 rounded-2xl border border-[#EDEFF2]"
+              style={{ backgroundColor: "#F5F7FA" }}
+            >
+              {/* Foto / placeholder lateral */}
+              {member.photo ? (
+                <Image
+                  src={member.photo}
+                  alt={member.name}
+                  width={100}
+                  height={100}
+                  className="rounded-xl object-cover object-top flex-shrink-0 self-center"
+                  style={{ width: 100, height: 100 }}
+                />
+              ) : (
+                <div
+                  className="rounded-xl flex items-center justify-center text-white text-xl font-bold flex-shrink-0 self-center"
+                  style={{ width: 100, height: 100, backgroundColor: "#4a6b8c" }}
+                >
+                  {member.initials}
+                </div>
+              )}
+
+              {/* Texto */}
+              <div className="min-w-0">
+                <p
+                  className="text-[0.65rem] font-semibold tracking-widest uppercase mb-1"
+                  style={{ color: "#4a6b8c" }}
+                >
+                  {member.role}
+                </p>
+                <h3
+                  className="text-[1.0625rem] font-bold mb-2"
+                  style={{ color: "#2E4659" }}
+                >
+                  {member.name}
+                </h3>
+                <p className="text-sm leading-[1.7] text-justify" style={{ color: "#6B7B8D" }}>
+                  {member.bio}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

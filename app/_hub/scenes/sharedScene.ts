@@ -3,9 +3,9 @@
 import { useEffect, useState, type RefObject } from "react";
 
 export const SCENE_COLORS = {
-  paper: "#F6F2EA",
-  white: "#FFFFFF",
-  oxblood: "#9B3221",
+  paper: "#2E4659",
+  white: "#dce8f0",
+  oxblood: "#4a6b8c",
 } as const;
 
 export function useInView(ref: RefObject<HTMLDivElement | null>) {
