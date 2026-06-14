@@ -1,11 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="560 138 153 150">
   <style>
-    .d { fill: #1a1d22; }
-    .d-hl { fill: #1a1d22; fill-opacity: 0.92; }
-    @media (prefers-color-scheme: dark) {
-      .d { fill: #f6f3ec; }
-      .d-hl { fill: #f6f3ec; fill-opacity: 0.92; }
-    }
+    .d { fill: #2E4659; }
+    .d-hl { fill: #2E4659; }
   </style>
   <path
     class="d"
