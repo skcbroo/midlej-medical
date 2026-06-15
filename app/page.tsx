@@ -127,7 +127,7 @@ function HomeHero() {
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
-                Pedir primeira conversa <Arrow />
+                Solicitar reunião <Arrow />
               </Link>
               <Link href="#solucoes" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
                 Ver as soluções
@@ -449,7 +449,7 @@ function S08_Workshops() {
           </div>
           <div className="col-span-12 md:col-span-5 flex md:justify-end">
             <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
-              Conversar sobre um workshop <Arrow />
+              Solicitar proposta <Arrow />
             </Link>
           </div>
         </div>
@@ -605,7 +605,7 @@ function HomeClosing() {
             </p>
           </div>
           <div className="col-span-12 md:col-span-6 md:col-start-7">
-            <HubLeadForm tone="dark" submitLabel="Pedir primeira conversa" origin="Hub Midlej Capital" />
+            <HubLeadForm tone="dark" submitLabel="Solicitar reunião" origin="Hub Midlej Capital" />
           </div>
         </div>
 
