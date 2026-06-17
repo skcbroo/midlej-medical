@@ -81,7 +81,7 @@ export function HomeHeader() {
               href="#contato"
               className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200"
             >
-              Pedir conversa
+              Quero ser cliente
             </Link>
 
             {/* Hambúrguer mobile */}

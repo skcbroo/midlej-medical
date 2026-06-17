@@ -148,7 +148,7 @@ function CtaPill({
       }}
       className="inline-flex items-center gap-2 t-mono text-[0.72rem] tracking-[0.18em] uppercase px-4 py-2 border transition-colors duration-300"
     >
-      Pedir conversa
+      Quero ser cliente
       <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden>
         <path
           d="M1 5h12m0 0L9 1m4 4L9 9"

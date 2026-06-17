@@ -39,10 +39,18 @@ export const metadata: Metadata = {
     "Mentoria, investimentos, seguros, alternativos, previdência e treinamentos. Uma banca de planejamento financeiro sem conflito.",
   openGraph: {
     title: "Midlej Capital",
-    description:
-      "Hub de soluções financeiras. Sem produto da prateleira, sem comissão por venda.",
+    description: "Hub de soluções financeiras.",
     type: "website",
     locale: "pt_BR",
+    url: "https://midlejcapital.com.br",
+    images: [
+      {
+        url: "/fotos_escritorio/1.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Espaço Midlej Capital",
+      },
+    ],
   },
   robots: { index: true, follow: true },
 };
