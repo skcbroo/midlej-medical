@@ -4,7 +4,6 @@ import Image from "next/image";
 import { HubLeadForm } from "./_hub/HubLeadForm";
 import { SmoothAnchor } from "./_hub/SmoothAnchor";
 import { HomeHeader } from "./_hub/HomeHeader";
-import { HeroViz } from "./_hub/HeroViz";
 import { SeguroCompare } from "./_hub/svg/SeguroCompare";
 import {
   GlobeClient as Globe,
@@ -61,6 +60,7 @@ export default function HubPage() {
       <S07_Previdencia />
       <S08_Workshops />
       <ConhecaInvestimentos />
+      <EspacoSection />
       <HomeEquipe />
       <HomeClosing />
     </main>
@@ -134,8 +134,15 @@ function HomeHero() {
               </Link>
             </div>
           </div>
-          <div className="col-span-12 md:col-span-6 lg:col-span-7 h-[300px] md:h-[400px]">
-            <HeroViz />
+          <div className="col-span-12 md:col-span-6 lg:col-span-7">
+            <Image
+              src="/fotos_escritorio/1.jpeg"
+              alt="Espaço Midlej Capital"
+              width={900}
+              height={600}
+              className="w-full h-[340px] md:h-[500px] object-cover rounded-2xl"
+              priority
+            />
           </div>
         </div>
       </div>
@@ -498,6 +505,47 @@ const TEAM = [
     initials: "GJ",
   },
 ];
+
+/* ================================================================
+   Espaço
+   ================================================================ */
+
+function EspacoSection() {
+  return (
+    <section className="bg-white py-16 md:py-24">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
+        <SectionTag label="Nosso espaço" />
+        <div className="grid grid-cols-12 gap-4">
+          <div className="col-span-12 md:col-span-7">
+            <Image
+              src="/fotos_escritorio/3.jpeg"
+              alt="Recepção Midlej Capital"
+              width={900}
+              height={600}
+              className="w-full h-[440px] object-cover rounded-2xl"
+            />
+          </div>
+          <div className="col-span-12 md:col-span-5 flex flex-col gap-4">
+            <Image
+              src="/fotos_escritorio/5.jpeg"
+              alt="Sala de reunião"
+              width={600}
+              height={400}
+              className="w-full h-[210px] object-cover rounded-2xl"
+            />
+            <Image
+              src="/fotos_escritorio/6.jpeg"
+              alt="Espaço externo"
+              width={600}
+              height={400}
+              className="w-full h-[210px] object-cover rounded-2xl"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function HomeEquipe() {
   return (
