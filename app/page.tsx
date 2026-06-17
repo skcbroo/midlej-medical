@@ -110,40 +110,37 @@ function ProofRow({ items }: { items: { k: string; v: string }[] }) {
 
 function HomeHero() {
   return (
-    <section className="bg-white pt-32 pb-20 md:pt-40 md:pb-28">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-8 items-center">
-          <div className="col-span-12 md:col-span-6 lg:col-span-5">
-            <span className="inline-block text-[0.7rem] font-semibold tracking-widest uppercase mb-6" style={{ color: "#4a6b8c" }}>
-              Midlej Capital
-            </span>
-            <h1 className="text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[1.06] tracking-tight mb-6" style={{ color: "#2E4659" }}>
-              Hub de soluções financeiras.
-            </h1>
-            <p className="text-[1.0625rem] leading-[1.65] mb-10 max-w-[44ch]" style={{ color: "#6B7B8D" }}>
-              Planejamento financeiro privado sem conflito de interesse.
-              Mentoria, investimentos, câmbio, seguros, alternativos,
-              previdência e treinamentos em uma única banca.
-            </p>
-            <div className="flex flex-wrap items-center gap-4">
-              <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
-                Solicitar reunião <Arrow />
-              </Link>
-              <Link href="#solucoes" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
-                Ver as soluções
-              </Link>
-            </div>
-          </div>
-          <div className="col-span-12 md:col-span-6 lg:col-span-7">
-            <Image
-              src="/fotos_escritorio/1.jpeg"
-              alt="Espaço Midlej Capital"
-              width={900}
-              height={600}
-              className="w-full h-[340px] md:h-[500px] object-cover rounded-2xl"
-              priority
-            />
-          </div>
+    <section className="relative min-h-screen flex items-center">
+      {/* Background */}
+      <Image
+        src="/fotos_escritorio/1.jpeg"
+        alt="Espaço Midlej Capital"
+        fill
+        className="object-cover object-center"
+        priority
+      />
+      {/* Overlay navy */}
+      <div className="absolute inset-0" style={{ backgroundColor: "rgba(46,70,89,0.58)" }} />
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 pt-48 pb-24 md:pt-60 md:pb-32">
+        <span className="inline-block text-[0.7rem] font-semibold tracking-widest uppercase mb-6 text-white/70">
+          Midlej Capital
+        </span>
+        <h1 className="text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[1.06] tracking-tight mb-6 text-white max-w-[18ch]">
+          Hub de soluções financeiras.
+        </h1>
+        <p className="text-[1.0625rem] leading-[1.65] mb-10 max-w-[44ch] text-white/75">
+          Planejamento financeiro privado sem conflito de interesse.
+          Mentoria, investimentos, câmbio, seguros, alternativos,
+          previdência e treinamentos em uma única banca.
+        </p>
+        <div className="flex flex-wrap items-center gap-4">
+          <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
+            Quero ser cliente <Arrow />
+          </Link>
+          <Link href="#solucoes" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/30 hover:border-white/60 transition-colors duration-200">
+            Ver as soluções
+          </Link>
         </div>
       </div>
     </section>
