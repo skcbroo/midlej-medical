@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     url: "https://midlejcapital.com.br",
     images: [
       {
-        url: "/fotos_escritorio/1.jpeg",
+        url: "https://gracious-trust-production-5043.up.railway.app/fotos_escritorio/1.jpeg",
         width: 1200,
         height: 630,
         alt: "Espaço Midlej Capital",
