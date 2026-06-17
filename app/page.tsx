@@ -276,8 +276,8 @@ function S04_Cambio() {
             </p>
             <ProofRow items={[
               { k: "Parceiros",  v: "Regulados BCB" },
-              { k: "Moedas",     v: "USD · EUR" },
-              { k: "Destinos",   v: "EUA · Europa · Ilhas" },
+              { k: "Moedas",     v: "USD" },
+              { k: "Destinos",   v: "EUA" },
             ]} />
             <div className="mt-8">
               <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
@@ -355,8 +355,7 @@ function S06_Alternativos() {
         <div className="mt-10 grid grid-cols-12 gap-10 md:gap-12 items-start">
           <div className="col-span-12 md:col-span-6">
             <p className="text-[1.0rem] leading-[1.65] mb-4" style={{ color: "#6B7B8D" }}>
-              O que o private banking acessa e seu gerente nunca te ofereceu,
-              porque não está na grade dele.
+              Ativos com baixa correlação estrutural ao mercado local — private equity, crédito privado estruturado e real assets cujo acesso exige relacionamento direto com gestores e originadores, não uma plataforma aberta.
             </p>
             <p className="text-[0.95rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>
               Fundos exclusivos, crédito privado estruturado, private equity, real estate.
@@ -401,7 +400,7 @@ function S07_Previdencia() {
             <ProofRow items={[
               { k: "IR mínimo",    v: "10%" },
               { k: "Veículos",     v: "PGBL · VGBL" },
-              { k: "Diferencial",  v: "Sem come-cotas" },
+              { k: "Diferencial",  v: "Sem come-cotas e ITCMD" },
             ]} />
             <div className="mt-8">
               <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
@@ -741,8 +740,7 @@ function ConhecaInvestimentos() {
               Investimentos é uma frente própria. Tem página própria.
             </h2>
             <p className="text-[1.0rem] leading-[1.65] max-w-[52ch]" style={{ color: "#6B7B8D" }}>
-              Modelo de fee, geografia de capital, composição em camadas,
-              tempo composto, e a primeira conversa. Em mais detalhe.
+              Como estruturamos a remuneração por honorário fixo, onde alocamos geograficamente o capital, como construímos a carteira em camadas de liquidez e prazo, o que o tempo composto faz a cada ciclo — e o que acontece no primeiro encontro.
             </p>
           </div>
           <div className="col-span-12 md:col-span-4 flex md:justify-end">
