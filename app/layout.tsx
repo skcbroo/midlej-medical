@@ -45,10 +45,10 @@ export const metadata: Metadata = {
     url: "https://gracious-trust-production-5043.up.railway.app",
     images: [
       {
-        url: "/fotos_escritorio/1.jpeg",
+        url: "/LINK.png",
         width: 1200,
         height: 630,
-        alt: "Espaço Midlej Capital",
+        alt: "Midlej Capital",
       },
     ],
   },
