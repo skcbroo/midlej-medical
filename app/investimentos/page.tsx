@@ -270,8 +270,8 @@ function ComoConduzimos() {
   ];
   return (
     <section style={{ backgroundColor: "#F5F7FA" }}>
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-8 mb-16 md:mb-20">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
+        <div className="grid grid-cols-12 gap-8 mb-10 md:mb-14">
           <div className="col-span-12 md:col-span-9">
             <SectionTag label="Como conduzimos" />
             <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[20ch]" style={{ color: "#2E4659" }}>
@@ -287,7 +287,7 @@ function ComoConduzimos() {
           {steps.map((s) => (
             <li
               key={s.n}
-              className="border-b border-[#EDEFF2] py-12 md:py-14 grid grid-cols-12 gap-6 items-baseline"
+              className="border-b border-[#EDEFF2] py-7 md:py-9 grid grid-cols-12 gap-6 items-baseline"
             >
               <div className="col-span-12 md:col-span-2">
                 <span className="text-[clamp(1.875rem,3vw,2.5rem)] font-light leading-none tabular-nums" style={{ color: "#4a6b8c" }}>
