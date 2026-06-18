@@ -30,7 +30,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://midlejcapital.com.br"),
+  metadataBase: new URL("https://gracious-trust-production-5043.up.railway.app"),
   title: {
     default: "Midlej Capital · Hub de soluções financeiras",
     template: "%s · Midlej Capital",
@@ -39,10 +39,18 @@ export const metadata: Metadata = {
     "Mentoria, investimentos, seguros, alternativos, previdência e treinamentos. Uma banca de planejamento financeiro sem conflito.",
   openGraph: {
     title: "Midlej Capital",
-    description:
-      "Hub de soluções financeiras. Sem produto da prateleira, sem comissão por venda.",
+    description: "Hub de soluções financeiras.",
     type: "website",
     locale: "pt_BR",
+    url: "https://gracious-trust-production-5043.up.railway.app",
+    images: [
+      {
+        url: "/LINK.png",
+        width: 1200,
+        height: 630,
+        alt: "Midlej Capital",
+      },
+    ],
   },
   robots: { index: true, follow: true },
 };
