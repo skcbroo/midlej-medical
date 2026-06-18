@@ -10,7 +10,7 @@ import {
 } from "./sharedScene";
 import { useScrollProgress } from "../lib/useScrollProgress";
 
-type Props = { className?: string };
+type Props = { className?: string; color?: string; markerColor?: string };
 
 type RingDef = {
   radius: number;
@@ -30,7 +30,7 @@ const RINGS: RingDef[] = [
 
 const MARKERS_PER_RING = 3;
 
-function RingsRig({ progressRef }: { progressRef: RefObject<number> }) {
+function RingsRig({ progressRef, color, markerColor }: { progressRef: RefObject<number>; color: string; markerColor: string }) {
   const group = useRef<THREE.Group>(null!);
   const ringGroups = useRef<(THREE.Group | null)[]>([]);
   const { pointer } = useThree();
@@ -80,23 +80,23 @@ function RingsRig({ progressRef }: { progressRef: RefObject<number> }) {
           }}
           position={[0, r.y, 0]}
         >
-          {/* Paper torus, lying flat (rotated to XZ plane). */}
+          {/* Torus principal */}
           <mesh rotation={[Math.PI / 2, 0, 0]}>
             <torusGeometry args={[r.radius, r.tube, 12, 64]} />
             <meshBasicMaterial
-              color={SCENE_COLORS.paper}
+              color={color}
               transparent
               opacity={r.opacity}
             />
           </mesh>
-          {/* Slightly larger oxblood wireframe overlay */}
+          {/* Wireframe overlay */}
           <mesh rotation={[Math.PI / 2, 0, 0]}>
             <torusGeometry args={[r.radius + 0.03, r.tube, 8, 48]} />
             <meshBasicMaterial
-              color={SCENE_COLORS.oxblood}
+              color={color}
               wireframe
               transparent
-              opacity={0.3}
+              opacity={0.2}
             />
           </mesh>
           {/* Markers along the ring (in XZ plane). */}
@@ -106,7 +106,7 @@ function RingsRig({ progressRef }: { progressRef: RefObject<number> }) {
             return (
               <mesh key={`m-${i}-${k}`} position={[x, 0, z]}>
                 <octahedronGeometry args={[0.06, 0]} />
-                <meshBasicMaterial color={SCENE_COLORS.paper} />
+                <meshBasicMaterial color={markerColor} />
               </mesh>
             );
           })}
@@ -116,7 +116,7 @@ function RingsRig({ progressRef }: { progressRef: RefObject<number> }) {
   );
 }
 
-function StaticAllocationRings({ className }: { className?: string }) {
+function StaticAllocationRings({ className, color = SCENE_COLORS.paper, markerColor = SCENE_COLORS.paper }: { className?: string; color?: string; markerColor?: string }) {
   const cx = 300;
   const cy = 320;
   // Four concentric ellipses (compressed Y to suggest perspective).
@@ -155,7 +155,7 @@ function StaticAllocationRings({ className }: { className?: string }) {
                 rx={r.rx}
                 ry={r.ry}
                 fill="none"
-                stroke={SCENE_COLORS.paper}
+                stroke={color}
                 strokeOpacity={r.op}
                 strokeWidth={2}
               />
@@ -165,15 +165,15 @@ function StaticAllocationRings({ className }: { className?: string }) {
                 rx={r.rx + 4}
                 ry={r.ry + 2}
                 fill="none"
-                stroke={SCENE_COLORS.oxblood}
-                strokeOpacity={0.3}
+                stroke={color}
+                strokeOpacity={0.2}
                 strokeWidth={1}
               />
               {marks.map((m, k) => (
                 <polygon
                   key={`mk-${i}-${k}`}
                   points={`${m.x},${m.y - 5} ${m.x + 5},${m.y} ${m.x},${m.y + 5} ${m.x - 5},${m.y}`}
-                  fill={SCENE_COLORS.paper}
+                  fill={markerColor}
                 />
               ))}
             </g>
@@ -184,13 +184,14 @@ function StaticAllocationRings({ className }: { className?: string }) {
   );
 }
 
-export default function AllocationRings({ className }: Props) {
+export default function AllocationRings({ className, color = SCENE_COLORS.paper, markerColor }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const inView = useInView(wrapRef);
   const progressRef = useScrollProgress(wrapRef);
   const reduced = useReducedMotion();
+  const mc = markerColor ?? color;
 
-  if (reduced) return <StaticAllocationRings className={className} />;
+  if (reduced) return <StaticAllocationRings className={className} color={color} markerColor={mc} />;
 
   return (
     <div
@@ -205,7 +206,7 @@ export default function AllocationRings({ className }: Props) {
         frameloop={inView ? "always" : "never"}
         style={{ width: "100%", height: "100%" }}
       >
-        <RingsRig progressRef={progressRef} />
+        <RingsRig progressRef={progressRef} color={color} markerColor={mc} />
       </Canvas>
     </div>
   );

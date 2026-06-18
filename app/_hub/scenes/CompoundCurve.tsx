@@ -22,27 +22,16 @@ function clamp01(v: number) {
   return Math.max(0, Math.min(1, v));
 }
 
-/**
- * Mapeamento de scroll → reveal da curva.
- *
- * useScrollProgress entrega 0..1 no trajeto completo do elemento pela
- * viewport — só chega em 1 quando o elemento sai por cima. Pra que a
- * curva se complete enquanto o usuário ainda está olhando pra seção,
- * remapeio: progresso "útil" = clamp01((p - 0.05) / 0.7). Assim:
- *   - p < 0.05 (seção entrando) → reveal 0
- *   - p = 0.40 (seção centralizada) → reveal ~50%
- *   - p = 0.75 (seção saindo por cima) → reveal 100%, e fica em 100%
- *     enquanto p continua subindo.
- */
-function easeReveal(p: number): number {
-  return clamp01((p - 0.05) / 0.7);
-}
+const ANIM_DURATION = 1.6; // segundos para completar a curva após o trigger
+const SCROLL_TRIGGER = 0.2; // progresso de scroll para disparar a animação
 
 function CurveRig({ progressRef }: { progressRef: RefObject<number> }) {
   const group = useRef<THREE.Group>(null!);
   const lineRef = useRef<THREE.BufferGeometry>(null);
   const markerCoreRefs = useRef<(THREE.Mesh | null)[]>([]);
   const markerShellRefs = useRef<(THREE.Mesh | null)[]>([]);
+  const triggered = useRef(false);
+  const animProgress = useRef(0);
   const { pointer } = useThree();
 
   const curve = useMemo(
@@ -75,10 +64,20 @@ function CurveRig({ progressRef }: { progressRef: RefObject<number> }) {
     [curve],
   );
 
-  useFrame(() => {
+  useFrame((_, delta) => {
     if (!group.current) return;
-    const rawP = progressRef.current;
-    const p = easeReveal(rawP);
+
+    // Dispara quando o scroll chega em SCROLL_TRIGGER.
+    if (!triggered.current && progressRef.current >= SCROLL_TRIGGER) {
+      triggered.current = true;
+    }
+
+    // Avança a animação pelo tempo, independente de scroll.
+    if (triggered.current && animProgress.current < 1) {
+      animProgress.current = clamp01(animProgress.current + delta / ANIM_DURATION);
+    }
+
+    const p = animProgress.current;
 
     // Mouse parallax sutil.
     const targetX = pointer.y * 0.12;
@@ -94,18 +93,13 @@ function CurveRig({ progressRef }: { progressRef: RefObject<number> }) {
       0.05,
     );
 
-    // Reveal: setDrawRange controla quantos vértices da curva são
-    // desenhados. Sempre pelo menos 2 pra não dar buffer underflow.
+    // Reveal via setDrawRange — não toca no buffer por frame.
     const reveal = Math.max(2, Math.floor(p * allPoints.length));
-    const count = Math.min(reveal, allPoints.length);
     const geo = lineRef.current;
-    if (geo) {
-      geo.setDrawRange(0, count);
-    }
+    if (geo) geo.setDrawRange(0, Math.min(reveal, allPoints.length));
 
     // Markers: fade-in conforme a curva chega em cada threshold.
     MARKER_THRESHOLDS.forEach((threshold, i) => {
-      // Janela de 0.08 pro fade-in suave.
       const op = clamp01((p - threshold) / 0.08);
       const core = markerCoreRefs.current[i];
       const shell = markerShellRefs.current[i];
@@ -113,8 +107,7 @@ function CurveRig({ progressRef }: { progressRef: RefObject<number> }) {
         const m = core.material as THREE.MeshBasicMaterial;
         m.opacity = op;
         m.transparent = true;
-        const s = THREE.MathUtils.lerp(0.5, 1, op);
-        core.scale.setScalar(s);
+        core.scale.setScalar(THREE.MathUtils.lerp(0.5, 1, op));
       }
       if (shell) {
         const m = shell.material as THREE.MeshBasicMaterial;
@@ -166,7 +159,7 @@ function CurveRig({ progressRef }: { progressRef: RefObject<number> }) {
           >
             <octahedronGeometry args={[0.14, 0]} />
             <meshBasicMaterial
-              color={SCENE_COLORS.paper}
+              color={SCENE_COLORS.oxblood}
               transparent
               opacity={0}
             />
@@ -256,7 +249,7 @@ function StaticCompoundCurve({ className }: { className?: string }) {
             />
             <polygon
               points={`${m.x},${m.y - 8} ${m.x + 8},${m.y} ${m.x},${m.y + 8} ${m.x - 8},${m.y}`}
-              fill={SCENE_COLORS.paper}
+              fill={SCENE_COLORS.oxblood}
             />
           </g>
         ))}
