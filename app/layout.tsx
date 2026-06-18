@@ -30,7 +30,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://gracious-trust-production-5043.up.railway.app"),
+  metadataBase: new URL("https://midlejcapital.com.br"),
   title: {
     default: "Midlej Capital · Hub de soluções financeiras",
     template: "%s · Midlej Capital",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     description: "Hub de soluções financeiras.",
     type: "website",
     locale: "pt_BR",
-    url: "https://gracious-trust-production-5043.up.railway.app",
+    url: "https://midlejcapital.com.br",
     images: [
       {
         url: "/LINK.png",
