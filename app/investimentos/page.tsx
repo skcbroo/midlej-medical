@@ -75,62 +75,39 @@ function SectionTag({ label, dark = false }: { label: string; dark?: boolean }) 
 
 function Hero() {
   return (
-    <section id="top" className="bg-white">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 pt-32 md:pt-40 pb-16 md:pb-20">
-        <div className="grid grid-cols-12 gap-8 md:gap-14 items-center">
-
-          {/* Esquerda: texto */}
-          <div className="col-span-12 lg:col-span-6">
-            <p className="text-[0.72rem] font-semibold tracking-[0.18em] uppercase mb-6" style={{ color: "#6B7B8D" }}>
-              Investimentos · Midlej Capital
-            </p>
-            <h1 className="text-[clamp(2.4rem,5vw,4.5rem)] font-bold leading-[0.98] tracking-tight" style={{ color: "#2E4659" }}>
-              Patrimônio integrado,<br />
-              <span style={{ color: "#4a6b8c" }}>sob critério único.</span>
-            </h1>
-            <p className="mt-8 text-[1.0625rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>
-              Gestão patrimonial independente para famílias que já formaram
-              patrimônio. Recomendação remunerada pelo cliente, estruturada
-              caso a caso, conduzida em horizonte plurianual.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center gap-6">
-              <Link
-                href="#contato"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200"
-              >
-                Pedir primeira conversa
-                <Arrow />
-              </Link>
-              <Link
-                href="#manifesto"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold transition-colors duration-200"
-                style={{ color: "#4a6b8c" }}
-              >
-                Como pensamos
-              </Link>
-            </div>
-          </div>
-
-          {/* Direita: foto */}
-          <div className="col-span-12 lg:col-span-6">
-            <div className="relative w-full h-[360px] md:h-[460px] rounded-2xl overflow-hidden">
-              <Image
-                src="/fotos_escritorio/2.jpeg"
-                alt="Espaço Midlej Capital"
-                fill
-                className="object-cover object-center"
-                priority
-              />
-            </div>
-          </div>
-
+    <section id="top" className="relative min-h-screen flex items-center">
+      {/* Background */}
+      <Image
+        src="/fotos_escritorio/2.jpeg"
+        alt="Espaço Midlej Capital"
+        fill
+        className="object-cover object-center"
+        priority
+      />
+      {/* Overlay navy */}
+      <div className="absolute inset-0" style={{ backgroundColor: "rgba(46,70,89,0.58)" }} />
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 pt-48 pb-24 md:pt-60 md:pb-32">
+        <span className="inline-block text-[0.7rem] font-semibold tracking-widest uppercase mb-6 text-white/70">
+          Investimentos · Midlej Capital
+        </span>
+        <h1 className="text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[1.06] tracking-tight mb-6 text-white max-w-[18ch]">
+          Patrimônio integrado, sob critério único.
+        </h1>
+        <p className="text-[1.0625rem] leading-[1.65] mb-10 max-w-[44ch] text-white/75">
+          Gestão patrimonial independente para famílias que já formaram
+          patrimônio. Recomendação remunerada pelo cliente, estruturada
+          caso a caso, conduzida em horizonte plurianual.
+        </p>
+        <div className="flex flex-wrap items-center gap-4">
+          <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
+            Pedir primeira conversa <Arrow />
+          </Link>
+          <Link href="#manifesto" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/30 hover:border-white/60 transition-colors duration-200">
+            Como pensamos
+          </Link>
         </div>
       </div>
-      <div
-        aria-hidden
-        className="mx-auto max-w-[1400px] px-6 md:px-12 lg:px-16 border-t"
-        style={{ borderColor: "#EDEFF2" }}
-      />
     </section>
   );
 }
