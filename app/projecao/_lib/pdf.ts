@@ -73,9 +73,9 @@ ${FOOTER_HTML(hoje)}
 
 // ─── Simulador de Fundo ────────────────────────────────────────────────────
 
-export function buildPdfFundoHtml(params: Record<string, unknown>, resultado: Record<string, unknown>): string {
-  const { capitalDebenture, taxaFunding, taxaDebenture, prazoDebenture, desagio, prazoProcesso, taxaOriginacao } = params as { capitalDebenture: number; taxaFunding: number; taxaDebenture: number; prazoDebenture: number; desagio: number; prazoProcesso: number; taxaOriginacao: number };
-  const { feeFunding, capitalDisponivel, nCiclos, mesesOciosos, lucroLiquidoCiclo, lucroTotalCiclos, montanteDebenture: md, jurosDebenture, resultadoLiquido, viavel, roiSobreCapital, ciclos, projecaoMensal } = resultado as { feeFunding: number; capitalDisponivel: number; nCiclos: number; mesesOciosos: number; lucroLiquidoCiclo: number; lucroTotalCiclos: number; montanteDebenture: number; jurosDebenture: number; resultadoLiquido: number; viavel: boolean; roiSobreCapital: number; ciclos: Array<{ numero: number; mesInicio: number; mesFim: number; cessao: number; recebimento: number; originacao: number; lucroLiquido: number; lucroAcumulado: number }>; projecaoMensal: Array<{ mes: number; montanteDebenture: number; jurosAcumulados: number; lucroAcumulado: number; saldo: number; cicloAtivo: number | null; fimCiclo: boolean }> };
+export function buildPdfFundoHtml(params: import("./calcFundo").CalcFundoParams, resultado: import("./calcFundo").CalcFundoResult): string {
+  const { capitalDebenture, taxaFunding, taxaDebenture, prazoDebenture, desagio, prazoProcesso, taxaOriginacao } = params;
+  const { feeFunding, capitalDisponivel, nCiclos, mesesOciosos, lucroLiquidoCiclo, lucroTotalCiclos, montanteDebenture: md, jurosDebenture, resultadoLiquido, viavel, roiSobreCapital, ciclos, projecaoMensal } = resultado;
 
   const sc = viavel ? "#15803d" : "#dc2626";
   const sb = viavel ? "#dcfce7" : "#fee2e2";
@@ -112,9 +112,9 @@ ${FOOTER_HTML(hoje)}
 
 // ─── Projeção Anual ────────────────────────────────────────────────────────
 
-export function buildPdfAnualHtml(params: Record<string, unknown>, resultado: Record<string, unknown>): string {
-  const { captacaoMensal, taxaFunding, taxaDebenture, horizonte, desagio, prazoProcesso, taxaOriginacao, percentualInutilizavel } = params as { captacaoMensal: number; taxaFunding: number; taxaDebenture: number; horizonte: number; desagio: number; prazoProcesso: number; taxaOriginacao: number; percentualInutilizavel: number };
-  const { feeFunding, capitalDisponivel, captacaoEfetiva, capitalOcioso, lucroLiquido, viavelOp, totalCaptado, totalFeeFunding, totalOcioso, totalInvestido, totalLucro, totalOpsCompletadas, roi, meses } = resultado as { feeFunding: number; capitalDisponivel: number; captacaoEfetiva: number; capitalOcioso: number; lucroLiquido: number; viavelOp: boolean; totalCaptado: number; totalFeeFunding: number; totalOcioso: number; totalInvestido: number; totalLucro: number; totalOpsCompletadas: number; roi: number; meses: Array<{ mes: number; efetivo: number; ocioso: number; opsAtivas: number; completou: boolean; recebimentoMes: number; lucroMes: number; lucroAcumulado: number }> };
+export function buildPdfAnualHtml(params: import("./calcAnual").CalcAnualParams, resultado: import("./calcAnual").CalcAnualResult): string {
+  const { captacaoMensal, taxaFunding, taxaDebenture, horizonte, desagio, prazoProcesso, taxaOriginacao, percentualInutilizavel } = params;
+  const { feeFunding, capitalDisponivel, captacaoEfetiva, capitalOcioso, lucroLiquido, viavelOp, totalCaptado, totalFeeFunding, totalOcioso, totalInvestido, totalLucro, totalOpsCompletadas, roi, meses } = resultado;
 
   const sc = viavelOp ? "#15803d" : "#dc2626";
   const sb = viavelOp ? "#dcfce7" : "#fee2e2";

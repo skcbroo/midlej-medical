@@ -37,7 +37,7 @@ export default function SimuladorFundo() {
 
   function handlePdf() {
     if (!resultado) return;
-    const html = buildPdfFundoHtml(params as Record<string, unknown>, resultado as Record<string, unknown>);
+    const html = buildPdfFundoHtml(params, resultado);
     const w = window.open("", "_blank");
     if (!w) { alert("Pop-up bloqueado. Permita pop-ups para exportar PDF."); return; }
     w.document.write(html);
