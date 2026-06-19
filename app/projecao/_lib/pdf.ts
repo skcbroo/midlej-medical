@@ -34,9 +34,9 @@ const BASE_CSS = `*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;
 
 // ─── Simulador de Cessão ───────────────────────────────────────────────────
 
-export function buildPdfHtml(params: Record<string, unknown>, resultado: Record<string, unknown>): string {
-  const { valorRecebimento, valorCessao, prazo, taxaOriginacao, taxaFunding, taxaDebenture, identificacao } = params as { valorRecebimento: number; valorCessao: number; prazo: number; taxaOriginacao: number; taxaFunding: number; taxaDebenture: number; identificacao?: string };
-  const { desagio, comissaoOriginacao, comissaoFunding, totalFees, montanteDebenture, juroDebenture, totalCusto, lucro, roi, viavel, valorMaxCessao, percentualMaxCessao, projecao } = resultado as { desagio: number; comissaoOriginacao: number; comissaoFunding: number; totalFees: number; montanteDebenture: number; juroDebenture: number; totalCusto: number; lucro: number; roi: number | null; viavel: boolean; valorMaxCessao: number; percentualMaxCessao: number; projecao: Array<{ mes: number; montanteDebenture: number; jurosAcumulados: number; custoTotal: number; lucro: number; viavel: boolean }> };
+export function buildPdfHtml(params: import("./calc").CalcParams, resultado: import("./calc").CalcResult): string {
+  const { valorRecebimento, valorCessao, prazo, taxaOriginacao, taxaFunding, taxaDebenture, identificacao } = params;
+  const { desagio, comissaoOriginacao, comissaoFunding, totalFees, montanteDebenture, juroDebenture, totalCusto, lucro, roi, viavel, valorMaxCessao, percentualMaxCessao, projecao } = resultado;
 
   const sc = viavel ? "#15803d" : "#dc2626";
   const sb = viavel ? "#dcfce7" : "#fee2e2";

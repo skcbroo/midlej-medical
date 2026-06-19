@@ -67,7 +67,7 @@ export default function Simulador() {
 
   function handlePdf() {
     if (!resultado) return;
-    const html = buildPdfHtml(params as Record<string, unknown>, resultado as Record<string, unknown>);
+    const html = buildPdfHtml(params, resultado);
     const w = window.open("", "_blank");
     if (!w) { alert("Pop-up bloqueado. Permita pop-ups para exportar PDF."); return; }
     w.document.write(html);
