@@ -1,475 +1,283 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Logo } from "../components/Logo";
-import { HubHeader } from "../_hub/HubHeader";
-import { HubLeadForm } from "../_hub/HubLeadForm";
-import { SmoothAnchor } from "../_hub/SmoothAnchor";
+import Image from "next/image";
+import { LPHeader } from "@/app/_hub/LPHeader";
+import { LPClosing } from "@/app/_hub/LPClosing";
+import { SmoothAnchor } from "@/app/_hub/SmoothAnchor";
 
 export const metadata: Metadata = {
   title: "Seguro de Vida Inteligente · Midlej Capital",
   description:
-    "Você está pagando por um seguro de vida — ou financiando o lucro de quem te vendeu? Com o mesmo dinheiro, o modelo certo entrega mais de 4× e a mesma proteção.",
+    "Você está pagando por um seguro de vida — ou financiando o lucro de quem te vendeu? Descubra o modelo que protege e ainda constrói patrimônio.",
+  openGraph: {
+    title: "Seguro de Vida Inteligente · Midlej Capital",
+    description: "R$1.000/mês em seguro vitalício ou R$200 + R$800 investidos? A simulação que ninguém te mostrou.",
+    type: "website",
+    locale: "pt_BR",
+  },
 };
 
-export default function SeguroPage() {
+const DISCLAIMER =
+  "Simulações ilustrativas baseadas em dados históricos; rentabilidade passada não representa garantia de rentabilidade futura. Esta página tem caráter educativo e não constitui recomendação individualizada de seguro ou investimento.";
+
+function SectionTag({ label, dark = false }: { label: string; dark?: boolean }) {
   return (
-    <main
-      data-brand
-      id="main"
-      className="brand-body min-h-screen bg-paper text-ink"
-    >
-      <SmoothAnchor />
-      <HubHeader />
-      <Hero />
-      <Agitacao />
-      <SimulacaoPrincipal />
-      <Solucao />
-      <ComoFunciona />
-      <Autoridade />
-      <Contato />
-      <Footer />
-    </main>
+    <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-3" style={{ color: dark ? "rgba(255,255,255,0.50)" : "#4a6b8c" }}>
+      {label}
+    </p>
   );
 }
 
 function Arrow() {
   return (
-    <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden>
-      <path
-        d="M1 5h12m0 0L9 1m4 4L9 9"
-        stroke="currentColor"
-        strokeWidth="1"
-        strokeLinecap="square"
-      />
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
-function Mark({ eyebrow, dark }: { eyebrow: string; dark: boolean }) {
+export default function SeguroPage() {
   return (
-    <div className="flex items-center gap-4">
-      <span
-        aria-hidden
-        className={`h-px ${dark ? "bg-[var(--color-line-on-ink)]" : "bg-[var(--color-line)]"}`}
-        style={{ width: 48 }}
-      />
-      <p
-        className={`t-mono text-[0.72rem] tracking-[0.18em] uppercase whitespace-nowrap ${
-          dark ? "text-on-ink-mute" : "text-ink-mute"
-        }`}
-      >
-        {eyebrow}
-      </p>
-    </div>
-  );
-}
-
-function Hero() {
-  return (
-    <section
-      id="top"
-      data-tone="dark"
-      className="relative isolate overflow-hidden bg-ink text-on-ink-strong"
+    <main
+      className="bg-white text-[#2E4659]"
+      style={{ fontFamily: "var(--font-brand), ui-sans-serif, system-ui, sans-serif" }}
     >
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 pt-40 md:pt-48 pb-28 md:pb-36">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-12 lg:col-span-9">
-            <p className="reveal r-1 t-mono text-[0.72rem] tracking-[0.18em] uppercase text-on-ink-mute mb-6">
-              Seguro de vida · Midlej Capital
-            </p>
-            <h1 className="reveal r-1 t-display text-[clamp(2.4rem,6vw,5.25rem)] leading-[0.98] text-balance text-on-ink-strong max-w-[22ch]">
-              Você está pagando por um seguro de vida —{" "}
-              <span className="text-on-ink-soft">
-                ou financiando o lucro de quem te vendeu?
-              </span>
-            </h1>
-            <p className="reveal r-2 mt-10 t-lede text-on-ink-soft text-[1.0625rem] md:text-[1.2rem] max-w-[58ch]">
-              <span className="asterisk" />
-              Descubra em 2 minutos quanto da sua mensalidade vira proteção e
-              quanto vira custo. E quanto esse dinheiro renderia se trabalhasse
-              pra você.
-            </p>
-            <div className="reveal r-3 mt-12 flex flex-wrap items-center gap-6">
-              <Link href="#simulacao" className="btn-primary-inverse">
-                Calcular meu seguro grátis
-                <Arrow />
-              </Link>
-              <Link href="#contato" className="btn-ghost-inverse">
-                Quero revisar com um consultor
-              </Link>
-            </div>
-            <p className="reveal r-3 mt-6 t-mono text-[0.72rem] tracking-[0.14em] uppercase text-on-ink-mute">
-              Leva 2 minutos · sem compromisso
-            </p>
-          </div>
-        </div>
-      </div>
-      <div
-        aria-hidden
-        className="mx-auto max-w-[1400px] border-t border-line-on-ink"
-      />
-    </section>
-  );
-}
+      <LPHeader ctaLabel="Revisar meu seguro" />
+      <SmoothAnchor />
 
-function Agitacao() {
-  const items = [
-    {
-      tag: "O nome técnico",
-      stat: "Caro",
-      body: "A maioria das apólices de vida 'que acumulam valor' embute um custo de seguro alto e um retorno de investimento baixo. Só não te contaram isso.",
-    },
-    {
-      tag: "O que ninguém te ofereceu",
-      stat: "A diferença",
-      body: "Você pode alugar a proteção (seguro temporário, bem mais barato) e investir a diferença — no seu nome, com liquidez, rendendo pra você.",
-    },
-    {
-      tag: "O resultado",
-      stat: "4× a mais",
-      body: "Com o mesmo dinheiro total, o modelo inteligente entrega mais de 4 vezes mais patrimônio — e a mesma proteção de R$ 1 milhão pra sua família.",
-    },
-  ];
-
-  return (
-    <section data-tone="light" className="bg-paper">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-36">
-        <Mark eyebrow="O que ninguém te explicou" dark={false} />
-        <h2 className="mt-10 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-ink max-w-[26ch]">
-          Você foi vendido, não atendido.
-        </h2>
-
-        <div className="mt-16 grid grid-cols-12 gap-x-8 gap-y-12">
-          {items.map((p) => (
-            <article
-              key={p.tag}
-              className="col-span-12 md:col-span-4 border-t border-line pt-8 flex flex-col"
-            >
-              <p className="t-mono text-[0.72rem] tracking-[0.18em] uppercase text-emphasis">
-                {p.tag}
-              </p>
-              <p className="mt-6 t-display-light text-[clamp(2.25rem,4.5vw,3.5rem)] leading-[0.95] text-ink">
-                {p.stat}
-              </p>
-              <p className="mt-6 t-body text-[1rem] leading-[1.65] text-ink-soft max-w-[40ch]">
-                {p.body}
-              </p>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-20 md:mt-24 border-t border-line pt-10">
-          <p className="t-quote text-[clamp(1.375rem,2.8vw,2.25rem)] leading-[1.2] text-ink max-w-[44ch]">
-            <span className="asterisk" />
-            O problema não é o seguro de vida. É o modelo de seguro que te
-            venderam.
+      {/* ── Hero ── */}
+      <section id="top" className="relative min-h-screen flex items-center">
+        <Image
+          src="/fotos_escritorio/6.jpeg"
+          alt="Escritório Midlej Capital"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(46,70,89,0.62)" }} />
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-32 md:py-48 w-full">
+          <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-6" style={{ color: "rgba(255,255,255,0.55)" }}>
+            Seguro de Vida Inteligente
           </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function SimulacaoPrincipal() {
-  return (
-    <section id="simulacao" data-tone="light" className="bg-bone">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-12 md:col-span-9">
-            <Mark eyebrow="A conta que mudou tudo" dark={false} />
-            <h2 className="mt-10 t-display text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.05] text-ink max-w-[26ch]">
-              Mesma proteção de R$ 1 milhão. Resultado completamente diferente.
-            </h2>
-            <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-ink-soft max-w-[52ch]">
-              Premissas: homem, 35 anos, cobertura de R$ 1 milhão, horizonte
-              de 30 anos, rendimento de investimento ≈ 10% a.a.
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-16 border-t border-line">
-          {/* Modelo comprar */}
-          <div className="border-b border-line py-12 md:py-16 grid grid-cols-12 gap-6 items-center">
-            <div className="col-span-12 md:col-span-2">
-              <span className="t-mono text-[0.72rem] tracking-[0.16em] uppercase text-ink-mute">
-                Modelo atual
-              </span>
-            </div>
-            <div className="col-span-12 md:col-span-6">
-              <h3 className="t-display text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.1] text-ink">
-                Seguro vitalício ("comprar")
-              </h3>
-              <p className="mt-3 t-body text-[0.95rem] leading-[1.6] text-ink-soft max-w-[48ch]">
-                ~R$ 1.000 por mês. Em 30 anos: ~R$ 360 mil pagos. O resgate
-                fica preso na apólice, rendendo pouco — e você paga comissão
-                embutida no produto até o fim.
-              </p>
-            </div>
-            <div className="col-span-12 md:col-span-4 flex flex-col items-start md:items-end">
-              <p className="t-display-light text-[clamp(2.5rem,5vw,4rem)] leading-[0.95] tabular-nums text-ink">
-                ~R$ 360 mil
-              </p>
-              <p className="mt-2 t-mono text-[0.72rem] tracking-[0.14em] uppercase text-ink-mute">
-                pagos · resgate baixo
-              </p>
-            </div>
-          </div>
-
-          {/* Modelo alugar */}
-          <div className="py-12 md:py-16 grid grid-cols-12 gap-6 items-center">
-            <div className="col-span-12 md:col-span-2">
-              <span className="t-mono text-[0.72rem] tracking-[0.16em] uppercase text-emphasis">
-                Modelo inteligente
-              </span>
-            </div>
-            <div className="col-span-12 md:col-span-6">
-              <h3 className="t-display text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.1] text-ink">
-                Temporário + investir a diferença ("alugar")
-              </h3>
-              <p className="mt-3 t-body text-[0.95rem] leading-[1.6] text-ink-soft max-w-[48ch]">
-                ~R$ 200 por mês de seguro temporário. ~R$ 800 por mês
-                investidos no seu nome, com liquidez. Em 30 anos, os R$ 800
-                mensais a 10% a.a. acumulam mais de R$ 1,6 milhão — seu,
-                líquido.
-              </p>
-            </div>
-            <div className="col-span-12 md:col-span-4 flex flex-col items-start md:items-end">
-              <p className="t-display-light text-[clamp(2.5rem,5vw,4rem)] leading-[0.95] tabular-nums text-emphasis">
-                ~R$ 1,6 milhão
-              </p>
-              <p className="mt-2 t-mono text-[0.72rem] tracking-[0.14em] uppercase text-emphasis">
-                patrimônio seu · liquidez
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-12 border-t border-line pt-10">
-          <p className="t-quote text-[clamp(1.25rem,2.4vw,1.875rem)] leading-[1.3] text-ink max-w-[52ch]">
-            <span className="asterisk" />
-            Com o mesmo dinheiro, em vez de R$ 360 mil presos numa apólice,
-            você teria mais de R$ 1,6 milhão — seu, líquido — e a mesma
-            proteção de R$ 1 milhão pra sua família. Mais de 4 vezes.
+          <h1 className="text-[clamp(2.25rem,6vw,4.5rem)] font-bold leading-[1.04] tracking-tight text-white mb-6 max-w-[20ch]">
+            Você está pagando por um seguro de vida — ou financiando o lucro de quem te vendeu?
+          </h1>
+          <p className="text-[clamp(1.0625rem,1.6vw,1.25rem)] leading-relaxed mb-10 max-w-[44ch]" style={{ color: "rgba(255,255,255,0.78)" }}>
+            Existe um modelo que protege a família agora e ainda constrói patrimônio. Ninguém te ofereceu porque ninguém ganha com isso.
           </p>
-        </div>
-
-        <div className="mt-12">
-          <Link href="#contato" className="btn-primary">
-            Calcular com meu caso real
-            <Arrow />
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Solucao() {
-  return (
-    <section data-tone="dark" className="bg-ink text-on-ink-strong">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-12 md:col-span-3">
-            <Mark eyebrow="Nossa abordagem" dark />
-          </div>
-          <div className="col-span-12 md:col-span-9">
-            <h2 className="t-display text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.05] text-on-ink-strong max-w-[24ch]">
-              Alugar a proteção.{" "}
-              <span className="text-on-ink-soft">Ser dono do patrimônio.</span>
-            </h2>
-            <p className="mt-12 t-body text-[1.0625rem] leading-[1.7] text-on-ink-soft max-w-[58ch]">
-              A Midlej não vende uma apólice. Desenha a estrutura: proteção
-              certa no momento certo — seguro temporário com cobertura real —
-              mais investimento da diferença, alinhado ao seu plano de vida.
-            </p>
-            <p className="mt-6 t-body text-[1.0625rem] leading-[1.7] text-on-ink-soft max-w-[58ch]">
-              Trabalhamos remunerados por fee fixo, sem comissão de seguradora.
-              Quando recomendamos um produto, é pelo seu plano — não pelo nosso
-              rebate.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ComoFunciona() {
-  const steps = [
-    {
-      n: "I",
-      title: "Diagnóstico da apólice atual",
-      body: "Analisamos o que você paga hoje: cobertura real, custo embutido, resgate projetado. Você entende, pela primeira vez, o que tem.",
-    },
-    {
-      n: "II",
-      title: "Plano estruturado",
-      body: "Desenhamos a proteção certa (temporária, no valor adequado) + o investimento da diferença. Cobertura que cobre de verdade, investimento que rende pra você.",
-    },
-    {
-      n: "III",
-      title: "Acompanhamento vivo",
-      body: "Revisão anual — porque sua vida muda, sua necessidade de cobertura muda, e o investimento precisa acompanhar o ritmo certo.",
-    },
-  ];
-
-  return (
-    <section data-tone="light" className="bg-bone">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-8 mb-16 md:mb-20">
-          <div className="col-span-12 md:col-span-9">
-            <Mark eyebrow="Como funciona" dark={false} />
-            <h2 className="mt-10 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.05] text-ink max-w-[22ch]">
-              Três passos. Um responsável por cada um deles.
-            </h2>
-          </div>
-        </div>
-        <ol className="border-t border-line">
-          {steps.map((s) => (
-            <li
-              key={s.n}
-              className="border-b border-line py-12 md:py-14 grid grid-cols-12 gap-6 items-baseline"
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="#simulacao"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200"
             >
-              <div className="col-span-12 md:col-span-2">
-                <span className="t-display-light text-[clamp(1.875rem,3vw,2.5rem)] leading-none text-emphasis tabular-nums">
-                  {s.n}
-                </span>
-              </div>
-              <div className="col-span-12 md:col-span-4">
-                <h3 className="t-display text-[clamp(1.25rem,1.8vw,1.625rem)] leading-[1.15] text-ink">
-                  {s.title}
-                </h3>
-              </div>
-              <div className="col-span-12 md:col-span-6">
-                <p className="t-body text-[0.95rem] leading-[1.6] text-ink-soft max-w-[52ch]">
-                  {s.body}
+              Calcular meu seguro grátis <Arrow />
+            </a>
+            <a
+              href="#contato"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/30 hover:border-white/60 transition-colors duration-200"
+            >
+              Quero revisar com um consultor
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Agitação ── */}
+      <section className="bg-white">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
+          <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
+            <div className="col-span-12 md:col-span-5">
+              <SectionTag label="O que ninguém te contou" />
+              <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[18ch]" style={{ color: "#2E4659" }}>
+                O seguro vitalício foi projetado para lucrar, não para proteger.
+              </h2>
+            </div>
+            <div className="col-span-12 md:col-span-7">
+              <p className="text-[1.0625rem] leading-[1.65] mb-10 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
+                Três verdades que as seguradoras evitam explicar — e que fazem toda a diferença ao longo de 30 anos de pagamentos.
+              </p>
+              <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                {[
+                  { n: "Caro", label: "O nome técnico é VUL ou inteiro", sub: "Mistura proteção e 'investimento' — com a seguradora ganhando nos dois lados" },
+                  { n: "Nunca", label: "O que ninguém ofereceu", sub: "Um seguro temporário puro, com o restante sendo investido por você" },
+                  { n: "4× mais", label: "O resultado possível", sub: "Proteção igual — e patrimônio líquido até 4 vezes maior ao longo do tempo" },
+                ].map((s) => (
+                  <div key={s.n} className="rounded-xl border border-[#EDEFF2] p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
+                    <dt className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold leading-none tracking-tight mb-2" style={{ color: "#4a6b8c" }}>
+                      {s.n}
+                    </dt>
+                    <dd className="text-sm font-semibold leading-snug mb-1" style={{ color: "#2E4659" }}>{s.label}</dd>
+                    <dd className="text-[0.8rem] leading-snug" style={{ color: "#6B7B8D" }}>{s.sub}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Simulação principal ── */}
+      <section id="simulacao" style={{ backgroundColor: "#F5F7FA" }}>
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
+          <SectionTag label="Simulação · 30 anos · mesma proteção" />
+          <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-4 max-w-[24ch]" style={{ color: "#2E4659" }}>
+            R$&nbsp;1.000/mês. Dois destinos completamente diferentes.
+          </h2>
+          <p className="text-[1.0625rem] leading-relaxed mb-16 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
+            A proteção é equivalente. O que muda é quem acumula patrimônio ao longo do caminho.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              {
+                label: "Modelo atual",
+                tag: "Seguro vitalício (VUL / inteiro)",
+                value: "~R$ 360 mil pagos",
+                sub: "30 anos × R$1.000 — capital retido pela seguradora",
+                note: "Preso no produto. Rentabilidade opaca. Sem acumulação líquida.",
+                highlight: false,
+              },
+              {
+                label: "Modelo inteligente",
+                tag: "Temporário + R$800 investidos/mês",
+                value: "~R$ 1,6 milhão",
+                sub: "Patrimônio líquido ao fim dos 30 anos",
+                note: "Proteção equivalente. Controle total. Rentabilidade do mercado.",
+                highlight: true,
+              },
+            ].map((c) => (
+              <div
+                key={c.label}
+                className="rounded-2xl p-8 md:p-10 border"
+                style={{
+                  backgroundColor: c.highlight ? "#2E4659" : "white",
+                  borderColor: c.highlight ? "transparent" : "#EDEFF2",
+                }}
+              >
+                <p className="text-[0.66rem] font-semibold tracking-[0.16em] uppercase mb-2" style={{ color: c.highlight ? "rgba(255,255,255,0.50)" : "#6B7B8D" }}>
+                  {c.label}
+                </p>
+                <p className="text-sm font-semibold mb-6" style={{ color: c.highlight ? "rgba(255,255,255,0.70)" : "#4a6b8c" }}>
+                  {c.tag}
+                </p>
+                <p className="text-[clamp(2rem,4vw,3rem)] font-bold leading-none tracking-tight mb-3" style={{ color: c.highlight ? "white" : "#2E4659" }}>
+                  {c.value}
+                </p>
+                <p className="text-[0.875rem] leading-relaxed mb-4" style={{ color: c.highlight ? "rgba(255,255,255,0.55)" : "#6B7B8D" }}>
+                  {c.sub}
+                </p>
+                <p className="text-[0.8rem] leading-relaxed" style={{ color: c.highlight ? "rgba(255,255,255,0.40)" : "#6B7B8D" }}>
+                  {c.note}
                 </p>
               </div>
-            </li>
-          ))}
-        </ol>
-        <div className="mt-12">
-          <Link href="#contato" className="btn-primary">
-            Começar pelo diagnóstico gratuito
-            <Arrow />
-          </Link>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-function Autoridade() {
-  return (
-    <section data-tone="light" className="bg-paper">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-          <div className="col-span-12 md:col-span-5">
-            <Mark eyebrow="Midlej Capital" dark={false} />
-            <h2 className="mt-10 t-display text-[clamp(1.625rem,3vw,2.5rem)] leading-[1.05] text-ink max-w-[20ch]">
-              Consultoria independente, sem conflito de produto.
-            </h2>
-          </div>
-          <div className="col-span-12 md:col-span-7">
-            <p className="t-body text-[1.0625rem] leading-[1.7] text-ink-soft max-w-[58ch]">
-              A Midlej Capital é consultoria de investimentos com registro na
-              CVM. Não recebemos comissão de seguradora, corretora ou
-              distribuidora. Quando desenhamos uma estrutura de seguro, é o seu
-              plano que orienta — não o produto com maior rebate para quem
-              vende.
-            </p>
-            <dl className="mt-10 grid grid-cols-3 gap-x-6 md:gap-x-10 border-t border-line pt-8">
-              <div>
-                <dt className="t-mono text-[0.66rem] tracking-[0.16em] uppercase text-ink-mute">
-                  Modelo
-                </dt>
-                <dd className="t-display-light text-[clamp(1.125rem,1.6vw,1.5rem)] leading-[1.1] mt-2 text-ink">
-                  Fee fixo
-                </dd>
-              </div>
-              <div>
-                <dt className="t-mono text-[0.66rem] tracking-[0.16em] uppercase text-ink-mute">
-                  Registro
-                </dt>
-                <dd className="t-display-light text-[clamp(1.125rem,1.6vw,1.5rem)] leading-[1.1] mt-2 text-ink">
-                  CVM
-                </dd>
-              </div>
-              <div>
-                <dt className="t-mono text-[0.66rem] tracking-[0.16em] uppercase text-ink-mute">
-                  Rebate
-                </dt>
-                <dd className="t-display-light text-[clamp(1.125rem,1.6vw,1.5rem)] leading-[1.1] mt-2 text-ink">
-                  Zero
-                </dd>
-              </div>
-            </dl>
+      {/* ── Solução ── */}
+      <section style={{ backgroundColor: "#4a6b8c" }}>
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
+          <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
+            <div className="col-span-12 md:col-span-7">
+              <SectionTag label="Nossa abordagem" dark />
+              <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight text-white mb-6 max-w-[22ch]">
+                Alugar a proteção. Ser dono do patrimônio.
+              </h2>
+              <p className="text-[1.0625rem] leading-[1.65] mb-6 max-w-[52ch]" style={{ color: "rgba(255,255,255,0.75)" }}>
+                Seguro temporário cobre o período em que a família depende de você. O dinheiro que sobra vai para uma carteira de investimentos — que você controla, liquida e herda.
+              </p>
+              <p className="text-[1.0625rem] leading-[1.65] max-w-[52ch]" style={{ color: "rgba(255,255,255,0.60)" }}>
+                Não vendemos seguro. Assessoramos a decisão. Por isso somos pagos por honorários fixos — não por comissão de apólice.
+              </p>
+            </div>
+            <div className="col-span-12 md:col-span-4 md:col-start-9">
+              <a
+                href="#contato"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold bg-white hover:bg-[#EDEFF2] transition-colors duration-200"
+                style={{ color: "#2E4659" }}
+              >
+                Quero rever meu seguro <Arrow />
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-function Contato() {
-  return (
-    <section id="contato" data-tone="dark" className="bg-ink text-on-ink-strong">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-          <div className="col-span-12 md:col-span-6">
-            <Mark eyebrow="Revisão gratuita" dark />
-            <h2 className="mt-10 t-display text-[clamp(2rem,4.5vw,3.75rem)] leading-[1.0] text-on-ink-strong max-w-[20ch]">
-              Quero revisar meu seguro com um consultor.
-            </h2>
-            <p className="mt-10 t-lede text-on-ink-soft text-[1.1rem] max-w-[44ch]">
-              Preencha em 2 minutos. Retornamos pelo WhatsApp com uma análise
-              do seu caso — sem material comercial, sem gravação.
-            </p>
-            <p className="mt-8 t-body text-[0.85rem] leading-[1.55] text-on-ink-mute max-w-[48ch]">
-              <span className="asterisk" />
-              Simulações ilustrativas baseadas em dados históricos;
-              rentabilidade passada não representa garantia de rentabilidade
-              futura. Esta página tem caráter educativo e não constitui
-              recomendação individualizada de investimento ou de seguro.
-            </p>
-          </div>
-          <div className="col-span-12 md:col-span-6 md:col-start-7">
-            <HubLeadForm
-              tone="dark"
-              submitLabel="Quero revisar meu seguro com um consultor"
-              origin="LP1 · Seguro de Vida"
-            />
+      {/* ── Como funciona ── */}
+      <section className="bg-white">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
+          <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
+            <div className="col-span-12 md:col-span-4">
+              <SectionTag label="Como funciona" />
+              <h2 className="text-[clamp(1.625rem,3vw,2.5rem)] font-bold leading-[1.04] tracking-tight max-w-[16ch]" style={{ color: "#2E4659" }}>
+                Três etapas. Um plano integrado.
+              </h2>
+            </div>
+            <div className="col-span-12 md:col-span-8 md:col-start-5">
+              <ol className="flex flex-col divide-y divide-[#EDEFF2]">
+                {[
+                  {
+                    n: "I",
+                    title: "Diagnóstico do seguro atual",
+                    body: "Analisamos o produto que você tem hoje — custo real, cobertura, cláusulas de carência e o que a seguradora não explicitou no contrato.",
+                  },
+                  {
+                    n: "II",
+                    title: "Reestruturação da proteção",
+                    body: "Calculamos o capital segurado que sua família realmente precisa, o prazo ideal e o seguro temporário mais eficiente do mercado — sem conflito de interesse.",
+                  },
+                  {
+                    n: "III",
+                    title: "Plano de investimento paralelo",
+                    body: "O valor liberado pela troca do produto é direcionado a uma carteira de investimentos adequada ao seu perfil. Proteção e patrimônio crescendo juntos.",
+                  },
+                ].map((s) => (
+                  <li key={s.n} className="py-8 md:py-10 flex gap-6 md:gap-10 items-start">
+                    <span className="text-[clamp(1.875rem,3vw,2.5rem)] font-light leading-none tabular-nums shrink-0" style={{ color: "#4a6b8c" }}>
+                      {s.n}
+                    </span>
+                    <div>
+                      <h3 className="text-[1.0625rem] font-bold mb-2" style={{ color: "#2E4659" }}>{s.title}</h3>
+                      <p className="text-[0.95rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>{s.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-function Footer() {
-  const year = new Date().getFullYear();
-  return (
-    <footer
-      data-tone="dark"
-      className="bg-ink text-on-ink-soft border-t border-line-on-ink"
-    >
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
-        <div className="grid grid-cols-12 gap-8 items-start">
-          <div className="col-span-12 md:col-span-4">
-            <Logo tone="dark" subText="CAPITAL" className="h-12 w-auto" />
-          </div>
-          <div className="col-span-12 md:col-span-7 md:col-start-6">
-            <p className="t-quote text-[clamp(1.0625rem,1.6vw,1.375rem)] leading-[1.4] text-on-ink-strong max-w-[40ch]">
-              Midlej Capital. Banca privada de planejamento financeiro,
-              conduzida em Brasília, atende em todo o Brasil.
-            </p>
-          </div>
+      {/* ── Autoridade ── */}
+      <section style={{ backgroundColor: "#F5F7FA" }}>
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
+          <SectionTag label="Por que a Midlej" />
+          <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-16 max-w-[28ch]" style={{ color: "#2E4659" }}>
+            Consultoria independente. Sem comissão de seguro.
+          </h2>
+          <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {[
+              { label: "Registrada na CVM", body: "Consultora de valores mobiliários regulada. Não somos corretores de seguro — somos consultores independentes, com obrigação fiduciária ao cliente." },
+              { label: "Fee fixo", body: "Nossa remuneração é um honorário fixo. Nenhum centavo vem de comissão de seguradora — o que nos permite recomendar o produto mais eficiente para você." },
+              { label: "Abordagem integrada", body: "Tratamos proteção e acumulação patrimonial como uma estratégia única — não como dois produtos vendidos por departamentos diferentes." },
+            ].map((c) => (
+              <div key={c.label} className="rounded-xl border border-[#EDEFF2] bg-white p-7 shadow-sm">
+                <dt className="text-sm font-bold mb-3" style={{ color: "#2E4659" }}>{c.label}</dt>
+                <dd className="text-[0.9375rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>{c.body}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
-        <div className="mt-16 pt-6 border-t border-line-on-ink flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-[0.78rem] tracking-[0.04em] text-on-ink-mute">
-          <span>Midlej Capital · CNPJ 35.340.252/0001-44</span>
-          <span>© {year} Midlej Capital. Todos os direitos reservados.</span>
-        </div>
-      </div>
-    </footer>
+      </section>
+
+      {/* ── Closing ── */}
+      <LPClosing
+        eyebrow="Revisão gratuita"
+        headline="Descubra quanto seu seguro atual está custando a mais."
+        body="Na primeira conversa analisamos o produto que você tem hoje e mostramos o que muda com a reestruturação. Gratuita, confidencial e sem compromisso de contratação."
+        ctaLabel="Quero revisar meu seguro"
+        origin="LP1 · Seguro de Vida"
+        disclaimer={DISCLAIMER}
+      />
+    </main>
   );
 }

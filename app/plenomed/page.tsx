@@ -1,458 +1,302 @@
-import Link from "next/link";
-import { Logo } from "../components/Logo";
-import { HubHeader } from "../_hub/HubHeader";
-import { HubLeadForm } from "../_hub/HubLeadForm";
-import { SmoothAnchor } from "../_hub/SmoothAnchor";
+import type { Metadata } from "next";
+import Image from "next/image";
+import { LPHeader } from "@/app/_hub/LPHeader";
+import { LPClosing } from "@/app/_hub/LPClosing";
+import { SmoothAnchor } from "@/app/_hub/SmoothAnchor";
 
-export default function PlenoMedPage() {
+export const metadata: Metadata = {
+  title: "Proteção Patrimonial para Médicos · Midlej Capital",
+  description:
+    "Um processo pode custar mais que sua carreira. Descubra se seu patrimônio pessoal está protegido — RC profissional + blindagem patrimonial com consultoria financeira e jurídica integradas.",
+  openGraph: {
+    title: "Proteção Patrimonial para Médicos · Midlej Capital",
+    description: "RC profissional na cobertura certa + blindagem patrimonial. Consultoria financeira e jurídica sob o mesmo teto.",
+    type: "website",
+    locale: "pt_BR",
+  },
+};
+
+const DISCLAIMER =
+  "Esta página tem caráter educativo e não constitui recomendação individualizada de seguro ou consultoria jurídica. Dados de judicialização são de fontes públicas e variam por especialidade e região.";
+
+function SectionTag({ label, dark = false }: { label: string; dark?: boolean }) {
   return (
-    <main
-      data-brand
-      id="main"
-      className="brand-body min-h-screen bg-paper text-ink"
-    >
-      <SmoothAnchor />
-      <HubHeader />
-      <Hero />
-      <Agitacao />
-      <DiagnosticoExposicao />
-      <Solucao />
-      <ComoFunciona />
-      <Autoridade />
-      <Contato />
-      <Footer />
-    </main>
+    <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-3" style={{ color: dark ? "rgba(255,255,255,0.50)" : "#4a6b8c" }}>
+      {label}
+    </p>
   );
 }
 
 function Arrow() {
   return (
-    <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden>
-      <path
-        d="M1 5h12m0 0L9 1m4 4L9 9"
-        stroke="currentColor"
-        strokeWidth="1"
-        strokeLinecap="square"
-      />
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
-function Mark({ eyebrow, dark }: { eyebrow: string; dark: boolean }) {
+export default function PlenomedPage() {
   return (
-    <div className="flex items-center gap-4">
-      <span
-        aria-hidden
-        className={`h-px ${dark ? "bg-[var(--color-line-on-ink)]" : "bg-[var(--color-line)]"}`}
-        style={{ width: 48 }}
-      />
-      <p
-        className={`t-mono text-[0.72rem] tracking-[0.18em] uppercase whitespace-nowrap ${
-          dark ? "text-on-ink-mute" : "text-ink-mute"
-        }`}
-      >
-        {eyebrow}
-      </p>
-    </div>
-  );
-}
-
-function Hero() {
-  return (
-    <section
-      id="top"
-      data-tone="dark"
-      className="relative isolate overflow-hidden bg-ink text-on-ink-strong"
+    <main
+      className="bg-white text-[#2E4659]"
+      style={{ fontFamily: "var(--font-brand), ui-sans-serif, system-ui, sans-serif" }}
     >
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 pt-40 md:pt-48 pb-28 md:pb-36">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-12 lg:col-span-9">
-            <p className="reveal r-1 t-mono text-[0.72rem] tracking-[0.18em] uppercase text-on-ink-mute mb-6">
-              Proteção patrimonial · Médicos · Midlej Capital
-            </p>
-            <h1 className="reveal r-1 t-display text-[clamp(2.4rem,6vw,5.25rem)] leading-[0.98] text-balance text-on-ink-strong max-w-[22ch]">
-              Um processo pode custar mais que sua carreira.{" "}
-              <span className="text-on-ink-soft">
-                Seu patrimônio pessoal está protegido?
-              </span>
-            </h1>
-            <p className="reveal r-2 mt-10 t-lede text-on-ink-soft text-[1.0625rem] md:text-[1.2rem] max-w-[58ch]">
-              <span className="asterisk" />
-              A judicialização da medicina cresce todo ano. Descubra em 2
-              minutos se você está coberto de verdade — e o que acontece com
-              seus bens se não estiver.
-            </p>
-            <div className="reveal r-3 mt-12 flex flex-wrap items-center gap-6">
-              <Link href="#exposicao" className="btn-primary-inverse">
-                Avaliar minha exposição grátis
-                <Arrow />
-              </Link>
-              <Link href="#contato" className="btn-ghost-inverse">
-                Quero meu Raio-X de proteção
-              </Link>
-            </div>
-            <p className="reveal r-3 mt-6 t-mono text-[0.72rem] tracking-[0.14em] uppercase text-on-ink-mute">
-              Leva 2 minutos · sem compromisso
-            </p>
-          </div>
-        </div>
-      </div>
-      <div
-        aria-hidden
-        className="mx-auto max-w-[1400px] border-t border-line-on-ink"
-      />
-    </section>
-  );
-}
+      <LPHeader ctaLabel="Quero meu Raio-X" />
+      <SmoothAnchor />
 
-function Agitacao() {
-  const items = [
-    {
-      tag: "Judicialização",
-      stat: "↑ todo ano",
-      body: "O número de ações por suposto erro médico cresce ano a ano. Qualquer especialidade está sujeita — não apenas as de maior risco cirúrgico.",
-    },
-    {
-      tag: "Indenizações",
-      stat: "Anos de trabalho",
-      body: "Condenações chegam a cifras que ultrapassam décadas de renda. E podem ser executadas sobre bens pessoais, não só profissionais.",
-    },
-    {
-      tag: "Patrimônio pessoal",
-      stat: "Na linha de frente",
-      body: "Sem cobertura adequada, a conta vai para imóveis, investimentos e reservas da família. Muitos médicos têm RC — mas com cobertura baixa, carências ou exclusões que só descobrem tarde demais.",
-    },
-  ];
-
-  return (
-    <section data-tone="light" className="bg-paper">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-36">
-        <Mark eyebrow="O risco que ninguém fala abertamente" dark={false} />
-        <h2 className="mt-10 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-ink max-w-[26ch]">
-          O risco jurídico não bate à porta. Ele já chegou na especialidade
-          do seu vizinho.
-        </h2>
-
-        <div className="mt-16 grid grid-cols-12 gap-x-8 gap-y-12">
-          {items.map((p) => (
-            <article
-              key={p.tag}
-              className="col-span-12 md:col-span-4 border-t border-line pt-8 flex flex-col"
-            >
-              <p className="t-mono text-[0.72rem] tracking-[0.18em] uppercase text-emphasis">
-                {p.tag}
-              </p>
-              <p className="mt-6 t-display-light text-[clamp(1.75rem,3.5vw,2.75rem)] leading-[1.05] text-ink">
-                {p.stat}
-              </p>
-              <p className="mt-6 t-body text-[1rem] leading-[1.65] text-ink-soft max-w-[40ch]">
-                {p.body}
-              </p>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-20 md:mt-24 border-t border-line pt-10">
-          <p className="t-quote text-[clamp(1.375rem,2.8vw,2.25rem)] leading-[1.2] text-ink max-w-[44ch]">
-            <span className="asterisk" />
-            Não é sobre ser culpado. É sobre estar exposto — e não saber disso.
+      {/* ── Hero ── */}
+      <section id="top" className="relative min-h-screen flex items-center">
+        <Image
+          src="/fotos_escritorio/3.jpeg"
+          alt="Escritório Midlej Capital"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(46,70,89,0.65)" }} />
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-32 md:py-48 w-full">
+          <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-6" style={{ color: "rgba(255,255,255,0.55)" }}>
+            Proteção Patrimonial · Médicos
           </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function DiagnosticoExposicao() {
-  const niveis = [
-    {
-      nivel: "Exposição alta",
-      cor: "text-emphasis",
-      perfil: "Cirurgiões, obstetras, anestesistas, ortopedistas",
-      sinal: "Especialidade de alto litígio + sem RC ou cobertura insuficiente + patrimônio pessoal sem blindagem.",
-    },
-    {
-      nivel: "Exposição média",
-      cor: "text-ink",
-      perfil: "Clínicos gerais, pediatras, dermatologistas",
-      sinal: "Tem RC, mas não revisou a cobertura nos últimos 2 anos. Patrimônio pessoal misturado com PJ.",
-    },
-    {
-      nivel: "Exposição controlada",
-      cor: "text-ink-mute",
-      perfil: "Qualquer especialidade",
-      sinal: "RC adequada à especialidade, cobertura revisada anualmente, estrutura patrimonial separada da pessoa física.",
-    },
-  ];
-
-  return (
-    <section id="exposicao" data-tone="light" className="bg-bone">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-12 md:col-span-9">
-            <Mark eyebrow="Mini-diagnóstico de exposição" dark={false} />
-            <h2 className="mt-10 t-display text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.05] text-ink max-w-[26ch]">
-              Em qual perfil você se encaixa agora?
-            </h2>
-            <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-ink-soft max-w-[52ch]">
-              Quatro perguntas revelam o nível de exposição: especialidade,
-              se realiza procedimentos, se tem RC hoje e qual é o valor da
-              cobertura atual.
-            </p>
+          <h1 className="text-[clamp(2.25rem,6vw,4.5rem)] font-bold leading-[1.04] tracking-tight text-white mb-6 max-w-[18ch]">
+            Um processo pode custar mais que sua carreira.
+          </h1>
+          <p className="text-[clamp(1.0625rem,1.6vw,1.25rem)] leading-relaxed mb-10 max-w-[44ch]" style={{ color: "rgba(255,255,255,0.78)" }}>
+            A judicialização contra médicos cresce todo ano. Saber se o seu patrimônio pessoal está realmente protegido é a pergunta que ninguém faz — até precisar.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="#exposicao"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200"
+            >
+              Avaliar minha exposição <Arrow />
+            </a>
+            <a
+              href="#contato"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/30 hover:border-white/60 transition-colors duration-200"
+            >
+              Quero falar com um especialista
+            </a>
           </div>
         </div>
+      </section>
 
-        <div className="mt-16 border-t border-line">
-          {niveis.map((n) => (
-            <div
-              key={n.nivel}
-              className="border-b border-line py-10 md:py-12 grid grid-cols-12 gap-6 items-baseline"
-            >
-              <div className="col-span-12 md:col-span-3">
-                <span
-                  className={`t-display text-[clamp(1.0625rem,1.4vw,1.25rem)] leading-[1.2] ${n.cor}`}
-                >
-                  {n.nivel}
-                </span>
-              </div>
-              <div className="col-span-12 md:col-span-3">
-                <p className="t-mono text-[0.72rem] tracking-[0.14em] uppercase text-ink-mute mb-2">
-                  Perfil típico
-                </p>
-                <p className="t-body text-[0.95rem] leading-[1.55] text-ink">
-                  {n.perfil}
-                </p>
-              </div>
-              <div className="col-span-12 md:col-span-6">
-                <p className="t-mono text-[0.72rem] tracking-[0.14em] uppercase text-ink-mute mb-2">
-                  Sinal de alerta
-                </p>
-                <p className="t-body text-[0.95rem] leading-[1.55] text-ink-soft max-w-[52ch]">
-                  {n.sinal}
-                </p>
-              </div>
+      {/* ── Agitação ── */}
+      <section className="bg-white">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
+          <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
+            <div className="col-span-12 md:col-span-5">
+              <SectionTag label="O cenário atual" />
+              <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[18ch]" style={{ color: "#2E4659" }}>
+                O risco cresce. A proteção fica estagnada.
+              </h2>
             </div>
-          ))}
-        </div>
-
-        <div className="mt-12">
-          <Link href="#contato" className="btn-primary">
-            Quero meu Raio-X de proteção patrimonial
-            <Arrow />
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Solucao() {
-  return (
-    <section data-tone="dark" className="bg-ink text-on-ink-strong">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-12 md:col-span-3">
-            <Mark eyebrow="Nossa abordagem" dark />
-          </div>
-          <div className="col-span-12 md:col-span-9">
-            <h2 className="t-display text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.05] text-on-ink-strong max-w-[26ch]">
-              Outros vendem a apólice.{" "}
-              <span className="text-on-ink-soft">
-                Nós protegemos o patrimônio inteiro.
-              </span>
-            </h2>
-            <p className="mt-12 t-body text-[1.0625rem] leading-[1.7] text-on-ink-soft max-w-[58ch]">
-              RC profissional na cobertura certa — sem exclusões que aparecem
-              na hora errada — mais estrutura de proteção do patrimônio pessoal.
-              Tudo sob o mesmo teto, com consultoria e braço jurídico próprios.
-            </p>
-            <p className="mt-6 t-body text-[1.0625rem] leading-[1.7] text-on-ink-soft max-w-[58ch]">
-              A MIDLEJ Advogados no grupo permite a oferta que escritórios de
-              seguros e corretoras isoladas não conseguem replicar: consultoria
-              financeira + estrutura jurídica de proteção, integradas.
-            </p>
+            <div className="col-span-12 md:col-span-7">
+              <p className="text-[1.0625rem] leading-[1.65] mb-10 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
+                Três realidades que médicos com RC ativa frequentemente ignoram — e que podem custar décadas de construção patrimonial.
+              </p>
+              <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                {[
+                  { n: "↑ todo ano", label: "Judicialização médica", sub: "Processos por erro médico crescem sistematicamente no Brasil" },
+                  { n: "Anos", label: "O que uma indenização pode levar", sub: "Uma sentença de R$500mil a R$2mi pode absorver anos de renda" },
+                  { n: "⚠", label: "Patrimônio pessoal na linha", sub: "RC com cobertura errada deixa imóveis e investimentos expostos" },
+                ].map((s) => (
+                  <div key={s.n} className="rounded-xl border border-[#EDEFF2] p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
+                    <dt className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold leading-none tracking-tight mb-2" style={{ color: "#4a6b8c" }}>
+                      {s.n}
+                    </dt>
+                    <dd className="text-sm font-semibold leading-snug mb-1" style={{ color: "#2E4659" }}>{s.label}</dd>
+                    <dd className="text-[0.8rem] leading-snug" style={{ color: "#6B7B8D" }}>{s.sub}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-function ComoFunciona() {
-  const steps = [
-    {
-      n: "I",
-      title: "Raio-X de exposição",
-      body: "Mapeamos sua especialidade, suas apólices atuais e o patrimônio pessoal exposto. Identificamos as lacunas antes que virem processo.",
-    },
-    {
-      n: "II",
-      title: "Plano de blindagem",
-      body: "Desenhamos a RC na cobertura adequada + a estrutura de proteção patrimonial. Consultoria financeira e jurídica integradas.",
-    },
-    {
-      n: "III",
-      title: "Acompanhamento anual",
-      body: "Revisão da cobertura a cada ciclo — porque a sua especialidade, a sua renda e o seu patrimônio mudam. A proteção tem que acompanhar.",
-    },
-  ];
-
-  return (
-    <section data-tone="light" className="bg-bone">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-8 mb-16 md:mb-20">
-          <div className="col-span-12 md:col-span-9">
-            <Mark eyebrow="Como funciona" dark={false} />
-            <h2 className="mt-10 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.05] text-ink max-w-[22ch]">
-              Três passos. Um responsável por cada um deles.
-            </h2>
-          </div>
-        </div>
-        <ol className="border-t border-line">
-          {steps.map((s) => (
-            <li
-              key={s.n}
-              className="border-b border-line py-12 md:py-14 grid grid-cols-12 gap-6 items-baseline"
-            >
-              <div className="col-span-12 md:col-span-2">
-                <span className="t-display-light text-[clamp(1.875rem,3vw,2.5rem)] leading-none text-emphasis tabular-nums">
-                  {s.n}
-                </span>
-              </div>
-              <div className="col-span-12 md:col-span-4">
-                <h3 className="t-display text-[clamp(1.25rem,1.8vw,1.625rem)] leading-[1.15] text-ink">
-                  {s.title}
-                </h3>
-              </div>
-              <div className="col-span-12 md:col-span-6">
-                <p className="t-body text-[0.95rem] leading-[1.6] text-ink-soft max-w-[52ch]">
-                  {s.body}
+      {/* ── Diagnóstico de exposição ── */}
+      <section id="exposicao" style={{ backgroundColor: "#F5F7FA" }}>
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
+          <SectionTag label="Diagnóstico de exposição" />
+          <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-4 max-w-[24ch]" style={{ color: "#2E4659" }}>
+            Qual é o seu nível de exposição hoje?
+          </h2>
+          <p className="text-[1.0625rem] leading-relaxed mb-16 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
+            O risco varia com especialidade, tempo de carreira e estrutura patrimonial. Identifique onde você está.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                tag: "Exposição Alta",
+                tagColor: "#c0392b",
+                title: "RC com cobertura abaixo do risco",
+                items: [
+                  "Especialidade de alto risco cirúrgico",
+                  "Apólice antiga sem revisão de cobertura",
+                  "Patrimônio pessoal sem proteção jurídica",
+                  "Sem separação entre PF e PJ",
+                ],
+                highlight: false,
+              },
+              {
+                tag: "Exposição Média",
+                tagColor: "#c07a17",
+                title: "Proteção parcial — pontos cegos",
+                items: [
+                  "RC ativa, mas limites desatualizados",
+                  "Nenhuma auditoria nos últimos 2 anos",
+                  "Bens pessoais sem blindagem específica",
+                  "Orientação de seguradora, não de consultoria",
+                ],
+                highlight: false,
+              },
+              {
+                tag: "Exposição Controlada",
+                tagColor: "#27ae60",
+                title: "Estrutura completa e revisada",
+                items: [
+                  "RC com cobertura calibrada à especialidade",
+                  "Patrimônio pessoal estruturado juridicamente",
+                  "Revisão anual com consultoria independente",
+                  "Plano integrado: finanças + proteção",
+                ],
+                highlight: true,
+              },
+            ].map((c) => (
+              <div
+                key={c.tag}
+                className="rounded-2xl p-8 border"
+                style={{
+                  backgroundColor: c.highlight ? "#2E4659" : "white",
+                  borderColor: c.highlight ? "transparent" : "#EDEFF2",
+                }}
+              >
+                <p className="text-[0.66rem] font-bold tracking-widest uppercase mb-4" style={{ color: c.highlight ? "rgba(255,255,255,0.55)" : c.tagColor }}>
+                  {c.tag}
                 </p>
+                <h3 className="text-[1.0625rem] font-bold mb-6 leading-snug" style={{ color: c.highlight ? "white" : "#2E4659" }}>
+                  {c.title}
+                </h3>
+                <ul className="flex flex-col gap-3">
+                  {c.items.map((item) => (
+                    <li key={item} className="text-[0.9rem] leading-snug flex gap-2" style={{ color: c.highlight ? "rgba(255,255,255,0.65)" : "#6B7B8D" }}>
+                      <span aria-hidden style={{ color: c.highlight ? "rgba(255,255,255,0.30)" : "#EDEFF2", flexShrink: 0 }}>—</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </li>
-          ))}
-        </ol>
-        <div className="mt-12">
-          <Link href="#contato" className="btn-primary">
-            Começar pelo Raio-X
-            <Arrow />
-          </Link>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-function Autoridade() {
-  return (
-    <section data-tone="light" className="bg-paper">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-          <div className="col-span-12 md:col-span-5">
-            <Mark eyebrow="Midlej Capital" dark={false} />
-            <h2 className="mt-10 t-display text-[clamp(1.625rem,3vw,2.5rem)] leading-[1.05] text-ink max-w-[20ch]">
-              Consultoria financeira e jurídica sob o mesmo teto.
-            </h2>
-          </div>
-          <div className="col-span-12 md:col-span-7">
-            <p className="t-body text-[1.0625rem] leading-[1.7] text-ink-soft max-w-[58ch]">
-              A Midlej Capital é consultoria de investimentos com registro na
-              CVM. A MIDLEJ Advogados é o braço jurídico do grupo. Juntos,
-              desenhamos a proteção que outros só conseguem parcialmente —
-              porque precisariam de dois escritórios sem integração entre eles.
-            </p>
-            <dl className="mt-10 grid grid-cols-3 gap-x-6 md:gap-x-10 border-t border-line pt-8">
-              <div>
-                <dt className="t-mono text-[0.66rem] tracking-[0.16em] uppercase text-ink-mute">
-                  Financeiro
-                </dt>
-                <dd className="t-display-light text-[clamp(1.125rem,1.6vw,1.5rem)] leading-[1.1] mt-2 text-ink">
-                  CVM
-                </dd>
-              </div>
-              <div>
-                <dt className="t-mono text-[0.66rem] tracking-[0.16em] uppercase text-ink-mute">
-                  Jurídico
-                </dt>
-                <dd className="t-display-light text-[clamp(1.125rem,1.6vw,1.5rem)] leading-[1.1] mt-2 text-ink">
-                  OAB
-                </dd>
-              </div>
-              <div>
-                <dt className="t-mono text-[0.66rem] tracking-[0.16em] uppercase text-ink-mute">
-                  Modelo
-                </dt>
-                <dd className="t-display-light text-[clamp(1.125rem,1.6vw,1.5rem)] leading-[1.1] mt-2 text-ink">
-                  Fee fixo
-                </dd>
-              </div>
-            </dl>
+      {/* ── Solução ── */}
+      <section style={{ backgroundColor: "#4a6b8c" }}>
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
+          <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
+            <div className="col-span-12 md:col-span-7">
+              <SectionTag label="Nossa diferença" dark />
+              <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight text-white mb-6 max-w-[22ch]">
+                Outros vendem a apólice. Nós protegemos o patrimônio inteiro.
+              </h2>
+              <p className="text-[1.0625rem] leading-[1.65] mb-6 max-w-[52ch]" style={{ color: "rgba(255,255,255,0.75)" }}>
+                A MIDLEJ reúne consultoria financeira (CVM) e jurídica (OAB) sob o mesmo teto. Calibramos a RC certa para a especialidade — e estruturamos o patrimônio pessoal para que nenhuma sentença apague décadas de trabalho.
+              </p>
+              <p className="text-[1.0625rem] leading-[1.65] max-w-[52ch]" style={{ color: "rgba(255,255,255,0.60)" }}>
+                Um único interlocutor. Sem conflito de interesse. Sem produto de prateleira.
+              </p>
+            </div>
+            <div className="col-span-12 md:col-span-4 md:col-start-9">
+              <a
+                href="#contato"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold bg-white hover:bg-[#EDEFF2] transition-colors duration-200"
+                style={{ color: "#2E4659" }}
+              >
+                Solicitar diagnóstico gratuito <Arrow />
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-function Contato() {
-  return (
-    <section id="contato" data-tone="dark" className="bg-ink text-on-ink-strong">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-          <div className="col-span-12 md:col-span-6">
-            <Mark eyebrow="Raio-X gratuito" dark />
-            <h2 className="mt-10 t-display text-[clamp(2rem,4.5vw,3.75rem)] leading-[1.0] text-on-ink-strong max-w-[20ch]">
-              Quero meu Raio-X de proteção patrimonial.
-            </h2>
-            <p className="mt-10 t-lede text-on-ink-soft text-[1.1rem] max-w-[44ch]">
-              Preencha em 2 minutos. Retornamos pelo WhatsApp com uma análise
-              da sua exposição — sem material comercial, sem gravação.
-            </p>
-            <p className="mt-8 t-body text-[0.85rem] leading-[1.55] text-on-ink-mute max-w-[48ch]">
-              <span className="asterisk" />
-              Simulações ilustrativas baseadas em dados históricos; rentabilidade
-              passada não representa garantia de rentabilidade futura. Esta página
-              tem caráter educativo e não constitui recomendação individualizada
-              de investimento ou de seguro.
-            </p>
-          </div>
-          <div className="col-span-12 md:col-span-6 md:col-start-7">
-            <HubLeadForm
-              tone="dark"
-              submitLabel="Quero meu Raio-X de proteção patrimonial"
-              origin="LP2 · RC Médico"
-            />
+      {/* ── Como funciona ── */}
+      <section className="bg-white">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
+          <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
+            <div className="col-span-12 md:col-span-4">
+              <SectionTag label="Como funciona" />
+              <h2 className="text-[clamp(1.625rem,3vw,2.5rem)] font-bold leading-[1.04] tracking-tight max-w-[16ch]" style={{ color: "#2E4659" }}>
+                Três etapas. Uma blindagem completa.
+              </h2>
+            </div>
+            <div className="col-span-12 md:col-span-8 md:col-start-5">
+              <ol className="flex flex-col divide-y divide-[#EDEFF2]">
+                {[
+                  {
+                    n: "I",
+                    title: "Raio-X de exposição",
+                    body: "Avaliamos sua especialidade, apólice atual, estrutura patrimonial e regime societário. Mapeamos onde está o risco real — não o que a seguradora quer te vender.",
+                  },
+                  {
+                    n: "II",
+                    title: "Calibração de cobertura + blindagem jurídica",
+                    body: "Nossa equipe recomenda o limite de RC adequado e, em paralelo, estrutura juridicamente o patrimônio pessoal: holding familiar, separação PF/PJ, doações em vida.",
+                  },
+                  {
+                    n: "III",
+                    title: "Revisão anual e acompanhamento",
+                    body: "O risco muda. A carreira evolui. Revisamos anualmente — cobertura, estrutura e finanças — para que a proteção nunca fique defasada.",
+                  },
+                ].map((s) => (
+                  <li key={s.n} className="py-8 md:py-10 flex gap-6 md:gap-10 items-start">
+                    <span className="text-[clamp(1.875rem,3vw,2.5rem)] font-light leading-none tabular-nums shrink-0" style={{ color: "#4a6b8c" }}>
+                      {s.n}
+                    </span>
+                    <div>
+                      <h3 className="text-[1.0625rem] font-bold mb-2" style={{ color: "#2E4659" }}>{s.title}</h3>
+                      <p className="text-[0.95rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>{s.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-function Footer() {
-  const year = new Date().getFullYear();
-  return (
-    <footer
-      data-tone="dark"
-      className="bg-ink text-on-ink-soft border-t border-line-on-ink"
-    >
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
-        <div className="grid grid-cols-12 gap-8 items-start">
-          <div className="col-span-12 md:col-span-4">
-            <Logo tone="dark" subText="CAPITAL" className="h-12 w-auto" />
-          </div>
-          <div className="col-span-12 md:col-span-7 md:col-start-6">
-            <p className="t-quote text-[clamp(1.0625rem,1.6vw,1.375rem)] leading-[1.4] text-on-ink-strong max-w-[40ch]">
-              Midlej Capital. Banca privada de planejamento financeiro,
-              conduzida em Brasília, atende em todo o Brasil.
-            </p>
-          </div>
+      {/* ── Autoridade ── */}
+      <section style={{ backgroundColor: "#F5F7FA" }}>
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
+          <SectionTag label="Por que a Midlej" />
+          <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-16 max-w-[28ch]" style={{ color: "#2E4659" }}>
+            Finanças e direito. Sob o mesmo teto.
+          </h2>
+          <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {[
+              { label: "Registrada na CVM", body: "Consultora de valores mobiliários regulada. Obrigação fiduciária ao cliente — não ao produto ou à seguradora." },
+              { label: "MIDLEJ Advogados · OAB", body: "Escritório jurídico parceiro especializado em proteção patrimonial. Mesmo time. Mesma estratégia." },
+              { label: "Fee fixo · sem comissão", body: "Não recebemos comissão da seguradora. Nossa remuneração é por honorários — alinhada ao seu interesse, não ao prêmio." },
+            ].map((c) => (
+              <div key={c.label} className="rounded-xl border border-[#EDEFF2] bg-white p-7 shadow-sm">
+                <dt className="text-sm font-bold mb-3" style={{ color: "#2E4659" }}>{c.label}</dt>
+                <dd className="text-[0.9375rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>{c.body}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
-        <div className="mt-16 pt-6 border-t border-line-on-ink flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-[0.78rem] tracking-[0.04em] text-on-ink-mute">
-          <span>Midlej Capital · CNPJ 35.340.252/0001-44</span>
-          <span>© {year} Midlej Capital. Todos os direitos reservados.</span>
-        </div>
-      </div>
-    </footer>
+      </section>
+
+      {/* ── Closing ── */}
+      <LPClosing
+        eyebrow="Diagnóstico gratuito"
+        headline="Descubra se seu patrimônio está realmente protegido."
+        body="A primeira conversa é gratuita, confidencial e sem compromisso. Avaliamos sua exposição atual e apresentamos o que precisa mudar — sem vender apólice antes da análise."
+        ctaLabel="Quero meu Raio-X patrimonial"
+        origin="LP2 · RC Médico"
+        disclaimer={DISCLAIMER}
+      />
+    </main>
   );
 }
