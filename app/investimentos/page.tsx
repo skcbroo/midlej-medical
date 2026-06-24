@@ -397,7 +397,7 @@ function ParaQuem() {
     },
     {
       tag: "Profissionais liberais",
-      body: "Advogados, engenheiros, consultores. Receita estável mas sem coordenação entre conta PJ, reserva de emergência, previdência e patrimônio investido.",
+      body: "Médicos, engenheiros, consultores. Receita estável mas sem coordenação entre conta PJ, reserva de emergência, previdência e patrimônio investido.",
     },
   ];
   return (

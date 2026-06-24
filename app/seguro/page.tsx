@@ -256,7 +256,7 @@ export default function SeguroPage() {
           </h2>
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { label: "Registrada na CVM", body: "Consultora de valores mobiliários regulada. Não somos corretores de seguro — somos consultores independentes, com obrigação fiduciária ao cliente." },
+              { label: "Consultoria independente", body: "Não somos corretores de seguro — somos consultores independentes, com obrigação fiduciária ao cliente." },
               { label: "Fee fixo", body: "Nossa remuneração é um honorário fixo. Nenhum centavo vem de comissão de seguradora — o que nos permite recomendar o produto mais eficiente para você." },
               { label: "Abordagem integrada", body: "Tratamos proteção e acumulação patrimonial como uma estratégia única — não como dois produtos vendidos por departamentos diferentes." },
             ].map((c) => (

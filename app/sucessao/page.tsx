@@ -186,7 +186,7 @@ export default function SucessaoPage() {
                 A holding familiar não é um produto exótico. É uma estrutura jurídica que organiza a transmissão de bens enquanto você está presente para decidir quem recebe o quê, quando e como.
               </p>
               <p className="text-[1.0625rem] leading-[1.65] max-w-[52ch]" style={{ color: "rgba(255,255,255,0.60)" }}>
-                A MIDLEJ reúne consultoria financeira (CVM) e MIDLEJ Advogados (OAB) para entregar o planejamento integrado — finanças e estrutura jurídica sob o mesmo teto.
+                A MIDLEJ reúne consultoria financeira e jurídica para entregar o planejamento integrado — finanças e estrutura patrimonial sob o mesmo teto.
               </p>
             </div>
             <div className="col-span-12 md:col-span-4 md:col-start-9">
@@ -223,7 +223,7 @@ export default function SucessaoPage() {
                   {
                     n: "II",
                     title: "Estruturação da holding e do plano sucessório",
-                    body: "MIDLEJ Advogados constitui a holding familiar e define o modelo de doação em vida com reserva de usufruto — preservando o controle do patrimônio enquanto você viver.",
+                    body: "Nosso parceiro jurídico constitui a holding familiar e define o modelo de doação em vida com reserva de usufruto — preservando o controle do patrimônio enquanto você viver.",
                   },
                   {
                     n: "III",
@@ -256,8 +256,8 @@ export default function SucessaoPage() {
           </h2>
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { label: "Registrada na CVM", body: "Consultora de valores mobiliários regulada. Atuamos com obrigação fiduciária — ao cliente, não ao produto ou ao processo." },
-              { label: "MIDLEJ Advogados · OAB", body: "Escritório jurídico parceiro especializado em planejamento sucessório e holding familiar. Mesmo time, mesma estratégia." },
+              { label: "Consultoria independente", body: "Atuamos com obrigação fiduciária — ao cliente, não ao produto ou ao processo." },
+              { label: "Parceiro jurídico", body: "Equipe jurídica especializada em planejamento sucessório e holding familiar. Mesmo time, mesma estratégia." },
               { label: "Um plano integrado", body: "Planejamento financeiro e estrutura jurídica são desenhados juntos — não como dois serviços vendidos separadamente." },
             ].map((c) => (
               <div key={c.label} className="rounded-xl border border-[#EDEFF2] bg-white p-7 shadow-sm">

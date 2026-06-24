@@ -256,7 +256,7 @@ export default function DolarPage() {
           </h2>
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { label: "Registrada na CVM", body: "Consultora de valores mobiliários regulada. Atuamos com obrigação fiduciária ao cliente, não ao produto." },
+              { label: "Consultoria independente", body: "Atuamos com obrigação fiduciária ao cliente — não ao produto, não ao banco, não à corretora." },
               { label: "Fee fixo", body: "Nossa remuneração é um fee fixo ou por projeto. Não recebemos rebate, comissão ou spread cambial." },
               { label: "Zero conflito", body: "Não temos mesa própria, não vendemos fundo e não temos acesso à sua conta. Somente recomendação e acompanhamento." },
             ].map((c) => (

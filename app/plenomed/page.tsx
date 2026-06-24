@@ -202,7 +202,7 @@ export default function PlenomedPage() {
                 Outros vendem a apólice. Nós protegemos o patrimônio inteiro.
               </h2>
               <p className="text-[1.0625rem] leading-[1.65] mb-6 max-w-[52ch]" style={{ color: "rgba(255,255,255,0.75)" }}>
-                A MIDLEJ reúne consultoria financeira (CVM) e jurídica (OAB) sob o mesmo teto. Calibramos a RC certa para a especialidade — e estruturamos o patrimônio pessoal para que nenhuma sentença apague décadas de trabalho.
+                A MIDLEJ reúne consultoria financeira e jurídica sob o mesmo teto. Calibramos a RC certa para a especialidade — e estruturamos o patrimônio pessoal para que nenhuma sentença apague décadas de trabalho.
               </p>
               <p className="text-[1.0625rem] leading-[1.65] max-w-[52ch]" style={{ color: "rgba(255,255,255,0.60)" }}>
                 Um único interlocutor. Sem conflito de interesse. Sem produto de prateleira.
@@ -275,8 +275,8 @@ export default function PlenomedPage() {
           </h2>
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { label: "Registrada na CVM", body: "Consultora de valores mobiliários regulada. Obrigação fiduciária ao cliente — não ao produto ou à seguradora." },
-              { label: "MIDLEJ Advogados · OAB", body: "Escritório jurídico parceiro especializado em proteção patrimonial. Mesmo time. Mesma estratégia." },
+              { label: "Consultoria independente", body: "Obrigação fiduciária ao cliente — não ao produto ou à seguradora." },
+              { label: "Parceiro jurídico", body: "Equipe jurídica especializada em proteção patrimonial integrada ao planejamento financeiro. Mesmo time. Mesma estratégia." },
               { label: "Fee fixo · sem comissão", body: "Não recebemos comissão da seguradora. Nossa remuneração é por honorários — alinhada ao seu interesse, não ao prêmio." },
             ].map((c) => (
               <div key={c.label} className="rounded-xl border border-[#EDEFF2] bg-white p-7 shadow-sm">
