@@ -6,14 +6,10 @@ import { HubLeadForm } from "../_hub/HubLeadForm";
 import { SmoothAnchor } from "../_hub/SmoothAnchor";
 
 export const metadata: Metadata = {
-  title: "Proteção em dólar · Midlej Capital",
+  title: "Investimento Internacional · Midlej Capital",
   description:
-    "Americanas, Master, real corroído. Três prejuízos que o brasileiro já conhece — e uma forma simples de tirar parte do seu patrimônio do risco-Brasil.",
+    "R$ 3.000 em 2011. No Brasil: R$ 11.700. Em dólar, no S&P 500: R$ 63.000. A diferença não é sorte — é onde o dinheiro estava.",
 };
-
-/* ================================================================
-   Page
-   ================================================================ */
 
 export default function DolarPage() {
   return (
@@ -24,23 +20,17 @@ export default function DolarPage() {
     >
       <SmoothAnchor />
       <HubHeader />
-
       <Hero />
-      <Prejuizos />
-      <Virada />
-      <Objecoes />
+      <DoisCaminhos />
+      <SimulacaoPrincipal />
+      <Solucao />
       <ComoFunciona />
       <Autoridade />
-      <FAQSection />
       <Contato />
       <Footer />
     </main>
   );
 }
-
-/* ================================================================
-   Shared atoms
-   ================================================================ */
 
 function Arrow() {
   return (
@@ -74,11 +64,6 @@ function Mark({ eyebrow, dark }: { eyebrow: string; dark: boolean }) {
   );
 }
 
-/* ================================================================
-   01 — Hero (ink)
-   Headline carrega o gatilho. Gráfico discreto BRL/USD ao fundo.
-   ================================================================ */
-
 function Hero() {
   return (
     <section
@@ -86,32 +71,31 @@ function Hero() {
       data-tone="dark"
       className="relative isolate overflow-hidden bg-ink text-on-ink-strong"
     >
-      <BrlUsdBackdrop />
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 pt-40 md:pt-48 pb-28 md:pb-36">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 lg:col-span-9">
             <p className="reveal r-1 t-mono text-[0.72rem] tracking-[0.18em] uppercase text-on-ink-mute mb-6">
-              Proteção em dólar · Midlej Capital
+              Internacionalização · Midlej Capital
             </p>
             <h1 className="reveal r-1 t-display text-[clamp(2.4rem,6vw,5.25rem)] leading-[0.98] text-balance text-on-ink-strong max-w-[22ch]">
-              Americanas. Master.{" "}
+              R$ 3.000 em 2011.{" "}
               <span className="text-on-ink-soft">
-                E o seu dinheiro, parado em real.
+                Dois caminhos. Uma diferença de mais de R$ 50 mil.
               </span>
             </h1>
             <p className="reveal r-2 mt-10 t-lede text-on-ink-soft text-[1.0625rem] md:text-[1.2rem] max-w-[58ch]">
               <span className="asterisk" />
-              Três prejuízos que o brasileiro já conhece — e uma forma simples
-              de não ser o próximo. Investir parte do seu patrimônio em dólar é
-              mais fácil do que parece.
+              Veja quanto o mesmo dinheiro fez no Tesouro Selic — e quanto
+              teria feito em dólar, no índice das maiores empresas do mundo. A
+              diferença não é sorte — é onde o dinheiro estava.
             </p>
             <div className="reveal r-3 mt-12 flex flex-wrap items-center gap-6">
-              <Link href="#contato" className="btn-primary-inverse">
-                Fazer meu diagnóstico gratuito
+              <Link href="#simulacao" className="btn-primary-inverse">
+                Ver a simulação completa
                 <Arrow />
               </Link>
-              <Link href="#prejuizos" className="btn-ghost-inverse">
-                Ver os três prejuízos
+              <Link href="#contato" className="btn-ghost-inverse">
+                Quero um plano de internacionalização
               </Link>
             </div>
             <p className="reveal r-3 mt-6 t-mono text-[0.72rem] tracking-[0.14em] uppercase text-on-ink-mute">
@@ -128,88 +112,32 @@ function Hero() {
   );
 }
 
-/**
- * Curva discreta BRL × USD nos últimos 10 anos. Trajetória real real-dólar
- * (2015 ≈ 3,30 → 2025 ≈ 5,40+), simplificada para fundo editorial. Não
- * carrega rótulos — é textura, não dataviz.
- */
-function BrlUsdBackdrop() {
-  return (
-    <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.18]">
-      <svg
-        viewBox="0 0 1400 600"
-        preserveAspectRatio="xMidYMid slice"
-        className="w-full h-full"
-        aria-hidden
-      >
-        <defs>
-          <linearGradient id="bul-fade" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.0" />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity="0.10" />
-          </linearGradient>
-          <linearGradient id="bul-stroke" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity="0.95" />
-          </linearGradient>
-        </defs>
-        {/* Hairlines de grade — quase invisíveis */}
-        {[120, 240, 360, 480].map((y) => (
-          <line
-            key={y}
-            x1="0"
-            x2="1400"
-            y1={y}
-            y2={y}
-            stroke="#ffffff"
-            strokeOpacity="0.06"
-            strokeWidth="1"
-          />
-        ))}
-        {/* Trajetória BRL/USD — sobe ao longo do tempo (real perde valor) */}
-        <path
-          d="M 0 460 C 140 440, 260 420, 380 380 C 500 340, 600 360, 720 320 C 840 280, 940 260, 1060 210 C 1180 160, 1280 130, 1400 100"
-          stroke="url(#bul-stroke)"
-          strokeWidth="1.8"
-          fill="none"
-        />
-        {/* Sombra leve abaixo da curva */}
-        <path
-          d="M 0 460 C 140 440, 260 420, 380 380 C 500 340, 600 360, 720 320 C 840 280, 940 260, 1060 210 C 1180 160, 1280 130, 1400 100 L 1400 600 L 0 600 Z"
-          fill="url(#bul-fade)"
-        />
-      </svg>
-    </div>
-  );
-}
-
-/* ================================================================
-   02 — Três prejuízos (paper)
-   ================================================================ */
-
-function Prejuizos() {
+function DoisCaminhos() {
   const items = [
     {
-      tag: "Americanas",
-      stat: "−99%",
-      body: "Sólida, auditada, gigante da bolsa. R$ 25 bilhões de rombo. A ação derreteu de R$ 12 para centavos.",
+      tag: "Tesouro Selic",
+      stat: "3,9×",
+      body: "O investimento mais seguro do Brasil rendeu bem — aproximadamente 3,9 vezes em 15 anos. Responsável, conservador, e ficou muito para trás.",
     },
     {
-      tag: "Banco Master",
-      stat: "Liquidado",
-      body: "CDB 'garantido pelo FGC'. Liquidado pelo Banco Central. Acima de R$ 250 mil? Fila de credores por 10, 15 anos.",
+      tag: "S&P 500",
+      stat: "7× em dólar",
+      body: "O índice das 500 maiores empresas do mundo rendeu cerca de 7 vezes no mesmo período — sem contar ainda o efeito do câmbio.",
     },
     {
-      tag: "O real",
-      stat: "−50%",
-      body: "Nenhum escândalo. Nenhuma manchete. Mesmo assim, perdeu mais da metade do valor frente ao dólar na última década.",
+      tag: "O câmbio",
+      stat: "R$ 1,70 → R$ 5,14",
+      body: "Em 2011, um dólar custava R$ 1,70. Hoje passa de R$ 5,00. Quem tinha posição em dólar ganhou nos dois lados — no ativo e na moeda.",
     },
   ];
+
   return (
-    <section id="prejuizos" data-tone="light" className="bg-paper">
+    <section data-tone="light" className="bg-paper">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-36">
-        <Mark eyebrow="Três prejuízos recentes" dark={false} />
-        <h2 className="mt-10 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-ink max-w-[24ch]">
-          O risco-Brasil não bate à porta. Ele já entrou.
+        <Mark eyebrow="O mesmo ponto de partida" dark={false} />
+        <h2 className="mt-10 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-ink max-w-[28ch]">
+          Enquanto você rendia em real, o mundo rendia em dólar — e o dólar
+          ainda subiu.
         </h2>
 
         <div className="mt-16 grid grid-cols-12 gap-x-8 gap-y-12">
@@ -234,8 +162,8 @@ function Prejuizos() {
         <div className="mt-20 md:mt-24 border-t border-line pt-10">
           <p className="t-quote text-[clamp(1.375rem,2.8vw,2.25rem)] leading-[1.2] text-ink max-w-[44ch]">
             <span className="asterisk" />
-            Renda variável quebrou. Renda fixa quebrou. A própria moeda derrete.
-            O problema não é o ativo — é estar 100% exposto a um único país.
+            Não é culpa de ninguém ter ficado 100% no Brasil. É o custo de
+            nunca ter recebido a oferta certa.
           </p>
         </div>
       </div>
@@ -243,164 +171,151 @@ function Prejuizos() {
   );
 }
 
-/* ================================================================
-   03 — A virada (bone)
-   ================================================================ */
-
-function Virada() {
+function SimulacaoPrincipal() {
   return (
-    <section data-tone="light" className="bg-bone">
+    <section id="simulacao" data-tone="light" className="bg-bone">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
+        <div className="grid grid-cols-12 gap-8">
+          <div className="col-span-12 md:col-span-9">
+            <Mark eyebrow="A simulação que muda a conversa" dark={false} />
+            <h2 className="mt-10 t-display text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.05] text-ink max-w-[26ch]">
+              O mesmo dinheiro. O mesmo período. Resultado completamente
+              diferente.
+            </h2>
+            <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-ink-soft max-w-[52ch]">
+              Premissas: aplicação em jan/2011; dólar ~R$ 1,70 em 2011 e
+              ~R$ 5,14 hoje (jun/2026); Tesouro Selic acumulado ≈ 3,9×; S&P
+              500 retorno total (com dividendos) ≈ 7× no período.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-16 border-t border-line">
+          {/* Caminho A */}
+          <div className="border-b border-line py-12 md:py-16 grid grid-cols-12 gap-6 items-center">
+            <div className="col-span-12 md:col-span-2">
+              <span className="t-mono text-[0.72rem] tracking-[0.16em] uppercase text-ink-mute">
+                Caminho A
+              </span>
+            </div>
+            <div className="col-span-12 md:col-span-6">
+              <h3 className="t-display text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.1] text-ink">
+                Ficou no Brasil
+              </h3>
+              <p className="mt-3 t-body text-[0.95rem] leading-[1.6] text-ink-soft max-w-[48ch]">
+                R$ 3.000 no Tesouro Selic em janeiro de 2011. Rendeu ~3,9×
+                em 15 anos. O investimento mais seguro que existe — ficou muito
+                abaixo do que poderia ter sido.
+              </p>
+            </div>
+            <div className="col-span-12 md:col-span-4 flex flex-col items-start md:items-end">
+              <p className="t-display-light text-[clamp(2.5rem,5vw,4rem)] leading-[0.95] tabular-nums text-ink">
+                ~R$ 11.700
+              </p>
+              <p className="mt-2 t-mono text-[0.72rem] tracking-[0.14em] uppercase text-ink-mute">
+                resultado hoje
+              </p>
+            </div>
+          </div>
+
+          {/* Caminho B */}
+          <div className="py-12 md:py-16 grid grid-cols-12 gap-6 items-center">
+            <div className="col-span-12 md:col-span-2">
+              <span className="t-mono text-[0.72rem] tracking-[0.16em] uppercase text-emphasis">
+                Caminho B
+              </span>
+            </div>
+            <div className="col-span-12 md:col-span-6">
+              <h3 className="t-display text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.1] text-ink">
+                Virou dólar
+              </h3>
+              <p className="mt-3 t-body text-[0.95rem] leading-[1.6] text-ink-soft max-w-[48ch]">
+                R$ 3.000 → US$ 1.765 em 2011 → S&P 500. Rendeu ~7× em dólar.
+                Mais: o câmbio saiu de R$ 1,70 e chegou a R$ 5,14. Os dois
+                efeitos somados na mesma posição.
+              </p>
+            </div>
+            <div className="col-span-12 md:col-span-4 flex flex-col items-start md:items-end">
+              <p className="t-display-light text-[clamp(2.5rem,5vw,4rem)] leading-[0.95] tabular-nums text-emphasis">
+                ~R$ 63.000
+              </p>
+              <p className="mt-2 t-mono text-[0.72rem] tracking-[0.14em] uppercase text-emphasis">
+                resultado hoje
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 border-t border-line pt-10">
+          <p className="t-quote text-[clamp(1.25rem,2.4vw,1.875rem)] leading-[1.3] text-ink max-w-[52ch]">
+            <span className="asterisk" />
+            O mesmo dinheiro, no mesmo período. No Brasil: R$ 11,7 mil. Em
+            dólar, no índice das maiores empresas do mundo: cerca de R$ 63 mil.
+            A diferença não é sorte — é onde o dinheiro estava.
+          </p>
+        </div>
+
+        <div className="mt-12">
+          <Link href="#contato" className="btn-primary">
+            Simular com meu patrimônio real
+            <Arrow />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Solucao() {
+  return (
+    <section data-tone="dark" className="bg-ink text-on-ink-strong">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-3">
-            <Mark eyebrow="A virada" dark={false} />
+            <Mark eyebrow="A tese" dark />
           </div>
           <div className="col-span-12 md:col-span-9">
-            <h2 className="t-display text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.05] text-ink max-w-[22ch]">
-              A elite financeira sempre fez isso.{" "}
-              <span className="text-ink-soft">Agora você também pode.</span>
+            <h2 className="t-display text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.05] text-on-ink-strong max-w-[26ch]">
+              Não é "tira tudo do Brasil".{" "}
+              <span className="text-on-ink-soft">
+                É internacionalizar a parte certa — com estrutura.
+              </span>
             </h2>
-            <p className="mt-12 t-body text-[1.0625rem] leading-[1.7] text-ink-soft max-w-[58ch]">
-              Bancos, family offices e os mais ricos do Brasil sempre
-              mantiveram parte do patrimônio fora — em dólar, fora do alcance
-              do risco-Brasil. Não é fuga, não é especulação: é diversificação
-              de país e de moeda.
+            <p className="mt-12 t-body text-[1.0625rem] leading-[1.7] text-on-ink-soft max-w-[58ch]">
+              Diversificar moeda não é aposta — é proteção. A Midlej Capital
+              desenha a estrutura: conta, veículo e tributação pós-Lei 14.754,
+              tudo alinhado ao seu plano financeiro — não ao nosso produto.
             </p>
-            <p className="mt-6 t-body text-[1.0625rem] leading-[1.7] text-ink-soft max-w-[58ch]">
-              E hoje isso cabe no seu bolso.
+            <p className="mt-6 t-body text-[1.0625rem] leading-[1.7] text-on-ink-soft max-w-[58ch]">
+              Outros vendem a conta no exterior. Nós desenhamos o quanto, em
+              que estrutura e com que liquidez — e acompanhamos.
             </p>
-
-            <ViradaDiagram />
           </div>
         </div>
       </div>
     </section>
   );
 }
-
-/**
- * Diagrama "antes/depois": 100% Brasil → mix Brasil + dólar/internacional.
- * Duas barras horizontais segmentadas, sem dataviz pesado.
- */
-function ViradaDiagram() {
-  return (
-    <div className="mt-16 grid grid-cols-12 gap-8 md:gap-12 items-start">
-      <div className="col-span-12 md:col-span-6">
-        <p className="t-mono text-[0.66rem] tracking-[0.16em] uppercase text-ink-mute">
-          Antes
-        </p>
-        <p className="mt-3 t-display text-[1.125rem] leading-[1.3] text-ink">
-          Patrimônio 100% Brasil
-        </p>
-        <div
-          aria-hidden
-          className="mt-6 h-3 w-full bg-[var(--color-ink)]"
-          style={{ opacity: 0.85 }}
-        />
-        <p className="mt-3 t-mono text-[0.72rem] tracking-[0.14em] uppercase text-ink-mute">
-          BRL · CDI · Bolsa BR · Imóvel BR
-        </p>
-      </div>
-      <div className="col-span-12 md:col-span-6">
-        <p className="t-mono text-[0.66rem] tracking-[0.16em] uppercase text-emphasis">
-          Depois
-        </p>
-        <p className="mt-3 t-display text-[1.125rem] leading-[1.3] text-ink">
-          Diversificado por país e moeda
-        </p>
-        <div className="mt-6 h-3 w-full flex">
-          <span
-            aria-hidden
-            className="h-3 bg-[var(--color-ink)]"
-            style={{ width: "65%", opacity: 0.85 }}
-          />
-          <span
-            aria-hidden
-            className="h-3 bg-[var(--color-emphasis)]"
-            style={{ width: "35%" }}
-          />
-        </div>
-        <p className="mt-3 t-mono text-[0.72rem] tracking-[0.14em] uppercase text-ink-mute">
-          BRL <span className="text-emphasis">· USD · Internacional</span>
-        </p>
-      </div>
-    </div>
-  );
-}
-
-/* ================================================================
-   04 — Quebra de objeção (paper)
-   ================================================================ */
-
-function Objecoes() {
-  const items = [
-    {
-      q: "Preciso de muito dinheiro?",
-      a: "Não. Começa com pouco — a porta de entrada hoje é muito menor do que era há 10 anos.",
-    },
-    {
-      q: "Preciso entender de mercado?",
-      a: "Não. A gente desenha pra você. Você decide o quanto, a gente cuida do como.",
-    },
-    {
-      q: "É arriscado? É golpe?",
-      a: "É o oposto: é reduzir a concentração de risco que você já tem. Conta institucional, custódia no exterior, no seu nome.",
-    },
-  ];
-  return (
-    <section data-tone="light" className="bg-paper">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-8 mb-16 md:mb-20">
-          <div className="col-span-12 md:col-span-9">
-            <Mark eyebrow="Não é nada de outro mundo" dark={false} />
-            <h2 className="mt-10 t-display text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.04] text-ink max-w-[22ch]">
-              Você imagina que é complicado.{" "}
-              <span className="text-ink-soft">Não é.</span>
-            </h2>
-          </div>
-        </div>
-        <div className="grid grid-cols-12 gap-x-8 gap-y-12 border-t border-line pt-10">
-          {items.map((o) => (
-            <article
-              key={o.q}
-              className="col-span-12 md:col-span-4 flex flex-col"
-            >
-              <p className="t-display text-[clamp(1.125rem,1.6vw,1.375rem)] leading-[1.25] text-ink max-w-[20ch]">
-                {o.q}
-              </p>
-              <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-ink-soft max-w-[36ch]">
-                {o.a}
-              </p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================================================================
-   05 — Como funciona (bone, 3 passos)
-   ================================================================ */
 
 function ComoFunciona() {
   const steps = [
     {
       n: "I",
-      title: "Diagnóstico",
-      body: "A gente entende seu momento, seu patrimônio e seu objetivo. Gratuito, sem compromisso, sem material comercial.",
+      title: "Diagnóstico patrimonial",
+      body: "Entendemos onde está seu patrimônio hoje, sua exposição ao risco-Brasil e qual parte faz sentido internacionalizar.",
     },
     {
       n: "II",
-      title: "Plano",
-      body: "Montamos sua estratégia de proteção em dólar sob medida. Quanto, em que estrutura, com que liquidez.",
+      title: "Estrutura sob medida",
+      body: "Desenhamos o veículo, a conta e o efeito tributário — ETF, fundo no exterior, previdência internacional. Sem fórmula genérica.",
     },
     {
       n: "III",
       title: "Execução acompanhada",
-      body: "Você investe com orientação. Abertura de conta institucional, operação, revisão. Sem se perder sozinho.",
+      body: "Abertura de conta, operação e revisão periódica. Você investe com orientação, no seu nome, com custódia em corretora ou banco regulado.",
     },
   ];
+
   return (
     <section data-tone="light" className="bg-bone">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
@@ -447,10 +362,6 @@ function ComoFunciona() {
   );
 }
 
-/* ================================================================
-   06 — Autoridade (paper)
-   ================================================================ */
-
 function Autoridade() {
   return (
     <section data-tone="light" className="bg-paper">
@@ -466,8 +377,8 @@ function Autoridade() {
             <p className="t-body text-[1.0625rem] leading-[1.7] text-ink-soft max-w-[58ch]">
               A Midlej Capital é consultoria de investimentos com registro na
               CVM. Trabalhamos remunerados pelo cliente — não recebemos rebate
-              de fundo, seguradora ou estrutura. Quando recomendamos dólar e
-              alocação internacional, é tese, não comissão.
+              de fundo, seguradora ou estrutura. Quando recomendamos
+              internacionalização, é tese, não comissão.
             </p>
             <dl className="mt-10 grid grid-cols-3 gap-x-6 md:gap-x-10 border-t border-line pt-8">
               <div>
@@ -495,131 +406,40 @@ function Autoridade() {
                 </dd>
               </div>
             </dl>
-
-            {/* Slots editoriais para depoimentos — preencher quando tiver material */}
-            <div className="mt-16 grid grid-cols-12 gap-x-8 gap-y-10">
-              <DepoimentoSlot />
-              <DepoimentoSlot />
-            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-
-function DepoimentoSlot() {
-  return (
-    <figure className="col-span-12 md:col-span-6 border-t border-line pt-6">
-      <p className="t-mono text-[0.66rem] tracking-[0.16em] uppercase text-ink-mute">
-        Depoimento · em preparação
-      </p>
-      <blockquote className="mt-4 t-quote text-[1rem] leading-[1.45] text-ink-soft max-w-[40ch]">
-        <span className="asterisk" />
-        Slot reservado para depoimento de cliente — foto, nome e frase.
-      </blockquote>
-    </figure>
-  );
-}
-
-/* ================================================================
-   07 — FAQ (paper)
-   ================================================================ */
-
-function FAQSection() {
-  const faqs = [
-    {
-      q: "Meu dinheiro fica preso?",
-      a: "Não. A liquidez depende do veículo escolhido — há opções com resgate em D+0/D+1 e estruturas com vencimento. O desenho responde ao seu objetivo, não o contrário.",
-    },
-    {
-      q: "Como eu acesso o dinheiro?",
-      a: "Conta institucional no seu nome, com login próprio, extrato e movimentação online. Você não nos repassa custódia. Tudo passa por corretora ou banco regulado.",
-    },
-    {
-      q: "Tem imposto?",
-      a: "Sim — varia por estrutura. Há veículos com tributação mais eficiente (fundos no exterior, previdência internacional, ETFs). Apresentamos o efeito tributário antes da decisão, não depois.",
-    },
-    {
-      q: "E se o dólar cair?",
-      a: "Pode cair, e provavelmente vai oscilar. A ideia não é ganhar com a alta do dólar — é não estar 100% exposto a uma única moeda. Em horizonte plurianual, a moeda forte tende a preservar poder de compra; mas oscilações no caminho são parte do jogo.",
-    },
-    {
-      q: "Quanto custa o serviço?",
-      a: "Fee proporcional à complexidade do caso, conhecido antes do aceite. Não cobramos percentual sobre patrimônio investido — é mensalidade ou anuidade fixa, revisada só quando o escopo muda.",
-    },
-  ];
-  return (
-    <section data-tone="light" className="bg-paper">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-10 md:gap-16">
-          <div className="col-span-12 md:col-span-4">
-            <Mark eyebrow="Dúvidas frequentes" dark={false} />
-            <h2 className="mt-10 t-display text-[clamp(1.625rem,3vw,2.5rem)] leading-[1.04] text-ink max-w-[16ch]">
-              O que costuma travar a decisão.
-            </h2>
-          </div>
-          <div className="col-span-12 md:col-span-8 md:col-start-5">
-            <ul className="border-t border-line">
-              {faqs.map((f, i) => (
-                <li key={i} className="border-b border-line">
-                  <details className="group">
-                    <summary className="cursor-pointer list-none flex items-baseline justify-between gap-6 py-6 md:py-7">
-                      <span className="t-display text-[clamp(1.0625rem,1.4vw,1.25rem)] leading-[1.3] text-ink">
-                        {f.q}
-                      </span>
-                      <span
-                        aria-hidden
-                        className="t-mono text-emphasis text-[0.95rem] transition-transform duration-200 group-open:rotate-45"
-                      >
-                        +
-                      </span>
-                    </summary>
-                    <p className="pb-6 md:pb-7 t-body text-[0.95rem] leading-[1.65] text-ink-soft max-w-[56ch]">
-                      {f.a}
-                    </p>
-                  </details>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================================================================
-   08 — CTA final + form (ink)
-   ================================================================ */
 
 function Contato() {
   return (
-    <section
-      id="contato"
-      data-tone="dark"
-      className="bg-ink text-on-ink-strong"
-    >
+    <section id="contato" data-tone="dark" className="bg-ink text-on-ink-strong">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
         <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
           <div className="col-span-12 md:col-span-6">
-            <Mark eyebrow="Diagnóstico gratuito" dark />
-            <h2 className="mt-10 t-display text-[clamp(2rem,4.5vw,3.75rem)] leading-[1.0] text-on-ink-strong max-w-[22ch]">
-              Os próximos Americanas e Master já estão sendo gestados.
+            <Mark eyebrow="Conversa gratuita" dark />
+            <h2 className="mt-10 t-display text-[clamp(2rem,4.5vw,3.75rem)] leading-[1.0] text-on-ink-strong max-w-[20ch]">
+              Quero um plano de internacionalização.
             </h2>
             <p className="mt-10 t-lede text-on-ink-soft text-[1.1rem] max-w-[44ch]">
-              A pergunta é onde vai estar o seu dinheiro.
+              Preencha em 2 minutos. Retornamos pelo WhatsApp com uma análise
+              do seu caso — sem material comercial, sem gravação.
             </p>
-            <p className="mt-8 t-body text-[0.95rem] leading-[1.65] text-on-ink-soft max-w-[48ch]">
-              Preencha em 2 minutos. Retornamos pelo WhatsApp em até 1 dia
-              útil, sem material comercial, sem gravação.
+            <p className="mt-8 t-body text-[0.85rem] leading-[1.55] text-on-ink-mute max-w-[48ch]">
+              <span className="asterisk" />
+              Simulações ilustrativas baseadas em dados históricos;
+              rentabilidade passada não representa garantia de rentabilidade
+              futura. Esta página tem caráter educativo e não constitui
+              recomendação individualizada de investimento.
             </p>
           </div>
           <div className="col-span-12 md:col-span-6 md:col-start-7">
             <HubLeadForm
               tone="dark"
-              submitLabel="Quero meu diagnóstico gratuito"
-              origin="Proteção em Dólar"
+              submitLabel="Quero um plano de internacionalização"
+              origin="LP3 · Investimento Internacional"
             />
           </div>
         </div>
@@ -627,10 +447,6 @@ function Contato() {
     </section>
   );
 }
-
-/* ================================================================
-   09 — Footer
-   ================================================================ */
 
 function Footer() {
   const year = new Date().getFullYear();

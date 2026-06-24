@@ -1,10 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Logo } from "../components/Logo";
 import { HubHeader } from "../_hub/HubHeader";
 import { HubLeadForm } from "../_hub/HubLeadForm";
 import { SmoothAnchor } from "../_hub/SmoothAnchor";
 
-export default function PlenoMedPage() {
+export const metadata: Metadata = {
+  title: "Sucessão e Holding Familiar · Midlej Capital",
+  description:
+    "Quanto sua família perde no inventário? ITCMD, cartório, honorários e anos de processo podem consumir 20% do patrimônio que você construiu. A holding familiar resolve isso.",
+};
+
+export default function SucessaoPage() {
   return (
     <main
       data-brand
@@ -15,7 +22,7 @@ export default function PlenoMedPage() {
       <HubHeader />
       <Hero />
       <Agitacao />
-      <DiagnosticoExposicao />
+      <SimulacaoPrincipal />
       <Solucao />
       <ComoFunciona />
       <Autoridade />
@@ -68,27 +75,24 @@ function Hero() {
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 lg:col-span-9">
             <p className="reveal r-1 t-mono text-[0.72rem] tracking-[0.18em] uppercase text-on-ink-mute mb-6">
-              Proteção patrimonial · Médicos · Midlej Capital
+              Sucessão patrimonial · Midlej Capital
             </p>
             <h1 className="reveal r-1 t-display text-[clamp(2.4rem,6vw,5.25rem)] leading-[0.98] text-balance text-on-ink-strong max-w-[22ch]">
-              Um processo pode custar mais que sua carreira.{" "}
-              <span className="text-on-ink-soft">
-                Seu patrimônio pessoal está protegido?
-              </span>
+              Quanto sua família vai perder no inventário?
             </h1>
             <p className="reveal r-2 mt-10 t-lede text-on-ink-soft text-[1.0625rem] md:text-[1.2rem] max-w-[58ch]">
               <span className="asterisk" />
-              A judicialização da medicina cresce todo ano. Descubra em 2
-              minutos se você está coberto de verdade — e o que acontece com
-              seus bens se não estiver.
+              Você construiu. O inventário pode desfazer em meses — ITCMD,
+              cartório, honorários e anos de processo consumindo o patrimônio
+              que levou décadas para formar.
             </p>
             <div className="reveal r-3 mt-12 flex flex-wrap items-center gap-6">
-              <Link href="#exposicao" className="btn-primary-inverse">
-                Avaliar minha exposição grátis
+              <Link href="#simulacao" className="btn-primary-inverse">
+                Ver o custo do inventário
                 <Arrow />
               </Link>
               <Link href="#contato" className="btn-ghost-inverse">
-                Quero meu Raio-X de proteção
+                Quero estruturar minha sucessão
               </Link>
             </div>
             <p className="reveal r-3 mt-6 t-mono text-[0.72rem] tracking-[0.14em] uppercase text-on-ink-mute">
@@ -108,29 +112,29 @@ function Hero() {
 function Agitacao() {
   const items = [
     {
-      tag: "Judicialização",
-      stat: "↑ todo ano",
-      body: "O número de ações por suposto erro médico cresce ano a ano. Qualquer especialidade está sujeita — não apenas as de maior risco cirúrgico.",
+      tag: "ITCMD",
+      stat: "Até 8%",
+      body: "O imposto sobre herança varia de estado para estado — hoje entre 2% e 8%, com projetos para elevar o teto. Sobre R$ 2 milhões, isso é até R$ 160 mil em impostos.",
     },
     {
-      tag: "Indenizações",
-      stat: "Anos de trabalho",
-      body: "Condenações chegam a cifras que ultrapassam décadas de renda. E podem ser executadas sobre bens pessoais, não só profissionais.",
+      tag: "Processo",
+      stat: "3 a 7 anos",
+      body: "O inventário judicial pode levar anos. Enquanto isso, os bens ficam bloqueados — sem vender, sem realocar, sem usar. A família fica travada.",
     },
     {
-      tag: "Patrimônio pessoal",
-      stat: "Na linha de frente",
-      body: "Sem cobertura adequada, a conta vai para imóveis, investimentos e reservas da família. Muitos médicos têm RC — mas com cobertura baixa, carências ou exclusões que só descobrem tarde demais.",
+      tag: "Custo total",
+      stat: "Até 20%",
+      body: "Somando ITCMD, custas cartorárias e honorários advocatícios, o inventário pode consumir até 20% do patrimônio que você passou décadas construindo.",
     },
   ];
 
   return (
     <section data-tone="light" className="bg-paper">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-36">
-        <Mark eyebrow="O risco que ninguém fala abertamente" dark={false} />
-        <h2 className="mt-10 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-ink max-w-[26ch]">
-          O risco jurídico não bate à porta. Ele já chegou na especialidade
-          do seu vizinho.
+        <Mark eyebrow="O custo que ninguém planeja" dark={false} />
+        <h2 className="mt-10 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-ink max-w-[28ch]">
+          O inventário não é um problema da morte. É um problema de hoje,
+          que você pode resolver agora.
         </h2>
 
         <div className="mt-16 grid grid-cols-12 gap-x-8 gap-y-12">
@@ -142,7 +146,7 @@ function Agitacao() {
               <p className="t-mono text-[0.72rem] tracking-[0.18em] uppercase text-emphasis">
                 {p.tag}
               </p>
-              <p className="mt-6 t-display-light text-[clamp(1.75rem,3.5vw,2.75rem)] leading-[1.05] text-ink">
+              <p className="mt-6 t-display-light text-[clamp(2.25rem,4.5vw,3.5rem)] leading-[0.95] tabular-nums text-ink">
                 {p.stat}
               </p>
               <p className="mt-6 t-body text-[1rem] leading-[1.65] text-ink-soft max-w-[40ch]">
@@ -155,7 +159,7 @@ function Agitacao() {
         <div className="mt-20 md:mt-24 border-t border-line pt-10">
           <p className="t-quote text-[clamp(1.375rem,2.8vw,2.25rem)] leading-[1.2] text-ink max-w-[44ch]">
             <span className="asterisk" />
-            Não é sobre ser culpado. É sobre estar exposto — e não saber disso.
+            Quem não planeja a sucessão não deixa herança — deixa processo.
           </p>
         </div>
       </div>
@@ -163,81 +167,92 @@ function Agitacao() {
   );
 }
 
-function DiagnosticoExposicao() {
-  const niveis = [
-    {
-      nivel: "Exposição alta",
-      cor: "text-emphasis",
-      perfil: "Cirurgiões, obstetras, anestesistas, ortopedistas",
-      sinal: "Especialidade de alto litígio + sem RC ou cobertura insuficiente + patrimônio pessoal sem blindagem.",
-    },
-    {
-      nivel: "Exposição média",
-      cor: "text-ink",
-      perfil: "Clínicos gerais, pediatras, dermatologistas",
-      sinal: "Tem RC, mas não revisou a cobertura nos últimos 2 anos. Patrimônio pessoal misturado com PJ.",
-    },
-    {
-      nivel: "Exposição controlada",
-      cor: "text-ink-mute",
-      perfil: "Qualquer especialidade",
-      sinal: "RC adequada à especialidade, cobertura revisada anualmente, estrutura patrimonial separada da pessoa física.",
-    },
-  ];
-
+function SimulacaoPrincipal() {
   return (
-    <section id="exposicao" data-tone="light" className="bg-bone">
+    <section id="simulacao" data-tone="light" className="bg-bone">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-9">
-            <Mark eyebrow="Mini-diagnóstico de exposição" dark={false} />
+            <Mark eyebrow="O mesmo patrimônio. Dois destinos." dark={false} />
             <h2 className="mt-10 t-display text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.05] text-ink max-w-[26ch]">
-              Em qual perfil você se encaixa agora?
+              O que acontece com R$ 2 milhões de patrimônio em cada cenário.
             </h2>
             <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-ink-soft max-w-[52ch]">
-              Quatro perguntas revelam o nível de exposição: especialidade,
-              se realiza procedimentos, se tem RC hoje e qual é o valor da
-              cobertura atual.
+              Premissas ilustrativas: patrimônio de R$ 2 milhões (imóvel +
+              investimentos), estado com alíquota ITCMD de 8%, honorários
+              médios de 6% e custas cartorárias de 2%.
             </p>
           </div>
         </div>
 
         <div className="mt-16 border-t border-line">
-          {niveis.map((n) => (
-            <div
-              key={n.nivel}
-              className="border-b border-line py-10 md:py-12 grid grid-cols-12 gap-6 items-baseline"
-            >
-              <div className="col-span-12 md:col-span-3">
-                <span
-                  className={`t-display text-[clamp(1.0625rem,1.4vw,1.25rem)] leading-[1.2] ${n.cor}`}
-                >
-                  {n.nivel}
-                </span>
-              </div>
-              <div className="col-span-12 md:col-span-3">
-                <p className="t-mono text-[0.72rem] tracking-[0.14em] uppercase text-ink-mute mb-2">
-                  Perfil típico
-                </p>
-                <p className="t-body text-[0.95rem] leading-[1.55] text-ink">
-                  {n.perfil}
-                </p>
-              </div>
-              <div className="col-span-12 md:col-span-6">
-                <p className="t-mono text-[0.72rem] tracking-[0.14em] uppercase text-ink-mute mb-2">
-                  Sinal de alerta
-                </p>
-                <p className="t-body text-[0.95rem] leading-[1.55] text-ink-soft max-w-[52ch]">
-                  {n.sinal}
-                </p>
-              </div>
+          {/* Cenário inventário */}
+          <div className="border-b border-line py-12 md:py-16 grid grid-cols-12 gap-6 items-center">
+            <div className="col-span-12 md:col-span-2">
+              <span className="t-mono text-[0.72rem] tracking-[0.16em] uppercase text-ink-mute">
+                Sem planejamento
+              </span>
             </div>
-          ))}
+            <div className="col-span-12 md:col-span-6">
+              <h3 className="t-display text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.1] text-ink">
+                Inventário tradicional
+              </h3>
+              <p className="mt-3 t-body text-[0.95rem] leading-[1.6] text-ink-soft max-w-[48ch]">
+                ITCMD: ~R$ 160 mil · Honorários advocatícios: ~R$ 120 mil ·
+                Custas cartorárias: ~R$ 40 mil. Total perdido: ~R$ 320 mil.
+                Prazo: 3 a 7 anos com bens bloqueados.
+              </p>
+            </div>
+            <div className="col-span-12 md:col-span-4 flex flex-col items-start md:items-end">
+              <p className="t-display-light text-[clamp(2.5rem,5vw,4rem)] leading-[0.95] tabular-nums text-ink">
+                −R$ 320 mil
+              </p>
+              <p className="mt-2 t-mono text-[0.72rem] tracking-[0.14em] uppercase text-ink-mute">
+                perdidos em processo
+              </p>
+            </div>
+          </div>
+
+          {/* Cenário holding */}
+          <div className="py-12 md:py-16 grid grid-cols-12 gap-6 items-center">
+            <div className="col-span-12 md:col-span-2">
+              <span className="t-mono text-[0.72rem] tracking-[0.16em] uppercase text-emphasis">
+                Com planejamento
+              </span>
+            </div>
+            <div className="col-span-12 md:col-span-6">
+              <h3 className="t-display text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.1] text-ink">
+                Holding familiar estruturada
+              </h3>
+              <p className="mt-3 t-body text-[0.95rem] leading-[1.6] text-ink-soft max-w-[48ch]">
+                Constituição da holding: ~R$ 15–30 mil. Transmissão de cotas
+                em vida, com redução de base de cálculo e otimização tributária.
+                Processo de sucessão planejado: meses, não anos.
+              </p>
+            </div>
+            <div className="col-span-12 md:col-span-4 flex flex-col items-start md:items-end">
+              <p className="t-display-light text-[clamp(2.5rem,5vw,4rem)] leading-[0.95] tabular-nums text-emphasis">
+                ~R$ 290 mil
+              </p>
+              <p className="mt-2 t-mono text-[0.72rem] tracking-[0.14em] uppercase text-emphasis">
+                preservados pela família
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 border-t border-line pt-10">
+          <p className="t-quote text-[clamp(1.25rem,2.4vw,1.875rem)] leading-[1.3] text-ink max-w-[52ch]">
+            <span className="asterisk" />
+            O mesmo patrimônio. Sem planejamento: a família recebe R$ 1,68
+            milhão após anos de processo. Com a estrutura certa: R$ 1,97 milhão
+            em meses — e você ainda vê isso acontecer em vida.
+          </p>
         </div>
 
         <div className="mt-12">
           <Link href="#contato" className="btn-primary">
-            Quero meu Raio-X de proteção patrimonial
+            Calcular o custo do inventário no meu caso
             <Arrow />
           </Link>
         </div>
@@ -256,20 +271,18 @@ function Solucao() {
           </div>
           <div className="col-span-12 md:col-span-9">
             <h2 className="t-display text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.05] text-on-ink-strong max-w-[26ch]">
-              Outros vendem a apólice.{" "}
-              <span className="text-on-ink-soft">
-                Nós protegemos o patrimônio inteiro.
-              </span>
+              Constituir em vida o que o inventário dissolve depois da morte.
             </h2>
             <p className="mt-12 t-body text-[1.0625rem] leading-[1.7] text-on-ink-soft max-w-[58ch]">
-              RC profissional na cobertura certa — sem exclusões que aparecem
-              na hora errada — mais estrutura de proteção do patrimônio pessoal.
-              Tudo sob o mesmo teto, com consultoria e braço jurídico próprios.
+              A holding familiar não é só planejamento tributário. É um
+              instrumento de governança, proteção e transmissão controlada —
+              você define as regras em vida, para que a família as execute em
+              ordem.
             </p>
             <p className="mt-6 t-body text-[1.0625rem] leading-[1.7] text-on-ink-soft max-w-[58ch]">
-              A MIDLEJ Advogados no grupo permite a oferta que escritórios de
-              seguros e corretoras isoladas não conseguem replicar: consultoria
-              financeira + estrutura jurídica de proteção, integradas.
+              A MIDLEJ Advogados estrutura o instrumento jurídico. A Midlej
+              Capital alinha a holding ao plano financeiro. Sem dois escritórios
+              separados sem integração — tudo sob o mesmo teto.
             </p>
           </div>
         </div>
@@ -282,18 +295,18 @@ function ComoFunciona() {
   const steps = [
     {
       n: "I",
-      title: "Raio-X de exposição",
-      body: "Mapeamos sua especialidade, suas apólices atuais e o patrimônio pessoal exposto. Identificamos as lacunas antes que virem processo.",
+      title: "Mapeamento patrimonial",
+      body: "Entendemos a composição do patrimônio, a estrutura familiar e os objetivos de sucessão. Calculamos o custo do inventário sem planejamento.",
     },
     {
       n: "II",
-      title: "Plano de blindagem",
-      body: "Desenhamos a RC na cobertura adequada + a estrutura de proteção patrimonial. Consultoria financeira e jurídica integradas.",
+      title: "Estrutura sob medida",
+      body: "Desenhamos a holding familiar — tipo societário, quotas, regras de governança e otimização tributária — alinhada ao seu plano e à sua família.",
     },
     {
       n: "III",
-      title: "Acompanhamento anual",
-      body: "Revisão da cobertura a cada ciclo — porque a sua especialidade, a sua renda e o seu patrimônio mudam. A proteção tem que acompanhar.",
+      title: "Constituição e acompanhamento",
+      body: "A MIDLEJ Advogados executa a constituição. A Midlej Capital integra a holding ao planejamento financeiro e revisamos periodicamente.",
     },
   ];
 
@@ -304,7 +317,7 @@ function ComoFunciona() {
           <div className="col-span-12 md:col-span-9">
             <Mark eyebrow="Como funciona" dark={false} />
             <h2 className="mt-10 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.05] text-ink max-w-[22ch]">
-              Três passos. Um responsável por cada um deles.
+              Três passos. Um time responsável por cada um deles.
             </h2>
           </div>
         </div>
@@ -334,7 +347,7 @@ function ComoFunciona() {
         </ol>
         <div className="mt-12">
           <Link href="#contato" className="btn-primary">
-            Começar pelo Raio-X
+            Começar pelo mapeamento gratuito
             <Arrow />
           </Link>
         </div>
@@ -349,17 +362,18 @@ function Autoridade() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
         <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
           <div className="col-span-12 md:col-span-5">
-            <Mark eyebrow="Midlej Capital" dark={false} />
+            <Mark eyebrow="O diferencial do grupo" dark={false} />
             <h2 className="mt-10 t-display text-[clamp(1.625rem,3vw,2.5rem)] leading-[1.05] text-ink max-w-[20ch]">
-              Consultoria financeira e jurídica sob o mesmo teto.
+              Financeiro e jurídico integrados — não terceirizados.
             </h2>
           </div>
           <div className="col-span-12 md:col-span-7">
             <p className="t-body text-[1.0625rem] leading-[1.7] text-ink-soft max-w-[58ch]">
-              A Midlej Capital é consultoria de investimentos com registro na
-              CVM. A MIDLEJ Advogados é o braço jurídico do grupo. Juntos,
-              desenhamos a proteção que outros só conseguem parcialmente —
-              porque precisariam de dois escritórios sem integração entre eles.
+              A maioria dos planejamentos de sucessão falha na integração:
+              o advogado constitui a holding, o gerente de banco tenta encaixar
+              os investimentos, e ninguém fala a mesma língua. Na Midlej,
+              a consultoria financeira (CVM) e o braço jurídico (OAB) estão
+              sob o mesmo teto — e trabalham o mesmo plano.
             </p>
             <dl className="mt-10 grid grid-cols-3 gap-x-6 md:gap-x-10 border-t border-line pt-8">
               <div>
@@ -380,10 +394,10 @@ function Autoridade() {
               </div>
               <div>
                 <dt className="t-mono text-[0.66rem] tracking-[0.16em] uppercase text-ink-mute">
-                  Modelo
+                  Integração
                 </dt>
                 <dd className="t-display-light text-[clamp(1.125rem,1.6vw,1.5rem)] leading-[1.1] mt-2 text-ink">
-                  Fee fixo
+                  Um plano
                 </dd>
               </div>
             </dl>
@@ -400,27 +414,27 @@ function Contato() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
         <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
           <div className="col-span-12 md:col-span-6">
-            <Mark eyebrow="Raio-X gratuito" dark />
+            <Mark eyebrow="Mapeamento gratuito" dark />
             <h2 className="mt-10 t-display text-[clamp(2rem,4.5vw,3.75rem)] leading-[1.0] text-on-ink-strong max-w-[20ch]">
-              Quero meu Raio-X de proteção patrimonial.
+              Quero estruturar a sucessão do meu patrimônio.
             </h2>
             <p className="mt-10 t-lede text-on-ink-soft text-[1.1rem] max-w-[44ch]">
               Preencha em 2 minutos. Retornamos pelo WhatsApp com uma análise
-              da sua exposição — sem material comercial, sem gravação.
+              do seu caso — sem material comercial, sem gravação.
             </p>
             <p className="mt-8 t-body text-[0.85rem] leading-[1.55] text-on-ink-mute max-w-[48ch]">
               <span className="asterisk" />
-              Simulações ilustrativas baseadas em dados históricos; rentabilidade
-              passada não representa garantia de rentabilidade futura. Esta página
+              Simulações ilustrativas baseadas em premissas genéricas; o custo
+              real varia por patrimônio, estado e estrutura familiar. Esta página
               tem caráter educativo e não constitui recomendação individualizada
-              de investimento ou de seguro.
+              de investimento ou assessoria jurídica.
             </p>
           </div>
           <div className="col-span-12 md:col-span-6 md:col-start-7">
             <HubLeadForm
               tone="dark"
-              submitLabel="Quero meu Raio-X de proteção patrimonial"
-              origin="LP2 · RC Médico"
+              submitLabel="Quero estruturar minha sucessão"
+              origin="LP4 · Sucessão e Holding"
             />
           </div>
         </div>
