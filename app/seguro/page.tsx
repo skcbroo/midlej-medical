@@ -254,10 +254,9 @@ export default function SeguroPage() {
           <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-16 max-w-[28ch]" style={{ color: "#2E4659" }}>
             Consultoria independente. Sem comissão de seguro.
           </h2>
-          <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {[
               { label: "Consultoria independente", body: "Não somos corretores de seguro — somos consultores independentes, com obrigação fiduciária ao cliente." },
-              { label: "Fee fixo", body: "Nossa remuneração é um honorário fixo. Nenhum centavo vem de comissão de seguradora — o que nos permite recomendar o produto mais eficiente para você." },
               { label: "Abordagem integrada", body: "Tratamos proteção e acumulação patrimonial como uma estratégia única — não como dois produtos vendidos por departamentos diferentes." },
             ].map((c) => (
               <div key={c.label} className="rounded-xl border border-[#EDEFF2] bg-white p-7 shadow-sm">
