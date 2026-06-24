@@ -54,17 +54,17 @@ export default function SeguroPage() {
           priority
         />
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(46,70,89,0.62)" }} />
-        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-32 md:py-48 w-full">
-          <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-6" style={{ color: "rgba(255,255,255,0.55)" }}>
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-40 md:py-56 w-full">
+          <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-8" style={{ color: "rgba(255,255,255,0.55)" }}>
             Seguro de Vida Inteligente
           </p>
-          <h1 className="text-[clamp(2.25rem,6vw,4.5rem)] font-bold leading-[1.04] tracking-tight text-white mb-6 max-w-[20ch]">
+          <h1 className="text-[clamp(2.25rem,6vw,4.5rem)] font-bold leading-[1.04] tracking-tight text-white mb-8 max-w-[20ch]">
             Você está pagando por um seguro de vida — ou financiando o lucro de quem te vendeu?
           </h1>
-          <p className="text-[clamp(1.0625rem,1.6vw,1.25rem)] leading-relaxed mb-10 max-w-[44ch]" style={{ color: "rgba(255,255,255,0.78)" }}>
+          <p className="text-[clamp(1.0625rem,1.6vw,1.25rem)] leading-relaxed mb-14 max-w-[38ch]" style={{ color: "rgba(255,255,255,0.78)" }}>
             Existe um modelo que protege a família agora e ainda constrói patrimônio. Ninguém te ofereceu porque ninguém ganha com isso.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-5">
             <a
               href="#simulacao"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200"
@@ -87,7 +87,7 @@ export default function SeguroPage() {
           <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
             <div className="col-span-12 md:col-span-5">
               <SectionTag label="O que ninguém te contou" />
-              <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[18ch]" style={{ color: "#2E4659" }}>
+              <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[18ch] mb-8 md:mb-0" style={{ color: "#2E4659" }}>
                 O seguro vitalício foi projetado para lucrar, não para proteger.
               </h2>
             </div>
@@ -119,7 +119,7 @@ export default function SeguroPage() {
       <section id="simulacao" style={{ backgroundColor: "#F5F7FA" }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
           <SectionTag label="Simulação · 30 anos · mesma proteção" />
-          <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-4 max-w-[24ch]" style={{ color: "#2E4659" }}>
+          <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-6 max-w-[24ch]" style={{ color: "#2E4659" }}>
             R$&nbsp;1.000/mês. Dois destinos completamente diferentes.
           </h2>
           <p className="text-[1.0625rem] leading-relaxed mb-16 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
@@ -236,7 +236,7 @@ export default function SeguroPage() {
                       {s.n}
                     </span>
                     <div>
-                      <h3 className="text-[1.0625rem] font-bold mb-2" style={{ color: "#2E4659" }}>{s.title}</h3>
+                      <h3 className="text-[1.0625rem] font-bold mb-3" style={{ color: "#2E4659" }}>{s.title}</h3>
                       <p className="text-[0.95rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>{s.body}</p>
                     </div>
                   </li>

@@ -54,17 +54,17 @@ export default function SucessaoPage() {
           priority
         />
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(46,70,89,0.65)" }} />
-        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-32 md:py-48 w-full">
-          <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-6" style={{ color: "rgba(255,255,255,0.55)" }}>
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-40 md:py-56 w-full">
+          <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-8" style={{ color: "rgba(255,255,255,0.55)" }}>
             Sucessão e Holding Familiar
           </p>
-          <h1 className="text-[clamp(2.25rem,6vw,4.5rem)] font-bold leading-[1.04] tracking-tight text-white mb-6 max-w-[18ch]">
+          <h1 className="text-[clamp(2.25rem,6vw,4.5rem)] font-bold leading-[1.04] tracking-tight text-white mb-8 max-w-[18ch]">
             Quanto sua família vai perder no inventário?
           </h1>
-          <p className="text-[clamp(1.0625rem,1.6vw,1.25rem)] leading-relaxed mb-10 max-w-[44ch]" style={{ color: "rgba(255,255,255,0.78)" }}>
+          <p className="text-[clamp(1.0625rem,1.6vw,1.25rem)] leading-relaxed mb-14 max-w-[38ch]" style={{ color: "rgba(255,255,255,0.78)" }}>
             O processo pode durar anos e consumir até 20% do que você levou décadas para construir. Existe uma forma de evitar isso — mas precisa ser feita em vida.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-5">
             <a
               href="#simulacao"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200"
@@ -87,7 +87,7 @@ export default function SucessaoPage() {
           <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
             <div className="col-span-12 md:col-span-5">
               <SectionTag label="O custo de não planejar" />
-              <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[18ch]" style={{ color: "#2E4659" }}>
+              <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[18ch] mb-8 md:mb-0" style={{ color: "#2E4659" }}>
                 O inventário é o imposto que sua família paga pelo que você não fez.
               </h2>
             </div>
@@ -119,7 +119,7 @@ export default function SucessaoPage() {
       <section id="simulacao" style={{ backgroundColor: "#F5F7FA" }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
           <SectionTag label="Simulação · patrimônio de R$2 milhões" />
-          <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-4 max-w-[24ch]" style={{ color: "#2E4659" }}>
+          <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-6 max-w-[24ch]" style={{ color: "#2E4659" }}>
             O mesmo patrimônio. Dois destinos para a família.
           </h2>
           <p className="text-[1.0625rem] leading-relaxed mb-16 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
@@ -236,7 +236,7 @@ export default function SucessaoPage() {
                       {s.n}
                     </span>
                     <div>
-                      <h3 className="text-[1.0625rem] font-bold mb-2" style={{ color: "#2E4659" }}>{s.title}</h3>
+                      <h3 className="text-[1.0625rem] font-bold mb-3" style={{ color: "#2E4659" }}>{s.title}</h3>
                       <p className="text-[0.95rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>{s.body}</p>
                     </div>
                   </li>
