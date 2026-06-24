@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pleno Med · Capital sob a sua escala de plantões",
+  title: "Proteção Patrimonial para Médicos · Midlej Capital",
   description:
-    "A Pleno Med é o hub de crédito para médicos. Antecipe plantões já realizados e tenha crédito sob medida com base na sua escala futura.",
+    "Um processo pode custar mais que sua carreira. Descubra se seu patrimônio pessoal está protegido — RC profissional + blindagem patrimonial com consultoria financeira e jurídica integradas.",
   openGraph: {
-    title: "Pleno Med · Capital sob a sua escala de plantões",
+    title: "Proteção Patrimonial para Médicos · Midlej Capital",
     description:
-      "Antecipação de recebíveis e crédito sobre a escala. Operação estruturada pela Midlej Capital.",
+      "RC profissional na cobertura certa + blindagem patrimonial. Consultoria financeira e jurídica sob o mesmo teto.",
     type: "website",
     locale: "pt_BR",
   },

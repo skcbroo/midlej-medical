@@ -482,8 +482,8 @@ const TEAM = [
   },
   {
     name: "Allan Guilherme",
-    role: "Sócio · Consultor CVM",
-    bio: "Credenciado pela Comissão de Valores Mobiliários. Atua em análise de investimentos, alocação de ativos e estratégias de preservação e crescimento patrimonial para pessoas físicas e jurídicas.",
+    role: "Sócio · Consultor de Investimentos",
+    bio: "Atua em análise de investimentos, alocação de ativos e estratégias de preservação e crescimento patrimonial para pessoas físicas e jurídicas.",
     photo: "/allan2.jpeg",
     initials: "AG",
   },
