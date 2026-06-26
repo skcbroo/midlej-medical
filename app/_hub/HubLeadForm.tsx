@@ -59,7 +59,7 @@ export function HubLeadForm({
         aria-live="polite"
         className={tone === "dark" ? "text-on-ink-strong" : "text-ink"}
       >
-        <p className="t-mono text-[0.72rem] tracking-[0.18em] uppercase text-emphasis mb-4">
+        <p className="t-mono text-[0.72rem] tracking-[0.18em] uppercase mb-4" style={{ color: "#B89840" }}>
           Recebemos
         </p>
         <p className="t-display text-[clamp(1.25rem,2vw,1.625rem)] leading-[1.1] max-w-[24ch]">
