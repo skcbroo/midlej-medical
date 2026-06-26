@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Manrope } from "next/font/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import { WhatsAppFloat } from "./components/WhatsAppFloat";
 
@@ -73,6 +74,7 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${bricolage.variable} ${manrope.variable} h-full antialiased`}
     >
+      <GoogleTagManager gtmId="GTM-MT5BHRDW" />
       <body className="min-h-full flex flex-col">
         <a href="#main" className="skip-link">
           Pular para o conteúdo
