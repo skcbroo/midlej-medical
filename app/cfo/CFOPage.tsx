@@ -118,18 +118,54 @@ function Dores() {
     {
       title: "Dinheiro sem rumo",
       body: "Você ganha muito e não sabe exatamente pra onde vai. Sobra menos do que deveria, e ninguém sabe explicar por quê.",
+      icon: (
+        // Moeda com seta para baixo = dinheiro escapando
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
+          <circle cx="9" cy="8" r="5" stroke={GOLD} strokeWidth="1.5" />
+          <path d="M9 5.5V10" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M6.5 8l2.5 2.5 2.5-2.5" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M5 14.5h8" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" strokeDasharray="1.5 1.5" />
+        </svg>
+      ),
     },
     {
       title: "Conselho que é venda",
       body: "Seu gerente não é conselheiro. É vendedor da casa, e o produto que ele indica costuma render mais pra ele do que pra você.",
+      icon: (
+        // Balão de fala com cifrão = conselho disfarçado de venda
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
+          <path d="M2.5 2.5h13a.5.5 0 01.5.5v7a.5.5 0 01-.5.5H9.5l-2.5 3v-3H2.5a.5.5 0 01-.5-.5V3a.5.5 0 01.5-.5z" stroke={GOLD} strokeWidth="1.4" strokeLinejoin="round" />
+          <path d="M9 4.5v6" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" />
+          <path d="M7.5 5.8a1.5 1.5 0 012.5 1c0 .7-.6 1.1-1.5 1.3-.9.2-1.5.6-1.5 1.3a1.5 1.5 0 002.5 1" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" />
+        </svg>
+      ),
     },
     {
       title: "Gestão no improviso",
       body: "Você administra uma carreira de milhões nas horas vagas, no susto, ouvindo grupo de WhatsApp e dica de plantão.",
+      icon: (
+        // Relógio com ponteiros em posição de urgência = sempre no improviso
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
+          <circle cx="9" cy="9.5" r="6" stroke={GOLD} strokeWidth="1.5" />
+          <path d="M9 6v3.5l2.5 1.5" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M9 2v1.5" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M5 3.2l.75 1.3" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" />
+          <path d="M13 3.2l-.75 1.3" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" />
+        </svg>
+      ),
     },
     {
       title: "Ninguém responsável pelo todo",
       body: "Investir todo mundo investe. Ter um responsável pela visão completa, com método e accountability, é raro.",
+      icon: (
+        // Cadeira vazia = ninguém no comando
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
+          <path d="M5 6V4a1 1 0 011-1h6a1 1 0 011 1v2" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M3.5 6h11a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-2a.5.5 0 01.5-.5z" stroke={GOLD} strokeWidth="1.4" />
+          <path d="M5.5 9v5M12.5 9v5" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M4 14h3M11 14h3" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      ),
     },
   ];
 
@@ -152,10 +188,7 @@ function Dores() {
               className="bg-white rounded-xl p-7 flex flex-col gap-3 border border-[#EDEFF2] shadow-sm"
             >
               <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: "#2E4659" }}>
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
-                  <circle cx="9" cy="9" r="6.5" stroke={GOLD} strokeWidth="1.6" />
-                  <path d="M9 6v4M9 12v.5" stroke={GOLD} strokeWidth="1.6" strokeLinecap="round" />
-                </svg>
+                {c.icon}
               </div>
               <h3 className="text-[1rem] font-bold leading-snug" style={{ color: "#2E4659" }}>{c.title}</h3>
               <p className="text-[0.9375rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>{c.body}</p>
