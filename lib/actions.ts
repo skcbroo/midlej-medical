@@ -54,6 +54,7 @@ export async function submitLeadForm(
 
   try {
     const resend = new Resend(env.RESEND_API_KEY);
+    console.log("[submitLeadForm] from:", `leads@${env.RESEND_FROM_DOMAIN}`, "to:", env.LEAD_EMAIL, "hasKey:", !!env.RESEND_API_KEY);
 
     const { error } = await resend.emails.send({
       from: `Midlej Site <leads@${env.RESEND_FROM_DOMAIN}>`,
@@ -74,7 +75,7 @@ export async function submitLeadForm(
     });
 
     if (error) {
-      console.error("[submitLeadForm] resend error", error);
+      console.error("[submitLeadForm] resend error", JSON.stringify(error));
       return { kind: "error", message: "Algo deu errado. Tente novamente em instantes." };
     }
 
