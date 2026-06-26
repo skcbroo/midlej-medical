@@ -5,19 +5,19 @@ import { LPClosing } from "@/app/_hub/LPClosing";
 import { SmoothAnchor } from "@/app/_hub/SmoothAnchor";
 
 export const metadata: Metadata = {
-  title: "Proteção Patrimonial para Médicos · Midlej Capital",
+  title: "Seguro de Vida Inteligente · Midlej Capital",
   description:
-    "Um processo pode custar mais que sua carreira. Descubra se seu patrimônio pessoal está protegido — RC profissional + blindagem patrimonial com consultoria financeira e jurídica integradas.",
+    "Você está pagando por um seguro de vida — ou financiando o lucro de quem te vendeu? Descubra o modelo que protege e ainda constrói patrimônio.",
   openGraph: {
-    title: "Proteção Patrimonial para Médicos · Midlej Capital",
-    description: "RC profissional na cobertura certa + blindagem patrimonial. Consultoria financeira e jurídica sob o mesmo teto.",
+    title: "Seguro de Vida Inteligente · Midlej Capital",
+    description: "R$1.000/mês em seguro vitalício ou R$200 + R$800 investidos? A simulação que ninguém te mostrou.",
     type: "website",
     locale: "pt_BR",
   },
 };
 
 const DISCLAIMER =
-  "Esta página tem caráter educativo e não constitui recomendação individualizada de seguro ou consultoria jurídica. Dados de judicialização são de fontes públicas e variam por especialidade e região.";
+  "Simulações ilustrativas baseadas em dados históricos; rentabilidade passada não representa garantia de rentabilidade futura. Esta página tem caráter educativo e não constitui recomendação individualizada de seguro ou investimento.";
 
 function SectionTag({ label, dark = false }: { label: string; dark?: boolean }) {
   return (
@@ -35,47 +35,47 @@ function Arrow() {
   );
 }
 
-export default function PlenomedPage() {
+export default function SeguroPage() {
   return (
     <main
       className="bg-white text-[#2E4659]"
       style={{ fontFamily: "var(--font-brand), ui-sans-serif, system-ui, sans-serif" }}
     >
-      <LPHeader ctaLabel="Quero meu Raio-X" />
+      <LPHeader ctaLabel="Revisar meu seguro" />
       <SmoothAnchor />
 
       {/* ── Hero ── */}
       <section id="top" className="relative min-h-screen flex items-center">
         <Image
-          src="/fotos_escritorio/3.jpeg"
+          src="/fotos_escritorio/6.jpeg"
           alt="Escritório Midlej Capital"
           fill
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0" style={{ backgroundColor: "rgba(46,70,89,0.65)" }} />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(46,70,89,0.62)" }} />
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-40 md:py-56 w-full">
           <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-8" style={{ color: "rgba(255,255,255,0.55)" }}>
-            Proteção Patrimonial · Médicos
+            Seguro de Vida Inteligente
           </p>
-          <h1 className="text-[clamp(2.25rem,6vw,4.5rem)] font-bold leading-[1.04] tracking-tight text-white mb-8 max-w-[18ch]">
-            Um processo pode custar mais que sua carreira.
+          <h1 className="text-[clamp(2.25rem,6vw,4.5rem)] font-bold leading-[1.04] tracking-tight text-white mb-8 max-w-[20ch]">
+            Você está pagando por um seguro de vida — ou financiando o lucro de quem te vendeu?
           </h1>
           <p className="text-[clamp(1.0625rem,1.6vw,1.25rem)] leading-relaxed mb-14 max-w-[38ch]" style={{ color: "rgba(255,255,255,0.78)" }}>
-            A judicialização contra médicos cresce todo ano. Saber se o seu patrimônio pessoal está realmente protegido é a pergunta que ninguém faz — até precisar.
+            Existe um modelo que protege a família agora e ainda constrói patrimônio. Ninguém te ofereceu porque ninguém ganha com isso.
           </p>
           <div className="flex flex-wrap gap-5">
             <a
-              href="#exposicao"
+              href="#simulacao"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200"
             >
-              Avaliar minha exposição <Arrow />
+              Calcular meu seguro grátis <Arrow />
             </a>
             <a
               href="#contato"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/30 hover:border-white/60 transition-colors duration-200"
             >
-              Quero falar com um especialista
+              Quero revisar com um consultor
             </a>
           </div>
         </div>
@@ -86,20 +86,20 @@ export default function PlenomedPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
           <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
             <div className="col-span-12 md:col-span-5">
-              <SectionTag label="O cenário atual" />
+              <SectionTag label="O que ninguém te contou" />
               <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[18ch] mb-8 md:mb-0" style={{ color: "#2E4659" }}>
-                O risco cresce. A proteção fica estagnada.
+                O seguro vitalício foi projetado para lucrar, não para proteger.
               </h2>
             </div>
             <div className="col-span-12 md:col-span-7">
               <p className="text-[1.0625rem] leading-[1.65] mb-10 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
-                Três realidades que médicos com RC ativa frequentemente ignoram — e que podem custar décadas de construção patrimonial.
+                Três verdades que as seguradoras evitam explicar — e que fazem toda a diferença ao longo de 30 anos de pagamentos.
               </p>
               <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {[
-                  { n: "↑ todo ano", label: "Judicialização médica", sub: "Processos por erro médico crescem sistematicamente no Brasil" },
-                  { n: "Anos", label: "O que uma indenização pode levar", sub: "Uma sentença de R$500mil a R$2mi pode absorver anos de renda" },
-                  { n: "⚠", label: "Patrimônio pessoal na linha", sub: "RC com cobertura errada deixa imóveis e investimentos expostos" },
+                  { n: "Caro", label: "O nome técnico é VUL ou inteiro", sub: "Mistura proteção e 'investimento' — com a seguradora ganhando nos dois lados" },
+                  { n: "Nunca", label: "O que ninguém ofereceu", sub: "Um seguro temporário puro, com o restante sendo investido por você" },
+                  { n: "4× mais", label: "O resultado possível", sub: "Proteção igual — e patrimônio líquido até 4 vezes maior ao longo do tempo" },
                 ].map((s) => (
                   <div key={s.n} className="rounded-xl border border-[#EDEFF2] p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
                     <dt className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold leading-none tracking-tight mb-2" style={{ color: "#4a6b8c" }}>
@@ -115,77 +115,58 @@ export default function PlenomedPage() {
         </div>
       </section>
 
-      {/* ── Diagnóstico de exposição ── */}
-      <section id="exposicao" style={{ backgroundColor: "#F5F7FA" }}>
+      {/* ── Simulação principal ── */}
+      <section id="simulacao" style={{ backgroundColor: "#F5F7FA" }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-          <SectionTag label="Diagnóstico de exposição" />
+          <SectionTag label="Simulação · 30 anos · mesma proteção" />
           <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-6 max-w-[24ch]" style={{ color: "#2E4659" }}>
-            Qual é o seu nível de exposição hoje?
+            R$&nbsp;1.000/mês. Dois destinos completamente diferentes.
           </h2>
           <p className="text-[1.0625rem] leading-relaxed mb-16 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
-            O risco varia com especialidade, tempo de carreira e estrutura patrimonial. Identifique onde você está.
+            A proteção é equivalente. O que muda é quem acumula patrimônio ao longo do caminho.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               {
-                tag: "Exposição Alta",
-                tagColor: "#c0392b",
-                title: "RC com cobertura abaixo do risco",
-                items: [
-                  "Especialidade de alto risco cirúrgico",
-                  "Apólice antiga sem revisão de cobertura",
-                  "Patrimônio pessoal sem proteção jurídica",
-                  "Sem separação entre PF e PJ",
-                ],
+                label: "Modelo atual",
+                tag: "Seguro vitalício (VUL / inteiro)",
+                value: "~R$ 360 mil pagos",
+                sub: "30 anos × R$1.000 — capital retido pela seguradora",
+                note: "Preso no produto. Rentabilidade opaca. Sem acumulação líquida.",
                 highlight: false,
               },
               {
-                tag: "Exposição Média",
-                tagColor: "#c07a17",
-                title: "Proteção parcial — pontos cegos",
-                items: [
-                  "RC ativa, mas limites desatualizados",
-                  "Nenhuma auditoria nos últimos 2 anos",
-                  "Bens pessoais sem blindagem específica",
-                  "Orientação de seguradora, não de consultoria",
-                ],
-                highlight: false,
-              },
-              {
-                tag: "Exposição Controlada",
-                tagColor: "#27ae60",
-                title: "Estrutura completa e revisada",
-                items: [
-                  "RC com cobertura calibrada à especialidade",
-                  "Patrimônio pessoal estruturado juridicamente",
-                  "Revisão anual com consultoria independente",
-                  "Plano integrado: finanças + proteção",
-                ],
+                label: "Modelo inteligente",
+                tag: "Temporário + R$800 investidos/mês",
+                value: "~R$ 1,6 milhão",
+                sub: "Patrimônio líquido ao fim dos 30 anos",
+                note: "Proteção equivalente. Controle total. Rentabilidade do mercado.",
                 highlight: true,
               },
             ].map((c) => (
               <div
-                key={c.tag}
-                className="rounded-2xl p-8 border"
+                key={c.label}
+                className="rounded-2xl p-8 md:p-10 border"
                 style={{
                   backgroundColor: c.highlight ? "#2E4659" : "white",
                   borderColor: c.highlight ? "transparent" : "#EDEFF2",
                 }}
               >
-                <p className="text-[0.66rem] font-bold tracking-widest uppercase mb-4" style={{ color: c.highlight ? "rgba(255,255,255,0.55)" : c.tagColor }}>
+                <p className="text-[0.66rem] font-semibold tracking-[0.16em] uppercase mb-2" style={{ color: c.highlight ? "rgba(255,255,255,0.50)" : "#6B7B8D" }}>
+                  {c.label}
+                </p>
+                <p className="text-sm font-semibold mb-6" style={{ color: c.highlight ? "rgba(255,255,255,0.70)" : "#4a6b8c" }}>
                   {c.tag}
                 </p>
-                <h3 className="text-[1.0625rem] font-bold mb-6 leading-snug" style={{ color: c.highlight ? "white" : "#2E4659" }}>
-                  {c.title}
-                </h3>
-                <ul className="flex flex-col gap-3">
-                  {c.items.map((item) => (
-                    <li key={item} className="text-[0.9rem] leading-snug flex gap-2" style={{ color: c.highlight ? "rgba(255,255,255,0.65)" : "#6B7B8D" }}>
-                      <span aria-hidden style={{ color: c.highlight ? "rgba(255,255,255,0.30)" : "#EDEFF2", flexShrink: 0 }}>—</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-[clamp(2rem,4vw,3rem)] font-bold leading-none tracking-tight mb-3" style={{ color: c.highlight ? "white" : "#2E4659" }}>
+                  {c.value}
+                </p>
+                <p className="text-[0.875rem] leading-relaxed mb-4" style={{ color: c.highlight ? "rgba(255,255,255,0.55)" : "#6B7B8D" }}>
+                  {c.sub}
+                </p>
+                <p className="text-[0.8rem] leading-relaxed" style={{ color: c.highlight ? "rgba(255,255,255,0.40)" : "#6B7B8D" }}>
+                  {c.note}
+                </p>
               </div>
             ))}
           </div>
@@ -197,15 +178,15 @@ export default function PlenomedPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
           <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
             <div className="col-span-12 md:col-span-7">
-              <SectionTag label="Nossa diferença" dark />
+              <SectionTag label="Nossa abordagem" dark />
               <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight text-white mb-6 max-w-[22ch]">
-                Outros vendem a apólice. Nós protegemos o patrimônio inteiro.
+                Alugar a proteção. Ser dono do patrimônio.
               </h2>
               <p className="text-[1.0625rem] leading-[1.65] mb-6 max-w-[52ch]" style={{ color: "rgba(255,255,255,0.75)" }}>
-                A MIDLEJ reúne consultoria financeira e jurídica sob o mesmo teto. Calibramos a RC certa para a especialidade — e estruturamos o patrimônio pessoal para que nenhuma sentença apague décadas de trabalho.
+                Seguro temporário cobre o período em que a família depende de você. O dinheiro que sobra vai para uma carteira de investimentos — que você controla, liquida e herda.
               </p>
               <p className="text-[1.0625rem] leading-[1.65] max-w-[52ch]" style={{ color: "rgba(255,255,255,0.60)" }}>
-                Um único interlocutor. Sem conflito de interesse. Sem produto de prateleira.
+                Não vendemos seguro. Assessoramos a decisão. Por isso somos pagos por honorários fixos — não por comissão de apólice.
               </p>
             </div>
             <div className="col-span-12 md:col-span-4 md:col-start-9">
@@ -214,7 +195,7 @@ export default function PlenomedPage() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold bg-white hover:bg-[#EDEFF2] transition-colors duration-200"
                 style={{ color: "#2E4659" }}
               >
-                Solicitar diagnóstico gratuito <Arrow />
+                Quero rever meu seguro <Arrow />
               </a>
             </div>
           </div>
@@ -228,7 +209,7 @@ export default function PlenomedPage() {
             <div className="col-span-12 md:col-span-4">
               <SectionTag label="Como funciona" />
               <h2 className="text-[clamp(1.625rem,3vw,2.5rem)] font-bold leading-[1.04] tracking-tight max-w-[16ch]" style={{ color: "#2E4659" }}>
-                Três etapas. Uma blindagem completa.
+                Três etapas. Um plano integrado.
               </h2>
             </div>
             <div className="col-span-12 md:col-span-8 md:col-start-5">
@@ -236,18 +217,18 @@ export default function PlenomedPage() {
                 {[
                   {
                     n: "I",
-                    title: "Raio-X de exposição",
-                    body: "Avaliamos sua especialidade, apólice atual, estrutura patrimonial e regime societário. Mapeamos onde está o risco real — não o que a seguradora quer te vender.",
+                    title: "Diagnóstico do seguro atual",
+                    body: "Analisamos o produto que você tem hoje — custo real, cobertura, cláusulas de carência e o que a seguradora não explicitou no contrato.",
                   },
                   {
                     n: "II",
-                    title: "Calibração de cobertura + blindagem jurídica",
-                    body: "Nossa equipe recomenda o limite de RC adequado e, em paralelo, estrutura juridicamente o patrimônio pessoal: holding familiar, separação PF/PJ, doações em vida.",
+                    title: "Reestruturação da proteção",
+                    body: "Calculamos o capital segurado que sua família realmente precisa, o prazo ideal e o seguro temporário mais eficiente do mercado — sem conflito de interesse.",
                   },
                   {
                     n: "III",
-                    title: "Revisão anual e acompanhamento",
-                    body: "O risco muda. A carreira evolui. Revisamos anualmente — cobertura, estrutura e finanças — para que a proteção nunca fique defasada.",
+                    title: "Plano de investimento paralelo",
+                    body: "O valor liberado pela troca do produto é direcionado a uma carteira de investimentos adequada ao seu perfil. Proteção e patrimônio crescendo juntos.",
                   },
                 ].map((s) => (
                   <li key={s.n} className="py-8 md:py-10 flex gap-6 md:gap-10 items-start">
@@ -271,13 +252,12 @@ export default function PlenomedPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
           <SectionTag label="Por que a Midlej" />
           <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-16 max-w-[28ch]" style={{ color: "#2E4659" }}>
-            Finanças e direito. Sob o mesmo teto.
+            Consultoria independente. Sem comissão de seguro.
           </h2>
-          <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {[
-              { label: "Consultoria independente", body: "Obrigação fiduciária ao cliente — não ao produto ou à seguradora." },
-              { label: "Parceiro jurídico", body: "Equipe jurídica especializada em proteção patrimonial integrada ao planejamento financeiro. Mesmo time. Mesma estratégia." },
-              { label: "Fee fixo · sem comissão", body: "Não recebemos comissão da seguradora. Nossa remuneração é por honorários — alinhada ao seu interesse, não ao prêmio." },
+              { label: "Consultoria independente", body: "Não somos corretores de seguro — somos consultores independentes, com obrigação fiduciária ao cliente." },
+              { label: "Abordagem integrada", body: "Tratamos proteção e acumulação patrimonial como uma estratégia única — não como dois produtos vendidos por departamentos diferentes." },
             ].map((c) => (
               <div key={c.label} className="rounded-xl border border-[#EDEFF2] bg-white p-7 shadow-sm">
                 <dt className="text-sm font-bold mb-3" style={{ color: "#2E4659" }}>{c.label}</dt>
@@ -290,11 +270,11 @@ export default function PlenomedPage() {
 
       {/* ── Closing ── */}
       <LPClosing
-        eyebrow="Diagnóstico gratuito"
-        headline="Descubra se seu patrimônio está realmente protegido."
-        body="A primeira conversa é gratuita, confidencial e sem compromisso. Avaliamos sua exposição atual e apresentamos o que precisa mudar — sem vender apólice antes da análise."
-        ctaLabel="Quero meu Raio-X patrimonial"
-        origin="LP2 · RC Médico"
+        eyebrow="Revisão gratuita"
+        headline="Descubra quanto seu seguro atual está custando a mais."
+        body="Na primeira conversa analisamos o produto que você tem hoje e mostramos o que muda com a reestruturação. Gratuita, confidencial e sem compromisso de contratação."
+        ctaLabel="Quero revisar meu seguro"
+        origin="LP1 · Seguro de Vida"
         disclaimer={DISCLAIMER}
       />
     </main>
