@@ -1,6 +1,6 @@
 "use client";
 
-const WA_LINK = "https://wa.me/5561983015739";
+const WA_LINK = `https://wa.me/5561983015739?text=${encodeURIComponent("Olá! Gostaria de saber mais sobre os serviços da Midlej Consultoria.")}`;
 
 export function WhatsAppFloat() {
   return (
