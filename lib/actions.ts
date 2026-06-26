@@ -54,10 +54,10 @@ export async function submitLeadForm(
 
   try {
     const resend = new Resend(env.RESEND_API_KEY);
-    console.log("[submitLeadForm] from:", `leads@${env.RESEND_FROM_DOMAIN}`, "to:", env.LEAD_EMAIL, "hasKey:", !!env.RESEND_API_KEY);
+
 
     const { error } = await resend.emails.send({
-      from: `Midlej Site <leads@${env.RESEND_FROM_DOMAIN}>`,
+      from: `Midlej Site <onboarding@${env.RESEND_FROM_DOMAIN}>`,
       to: env.LEAD_EMAIL,
       subject: `Novo lead — ${origin}`,
       html: `
