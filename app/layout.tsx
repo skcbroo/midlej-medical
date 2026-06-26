@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Manrope } from "next/font/google";
 import "./globals.css";
+import { WhatsAppFloat } from "./components/WhatsAppFloat";
 
 /**
  * Bricolage Grotesque — fonte oficial da marca Midlej Capital.
@@ -77,6 +78,7 @@ export default function RootLayout({
           Pular para o conteúdo
         </a>
         {children}
+        <WhatsAppFloat />
       </body>
     </html>
   );

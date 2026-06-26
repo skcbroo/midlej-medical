@@ -1,6 +1,6 @@
 "use server";
 
-import { headers } from "next/headers";
+import { Resend } from "resend";
 import { LeadSchema, CONSENT_TEXT } from "./leadSchema";
 import { env } from "./env";
 
@@ -26,23 +26,19 @@ function readValues(formData: FormData) {
   };
 }
 
-function readOrigin(formData: FormData): string | undefined {
+function readOrigin(formData: FormData): string {
   const raw = (formData.get("origin") ?? "").toString().trim();
-  return raw ? raw.slice(0, 120) : undefined;
+  return raw ? raw.slice(0, 120) : "Site Midlej";
 }
 
 export async function submitLeadForm(
   _prev: LeadFormState,
   formData: FormData,
 ): Promise<LeadFormState> {
-  // Honeypot: hidden field. Bots fill it; users never see it.
   const honeypot = (formData.get("website") ?? "").toString();
-  if (honeypot.length > 0) {
-    return { kind: "success" }; // silent accept
-  }
+  if (honeypot.length > 0) return { kind: "success" };
 
   const values = readValues(formData);
-
   const parsed = LeadSchema.safeParse(values);
 
   if (!parsed.success) {
@@ -53,78 +49,38 @@ export async function submitLeadForm(
     };
   }
 
-  const hdrs = await headers();
+  const origin = readOrigin(formData);
+  const { name, estado, whatsapp } = parsed.data;
 
   try {
-    const requestHeaders: Record<string, string> = {
-      "content-type": "application/json",
-      "x-forwarded-for":
-        hdrs.get("x-forwarded-for") ?? hdrs.get("x-real-ip") ?? "",
-      "user-agent": hdrs.get("user-agent") ?? "",
-      referer: hdrs.get("referer") ?? "",
-    };
-    // Em prod a LP envia o shared secret; em dev (chave vazia) o header
-    // é omitido e o backend pula a checagem.
-    if (env.PLENO_MED_INGEST_KEY) {
-      requestHeaders["x-pleno-med-key"] = env.PLENO_MED_INGEST_KEY;
-    }
+    const resend = new Resend(env.RESEND_API_KEY);
 
-    const res = await fetch(`${env.BACKEND_API_URL}/api/pleno-med/leads`, {
-      method: "POST",
-      headers: requestHeaders,
-      body: JSON.stringify({
-        name: parsed.data.name,
-        estado: parsed.data.estado,
-        whatsapp: parsed.data.whatsapp,
-        consentText: CONSENT_TEXT,
-        origin: readOrigin(formData),
-      }),
-      cache: "no-store",
+    const { error } = await resend.emails.send({
+      from: `Midlej Site <leads@${env.RESEND_FROM_DOMAIN}>`,
+      to: env.LEAD_EMAIL,
+      subject: `Novo lead — ${origin}`,
+      html: `
+        <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px 24px;background:#F5F7FA;border-radius:12px">
+          <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#B89840">Novo lead</p>
+          <h2 style="margin:0 0 24px;font-size:22px;color:#2E4659">${origin}</h2>
+          <table style="width:100%;border-collapse:collapse">
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D;width:110px">Nome</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${name}</td></tr>
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">WhatsApp</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${whatsapp}</td></tr>
+            <tr><td style="padding:10px 0;font-size:12px;color:#6B7B8D">Estado</td><td style="padding:10px 0;font-size:15px;font-weight:600;color:#2E4659">${estado}</td></tr>
+          </table>
+          <p style="margin:24px 0 0;font-size:11px;color:#9BA8B5">${CONSENT_TEXT}</p>
+        </div>
+      `,
     });
 
-    if (res.status === 201) {
-      return { kind: "success" };
+    if (error) {
+      console.error("[submitLeadForm] resend error", error);
+      return { kind: "error", message: "Algo deu errado. Tente novamente em instantes." };
     }
 
-    if (res.status === 400) {
-      const data = (await res.json().catch(() => ({}))) as {
-        error?: string;
-        fields?: Record<string, string[]>;
-      };
-      console.warn("[submitLeadForm] backend 400", { fields: data.fields });
-      return {
-        kind: "error",
-        fields: data.fields,
-        message: "Verifique os campos e tente novamente.",
-        values,
-      };
-    }
-
-    const bodyPeek = await res.text().catch(() => "<unreadable>");
-    console.error("[submitLeadForm] backend non-2xx", {
-      url: `${env.BACKEND_API_URL}/api/pleno-med/leads`,
-      status: res.status,
-      hasKey: !!env.PLENO_MED_INGEST_KEY,
-      keyLen: env.PLENO_MED_INGEST_KEY.length,
-      body: bodyPeek.slice(0, 240),
-    });
-    return {
-      kind: "error",
-      message: "Algo deu errado. Tente novamente em instantes.",
-      values,
-    };
+    return { kind: "success" };
   } catch (err) {
-    console.error("[submitLeadForm] backend unreachable:", {
-      url: `${env.BACKEND_API_URL}/api/pleno-med/leads`,
-      hasKey: !!env.PLENO_MED_INGEST_KEY,
-      keyLen: env.PLENO_MED_INGEST_KEY.length,
-      err: err instanceof Error ? err.message : String(err),
-    });
-    return {
-      kind: "error",
-      message: "Não conseguimos enviar agora. Tente novamente em instantes.",
-      values,
-    };
+    console.error("[submitLeadForm] resend unreachable", err instanceof Error ? err.message : err);
+    return { kind: "error", message: "Não conseguimos enviar agora. Tente novamente em instantes." };
   }
 }
-
