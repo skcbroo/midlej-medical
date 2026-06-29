@@ -97,7 +97,7 @@ export default function SeguroPage() {
               </p>
               <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {[
-                  { n: "Caro", label: "O nome técnico é VUL ou inteiro", sub: "Mistura proteção e 'investimento' — com a seguradora ganhando nos dois lados" },
+                  { n: "Caro", label: "", sub: "Mistura proteção e 'investimento' — com a seguradora ganhando nos dois lados" },
                   { n: "Nunca", label: "O que ninguém ofereceu", sub: "Um seguro temporário puro, com o restante sendo investido por você" },
                   { n: "4× mais", label: "O resultado possível", sub: "Proteção igual — e patrimônio líquido até 4 vezes maior ao longo do tempo" },
                 ].map((s) => (
@@ -105,7 +105,7 @@ export default function SeguroPage() {
                     <dt className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold leading-none tracking-tight mb-2" style={{ color: "#4a6b8c" }}>
                       {s.n}
                     </dt>
-                    <dd className="text-sm font-semibold leading-snug mb-1" style={{ color: "#2E4659" }}>{s.label}</dd>
+                    {s.label && <dd className="text-sm font-semibold leading-snug mb-1" style={{ color: "#2E4659" }}>{s.label}</dd>}
                     <dd className="text-[0.8rem] leading-snug" style={{ color: "#6B7B8D" }}>{s.sub}</dd>
                   </div>
                 ))}
@@ -129,7 +129,7 @@ export default function SeguroPage() {
             {[
               {
                 label: "Modelo atual",
-                tag: "Seguro vitalício (VUL / inteiro)",
+                tag: "Seguro vitalício",
                 value: "~R$ 360 mil pagos",
                 sub: "30 anos × R$1.000 — capital retido pela seguradora",
                 note: "Preso no produto. Rentabilidade opaca. Sem acumulação líquida.",
