@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import {
   MIDLEJ_WHATSAPP_HREF,
   PLENOMED_WHATSAPP_HREF,
-  PLENOMED_WHATSAPP_MESSAGE,
+  CONSORCIO_WHATSAPP_HREF,
 } from "@/lib/leadConstants";
 
 const GENERIC_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
@@ -15,20 +15,27 @@ const GENERIC_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
 // ícone flutuante de WhatsApp não deve aparecer nessas páginas.
 const HIDE_ON = new Set(["/cfo", "/dolar"]);
 
+// LPs com link de WhatsApp específico (mensagem pré-preenchida própria).
+const PAGE_HREF: Record<string, string> = {
+  "/plenomed": PLENOMED_WHATSAPP_HREF,
+  "/consorcio": CONSORCIO_WHATSAPP_HREF,
+};
+
+// LPs que têm barra fixa de CTA no rodapé do mobile — sobe o botão flutuante
+// para não sobrepor a barra. No desktop fica na posição padrão.
+const RAISE_ON_MOBILE = new Set(["/plenomed", "/consorcio"]);
+
 export function WhatsAppFloat() {
   const pathname = usePathname();
 
   if (pathname && HIDE_ON.has(pathname)) return null;
 
-  const isPlenomed = pathname === "/plenomed";
-  const href = isPlenomed ? PLENOMED_WHATSAPP_HREF : GENERIC_HREF;
-  const label = isPlenomed
-    ? PLENOMED_WHATSAPP_MESSAGE
-    : "Falar no WhatsApp";
-
-  // Em /plenomed há uma barra fixa de CTA no rodapé do mobile; subimos o botão
-  // flutuante para não sobrepor a barra. No desktop fica na posição padrão.
-  const position = isPlenomed ? "bottom-24 right-6 md:bottom-6" : "bottom-6 right-6";
+  const href = (pathname && PAGE_HREF[pathname]) ?? GENERIC_HREF;
+  const label = "Falar no WhatsApp";
+  const position =
+    pathname && RAISE_ON_MOBILE.has(pathname)
+      ? "bottom-24 right-6 md:bottom-6"
+      : "bottom-6 right-6";
 
   return (
     <a
