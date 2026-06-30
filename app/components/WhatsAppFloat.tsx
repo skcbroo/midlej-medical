@@ -1,15 +1,42 @@
 "use client";
 
-const WA_LINK = `https://wa.me/5561983015739?text=${encodeURIComponent("Olá! Gostaria de saber mais sobre os serviços da Midlej Consultoria.")}`;
+import { usePathname } from "next/navigation";
+import {
+  MIDLEJ_WHATSAPP_HREF,
+  PLENOMED_WHATSAPP_HREF,
+  PLENOMED_WHATSAPP_MESSAGE,
+} from "@/lib/leadConstants";
+
+const GENERIC_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
+  "Olá! Gostaria de saber mais sobre os serviços da Midlej Consultoria.",
+)}`;
+
+// Teste de canal de contato: /cfo e /dolar usam SOMENTE formulário, então o
+// ícone flutuante de WhatsApp não deve aparecer nessas páginas.
+const HIDE_ON = new Set(["/cfo", "/dolar"]);
 
 export function WhatsAppFloat() {
+  const pathname = usePathname();
+
+  if (pathname && HIDE_ON.has(pathname)) return null;
+
+  const isPlenomed = pathname === "/plenomed";
+  const href = isPlenomed ? PLENOMED_WHATSAPP_HREF : GENERIC_HREF;
+  const label = isPlenomed
+    ? PLENOMED_WHATSAPP_MESSAGE
+    : "Falar no WhatsApp";
+
+  // Em /plenomed há uma barra fixa de CTA no rodapé do mobile; subimos o botão
+  // flutuante para não sobrepor a barra. No desktop fica na posição padrão.
+  const position = isPlenomed ? "bottom-24 right-6 md:bottom-6" : "bottom-6 right-6";
+
   return (
     <a
-      href={WA_LINK}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Falar no WhatsApp"
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95"
+      aria-label={label}
+      className={`fixed ${position} z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95`}
       style={{ backgroundColor: "#25D366" }}
     >
       <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden>
