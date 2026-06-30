@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { LPHeader } from "@/app/_hub/LPHeader";
 import { LPClosing } from "@/app/_hub/LPClosing";
+import { StickyCTA } from "@/app/components/StickyCTA";
 import { OrgCard } from "./OrgCard";
 
 const GOLD = "#B89840";
@@ -77,13 +78,14 @@ function Hero() {
             <div className="flex flex-wrap items-center gap-4">
               <a
                 href="#contato"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200"
+                aria-label="Quero avaliar meu planejamento"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 min-h-[52px] rounded-lg text-[1.0625rem] font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] shadow-md transition-colors duration-200"
               >
-                Quero meu Diagnóstico do CFO <Arrow />
+                Quero avaliar meu planejamento <Arrow />
               </a>
               <a
                 href="#como-funciona"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/30 hover:border-white/60 transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-6 py-3 min-h-[48px] rounded-lg text-sm font-semibold text-white border border-white/30 hover:border-white/60 transition-colors duration-200"
               >
                 Como funciona
               </a>
@@ -492,9 +494,10 @@ function Padrao() {
         <div className="mt-12 flex justify-center">
           <a
             href="#contato"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#2E4659] hover:bg-[#1d3347] transition-colors duration-200"
+            aria-label="Quero avaliar meu planejamento"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 min-h-[52px] rounded-lg text-[1.0625rem] font-semibold text-white bg-[#2E4659] hover:bg-[#1d3347] shadow-md transition-colors duration-200"
           >
-            Quero meu Diagnóstico do CFO <Arrow />
+            Quero avaliar meu planejamento <Arrow />
           </a>
         </div>
       </div>
@@ -590,10 +593,14 @@ export function CFOPage() {
         eyebrow="O primeiro passo"
         headline="Solicite seu Diagnóstico do CFO."
         body="Um raio-x completo e gratuito da sua vida financeira. Sem venda de produto, sem compromisso."
-        ctaLabel="Solicitar Diagnóstico do CFO"
+        ctaLabel="Quero avaliar meu planejamento"
         origin="CFO as a Service"
+        gtmFormPage="cfo"
         disclaimer="A Midlej Consultoria atua como consultoria de valores mobiliários. As decisões de investimento permanecem do cliente. Rentabilidade passada não representa garantia de rentabilidade futura. Conteúdo de caráter informativo, não constituindo oferta ou recomendação individualizada de investimento."
       />
+
+      {/* Barra fixa mobile → formulário de contato */}
+      <StickyCTA label="Quero avaliar meu planejamento" href="#contato" />
     </main>
   );
 }

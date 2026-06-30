@@ -4,13 +4,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const NAV_ITEMS = [
-  { label: "Hub",           href: "/" },
-  { label: "Investimentos", href: "/investimentos" },
-  { label: "Contato",       href: "#contato" },
-];
-
-export function LPHeader({ ctaLabel = "Quero ser cliente" }: { ctaLabel?: string }) {
+export function LPHeader({
+  ctaLabel = "Quero ser cliente",
+  ctaHref = "#contato",
+  ctaExternal = false,
+}: {
+  ctaLabel?: string;
+  /** Destino do CTA de contato. Default = âncora do formulário (#contato). */
+  ctaHref?: string;
+  /** true quando ctaHref é externo (ex.: WhatsApp) — abre em nova aba. */
+  ctaExternal?: boolean;
+}) {
+  const NAV_ITEMS = [
+    { label: "Hub",           href: "/",              external: false },
+    { label: "Investimentos", href: "/investimentos", external: false },
+    { label: "Contato",       href: ctaHref,          external: ctaExternal },
+  ];
+  const externalProps = ctaExternal
+    ? { target: "_blank", rel: "noopener noreferrer" as const }
+    : {};
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -50,17 +62,23 @@ export function LPHeader({ ctaLabel = "Quero ser cliente" }: { ctaLabel?: string
           </Link>
 
           <nav className="hidden md:flex items-center gap-8" aria-label="Navegação">
-            {NAV_ITEMS.map((item) => (
-              <Link key={item.href} href={item.href} className="text-sm font-medium transition-colors duration-200 hover:text-[#2E4659]" style={{ color: "#4a6b8c" }}>
-                {item.label}
-              </Link>
-            ))}
+            {NAV_ITEMS.map((item) =>
+              item.external ? (
+                <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="text-sm font-medium transition-colors duration-200 hover:text-[#2E4659]" style={{ color: "#4a6b8c" }}>
+                  {item.label}
+                </a>
+              ) : (
+                <Link key={item.label} href={item.href} className="text-sm font-medium transition-colors duration-200 hover:text-[#2E4659]" style={{ color: "#4a6b8c" }}>
+                  {item.label}
+                </Link>
+              ),
+            )}
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link href="#contato" className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
+            <a href={ctaHref} {...externalProps} aria-label={ctaLabel} className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
               {ctaLabel}
-            </Link>
+            </a>
             <button
               onClick={() => setMenuOpen((o) => !o)}
               className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-[5px] rounded-md"
@@ -83,14 +101,20 @@ export function LPHeader({ ctaLabel = "Quero ser cliente" }: { ctaLabel?: string
         aria-hidden={!menuOpen}
       >
         <nav className="flex flex-col px-6 pt-6 pb-10 gap-1" aria-label="Navegação mobile">
-          {NAV_ITEMS.map((item) => (
-            <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className="text-[1.125rem] font-semibold py-4 border-b border-[#EDEFF2] transition-colors duration-200 hover:text-[#4a6b8c]" style={{ color: "#2E4659" }}>
-              {item.label}
-            </Link>
-          ))}
-          <Link href="#contato" onClick={() => setMenuOpen(false)} className="mt-6 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
+          {NAV_ITEMS.map((item) =>
+            item.external ? (
+              <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)} className="text-[1.125rem] font-semibold py-4 border-b border-[#EDEFF2] transition-colors duration-200 hover:text-[#4a6b8c]" style={{ color: "#2E4659" }}>
+                {item.label}
+              </a>
+            ) : (
+              <Link key={item.label} href={item.href} onClick={() => setMenuOpen(false)} className="text-[1.125rem] font-semibold py-4 border-b border-[#EDEFF2] transition-colors duration-200 hover:text-[#4a6b8c]" style={{ color: "#2E4659" }}>
+                {item.label}
+              </Link>
+            ),
+          )}
+          <a href={ctaHref} {...externalProps} aria-label={ctaLabel} onClick={() => setMenuOpen(false)} className="mt-6 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
             {ctaLabel}
-          </Link>
+          </a>
         </nav>
       </div>
     </>

@@ -3,6 +3,9 @@ import Image from "next/image";
 import { LPHeader } from "@/app/_hub/LPHeader";
 import { LPClosing } from "@/app/_hub/LPClosing";
 import { SmoothAnchor } from "@/app/_hub/SmoothAnchor";
+import { StickyCTA } from "@/app/components/StickyCTA";
+
+const CTA_LABEL = "Quero avaliar minha exposição ao dólar";
 
 export const metadata: Metadata = {
   title: "Investimento Internacional · Midlej Capital",
@@ -64,18 +67,19 @@ export default function DolarPage() {
           <p className="text-[clamp(1.0625rem,1.6vw,1.25rem)] leading-relaxed mb-14 max-w-[38ch]" style={{ color: "rgba(255,255,255,0.78)" }}>
             O mesmo valor, no mesmo ano — a diferença entre ficar preso ao real e proteger patrimônio em dólar.
           </p>
-          <div className="flex flex-wrap gap-5">
-            <a
-              href="#simulacao"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200"
-            >
-              Ver a simulação completa <Arrow />
-            </a>
+          <div className="flex flex-wrap items-center gap-4">
             <a
               href="#contato"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/30 hover:border-white/60 transition-colors duration-200"
+              aria-label={CTA_LABEL}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 min-h-[52px] rounded-lg text-[1.0625rem] font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] shadow-md transition-colors duration-200"
             >
-              Quero um plano de internacionalização
+              {CTA_LABEL} <Arrow />
+            </a>
+            <a
+              href="#simulacao"
+              className="inline-flex items-center gap-2 px-6 py-3 min-h-[48px] rounded-lg text-sm font-semibold text-white border border-white/30 hover:border-white/60 transition-colors duration-200"
+            >
+              Ver a simulação completa <Arrow />
             </a>
           </div>
         </div>
@@ -192,10 +196,11 @@ export default function DolarPage() {
             <div className="col-span-12 md:col-span-4 md:col-start-9">
               <a
                 href="#contato"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold bg-white hover:bg-[#EDEFF2] transition-colors duration-200"
+                aria-label={CTA_LABEL}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 min-h-[52px] rounded-lg text-[1.0625rem] font-semibold bg-white hover:bg-[#EDEFF2] shadow-md transition-colors duration-200"
                 style={{ color: "#2E4659" }}
               >
-                Quero montar minha carteira <Arrow />
+                {CTA_LABEL} <Arrow />
               </a>
             </div>
           </div>
@@ -274,10 +279,14 @@ export default function DolarPage() {
         eyebrow="Primeira conversa"
         headline="Seu patrimônio fora do Brasil começa aqui."
         body="Mostramos como montar uma carteira internacional dentro do seu perfil, sem abrir conta no exterior, sem especulação. A primeira conversa é gratuita e sem compromisso."
-        ctaLabel="Quero meu diagnóstico patrimonial"
+        ctaLabel={CTA_LABEL}
         origin="LP3 · Investimento Internacional"
+        gtmFormPage="dolar"
         disclaimer={DISCLAIMER}
       />
+
+      {/* Barra fixa mobile → formulário de contato */}
+      <StickyCTA label={CTA_LABEL} href="#contato" />
     </main>
   );
 }

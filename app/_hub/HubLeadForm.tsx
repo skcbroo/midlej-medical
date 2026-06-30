@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useState } from "react";
 import { BR_UFS, CONSENT_TEXT } from "@/lib/leadConstants";
 import { submitLeadForm, type LeadFormState } from "@/lib/actions";
+import { pushEvent } from "@/lib/analytics";
 
 /**
  * Formulário de lead do hub Midlej Capital.
@@ -35,12 +36,19 @@ type Props = {
   submitLabel?: string;
   /** Identificação da LP de origem — aparece no email de notificação. */
   origin?: string;
+  /**
+   * Quando definido, dispara `lead_form_submit` no dataLayer do GTM em
+   * caso de envio bem-sucedido (após validação + resposta OK do servidor).
+   * Valor vira o parâmetro `form_page` (ex.: "cfo" | "dolar").
+   */
+  gtmFormPage?: string;
 };
 
 export function HubLeadForm({
   tone = "light",
   submitLabel = "Pedir a primeira conversa",
   origin,
+  gtmFormPage,
 }: Props) {
   const [state, action, pending] = useActionState(submitLeadForm, initial);
 
@@ -49,6 +57,13 @@ export function HubLeadForm({
     const first = FIELD_ORDER.find((n) => state.fields?.[n]?.length);
     if (first) document.getElementById(`hub-${first}`)?.focus();
   }, [state]);
+
+  // Mede a conversão SOMENTE em sucesso real (não no clique nem em erro).
+  useEffect(() => {
+    if (state.kind === "success" && gtmFormPage) {
+      pushEvent("lead_form_submit", { form_page: gtmFormPage });
+    }
+  }, [state.kind, gtmFormPage]);
 
   const [wa, setWa] = useState("");
 

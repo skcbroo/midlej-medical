@@ -16,3 +16,11 @@ export const CONSENT_TEXT =
 
 export const MIDLEJ_WHATSAPP_NUMBER = "5561983015739";
 export const MIDLEJ_WHATSAPP_HREF = `https://wa.me/${MIDLEJ_WHATSAPP_NUMBER}`;
+
+// Canal de contato da LP /plenomed (teste: somente WhatsApp).
+// Mensagem pré-preenchida exigida pelo briefing; URL-encode no link.
+export const PLENOMED_WHATSAPP_MESSAGE =
+  "Olá! Sou médico(a) e quero avaliar a proteção do meu patrimônio.";
+export const PLENOMED_WHATSAPP_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
+  PLENOMED_WHATSAPP_MESSAGE,
+)}`;
