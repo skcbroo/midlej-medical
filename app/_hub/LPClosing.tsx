@@ -8,6 +8,7 @@ const FOOTER_LINKS = [
   { label: "Seguro de vida",  href: "/seguro" },
   { label: "Proteção médica", href: "/plenomed" },
   { label: "Internacional",   href: "/dolar" },
+  { label: "Consórcio",       href: "/consorcio" },
   { label: "Sucessão",        href: "/sucessao" },
 ];
 

@@ -24,3 +24,10 @@ export const PLENOMED_WHATSAPP_MESSAGE =
 export const PLENOMED_WHATSAPP_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
   PLENOMED_WHATSAPP_MESSAGE,
 )}`;
+
+// Canal de contato da LP /consorcio (teste: somente WhatsApp).
+export const CONSORCIO_WHATSAPP_MESSAGE =
+  "Olá! Quero entender como usar consórcio para alavancar meu patrimônio em imóveis e ativos reais.";
+export const CONSORCIO_WHATSAPP_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
+  CONSORCIO_WHATSAPP_MESSAGE,
+)}`;
