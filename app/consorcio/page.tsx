@@ -7,9 +7,9 @@ import { StickyCTA } from "@/app/components/StickyCTA";
 import { CONSORCIO_WHATSAPP_HREF } from "@/lib/leadConstants";
 
 export const metadata: Metadata = {
-  title: "Consórcio como alavancagem patrimonial · Midlej Capital",
+  title: "Consórcio: construa patrimônio real sem juros · Midlej Capital",
   description:
-    "Consórcio não é compra parcelada — é uma ferramenta de alavancagem patrimonial para adquirir imóveis e ativos reais sem juros, dentro de um plano.",
+    "Transforme disciplina em patrimônio real. Conquiste imóveis e ativos reais sem juros, com estratégia de consórcio dentro de um plano patrimonial.",
 };
 
 const WA_CTA_LABEL = "Quero alavancar meu patrimônio";
@@ -73,7 +73,7 @@ export default function ConsorcioPage() {
       <LPHeader ctaLabel={WA_CTA_LABEL} ctaHref={CONSORCIO_WHATSAPP_HREF} ctaExternal />
       <SmoothAnchor />
 
-      {/* ── Hero ── */}
+      {/* ── Hero — aspiracional ── */}
       <section id="top" className="relative min-h-screen flex items-center">
         <Image
           src="/fotos_escritorio/2.jpeg"
@@ -82,21 +82,24 @@ export default function ConsorcioPage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0" style={{ backgroundColor: "rgba(46,70,89,0.65)" }} />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(46,70,89,0.66)" }} />
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-40 md:py-56 w-full">
           <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-8" style={{ color: "rgba(255,255,255,0.55)" }}>
-            Consórcio · Alavancagem patrimonial
+            Consórcio · Patrimônio real, sem juros
           </p>
-          <h1 className="text-[clamp(2.25rem,6vw,4.5rem)] font-bold leading-[1.04] tracking-tight text-white mb-8 max-w-[20ch]">
-            Consórcio não é compra parcelada. É alavancagem patrimonial.
+          <h1 className="text-[clamp(2.25rem,6vw,4.5rem)] font-bold leading-[1.04] tracking-tight text-white mb-8 max-w-[18ch]">
+            Transforme disciplina em patrimônio real.
           </h1>
-          <p className="text-[clamp(1.0625rem,1.6vw,1.25rem)] leading-relaxed mb-14 max-w-[42ch]" style={{ color: "rgba(255,255,255,0.78)" }}>
-            Para quem investe em imóveis e ativos reais: forme poder de compra sem juros e use a carta de crédito como caixa à vista — dentro de uma estratégia, não no improviso.
+          <p className="text-[clamp(1.0625rem,1.6vw,1.25rem)] leading-relaxed mb-6 max-w-[44ch]" style={{ color: "rgba(255,255,255,0.82)" }}>
+            Consórcio é a ponte, sem juros, entre o que você guarda hoje e os imóveis e ativos reais que você quer conquistar amanhã.
+          </p>
+          <p className="text-[clamp(0.95rem,1.4vw,1.0625rem)] leading-relaxed mb-14 max-w-[42ch]" style={{ color: "rgba(255,255,255,0.62)" }}>
+            Com método e estratégia — não no improviso, e sem entregar parte do seu patrimônio em juros.
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <WhatsAppCTA size="lg" />
             <a
-              href="#como-funciona"
+              href="#passo-a-passo"
               className="inline-flex items-center gap-2 px-6 py-3 min-h-[48px] rounded-lg text-sm font-semibold text-white border border-white/30 hover:border-white/60 transition-colors duration-200"
             >
               Como funciona <Arrow />
@@ -105,58 +108,107 @@ export default function ConsorcioPage() {
         </div>
       </section>
 
-      {/* ── Agitação ── */}
+      {/* ── O que é — reframe emocional ── */}
       <section className="bg-white">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
           <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
             <div className="col-span-12 md:col-span-5">
-              <SectionTag label="O ponto cego do investidor de ativos reais" />
-              <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[18ch] mb-8 md:mb-0" style={{ color: "#2E4659" }}>
-                Capital travado custa oportunidade.
+              <SectionTag label="O que é, de verdade" />
+              <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[16ch]" style={{ color: "#2E4659" }}>
+                Não é compra parcelada. É um plano de conquista.
               </h2>
             </div>
             <div className="col-span-12 md:col-span-7">
-              <p className="text-[1.0625rem] leading-[1.65] mb-10 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
-                Quem constrói patrimônio em imóveis e ativos reais conhece o dilema: comprar à vista trava caixa por anos, e financiar entrega juros que corroem o retorno do ativo.
+              <p className="text-[1.125rem] leading-[1.65] mb-6 max-w-[52ch]" style={{ color: "#4a6b8c" }}>
+                Imagine ter, no momento certo, o valor à vista para comprar o imóvel ou o ativo real que você quer — sem ter pago um centavo de juros para chegar lá.
               </p>
-              <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                {[
-                  { n: "Juros", label: "O custo do financiamento", sub: "No financiamento, parte relevante do que você paga não vira patrimônio — vira juros." },
-                  { n: "Caixa", label: "Capital parado esperando", sub: "Juntar o valor à vista pode levar anos e deixar você fora das boas janelas de compra." },
-                  { n: "Timing", label: "Oportunidade exige liquidez", sub: "Bons negócios em ativos reais aparecem para quem tem poder de compra pronto." },
-                ].map((s) => (
-                  <div key={s.n} className="rounded-xl border border-[#EDEFF2] p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
-                    <dt className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold leading-none tracking-tight mb-2" style={{ color: "#4a6b8c" }}>
-                      {s.n}
-                    </dt>
-                    <dd className="text-sm font-semibold leading-snug mb-1" style={{ color: "#2E4659" }}>{s.label}</dd>
-                    <dd className="text-[0.8rem] leading-snug" style={{ color: "#6B7B8D" }}>{s.sub}</dd>
-                  </div>
-                ))}
-              </dl>
+              <p className="text-[1.0625rem] leading-[1.65] mb-6 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
+                É isso que o consórcio faz quando bem usado: reúne pessoas com o mesmo objetivo, que se autofinanciam com disciplina e transformam aporte mensal em poder de compra. Ao ser contemplado, a carta de crédito vale como pagamento à vista.
+              </p>
+              <p className="text-[1.0625rem] leading-[1.65] max-w-[52ch]" style={{ color: "#6B7B8D" }}>
+                Cada real que você coloca trabalha pelo seu patrimônio — não pelo lucro de um banco.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── A virada / solução ── */}
+      {/* ── Passo a passo — jornada ── */}
+      <section id="passo-a-passo" style={{ backgroundColor: "#F5F7FA" }}>
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
+          <SectionTag label="Passo a passo" />
+          <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-6 max-w-[22ch]" style={{ color: "#2E4659" }}>
+            Do objetivo à carta na mão — quatro passos.
+          </h2>
+          <p className="text-[1.0625rem] leading-relaxed mb-16 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
+            Uma jornada clara, conduzida ao seu lado, do primeiro plano até a hora de conquistar o ativo.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                n: "01",
+                title: "Defina o que quer conquistar",
+                body: "Imóvel, terreno, expansão ou outro ativo real. Começamos pelo seu objetivo — e pelo seu fluxo de caixa.",
+              },
+              {
+                n: "02",
+                title: "Monte sua estratégia de cartas",
+                body: "Valor, prazo, quantidade de cartas e uma política de lance, calibrados à velocidade que você precisa.",
+              },
+              {
+                n: "03",
+                title: "Seja contemplado",
+                body: "Por sorteio ou lance, a carta de crédito vira poder de compra à vista nas suas mãos.",
+              },
+              {
+                n: "04",
+                title: "Conquiste e construa",
+                body: "Use a carta para realizar a aquisição e seguir construindo patrimônio, dentro do seu plano.",
+              },
+            ].map((s) => (
+              <div key={s.n} className="rounded-2xl bg-white border border-[#EDEFF2] p-7 shadow-sm flex flex-col gap-4">
+                <span className="text-[clamp(1.75rem,3vw,2.25rem)] font-light leading-none tabular-nums" style={{ color: "#4a6b8c" }}>
+                  {s.n}
+                </span>
+                <h3 className="text-[1.0625rem] font-bold leading-snug" style={{ color: "#2E4659" }}>{s.title}</h3>
+                <p className="text-[0.9375rem] leading-[1.6]" style={{ color: "#6B7B8D" }}>{s.body}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12">
+            <WhatsAppCTA size="lg" />
+          </div>
+        </div>
+      </section>
+
+      {/* ── O custo invisível dos juros — dor emocional ── */}
       <section style={{ backgroundColor: "#4a6b8c" }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
           <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
             <div className="col-span-12 md:col-span-7">
-              <SectionTag label="A virada de chave" dark />
-              <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight text-white mb-6 max-w-[24ch]">
-                A carta de crédito é poder de compra à vista — sem juros.
+              <SectionTag label="O custo invisível" dark />
+              <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight text-white mb-6 max-w-[22ch]">
+                No financiamento, parte do seu sonho vira juros.
               </h2>
-              <p className="text-[1.0625rem] leading-[1.65] mb-6 max-w-[52ch]" style={{ color: "rgba(255,255,255,0.75)" }}>
-                No consórcio você forma capital com aportes planejados, sem os juros de um financiamento. Ao ser contemplado, a carta funciona como pagamento à vista — e quem paga à vista negocia melhor.
+              <p className="text-[1.0625rem] leading-[1.65] mb-6 max-w-[52ch]" style={{ color: "rgba(255,255,255,0.78)" }}>
+                Mês após mês, uma fatia de cada parcela não constrói o seu patrimônio — paga o lucro do banco. No fim do contrato, você pode ter desembolsado muito mais do que o bem vale.
               </p>
               <p className="text-[1.0625rem] leading-[1.65] max-w-[52ch]" style={{ color: "rgba(255,255,255,0.60)" }}>
-                Usada com estratégia, deixa de ser “mais uma cota” e vira alavanca: antecipa aquisições, preserva liquidez e entra no seu plano patrimonial como uma ferramenta, não como um produto avulso.
+                O consórcio inverte essa lógica: sem juros, com uma taxa de administração definida e transparente, o seu esforço fica concentrado onde importa — em virar patrimônio seu.
               </p>
             </div>
             <div className="col-span-12 md:col-span-4 md:col-start-9">
-              <WhatsAppCTA size="lg" />
+              <div className="rounded-2xl p-8" style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.14)" }}>
+                <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.45)" }}>
+                  A pergunta que importa
+                </p>
+                <p className="text-[1.25rem] leading-[1.4] font-semibold text-white mb-6">
+                  Para onde está indo o dinheiro que você junta todo mês?
+                </p>
+                <p className="text-[0.95rem] leading-[1.6]" style={{ color: "rgba(255,255,255,0.65)" }}>
+                  Construir patrimônio é decidir que ele trabalhe por você — não por juros que você nem vê.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -167,10 +219,10 @@ export default function ConsorcioPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
           <SectionTag label="Duas formas de chegar ao mesmo bem" />
           <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-6 max-w-[24ch]" style={{ color: "#2E4659" }}>
-            Financiamento e consórcio resolvem problemas diferentes.
+            Cada caminho tem o seu lugar. O segredo é escolher com estratégia.
           </h2>
           <p className="text-[1.0625rem] leading-relaxed mb-16 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
-            Nenhum é “melhor” em todo cenário — cada um tem um lugar. O papel da consultoria é encaixar a ferramenta certa no seu objetivo e no seu fluxo de caixa.
+            Nenhum é “melhor” em todo cenário. O papel da consultoria é encaixar a ferramenta certa no seu objetivo e no seu fluxo de caixa.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="rounded-2xl p-8 md:p-10 border bg-white" style={{ borderColor: "#EDEFF2" }}>
@@ -204,7 +256,7 @@ export default function ConsorcioPage() {
               <ul className="flex flex-col gap-3">
                 {[
                   "Sem juros — há taxa de administração, definida e transparente.",
-                  "Capital formado com disciplina de aportes.",
+                  "Cada aporte vira poder de compra seu, não lucro do banco.",
                   "Contemplação por sorteio ou lance (sem prazo garantido).",
                   "Carta vale como pagamento à vista — poder de negociação.",
                 ].map((item) => (
@@ -222,69 +274,19 @@ export default function ConsorcioPage() {
         </div>
       </section>
 
-      {/* ── Como funciona ── */}
-      <section id="como-funciona" className="bg-white">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-          <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-            <div className="col-span-12 md:col-span-4">
-              <SectionTag label="Como funciona" />
-              <h2 className="text-[clamp(1.625rem,3vw,2.5rem)] font-bold leading-[1.04] tracking-tight max-w-[16ch]" style={{ color: "#2E4659" }}>
-                Da estratégia à carta na mão.
-              </h2>
-            </div>
-            <div className="col-span-12 md:col-span-8 md:col-start-5">
-              <ol className="flex flex-col divide-y divide-[#EDEFF2]">
-                {[
-                  {
-                    n: "I",
-                    title: "Diagnóstico patrimonial",
-                    body: "Entendemos seu objetivo (imóvel, ativos reais, expansão), seu fluxo de caixa e seu horizonte. Consórcio só entra se fizer sentido no conjunto.",
-                  },
-                  {
-                    n: "II",
-                    title: "Estratégia de cartas",
-                    body: "Definimos valor, prazo e quantidade de cartas, e uma política de lance — calibrada ao seu caixa e à velocidade que você precisa de poder de compra.",
-                  },
-                  {
-                    n: "III",
-                    title: "Contemplação e uso da carta",
-                    body: "Quando contemplado, orientamos o melhor uso da carta de crédito como pagamento à vista — para comprar, negociar ou compor a aquisição do ativo.",
-                  },
-                  {
-                    n: "IV",
-                    title: "Acompanhamento contínuo",
-                    body: "Revisamos a estratégia ao longo do tempo, integrando o consórcio ao restante do seu plano financeiro e patrimonial.",
-                  },
-                ].map((s) => (
-                  <li key={s.n} className="py-8 md:py-10 flex gap-6 md:gap-10 items-start">
-                    <span className="text-[clamp(1.875rem,3vw,2.5rem)] font-light leading-none tabular-nums shrink-0" style={{ color: "#4a6b8c" }}>
-                      {s.n}
-                    </span>
-                    <div>
-                      <h3 className="text-[1.0625rem] font-bold mb-3" style={{ color: "#2E4659" }}>{s.title}</h3>
-                      <p className="text-[0.95rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>{s.body}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Estratégias de uso ── */}
-      <section style={{ backgroundColor: "#F5F7FA" }}>
+      {/* ── Formas de conquistar — estratégias ── */}
+      <section className="bg-white">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
           <SectionTag label="Formas de usar como alavanca" />
-          <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-16 max-w-[28ch]" style={{ color: "#2E4659" }}>
-            Uma ferramenta, vários usos estratégicos.
+          <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-16 max-w-[26ch]" style={{ color: "#2E4659" }}>
+            Uma ferramenta. Muitas formas de conquistar.
           </h2>
           <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { label: "Lance estratégico", body: "Usar lance para antecipar a contemplação quando o timing do negócio pede poder de compra mais cedo." },
-              { label: "Múltiplas cartas", body: "Escalonar cartas de valores diferentes para acompanhar etapas de um plano de aquisição ao longo do tempo." },
-              { label: "Imóveis e ativos reais", body: "Direcionar a carta para imóveis, terrenos e outros bens elegíveis, formando patrimônio físico com disciplina." },
-              { label: "Caixa de oportunidade", body: "Manter poder de compra à vista pronto para entrar em boas janelas, sem travar liquidez no caminho." },
+              { label: "Lance estratégico", body: "Antecipe a contemplação quando o timing do negócio pede poder de compra mais cedo." },
+              { label: "Múltiplas cartas", body: "Escalone cartas de valores diferentes para acompanhar cada etapa do seu plano de aquisição." },
+              { label: "Imóveis e ativos reais", body: "Direcione a carta para imóveis, terrenos e outros bens, formando patrimônio físico com disciplina." },
+              { label: "Caixa de oportunidade", body: "Mantenha poder de compra à vista pronto para entrar nas boas janelas, sem travar sua liquidez." },
             ].map((c) => (
               <div key={c.label} className="rounded-xl border border-[#EDEFF2] bg-white p-7 shadow-sm">
                 <dt className="text-sm font-bold mb-3" style={{ color: "#2E4659" }}>{c.label}</dt>
@@ -295,17 +297,17 @@ export default function ConsorcioPage() {
         </div>
       </section>
 
-      {/* ── Autoridade ── */}
-      <section className="bg-white">
+      {/* ── Por que a Midlej ── */}
+      <section style={{ backgroundColor: "#F5F7FA" }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
           <SectionTag label="Por que a Midlej" />
           <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight mb-16 max-w-[28ch]" style={{ color: "#2E4659" }}>
-            Estratégia integrada ao seu plano — não venda de cota.
+            Do seu lado da mesa — estratégia, não venda de cota.
           </h2>
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
               { label: "Consultoria independente", body: "Olhamos o conjunto do seu patrimônio. O consórcio só entra quando é a ferramenta certa para o seu objetivo." },
-              { label: "Estratégia, não produto de prateleira", body: "Estruturamos cartas, lances e uso da contemplação dentro de um plano — não empurramos uma cota qualquer." },
+              { label: "Estratégia, não prateleira", body: "Estruturamos cartas, lances e o uso da contemplação dentro de um plano — não empurramos uma cota qualquer." },
               { label: "Acompanhamento de longo prazo", body: "Seguimos com você da definição da estratégia até o uso da carta, integrando ao restante do seu planejamento." },
             ].map((c) => (
               <div key={c.label} className="rounded-xl border border-[#EDEFF2] bg-white p-7 shadow-sm">
@@ -319,9 +321,9 @@ export default function ConsorcioPage() {
 
       {/* ── Closing — somente WhatsApp ── */}
       <LPClosing
-        eyebrow="Primeira conversa"
-        headline="Vamos montar sua estratégia de consórcio?"
-        body="Avaliamos seu objetivo patrimonial e mostramos se — e como — o consórcio pode atuar como alavanca no seu plano. A primeira conversa é gratuita e sem compromisso."
+        eyebrow="Comece pelo primeiro passo"
+        headline="O patrimônio que você quer começa com uma conversa."
+        body="Vamos entender seu objetivo e mostrar se — e como — o consórcio pode ser a alavanca certa para você conquistar imóveis e ativos reais. A primeira conversa é gratuita e sem compromisso."
         ctaLabel={WA_CTA_LABEL}
         origin="LP · Consórcio"
         disclaimer={DISCLAIMER}
