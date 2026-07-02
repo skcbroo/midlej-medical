@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { CFOPage } from "./CFOPage";
 
 export const metadata: Metadata = {
-  title: "CFO as a Service — Para médicos de alta renda · Midlej Consultoria",
+  title: "CFO as a Service — Para servidores públicos · Midlej Consultoria",
   description:
-    "Toda empresa séria tem um CFO. A Midlej assume esse papel na sua vida financeira. Diagnóstico gratuito, sem compromisso.",
+    "Você tem a estabilidade. A Midlej é o CFO da sua vida financeira: método e segurança para transformar sua estabilidade em patrimônio e renda para o futuro. Diagnóstico gratuito, sem compromisso.",
 };
 
 export default function CfoRoute() {
