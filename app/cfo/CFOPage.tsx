@@ -58,21 +58,21 @@ function Hero() {
 
           <div className="col-span-12 lg:col-span-7">
             <span className="inline-block text-[0.7rem] font-semibold tracking-widest uppercase mb-6 text-white/70">
-              Para médicos de alta renda
+              Para servidores públicos
             </span>
 
             <h1 className="text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[1.06] tracking-tight mb-6 text-white max-w-[20ch]">
-              Você é o CEO da sua vida.{" "}
+              Você conquistou a estabilidade. Agora vamos transformá-la em{" "}
               <em className="not-italic" style={{ color: GOLD }}>
-                Quem é o seu CFO?
+                renda para o futuro.
               </em>
             </h1>
 
-            <p className="text-[1.0625rem] leading-[1.65] mb-10 max-w-[44ch] text-white/75">
-              Toda empresa séria tem um CFO cuidando do dinheiro. A sua carreira movimenta
-              o equivalente a uma empresa de bom porte, e provavelmente as finanças ficam
-              pra hora vaga, entre um plantão e outro. A Midlej assume esse papel:
-              o CFO da sua vida financeira.
+            <p className="text-[1.0625rem] leading-[1.65] mb-10 max-w-[46ch] text-white/75">
+              Você tem a segurança que a maioria sonha. Mas estabilidade sem estratégia é só
+              um salário que entra e sai. A Midlej é o CFO da sua vida financeira: método,
+              segurança e um plano para o seu dinheiro começar a trabalhar por você — no seu
+              ritmo, sem arriscar o que você já construiu.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
@@ -92,11 +92,11 @@ function Hero() {
             </div>
 
             <p className="mt-5 text-[0.78rem] text-white/45">
-              Gratuito e sem compromisso. Leva poucos minutos.
+              Diagnóstico gratuito e sem compromisso. Leva poucos minutos.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
-              {["Fee based, sem comissão de produto", "Do seu lado da mesa"].map((item) => (
+              {["Fee based, sem comissão de produto", "Consultoria registrada na CVM", "Do seu lado da mesa"].map((item) => (
                 <span key={item} className="flex items-center gap-2 text-[0.8rem] text-white/65">
                   <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: GOLD }} />
                   {item}
@@ -118,54 +118,41 @@ function Hero() {
 function Dores() {
   const cards = [
     {
-      title: "Dinheiro sem rumo",
-      body: "Você ganha muito e não sabe exatamente pra onde vai. Sobra menos do que deveria, e ninguém sabe explicar por quê.",
+      title: "Seu salário é estável — mas e quando ele parar?",
+      body: "O contracheque não acompanha você para sempre. Um dia a aposentadoria chega, e com ela costuma vir uma renda menor. O que vai sustentar o seu padrão de vida quando o salário mudar?",
       icon: (
-        // Moeda com seta para baixo = dinheiro escapando
+        // Calendário com contracheque = o dia em que o salário muda
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
-          <circle cx="9" cy="8" r="5" stroke={GOLD} strokeWidth="1.5" />
-          <path d="M9 5.5V10" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M6.5 8l2.5 2.5 2.5-2.5" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M5 14.5h8" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" strokeDasharray="1.5 1.5" />
+          <rect x="3" y="4" width="12" height="11" rx="1" stroke={GOLD} strokeWidth="1.5" />
+          <path d="M3 7.5h12" stroke={GOLD} strokeWidth="1.5" />
+          <path d="M6 2.5v3M12 2.5v3" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M6 11h4" stroke={GOLD} strokeWidth="1.4" strokeLinecap="round" />
         </svg>
       ),
     },
     {
-      title: "Conselho que é venda",
-      body: "Seu gerente não é conselheiro. É vendedor da casa, e o produto que ele indica costuma render mais pra ele do que pra você.",
+      title: "Estabilidade não é o mesmo que patrimônio.",
+      body: "Ter o emprego garantido protege o presente. Mas estabilidade parada no contracheque não vira patrimônio sozinha. Sem um plano, o dinheiro entra e sai — e no fim do ano você não sabe o que ficou.",
       icon: (
-        // Balão de fala com cifrão = conselho disfarçado de venda
+        // Cofre / base sólida = estabilidade que fica parada
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
-          <path d="M2.5 2.5h13a.5.5 0 01.5.5v7a.5.5 0 01-.5.5H9.5l-2.5 3v-3H2.5a.5.5 0 01-.5-.5V3a.5.5 0 01.5-.5z" stroke={GOLD} strokeWidth="1.4" strokeLinejoin="round" />
-          <path d="M9 4.5v6" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" />
-          <path d="M7.5 5.8a1.5 1.5 0 012.5 1c0 .7-.6 1.1-1.5 1.3-.9.2-1.5.6-1.5 1.3a1.5 1.5 0 002.5 1" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" />
+          <rect x="3" y="4.5" width="12" height="9" rx="1" stroke={GOLD} strokeWidth="1.5" />
+          <circle cx="9" cy="9" r="2" stroke={GOLD} strokeWidth="1.4" />
+          <path d="M9 9v-.01" stroke={GOLD} strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M4.5 13.5v1.5M13.5 13.5v1.5" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       ),
     },
     {
-      title: "Gestão no improviso",
-      body: "Você administra uma carreira de milhões nas horas vagas, no susto, ouvindo grupo de WhatsApp e dica de plantão.",
+      title: "Sem renda passiva, a dependência é permanente.",
+      body: "Hoje tudo depende de você trabalhar; nada trabalha pelo seu dinheiro. Construir patrimônio ao longo do tempo é o que separa quem só recebe salário de quem tem tranquilidade para o futuro.",
       icon: (
-        // Relógio com ponteiros em posição de urgência = sempre no improviso
+        // Semente / broto crescendo = patrimônio construído no tempo
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
-          <circle cx="9" cy="9.5" r="6" stroke={GOLD} strokeWidth="1.5" />
-          <path d="M9 6v3.5l2.5 1.5" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M9 2v1.5" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M5 3.2l.75 1.3" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" />
-          <path d="M13 3.2l-.75 1.3" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-    {
-      title: "Ninguém responsável pelo todo",
-      body: "Investir todo mundo investe. Ter um responsável pela visão completa, com método e accountability, é raro.",
-      icon: (
-        // Cadeira vazia = ninguém no comando
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
-          <path d="M5 6V4a1 1 0 011-1h6a1 1 0 011 1v2" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M3.5 6h11a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-2a.5.5 0 01.5-.5z" stroke={GOLD} strokeWidth="1.4" />
-          <path d="M5.5 9v5M12.5 9v5" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M4 14h3M11 14h3" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M9 15V8" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M9 9c0-2 1.5-3.5 4-3.5C13 7.5 11.5 9 9 9z" stroke={GOLD} strokeWidth="1.4" strokeLinejoin="round" />
+          <path d="M9 10.5C9 8.5 7.5 7 5 7c0 2 1.5 3.5 4 3.5z" stroke={GOLD} strokeWidth="1.4" strokeLinejoin="round" />
+          <path d="M5.5 15h7" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       ),
     },
@@ -174,16 +161,17 @@ function Dores() {
   return (
     <section style={{ backgroundColor: "#F5F7FA" }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
-        <SectionTag label="O diagnóstico começa por aqui" />
+        <SectionTag label="Por onde o diagnóstico começa" />
         <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-tight tracking-tight mb-4 max-w-[22ch]" style={{ color: "#2E4659" }}>
-          Você ganha bem. Mas o seu dinheiro tem dono?
+          Você tem estabilidade. Mas o seu dinheiro trabalha por você?
         </h2>
-        <p className="text-[1.0625rem] leading-[1.65] mb-12 max-w-[50ch]" style={{ color: "#6B7B8D" }}>
-          Não é falta de capacidade. É falta de tempo e de alguém responsável pelo conjunto.
-          Quase todo médico que conversamos reconhece pelo menos um destes pontos.
+        <p className="text-[1.0625rem] leading-[1.65] mb-12 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
+          Não é falta de disciplina. É falta de método e de alguém responsável por transformar
+          a sua estabilidade em patrimônio. Quase todo servidor com quem conversamos reconhece
+          pelo menos um destes pontos.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {cards.map((c) => (
             <div
               key={c.title}
@@ -204,10 +192,10 @@ function Dores() {
 
 function Virada() {
   const items = [
-    "Organização e diagnóstico do todo, não só da carteira.",
-    "Planejamento de metas e política de investimento por escrito.",
-    "Acompanhamento contínuo, com decisão e responsabilidade.",
-    "Relatório no padrão de uma diretoria financeira de verdade.",
+    "Diagnóstico do todo: para onde vai o seu dinheiro hoje e o que dá pra organizar.",
+    "Um plano por escrito, conservador, feito para o seu perfil e para o longo prazo.",
+    "Acompanhamento contínuo, com método — decisões seguras, sem susto e sem aposta.",
+    "Estratégia para transformar a sua estabilidade em patrimônio e renda para o futuro.",
   ];
 
   return (
@@ -216,10 +204,10 @@ function Virada() {
         <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
 
           <div className="col-span-12 lg:col-span-7 order-2 md:order-1">
-            <SectionTag label="A virada de chave" dark />
+            <SectionTag label="A ponte entre estabilidade e renda" dark />
             <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-bold leading-[1.04] tracking-tight mb-8 text-white max-w-[24ch]">
               O que um CFO faz por uma empresa, a Midlej faz{" "}
-              <span style={{ color: GOLD }}>pelo seu dinheiro.</span>
+              <span style={{ color: GOLD }}>pela sua estabilidade.</span>
             </h2>
             <ul className="flex flex-col gap-4 mb-10">
               {items.map((item) => (
@@ -241,13 +229,14 @@ function Virada() {
             <div className="rounded-xl p-7 md:p-8" style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.14)" }}>
               <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-4 text-white/45">A divisão de papéis</p>
               <p className="text-[1.0625rem] leading-[1.65] mb-8 text-white/70">
-                Você toca o consultório, a carreira e a família. Nós rodamos a máquina financeira
-                por trás: caixa, alocação, risco, relatório e decisão.
+                Você cuida da sua carreira e da sua família. Nós cuidamos da máquina financeira
+                por trás: organização, plano, risco e acompanhamento — para a sua estabilidade
+                virar patrimônio.
               </p>
               <div className="flex flex-col gap-3">
                 {[
-                  { role: "Sua função", action: "Viver e decidir" },
-                  { role: "Nossa função", action: "Cuidar do dinheiro" },
+                  { role: "Sua função", action: "Viver com tranquilidade" },
+                  { role: "Nossa função", action: "Cuidar do seu dinheiro" },
                 ].map((it) => (
                   <div key={it.role} className="flex items-center justify-between gap-4 py-3.5 px-4 rounded-lg" style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
                     <p className="text-[0.72rem] font-semibold tracking-widest uppercase text-white/45">{it.role}</p>
@@ -268,20 +257,20 @@ function ComoFunciona() {
   const steps = [
     {
       n: "01",
-      title: "Diagnóstico do CFO",
-      body: "Um raio-x da sua situação financeira hoje: o que está organizado, o que está vazando e o que dá pra fazer melhor.",
+      title: "Diagnóstico",
+      body: "Um raio-x da sua vida financeira hoje: o que está organizado, o que está parado e o que dá pra transformar em patrimônio.",
       tag: "Gratuito",
     },
     {
       n: "02",
-      title: "Estruturação",
-      body: "Os primeiros 90 dias do seu CFO: organização, metas, política de investimento e montagem da estrutura.",
-      tag: "Implantação",
+      title: "Plano",
+      body: "Montamos, por escrito, um plano conservador e no seu ritmo: organização, metas e a estratégia para construir renda no futuro.",
+      tag: "Estruturação",
     },
     {
       n: "03",
-      title: "CFO em retainer",
-      body: "Acompanhamento, rebalanceamento, relatório institucional e board financeiro a cada trimestre.",
+      title: "Execução acompanhada",
+      body: "Acompanhamento próximo, revisão periódica e ajuste de rota. Você decide com clareza; a gente cuida do método.",
       tag: "Contínuo",
     },
   ];
@@ -290,11 +279,11 @@ function ComoFunciona() {
     <section id="como-funciona" className="bg-white">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
         <SectionTag label="Como funciona" />
-        <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-tight tracking-tight mb-4 max-w-[20ch]" style={{ color: "#2E4659" }}>
-          Três passos para ter um CFO.
+        <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-tight tracking-tight mb-4 max-w-[22ch]" style={{ color: "#2E4659" }}>
+          Três passos para transformar estabilidade em renda.
         </h2>
         <p className="text-[1.0625rem] leading-[1.65] mb-14 max-w-[46ch]" style={{ color: "#6B7B8D" }}>
-          Começa com um raio-x gratuito da sua situação. A partir dele, você decide se faz sentido seguir.
+          Começa com um raio-x gratuito da sua situação. A partir dele, você decide, com calma, se faz sentido seguir.
         </p>
 
         <ol className="border-t border-[#EDEFF2]">
@@ -340,25 +329,26 @@ function ComoFunciona() {
 
 function Diferencas() {
   const assessor = [
-    "É comissionado pelo banco ou corretora.",
+    "É comissionado pelo banco ou pela corretora.",
     "Ganha quando você compra o produto da casa.",
     "Foca na venda, não no conjunto da sua vida.",
   ];
   const midlej = [
     "Fee based: pago por você, não pelo produto.",
-    "A gente só cresce quando o seu patrimônio cresce.",
+    "Consultoria registrada na CVM, com interesses alinhados aos seus.",
     "Responsável pela visão completa, do seu lado da mesa.",
   ];
 
   return (
     <section style={{ backgroundColor: "#F5F7FA" }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        <SectionTag label="Por que somos diferentes" />
-        <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-tight tracking-tight mb-3 max-w-[20ch]" style={{ color: "#2E4659" }}>
-          Não somos mais um assessor.
+        <SectionTag label="Segurança e alinhamento" />
+        <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-tight tracking-tight mb-3 max-w-[22ch]" style={{ color: "#2E4659" }}>
+          Método conservador, sem conflito de interesse.
         </h2>
-        <p className="text-[1.0625rem] leading-[1.65] mb-12 max-w-[40ch]" style={{ color: "#6B7B8D" }}>
-          A diferença está em quem nos paga. Isso muda tudo.
+        <p className="text-[1.0625rem] leading-[1.65] mb-12 max-w-[46ch]" style={{ color: "#6B7B8D" }}>
+          A Midlej é uma consultoria fee based registrada na CVM. A diferença está em quem nos
+          paga — e isso muda tudo.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -426,11 +416,11 @@ function Fundador() {
           <div className="col-span-12 md:col-span-7 md:col-start-6">
             <SectionTag label="Quem está por trás" />
             <blockquote className="text-[clamp(1.25rem,2.4vw,2rem)] font-light leading-[1.4] tracking-tight mb-8 max-w-[34ch]" style={{ color: "#2E4659" }}>
-              "Eu construí a Midlej com uma regra simples:{" "}
+              &ldquo;Eu construí a Midlej com uma regra simples:{" "}
               <strong className="font-bold" style={{ color: "#2E4659" }}>
                 quem cuida do seu dinheiro tem que ser pago por você, e por mais ninguém.
               </strong>{" "}
-              É a única forma de estar de verdade do seu lado."
+              É a única forma de estar de verdade do seu lado.&rdquo;
             </blockquote>
             <figcaption>
               <p className="text-sm font-bold" style={{ color: "#2E4659" }}>Lucas Midlej</p>
@@ -450,18 +440,18 @@ function Padrao() {
   const items = [
     {
       n: "01",
-      title: "Relatório institucional",
-      body: "Você recebe relatórios no padrão usado por grandes bancos, coisa rara na faixa pessoa física.",
+      title: "Plano por escrito",
+      body: "Sua estratégia documentada e conservadora, feita para o longo prazo. Nada de dica de grupo de WhatsApp ou decisão no susto.",
     },
     {
       n: "02",
-      title: "Board trimestral",
-      body: "Uma reunião de diretoria sobre o seu dinheiro a cada três meses. A que você nunca teve.",
+      title: "Revisão periódica",
+      body: "Encontros para acompanhar o seu dinheiro e ajustar a rota com calma. O acompanhamento próximo que você nunca teve.",
     },
     {
       n: "03",
       title: "Consultoria, não gestão",
-      body: "As decisões continuam suas. A gente traz estrutura, estratégia e acompanhamento.",
+      body: "As decisões continuam suas. A gente traz estrutura, estratégia e método — você segue no controle.",
     },
   ];
 
@@ -470,10 +460,11 @@ function Padrao() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
         <SectionTag label="O padrão" dark />
         <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-tight tracking-tight mb-4 text-white max-w-[24ch]">
-          O nível de uma diretoria financeira.
+          O rigor de quem cuida de grandes patrimônios.
         </h2>
         <p className="text-[1.0625rem] leading-[1.65] mb-16 max-w-[44ch] text-white/60">
-          O mesmo rigor de uma grande empresa, aplicado à sua vida.
+          O mesmo método e cuidado de uma diretoria financeira, aplicado à sua vida — com a
+          segurança que o seu perfil pede.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px" style={{ backgroundColor: "rgba(255,255,255,0.10)" }}>
@@ -509,15 +500,19 @@ function FAQ() {
   const faqs = [
     {
       q: "Quanto custa?",
-      a: "O Diagnóstico do CFO é gratuito. A partir dele, o investimento é definido de acordo com a sua realidade e o seu patrimônio, com tudo claro e sem letra miúda. Nada é cobrado antes de você entender exatamente o que recebe.",
+      a: "O diagnóstico é gratuito. A partir dele, o investimento no planejamento é definido de acordo com a sua realidade, com tudo claro e sem letra miúda. Nada é cobrado antes de você entender exatamente o que recebe.",
     },
     {
-      q: "Preciso ter muito dinheiro?",
-      a: "Não é serviço para qualquer um, mas também não é só para milionário. O diagnóstico mostra, com honestidade, se faz sentido para você agora ou não.",
+      q: "Preciso ter muito dinheiro para começar?",
+      a: "Não. O serviço é para quem tem estabilidade e quer construir patrimônio com método, não só para quem já é milionário. O diagnóstico mostra, com honestidade, se faz sentido para você agora ou não.",
     },
     {
-      q: "É a mesma coisa que o meu assessor da corretora?",
-      a: "Não. O assessor é comissionado pelo banco ou pela corretora. Nós somos fee based, pagos por você, sem comissão de produto nenhum. É a diferença entre um executivo e um vendedor.",
+      q: "Sou conservador e tenho medo de arriscar. Isso é para mim?",
+      a: "Sim — é justamente por isso. Trabalhamos com método e planejamento de longo prazo, respeitando o seu perfil. A ideia não é arriscar o que você construiu, e sim organizar e proteger para o seu dinheiro trabalhar com segurança.",
+    },
+    {
+      q: "É a mesma coisa que o assessor da minha corretora?",
+      a: "Não. O assessor é comissionado pelo banco ou pela corretora. Nós somos fee based, pagos por você, sem comissão de produto nenhum. É a diferença entre um conselheiro e um vendedor.",
     },
     {
       q: "Vocês vão mexer no meu dinheiro?",
@@ -591,12 +586,12 @@ export function CFOPage() {
       <FAQ />
       <LPClosing
         eyebrow="O primeiro passo"
-        headline="Solicite seu Diagnóstico do CFO."
-        body="Um raio-x completo e gratuito da sua vida financeira. Sem venda de produto, sem compromisso."
+        headline="Solicite seu diagnóstico gratuito."
+        body="Um raio-x completo da sua vida financeira e o primeiro passo para transformar a sua estabilidade em patrimônio e renda. Sem venda de produto, sem compromisso."
         ctaLabel="Quero avaliar meu planejamento"
-        origin="CFO as a Service"
+        origin="CFO as a Service — Servidores públicos"
         gtmFormPage="cfo"
-        disclaimer="A Midlej Consultoria atua como consultoria de valores mobiliários. As decisões de investimento permanecem do cliente. Rentabilidade passada não representa garantia de rentabilidade futura. Conteúdo de caráter informativo, não constituindo oferta ou recomendação individualizada de investimento."
+        disclaimer="A Midlej Consultoria atua como consultoria de valores mobiliários registrada na CVM, no modelo fee based. As decisões de investimento permanecem do cliente. Rentabilidade passada não representa garantia de rentabilidade futura. Conteúdo de caráter informativo, não constituindo oferta ou recomendação individualizada de investimento."
       />
 
       {/* Barra fixa mobile → formulário de contato */}
