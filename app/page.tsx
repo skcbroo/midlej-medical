@@ -477,7 +477,7 @@ const TEAM = [
     name: "Breno Barreto",
     role: "Sócio",
     bio: "Responsável pela operação e governança da consultoria. Coordena processos, inovação e segurança das estruturas implementadas, garantindo eficiência e conformidade em cada solução entregue.",
-    photo: "/breno.jpeg",
+    photo: "/breno2.jpeg",
     initials: "BB",
   },
   {
