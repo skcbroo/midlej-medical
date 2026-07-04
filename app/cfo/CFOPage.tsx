@@ -404,7 +404,7 @@ function Fundador() {
           <div className="col-span-12 md:col-span-4 flex justify-center md:justify-start">
             <div className="w-52 h-64 md:w-full md:max-w-[280px] md:h-80 rounded-2xl overflow-hidden border border-[#EDEFF2]" style={{ backgroundColor: "#F5F7FA" }}>
               <Image
-                src="/lucas2.jpeg"
+                src="/lucas.jpeg"
                 alt="Lucas Midlej, fundador da Midlej Consultoria"
                 width={280}
                 height={380}

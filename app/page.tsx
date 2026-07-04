@@ -470,14 +470,14 @@ const TEAM = [
     name: "Lucas Midlej",
     role: "Sócio-fundador",
     bio: "Advogado com atuação focada no cruzamento entre direito e mercado financeiro. Especialista em planejamento patrimonial, estruturas societárias e assessoria estratégica para investidores, empresários e famílias.",
-    photo: "/lucas2.jpeg",
+    photo: "/lucas.jpeg",
     initials: "LM",
   },
   {
     name: "Breno Barreto",
     role: "Sócio",
     bio: "Responsável pela operação e governança da consultoria. Coordena processos, inovação e segurança das estruturas implementadas, garantindo eficiência e conformidade em cada solução entregue.",
-    photo: "/breno2.jpeg",
+    photo: "/breno.jpeg",
     initials: "BB",
   },
   {
