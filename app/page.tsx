@@ -12,30 +12,28 @@ import {
   PrevidenciaStackClient as PrevidenciaStack,
 } from "./_hub/scenes/clients";
 import { PortalMock } from "./_hub/PortalMock";
-import { MentoriaSection } from "./_hub/MentoriaSection";
 
 export const metadata: Metadata = {
   title: "Midlej Capital · Hub de soluções financeiras",
   description:
-    "Mentoria, investimentos internacionais, câmbio, seguros, alternativos, previdência e treinamentos. Uma banca de planejamento financeiro sem conflito.",
+    "Investimentos internacionais, câmbio, seguros, alternativos, previdência e treinamentos. Uma banca de planejamento financeiro sem conflito.",
 };
 
 const SERVICES = [
-  { n: "01", name: "Mentoria",       desc: "Diagnóstico, arquitetura e sustentação do patrimônio em paralelo.",    href: "#mentoria" },
-  { n: "02", name: "Internacionais", desc: "Patrimônio em dólar, contas offshore, trusts e veículos globais.",     href: "#internacionais" },
-  { n: "03", name: "Câmbio",         desc: "Compra e envio assistido de dólares americanos para o exterior.",      href: "#cambio" },
-  { n: "04", name: "Seguros",        desc: "Cobertura calibrada e custo otimizado fora do balcão de venda.",       href: "#seguro" },
-  { n: "05", name: "Alternativos",   desc: "Fundos exclusivos, crédito privado estruturado e private equity.",     href: "#alternativos" },
-  { n: "06", name: "Previdência",    desc: "Tabela regressiva e gestor institucional trocado por mérito.",         href: "#previdencia" },
-  { n: "07", name: "Workshops",      desc: "Treinamentos estratégicos para executivos, gestores e conselhos.",     href: "#workshops" },
-  { n: "08", name: "Investimentos",  desc: "Plataforma de investimentos privados com arquitetura por camadas.",    href: "/investimentos" },
+  { n: "01", name: "Internacionais", desc: "Patrimônio em dólar, contas offshore, trusts e veículos globais.",     href: "#internacionais" },
+  { n: "02", name: "Câmbio",         desc: "Compra e envio assistido de dólares americanos para o exterior.",      href: "#cambio" },
+  { n: "03", name: "Seguros",        desc: "Cobertura calibrada e custo otimizado fora do balcão de venda.",       href: "#seguro" },
+  { n: "04", name: "Alternativos",   desc: "Fundos exclusivos, crédito privado estruturado e private equity.",     href: "#alternativos" },
+  { n: "05", name: "Previdência",    desc: "Tabela regressiva e gestor institucional trocado por mérito.",         href: "#previdencia" },
+  { n: "06", name: "Workshops",      desc: "Treinamentos estratégicos para executivos, gestores e conselhos.",     href: "#workshops" },
+  { n: "07", name: "Investimentos",  desc: "Plataforma de investimentos privados com arquitetura por camadas.",    href: "/investimentos" },
 ];
 
 const STATS = [
   { value: "R$ 120M+",  label: "em patrimônio acompanhado" },
   { value: "85+",       label: "famílias atendidas" },
   { value: "8 anos",    label: "de experiência" },
-  { value: "8 frentes", label: "de atuação" },
+  { value: "7 frentes", label: "de atuação" },
 ];
 
 export default function HubPage() {
@@ -52,7 +50,6 @@ export default function HubPage() {
       <HomeStats />
       <HomeServices />
       <PortalCliente />
-      <MentoriaSection />
       <S03_Internacionais />
       <S04_Cambio />
       <S05_Seguro />
@@ -131,7 +128,7 @@ function HomeHero() {
         </h1>
         <p className="text-[1.0625rem] leading-[1.65] mb-10 max-w-[44ch] text-white/75">
           Planejamento financeiro privado sem conflito de interesse.
-          Mentoria, investimentos, câmbio, seguros, alternativos,
+          Investimentos, câmbio, seguros, alternativos,
           previdência e treinamentos em uma única banca.
         </p>
         <div className="flex flex-wrap items-center gap-4">
@@ -181,7 +178,7 @@ function HomeServices() {
         <div className="mb-12 md:mb-16">
           <SectionTag label="Nossas soluções" />
           <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-tight tracking-tight max-w-[22ch]" style={{ color: "#2E4659" }}>
-            Oito frentes de planejamento financeiro.
+            Sete frentes de planejamento financeiro.
           </h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -195,7 +192,7 @@ function HomeServices() {
               <h3 className="text-[1rem] font-semibold leading-snug mb-2" style={{ color: "#2E4659" }}>{s.name}</h3>
               <p className="text-sm leading-relaxed mb-5" style={{ color: "#6B7B8D" }}>{s.desc}</p>
               <span className="text-xs font-semibold group-hover:text-[#2E4659] transition-colors duration-200" style={{ color: "#4a6b8c" }}>
-                {s.n === "08" ? "Ver página →" : "Saiba mais →"}
+                {s.n === "07" ? "Ver página →" : "Saiba mais →"}
               </span>
             </Link>
           ))}
@@ -615,7 +612,6 @@ function HomeEquipe() {
    ================================================================ */
 
 const FOOTER_LINKS = [
-  { label: "Mentoria",      href: "#mentoria" },
   { label: "Investimentos", href: "/investimentos" },
   { label: "Câmbio",        href: "#cambio" },
   { label: "Seguros",       href: "#seguro" },
