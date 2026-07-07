@@ -14,7 +14,7 @@ export type BrUf = (typeof BR_UFS)[number];
 export const CONSENT_TEXT =
   "Ao enviar, autorizo a Midlej Capital a entrar em contato pelo WhatsApp informado sobre a mentoria e o envio deste material.";
 
-export const MIDLEJ_WHATSAPP_NUMBER = "5561983015739";
+export const MIDLEJ_WHATSAPP_NUMBER = "5561996204646";
 export const MIDLEJ_WHATSAPP_HREF = `https://wa.me/${MIDLEJ_WHATSAPP_NUMBER}`;
 
 // Canal de contato da LP /plenomed (teste: somente WhatsApp).
