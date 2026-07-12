@@ -4,6 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+function UserIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 const NAV_ITEMS = [
   { label: "Soluções",      href: "#solucoes" },
   { label: "Investimentos", href: "/investimentos" },
@@ -83,6 +97,17 @@ export function HomeHeader() {
               Quero ser cliente
             </Link>
 
+            {/* Portal do cliente (desktop) */}
+            <a
+              href="https://planejamento.midlejcapital.com.br/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold border border-[#4a6b8c] text-[#4a6b8c] hover:bg-[#4a6b8c] hover:text-white transition-colors duration-200"
+            >
+              <UserIcon />
+              Portal do cliente
+            </a>
+
             {/* Hambúrguer mobile */}
             <button
               onClick={() => setMenuOpen((o) => !o)}
@@ -151,6 +176,16 @@ export function HomeHeader() {
           >
             Pedir primeira conversa
           </Link>
+          <a
+            href="https://planejamento.midlejcapital.com.br/"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMenuOpen(false)}
+            className="mt-3 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg text-sm font-semibold border border-[#4a6b8c] text-[#4a6b8c] hover:bg-[#4a6b8c] hover:text-white transition-colors duration-200"
+          >
+            <UserIcon />
+            Portal do cliente
+          </a>
         </nav>
       </div>
     </>
