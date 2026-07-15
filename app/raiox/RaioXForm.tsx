@@ -94,7 +94,11 @@ export function RaioXForm() {
 
   function choose(key: "situacao" | "patrimonio" | "profissao", value: string) {
     setChoices((c) => ({ ...c, [key]: value }));
-    setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
+    const next = Math.min(step + 1, TOTAL_STEPS - 1);
+    setStep(next);
+    // Evento por etapa (Seção 10 da auditoria): mede o funil interno do form
+    // no GTM/GA4 — em que passo o lead avança e onde abandona.
+    pushEvent("raiox_form_step", { form_page: "raiox", step: step + 1, field: key });
     topRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
   }
 

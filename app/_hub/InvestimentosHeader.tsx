@@ -11,7 +11,22 @@ const NAV_ITEMS = [
   { label: "Contato",   href: "#contato" },
 ];
 
-export function InvestimentosHeader() {
+/**
+ * Props opcionais para uso em landing page de campanha (ex.: /raiox).
+ * Defaults preservam o comportamento institucional (/investimentos):
+ *  - `hideNav`  remove a navegação e o menu mobile (elimina rotas de fuga);
+ *  - `ctaLabel` troca o rótulo do CTA (unificação da oferta);
+ *  - `logoHref` aponta o logo p/ a própria página em vez do Hub.
+ */
+export function InvestimentosHeader({
+  hideNav = false,
+  ctaLabel = "Pedir reunião",
+  logoHref = "/",
+}: {
+  hideNav?: boolean;
+  ctaLabel?: string;
+  logoHref?: string;
+} = {}) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -44,7 +59,7 @@ export function InvestimentosHeader() {
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 h-16 flex items-center justify-between gap-8">
           {/* Logo */}
-          <Link href="/" aria-label="Midlej Capital, voltar ao hub" className="inline-flex items-center gap-3 shrink-0">
+          <Link href={logoHref} aria-label="Midlej Capital" className="inline-flex items-center gap-3 shrink-0">
             <Image
               src="/icon_midlej.png"
               alt=""
@@ -59,7 +74,7 @@ export function InvestimentosHeader() {
           </Link>
 
           {/* Nav desktop */}
-          <nav className="hidden md:flex items-center gap-8" aria-label="Navegação">
+          <nav className={`${hideNav ? "hidden" : "hidden md:flex"} items-center gap-8`} aria-label="Navegação">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
@@ -76,15 +91,15 @@ export function InvestimentosHeader() {
             {/* CTA desktop */}
             <Link
               href="#contato"
-              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200"
+              className={`${hideNav ? "inline-flex" : "hidden md:inline-flex"} items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200`}
             >
-              Pedir reunião
+              {ctaLabel}
             </Link>
 
-            {/* Hambúrguer mobile */}
+            {/* Hambúrguer mobile — oculto quando a nav está desligada */}
             <button
               onClick={() => setMenuOpen((o) => !o)}
-              className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-[5px] rounded-md"
+              className={`${hideNav ? "hidden" : "md:hidden flex"} flex-col justify-center items-center w-10 h-10 gap-[5px] rounded-md`}
               aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
