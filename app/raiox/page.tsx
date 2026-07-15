@@ -26,7 +26,7 @@ import { RaioXForm } from "./RaioXForm";
    nome + CNPJ (verificáveis) e o link para a consulta pública.
    CVM_CONSULTA_URL: trocar pela deep-link da consulta se preferir.
    ---------------------------------------------------------------- */
-const CVM_REGISTRO = ""; // ex.: "Ato Declaratório CVM nº 00000"
+const CVM_REGISTRO = "CVM nº 004770-8";
 const CVM_CONSULTA_URL = "https://www.gov.br/cvm";
 const RAZAO_SOCIAL = "Midlej Consultoria de Valores Mobiliários LTDA";
 const CNPJ = "67.608.789/0001-39";
@@ -39,11 +39,11 @@ const CNPJ = "67.608.789/0001-39";
    nome + credencial). Vazio, exibe a versão institucional segura.
    ---------------------------------------------------------------- */
 const RESPONSAVEL = {
-  nome: "", // ex.: "Lucas Midlej"
-  cargo: "Consultor de valores mobiliários · Responsável técnico",
-  credencial: "Certificação profissional CEA (Anbima)",
-  foto: "/fotos_escritorio/2.jpeg", // trocar por retrato real
-  bio: "Conduz pessoalmente cada Raio-X. A análise é feita por gente — não por um algoritmo genérico — e a mesma pessoa que assina o diagnóstico acompanha a relação ao longo do tempo.",
+  nome: "Allan Guilherme",
+  cargo: "Sócio · Responsável pela estratégia de investimentos",
+  credencial: "CEA nº 004189-0 (Anbima)",
+  foto: "/fotos_escritorio/2.jpeg", // ⚠️ trocar por retrato real do Allan p/ o efeito pleno
+  bio: "Sócio responsável pela estratégia de investimentos da Midlej. É a estratégia que ele conduz que orienta cada Raio-X — a análise é feita por gente, não por um algoritmo genérico, e você sabe exatamente quem responde por cada recomendação.",
 };
 
 /* ----------------------------------------------------------------
