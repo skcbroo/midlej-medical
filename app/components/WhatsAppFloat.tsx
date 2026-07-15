@@ -5,25 +5,29 @@ import {
   MIDLEJ_WHATSAPP_HREF,
   PLENOMED_WHATSAPP_HREF,
   CONSORCIO_WHATSAPP_HREF,
+  CFO_WHATSAPP_HREF,
+  RAIOX_WHATSAPP_HREF,
 } from "@/lib/leadConstants";
 
 const GENERIC_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
   "Olá! Gostaria de saber mais sobre os serviços da Midlej Consultoria.",
 )}`;
 
-// Teste de canal de contato: /cfo e /dolar usam SOMENTE formulário, então o
-// ícone flutuante de WhatsApp não deve aparecer nessas páginas.
-const HIDE_ON = new Set(["/cfo", "/dolar"]);
+// Teste de canal de contato: /dolar ainda usa SOMENTE formulário, então o
+// ícone flutuante de WhatsApp não deve aparecer nessa página.
+const HIDE_ON = new Set(["/dolar"]);
 
 // LPs com link de WhatsApp específico (mensagem pré-preenchida própria).
 const PAGE_HREF: Record<string, string> = {
   "/plenomed": PLENOMED_WHATSAPP_HREF,
   "/consorcio": CONSORCIO_WHATSAPP_HREF,
+  "/cfo": CFO_WHATSAPP_HREF,
+  "/raiox": RAIOX_WHATSAPP_HREF,
 };
 
 // LPs que têm barra fixa de CTA no rodapé do mobile — sobe o botão flutuante
 // para não sobrepor a barra. No desktop fica na posição padrão.
-const RAISE_ON_MOBILE = new Set(["/plenomed", "/consorcio"]);
+const RAISE_ON_MOBILE = new Set(["/plenomed", "/consorcio", "/cfo", "/raiox"]);
 
 export function WhatsAppFloat() {
   const pathname = usePathname();
