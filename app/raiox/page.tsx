@@ -566,7 +566,7 @@ function Closing() {
         {/* ── Barra legal ── */}
         <div className="border-t pt-6 flex flex-col gap-3 text-xs" style={{ borderColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.38)" }}>
           <p className="max-w-[92ch] leading-[1.6]">
-            A Midlej Capital é consultoria de valores mobiliários registrada na CVM e
+            A Midlej Consultoria de Valores Mobiliários LTDA é registrada na CVM e
             atua exclusivamente na modalidade fee based. Não realiza gestão de recursos
             de terceiros nem garante rentabilidade. Rentabilidade passada não representa
             garantia de rentabilidade futura. Investimentos envolvem riscos e podem
@@ -574,7 +574,7 @@ function Closing() {
             recomendação individualizada ou solicitação de compra ou venda de ativos.
           </p>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-            <span>CNPJ 35.340.252/0001-44</span>
+            <span>Midlej Consultoria de Valores Mobiliários LTDA · CNPJ 67.608.789/0001-39</span>
             <span>© {year} Midlej Capital. Todos os direitos reservados.</span>
           </div>
         </div>

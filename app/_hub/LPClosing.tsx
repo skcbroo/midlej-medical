@@ -138,7 +138,7 @@ export function LPClosing({
         {/* Barra legal */}
         <div className="border-t pt-6 flex flex-col gap-3" style={{ borderColor: "rgba(255,255,255,0.12)" }}>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
-            <span>CNPJ 35.340.252/0001-44</span>
+            <span>Midlej Consultoria de Valores Mobiliários LTDA · CNPJ 67.608.789/0001-39</span>
             <span>© {year} Midlej Capital. Todos os direitos reservados.</span>
           </div>
           <p className="text-[0.7rem] leading-relaxed max-w-[80ch]" style={{ color: "rgba(255,255,255,0.28)" }}>
