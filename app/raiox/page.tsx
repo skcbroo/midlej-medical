@@ -42,7 +42,7 @@ const RESPONSAVEL = {
   nome: "Allan Guilherme",
   cargo: "Sócio · Responsável pela estratégia de investimentos",
   credencial: "CEA nº 004189-0 (Anbima)",
-  foto: "/fotos_escritorio/2.jpeg", // ⚠️ trocar por retrato real do Allan p/ o efeito pleno
+  foto: "/allan.jpeg", // retrato real do Allan Guilherme
   bio: "Sócio responsável pela estratégia de investimentos da Midlej. É a estratégia que ele conduz que orienta cada Raio-X — a análise é feita por gente, não por um algoritmo genérico, e você sabe exatamente quem responde por cada recomendação.",
 };
 
