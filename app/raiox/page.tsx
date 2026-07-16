@@ -322,7 +322,7 @@ function Resposta() {
           Quero descobrir onde investir <Arrow />
         </Link>
 
-        <div className="mt-14 pt-10 border-t border-[#E1E6EC] grid grid-cols-12 gap-x-8 gap-y-10">
+        <div className="mt-14 pt-10 border-t border-[#E1E6EC] grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10">
           {perguntas.map((p) => (
             <div key={p.q} className="col-span-12 md:col-span-6 flex flex-col">
               <p className="text-[1.125rem] font-bold leading-[1.3]" style={{ color: "#2E4659" }}>
@@ -351,7 +351,7 @@ function Dor() {
         <h2 className="text-[clamp(1.875rem,4vw,3.25rem)] font-bold leading-[1.08] tracking-tight max-w-[24ch]" style={{ color: "#2E4659" }}>
           O problema não é falta de opções. É o excesso de intermediários remunerados por comissão.
         </h2>
-        <div className="mt-14 pt-10 border-t border-[#EDEFF2] grid grid-cols-12 gap-x-8 gap-y-10">
+        <div className="mt-14 pt-10 border-t border-[#EDEFF2] grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10">
           {[
             {
               k: "No banco",
@@ -408,7 +408,7 @@ function TrackRecord() {
   return (
     <section id="track" style={{ backgroundColor: "#2E4659" }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
           {/* Esquerda: número + benchmark */}
           <div className="col-span-12 md:col-span-5">
             <SectionTag label="Transparência" dark />
@@ -525,7 +525,7 @@ function ComoFunciona() {
         <p className="text-[1.0625rem] leading-[1.65] max-w-[54ch] mb-12 md:mb-16" style={{ color: "#6B7B8D" }}>
           Uma segunda opinião independente antes de qualquer decisão de investimento.
         </p>
-        <ol className="grid grid-cols-12 gap-8">
+        <ol className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {steps.map((s) => (
             <li key={s.n} className="col-span-12 md:col-span-4 bg-white rounded-2xl border border-[#EDEFF2] p-8 flex flex-col">
               <span className="text-[clamp(2rem,3vw,2.75rem)] font-light leading-none tabular-nums" style={{ color: "#4a6b8c" }}>
@@ -585,7 +585,7 @@ function Autoridade() {
   return (
     <section className="bg-white">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        <div className="rounded-2xl border border-[#EDEFF2] bg-[#F5F7FA] overflow-hidden grid grid-cols-12">
+        <div className="rounded-2xl border border-[#EDEFF2] bg-[#F5F7FA] overflow-hidden grid grid-cols-1 md:grid-cols-12">
           {/* Foto */}
           <div className="col-span-12 md:col-span-5 relative min-h-[380px] md:min-h-[420px]">
             <Image
@@ -652,7 +652,7 @@ function PorQueConfiar() {
         <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-tight tracking-tight mb-12 md:mb-16 max-w-[26ch]" style={{ color: "#2E4659" }}>
           Independência não é discurso. É o nosso modelo de remuneração.
         </h2>
-        <div className="grid grid-cols-12 gap-x-8 gap-y-12 border-t border-[#EDEFF2] pt-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12 border-t border-[#EDEFF2] pt-10">
           {items.map((m) => (
             <div key={m.k} className="col-span-12 md:col-span-6 lg:col-span-3 flex flex-col">
               <p className="text-[0.66rem] font-semibold tracking-[0.16em] uppercase" style={{ color: "#6B7B8D" }}>
@@ -709,7 +709,7 @@ function ParaQuem() {
   return (
     <section id="para-quem" style={{ backgroundColor: "#F5F7FA" }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        <div className="grid grid-cols-12 gap-8 mb-14 md:mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-14 md:mb-20">
           <div className="col-span-12 md:col-span-9">
             <SectionTag label="Para quem é o Raio-X" />
             <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[24ch]" style={{ color: "#2E4659" }}>
@@ -717,7 +717,7 @@ function ParaQuem() {
             </h2>
           </div>
         </div>
-        <div className="grid grid-cols-12 gap-x-8 gap-y-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12">
           {profiles.map((p) => (
             <article key={p.tag} className="col-span-12 md:col-span-6 border-t border-[#EDEFF2] pt-8">
               <p className="text-[0.72rem] font-semibold tracking-[0.18em] uppercase" style={{ color: "#4a6b8c" }}>
@@ -742,7 +742,7 @@ function FAQSection() {
   return (
     <section className="bg-white">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        <div className="grid grid-cols-12 gap-10 md:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
           <div className="col-span-12 md:col-span-4">
             <SectionTag label="Dúvidas frequentes" />
             <h2 className="text-[clamp(1.625rem,3vw,2.5rem)] font-bold leading-[1.04] tracking-tight max-w-[16ch]" style={{ color: "#2E4659" }}>
@@ -794,7 +794,7 @@ function Closing() {
     <section id="contato" style={{ backgroundColor: "#4a6b8c" }} className="pt-24 md:pt-32 pb-10">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
         {/* ── CTA + form ── */}
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start pb-20 md:pb-24">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start pb-20 md:pb-24">
           <div className="col-span-12 md:col-span-5">
             <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.50)" }}>
               Raio-X gratuito da carteira
@@ -829,7 +829,7 @@ function Closing() {
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }} className="mb-12 md:mb-14" />
 
         {/* ── Footer info ── */}
-        <div className="grid grid-cols-12 gap-8 items-start mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-10">
           <div className="col-span-12 md:col-span-6">
             <Image
               src="/midlej_capital.png"
