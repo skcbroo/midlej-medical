@@ -6,6 +6,9 @@ import {
   RAIOX_SITUACOES,
   RAIOX_PATRIMONIOS,
   RAIOX_PROFISSOES,
+  BLINDAGEM_MOTIVACOES,
+  BLINDAGEM_FAIXAS,
+  BLINDAGEM_HORIZONTES,
 } from "./leadConstants";
 
 export { CONSENT_TEXT } from "./leadConstants";
@@ -65,4 +68,34 @@ export function raioxScore(lead: RaioXLeadInput): "A" | "B" | "C" {
     return altaIntencao ? "A" : "B";
   }
   return "C"; // Até R$ 300 mil
+}
+
+/* ─────────────────────────────────────────────────────────
+   LP /blindagem — Proteção patrimonial internacional (dólar)
+   Form de qualificação: motivação → faixa → horizonte → dados.
+   ───────────────────────────────────────────────────────── */
+
+export const BlindagemLeadSchema = z.object({
+  name: nome,
+  whatsapp,
+  email: z.string().trim().email("E-mail inválido").max(120),
+  motivacao: z.enum(BLINDAGEM_MOTIVACOES, { message: "Selecione uma opção" }),
+  faixa: z.enum(BLINDAGEM_FAIXAS, { message: "Selecione uma faixa" }),
+  horizonte: z.enum(BLINDAGEM_HORIZONTES, { message: "Selecione uma opção" }),
+});
+
+export type BlindagemLeadInput = z.infer<typeof BlindagemLeadSchema>;
+
+/**
+ * Score de atendimento da /blindagem. A = quente, B = morno, C = frio.
+ * Roteia a velocidade do contato; não exclui ninguém. Faixa de patrimônio
+ * é o principal driver — é um produto internacional de ticket relevante.
+ */
+export function blindagemScore(lead: BlindagemLeadInput): "A" | "B" | "C" {
+  const { faixa } = lead;
+  if (faixa === "R$ 2 a 10 milhões" || faixa === "Acima de R$ 10 milhões") {
+    return "A";
+  }
+  if (faixa === "R$ 500 mil a R$ 2 milhões") return "B";
+  return "C"; // Começando a estruturar / até R$ 500 mil
 }

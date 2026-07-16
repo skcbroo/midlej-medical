@@ -84,3 +84,46 @@ export type RaioxProfissao = (typeof RAIOX_PROFISSOES)[number];
 // Consentimento específico do Raio-X (form pede e-mail além de WhatsApp).
 export const RAIOX_CONSENT_TEXT =
   "Autorizo a Midlej Capital a entrar em contato pelo WhatsApp e e-mail informados sobre o Raio-X da Carteira e concordo com a Política de Privacidade.";
+
+/* ─────────────────────────────────────────────────────────
+   LP /blindagem — Proteção patrimonial internacional (dólar)
+   Produto internacional (seguro de vida dolarizado). Sem menção
+   à CVM em nenhum ponto — não é valor mobiliário local.
+   Público: quem vê risco no Brasil, quer dolarizar e exclusividade.
+   ───────────────────────────────────────────────────────── */
+
+export const BLINDAGEM_WHATSAPP_MESSAGE =
+  "Olá! Quero entender como proteger meu patrimônio fora do Brasil, em dólar, com a Midlej.";
+export const BLINDAGEM_WHATSAPP_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
+  BLINDAGEM_WHATSAPP_MESSAGE,
+)}`;
+
+// O que motiva o interesse na proteção internacional (1ª pergunta).
+export const BLINDAGEM_MOTIVACOES = [
+  "Não confio no rumo do Brasil e quero reduzir esse risco",
+  "Quero proteger meu poder de compra em dólar",
+  "Quero transmitir patrimônio à família sem inventário",
+  "Temo bloqueio, confisco ou mudança de regra sobre meus ativos",
+] as const;
+export type BlindagemMotivacao = (typeof BLINDAGEM_MOTIVACOES)[number];
+
+// Faixa de patrimônio a proteger no exterior. Só ROTEIA o atendimento
+// (score interno) — não é barreira de exclusão.
+export const BLINDAGEM_FAIXAS = [
+  "Começando a estruturar / até R$ 500 mil",
+  "R$ 500 mil a R$ 2 milhões",
+  "R$ 2 a 10 milhões",
+  "Acima de R$ 10 milhões",
+] as const;
+export type BlindagemFaixa = (typeof BLINDAGEM_FAIXAS)[number];
+
+// Horizonte pretendido para a proteção (contextualiza a conversa).
+export const BLINDAGEM_HORIZONTES = [
+  "Proteção de longo prazo (10 anos ou mais)",
+  "Médio prazo (5 a 10 anos)",
+  "Ainda estou avaliando o horizonte",
+] as const;
+export type BlindagemHorizonte = (typeof BLINDAGEM_HORIZONTES)[number];
+
+export const BLINDAGEM_CONSENT_TEXT =
+  "Autorizo a Midlej Capital a entrar em contato pelo WhatsApp e e-mail informados sobre proteção patrimonial internacional e concordo com a Política de Privacidade.";
