@@ -56,13 +56,13 @@ type Dor = "heranca" | "parado" | "insatisfeito" | "metodo";
 const DOR_VARIANTS: Record<Dor, { eyebrow: string; h1: string; sub: string }> = {
   heranca: {
     eyebrow: "Herança · Venda de imóvel · Liquidez",
-    h1: "Recebeu uma herança ou vendeu um imóvel? Não decida antes de um Raio-X independente.",
-    sub: "Um valor relevante ingressou de uma só vez e a primeira alocação é a que mais pesa. Antes de qualquer decisão, solicite um Raio-X gratuito da sua carteira — consultoria independente, remunerada por você, não por comissão.",
+    h1: "Recebeu uma herança e não sabe onde investir? A primeira alocação é a que mais pesa — descubra a sua no Raio-X.",
+    sub: "Um valor relevante ingressou de uma só vez e a decisão certa depende do seu caso, não de uma dica genérica. Solicite um Raio-X gratuito da sua carteira — consultoria independente, remunerada por você, não por comissão.",
   },
   parado: {
     eyebrow: "Capital parado no banco",
-    h1: "R$ 100 mil ou mais parados no banco? Cada mês no lugar errado é retorno que não volta.",
-    sub: "Poupança, CDB do banco ou conta corrente rendendo abaixo do potencial enquanto a decisão é adiada. Solicite um Raio-X gratuito da sua carteira — consultoria independente, remunerada por você, não por comissão.",
+    h1: "Dinheiro parado no banco? Cada mês no lugar errado é retorno que não volta — e o certo para você, o Raio-X revela.",
+    sub: "Poupança, CDB do banco ou conta corrente rendendo abaixo do potencial enquanto a decisão é adiada. Onde esse dinheiro deveria estar depende do seu caso — solicite um Raio-X gratuito da sua carteira. Consultoria independente, remunerada por você, não por comissão.",
   },
   insatisfeito: {
     eyebrow: "Segunda opinião · Sem conflito",
@@ -78,8 +78,8 @@ const DOR_VARIANTS: Record<Dor, { eyebrow: string; h1: string; sub: string }> = 
 
 const HERO_DEFAULT = {
   eyebrow: "Consultoria de investimentos · Registro CVM",
-  h1: "Tem um valor parado e não sabe onde investir?",
-  sub: "Recebeu uma herança, vendeu um imóvel ou acumulou R$ 100 mil, R$ 500 mil, R$ 1 milhão — e a orientação que recebe do banco parece atender mais ao banco do que a você? Antes de qualquer decisão, solicite um Raio-X gratuito da sua carteira. Consultoria independente, remunerada por você — não por comissão.",
+  h1: "Onde investir seu dinheiro? A resposta honesta é: depende de você.",
+  sub: "Não existe “melhor investimento” universal — existe a carteira certa para o seu momento, seus objetivos e o que você já tem hoje. O Raio-X da Midlej mostra a sua, de graça e sem compromisso. Consultoria registrada na CVM, remunerada por você — não por comissão.",
 };
 
 function resolveDor(raw: string | string[] | undefined): Dor | null {
@@ -185,6 +185,7 @@ export default async function RaioXPage({
       <InvestimentosHeader hideNav ctaLabel="Quero meu Raio-X gratuito" logoHref="#top" />
 
       <Hero hero={hero} />
+      <Resposta />
       <Dor />
       <TrackRecord />
       <ComoFunciona />
@@ -253,7 +254,7 @@ function Hero({ hero }: { hero: { eyebrow: string; h1: string; sub: string } }) 
             href="#contato"
             className="inline-flex items-center gap-2 px-7 py-4 rounded-lg text-[0.95rem] font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200 shadow-lg"
           >
-            Quero meu Raio-X gratuito <Arrow />
+            Descobrir onde investir <Arrow />
           </Link>
           <Link
             href="#track"
@@ -266,6 +267,73 @@ function Hero({ hero }: { hero: { eyebrow: string; h1: string; sub: string } }) 
           Análise sem custo e sem compromisso. Não solicitamos senha, extrato bancário
           ou acesso à sua conta. A solicitação leva cerca de dois minutos.
         </p>
+      </div>
+    </section>
+  );
+}
+
+/* ================================================================
+   01b — A resposta (message match: pega a pergunta da keyword e a
+   conduz até "você descobre com o Raio-X da Midlej"). Foco nas
+   queries reais que trazem cliques: "onde investir meu dinheiro",
+   "dinheiro parado no banco", "onde investir 100/500 mil".
+   ⚠️ COMPLIANCE CVM: a resposta é sempre "depende do seu caso → o
+   Raio-X revela" — nunca uma indicação de ativo nem promessa de retorno.
+   ================================================================ */
+
+function Resposta() {
+  const perguntas = [
+    {
+      q: "“Onde investir R$ 100 mil, R$ 500 mil, R$ 1 milhão?”",
+      a: "O valor muda as opções, mas não a lógica: a carteira certa é a que cabe no seu caso, não a dica da vez. O Raio-X mostra a sua.",
+    },
+    {
+      q: "“Onde investir com segurança?”",
+      a: "Segurança se constrói entendendo o risco de cada posição — não fugindo de todas. O Raio-X aponta onde você está exposto sem perceber.",
+    },
+  ];
+  return (
+    <section style={{ backgroundColor: "#F5F7FA" }}>
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
+        <SectionTag label="A pergunta que te trouxe aqui" />
+        <h2 className="text-[clamp(1.875rem,4vw,3.25rem)] font-bold leading-[1.08] tracking-tight max-w-[24ch]" style={{ color: "#2E4659" }}>
+          “Onde eu invisto meu dinheiro?” — a resposta que ninguém te dá de graça na internet.
+        </h2>
+        <div className="mt-8 max-w-[60ch] space-y-5 text-[1.0625rem] leading-[1.7]" style={{ color: "#6B7B8D" }}>
+          <p>
+            Todo blog vai te empurrar um produto. Todo gerente, o produto do mês. Mas a
+            verdade é simples: <strong style={{ color: "#2E4659" }}>a alocação certa não é a
+            mesma para todo mundo.</strong> Depende de quanto você tem, de quando vai
+            precisar, do risco que topa e do que já carrega na carteira.
+          </p>
+          <p>
+            É exatamente isso que o <strong style={{ color: "#2E4659" }}>Raio-X da Carteira
+            da Midlej</strong> faz: olha o <strong style={{ color: "#2E4659" }}>seu</strong> caso
+            e mostra, sem custo, o que faz sentido ajustar — o que está caro, onde o risco
+            não se justifica e onde o dinheiro pode trabalhar melhor. A resposta para “onde
+            investir” você descobre aqui — sobre a sua realidade, não sobre uma tabela genérica.
+          </p>
+        </div>
+
+        <Link
+          href="#contato"
+          className="mt-9 inline-flex items-center gap-2 px-7 py-4 rounded-lg text-[0.95rem] font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200 shadow-lg"
+        >
+          Quero descobrir onde investir <Arrow />
+        </Link>
+
+        <div className="mt-14 pt-10 border-t border-[#E1E6EC] grid grid-cols-12 gap-x-8 gap-y-10">
+          {perguntas.map((p) => (
+            <div key={p.q} className="col-span-12 md:col-span-6 flex flex-col">
+              <p className="text-[1.125rem] font-bold leading-[1.3]" style={{ color: "#2E4659" }}>
+                {p.q}
+              </p>
+              <p className="mt-3 text-[0.95rem] leading-[1.6]" style={{ color: "#6B7B8D" }}>
+                {p.a}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
