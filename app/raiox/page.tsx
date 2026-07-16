@@ -172,7 +172,7 @@ export default async function RaioXPage({
       data-brand
       id="main"
       style={{ fontFamily: "var(--font-brand), ui-sans-serif, system-ui, sans-serif" }}
-      className="min-h-screen bg-white text-[#2E4659]"
+      className="min-h-screen bg-white text-[#2E4659] overflow-x-hidden"
     >
       {/* Dados estruturados FAQPage (Eixo 5 — presença em busca) */}
       <script

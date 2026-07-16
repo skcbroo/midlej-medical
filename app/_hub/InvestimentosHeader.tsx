@@ -91,7 +91,7 @@ export function InvestimentosHeader({
             {/* CTA desktop */}
             <Link
               href="#contato"
-              className={`${hideNav ? "inline-flex" : "hidden md:inline-flex"} items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200`}
+              className={`${hideNav ? "hidden md:inline-flex" : "hidden md:inline-flex"} items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200`}
             >
               {ctaLabel}
             </Link>
