@@ -519,12 +519,12 @@ function Autoridade() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
         <div className="rounded-2xl border border-[#EDEFF2] bg-[#F5F7FA] overflow-hidden grid grid-cols-12">
           {/* Foto */}
-          <div className="col-span-12 md:col-span-5 relative min-h-[280px] md:min-h-[420px]">
+          <div className="col-span-12 md:col-span-5 relative min-h-[380px] md:min-h-[420px]">
             <Image
               src={RESPONSAVEL.foto}
               alt={hasName ? RESPONSAVEL.nome : "Equipe Midlej Capital"}
               fill
-              className="object-cover object-[center_20%]"
+              className="object-cover object-top"
               sizes="(max-width: 768px) 100vw, 40vw"
             />
           </div>
