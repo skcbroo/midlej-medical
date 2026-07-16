@@ -524,7 +524,7 @@ function Autoridade() {
               src={RESPONSAVEL.foto}
               alt={hasName ? RESPONSAVEL.nome : "Equipe Midlej Capital"}
               fill
-              className="object-cover object-center"
+              className="object-cover object-[center_20%]"
               sizes="(max-width: 768px) 100vw, 40vw"
             />
           </div>
