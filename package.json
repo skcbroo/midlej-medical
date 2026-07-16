@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:mobile": "node scripts/check-mobile-grids.mjs",
+    "fix:mobile": "node scripts/check-mobile-grids.mjs --fix"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
