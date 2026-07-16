@@ -324,7 +324,7 @@ function Resposta() {
 
         <div className="mt-14 pt-10 border-t border-[#E1E6EC] grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10">
           {perguntas.map((p) => (
-            <div key={p.q} className="col-span-12 md:col-span-6 flex flex-col">
+            <div key={p.q} className="col-span-full md:col-span-6 flex flex-col">
               <p className="text-[1.125rem] font-bold leading-[1.3]" style={{ color: "#2E4659" }}>
                 {p.q}
               </p>
@@ -369,7 +369,7 @@ function Dor() {
               note: "Consultoria registrada na CVM, remunerada exclusivamente por você. Sem rebate e sem produto de prateleira. A recomendação existe para servir ao seu patrimônio — e apenas a ele.",
             },
           ].map((m) => (
-            <div key={m.k} className="col-span-12 md:col-span-4 flex flex-col">
+            <div key={m.k} className="col-span-full md:col-span-4 flex flex-col">
               <p className="text-[0.66rem] font-semibold tracking-[0.16em] uppercase" style={{ color: "#6B7B8D" }}>
                 {m.k}
               </p>
@@ -410,7 +410,7 @@ function TrackRecord() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
           {/* Esquerda: número + benchmark */}
-          <div className="col-span-12 md:col-span-5">
+          <div className="col-span-full md:col-span-5">
             <SectionTag label="Transparência" dark />
             <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight text-white">
               Você quer ver resultado. Nós mostramos — dentro das regras da CVM.
@@ -424,7 +424,7 @@ function TrackRecord() {
           </div>
 
           {/* Direita: card do track record */}
-          <div className="col-span-12 md:col-span-7">
+          <div className="col-span-full md:col-span-7">
             <div className="rounded-2xl bg-white/[0.06] border border-white/10 p-8 md:p-10">
               <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-2" style={{ color: "rgba(255,255,255,0.50)" }}>
                 O resultado da nossa carteira própria
@@ -527,7 +527,7 @@ function ComoFunciona() {
         </p>
         <ol className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {steps.map((s) => (
-            <li key={s.n} className="col-span-12 md:col-span-4 bg-white rounded-2xl border border-[#EDEFF2] p-8 flex flex-col">
+            <li key={s.n} className="col-span-full md:col-span-4 bg-white rounded-2xl border border-[#EDEFF2] p-8 flex flex-col">
               <span className="text-[clamp(2rem,3vw,2.75rem)] font-light leading-none tabular-nums" style={{ color: "#4a6b8c" }}>
                 {s.n}
               </span>
@@ -587,7 +587,7 @@ function Autoridade() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
         <div className="rounded-2xl border border-[#EDEFF2] bg-[#F5F7FA] overflow-hidden grid grid-cols-1 md:grid-cols-12">
           {/* Foto */}
-          <div className="col-span-12 md:col-span-5 relative min-h-[380px] md:min-h-[420px]">
+          <div className="col-span-full md:col-span-5 relative min-h-[380px] md:min-h-[420px]">
             <Image
               src={RESPONSAVEL.foto}
               alt={hasName ? RESPONSAVEL.nome : "Equipe Midlej Capital"}
@@ -597,7 +597,7 @@ function Autoridade() {
             />
           </div>
           {/* Texto */}
-          <div className="col-span-12 md:col-span-7 p-8 md:p-12 flex flex-col justify-center">
+          <div className="col-span-full md:col-span-7 p-8 md:p-12 flex flex-col justify-center">
             <SectionTag label="Quem conduz a sua análise" />
             {hasName ? (
               <>
@@ -654,7 +654,7 @@ function PorQueConfiar() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12 border-t border-[#EDEFF2] pt-10">
           {items.map((m) => (
-            <div key={m.k} className="col-span-12 md:col-span-6 lg:col-span-3 flex flex-col">
+            <div key={m.k} className="col-span-full md:col-span-6 lg:col-span-3 flex flex-col">
               <p className="text-[0.66rem] font-semibold tracking-[0.16em] uppercase" style={{ color: "#6B7B8D" }}>
                 {m.k}
               </p>
@@ -710,7 +710,7 @@ function ParaQuem() {
     <section id="para-quem" style={{ backgroundColor: "#F5F7FA" }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-14 md:mb-20">
-          <div className="col-span-12 md:col-span-9">
+          <div className="col-span-full md:col-span-9">
             <SectionTag label="Para quem é o Raio-X" />
             <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[24ch]" style={{ color: "#2E4659" }}>
               Se você tem recursos para investir e quer decidir sem pressão de venda, é para você.
@@ -719,7 +719,7 @@ function ParaQuem() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12">
           {profiles.map((p) => (
-            <article key={p.tag} className="col-span-12 md:col-span-6 border-t border-[#EDEFF2] pt-8">
+            <article key={p.tag} className="col-span-full md:col-span-6 border-t border-[#EDEFF2] pt-8">
               <p className="text-[0.72rem] font-semibold tracking-[0.18em] uppercase" style={{ color: "#4a6b8c" }}>
                 {p.tag}
               </p>
@@ -743,13 +743,13 @@ function FAQSection() {
     <section className="bg-white">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
-          <div className="col-span-12 md:col-span-4">
+          <div className="col-span-full md:col-span-4">
             <SectionTag label="Dúvidas frequentes" />
             <h2 className="text-[clamp(1.625rem,3vw,2.5rem)] font-bold leading-[1.04] tracking-tight max-w-[16ch]" style={{ color: "#2E4659" }}>
               As dúvidas mais comuns antes da primeira conversa.
             </h2>
           </div>
-          <div className="col-span-12 md:col-span-8 md:col-start-5">
+          <div className="col-span-full md:col-span-8 md:col-start-5">
             <ul className="border-t border-[#EDEFF2]">
               {FAQ_ITEMS.map((f, i) => (
                 <li key={i} className="border-b border-[#EDEFF2]">
@@ -795,7 +795,7 @@ function Closing() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
         {/* ── CTA + form ── */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start pb-20 md:pb-24">
-          <div className="col-span-12 md:col-span-5">
+          <div className="col-span-full md:col-span-5">
             <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.50)" }}>
               Raio-X gratuito da carteira
             </p>
@@ -820,7 +820,7 @@ function Closing() {
               Retornamos pelo WhatsApp em até 4 horas úteis.
             </p>
           </div>
-          <div className="col-span-12 md:col-span-6 md:col-start-7">
+          <div className="col-span-full md:col-span-6 md:col-start-7">
             <RaioXForm />
           </div>
         </div>
@@ -830,7 +830,7 @@ function Closing() {
 
         {/* ── Footer info ── */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-10">
-          <div className="col-span-12 md:col-span-6">
+          <div className="col-span-full md:col-span-6">
             <Image
               src="/midlej_capital.png"
               alt="Midlej Capital"
@@ -845,7 +845,7 @@ function Closing() {
             </p>
           </div>
 
-          <div className="col-span-12 md:col-span-5 md:col-start-8">
+          <div className="col-span-full md:col-span-5 md:col-start-8">
             <p className="text-[0.6rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.35)" }}>
               Contato
             </p>
