@@ -230,7 +230,7 @@ function SectionTag({ label, dark = false }: { label: string; dark?: boolean }) 
 
 function Hero({ hero }: { hero: { eyebrow: string; h1: string; sub: string } }) {
   return (
-    <section id="top" className="relative flex items-center">
+    <section id="top" className="relative min-h-screen flex items-center">
       <Image
         src="/fotos_escritorio/2.jpeg"
         alt="Espaço Midlej Capital"
@@ -238,32 +238,36 @@ function Hero({ hero }: { hero: { eyebrow: string; h1: string; sub: string } }) 
         className="object-cover object-center"
         priority
       />
-      <div className="absolute inset-0" style={{ backgroundColor: "rgba(46,70,89,0.66)" }} />
-      {/* CRO (funil): O QUÊ + captura na dobra. Copy à esquerda, formulário à
-          direita no desktop; empilhado no mobile (form logo abaixo do H1). */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 pt-28 pb-16 md:pt-36 md:pb-24">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-10 md:gap-x-12 lg:gap-x-16 items-center">
-          {/* Copy */}
-          <div className="col-span-full md:col-span-7">
-            <span className="inline-block text-[0.7rem] font-semibold tracking-widest uppercase mb-5 text-white/70">
-              {hero.eyebrow}
-            </span>
-            <h1 className="text-[clamp(2.125rem,4.4vw,3.75rem)] font-bold leading-[1.06] tracking-tight mb-5 text-white max-w-[20ch]">
-              {hero.h1}
-            </h1>
-            <p className="text-[1.0625rem] leading-[1.65] mb-7 max-w-[52ch] text-white/80">
-              {hero.sub}
-            </p>
-            <p className="text-[0.8rem] text-white/55 max-w-[46ch]">
-              Análise sem custo e sem compromisso. Não solicitamos senha, extrato
-              bancário ou acesso à sua conta.
-            </p>
-          </div>
-          {/* Captura — formulário acima da dobra */}
-          <div className="col-span-full md:col-span-5">
-            <RaioXForm />
-          </div>
+      <div className="absolute inset-0" style={{ backgroundColor: "rgba(46,70,89,0.62)" }} />
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 pt-40 pb-24 md:pt-56 md:pb-32">
+        <span className="inline-block text-[0.7rem] font-semibold tracking-widest uppercase mb-6 text-white/70">
+          {hero.eyebrow}
+        </span>
+        <h1 className="text-[clamp(2.25rem,5vw,4.25rem)] font-bold leading-[1.05] tracking-tight mb-6 text-white max-w-[20ch]">
+          {hero.h1}
+        </h1>
+        <p className="text-[1.0625rem] leading-[1.65] mb-9 max-w-[52ch] text-white/80">
+          {hero.sub}
+        </p>
+        {/* CTA único e proeminente (Eixo 3 — sem rotas de fuga concorrentes) */}
+        <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
+          <Link
+            href="#contato"
+            className="inline-flex items-center gap-2 px-7 py-4 rounded-lg text-[0.95rem] font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200 shadow-lg"
+          >
+            Descobrir onde investir <Arrow />
+          </Link>
+          <Link
+            href="#track"
+            className="inline-flex items-center gap-1.5 text-[0.9rem] font-medium text-white/75 hover:text-white underline underline-offset-4 transition-colors duration-200"
+          >
+            Ver como investimos
+          </Link>
         </div>
+        <p className="mt-6 text-[0.8rem] text-white/55 max-w-[46ch]">
+          Análise sem custo e sem compromisso. Não solicitamos senha, extrato bancário
+          ou acesso à sua conta. A solicitação leva cerca de dois minutos.
+        </p>
       </div>
     </section>
   );
