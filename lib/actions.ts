@@ -153,6 +153,9 @@ export async function submitRaioXLead(
 
   const { name, whatsapp, email, situacao, patrimonio, profissao } = parsed.data;
   const score = raioxScore(parsed.data);
+  // Enriquecido = já veio com a qualificação (patrimônio/profissão) preenchida
+  // na tela de sucesso. Captura = 1º envio, só com contato + situação.
+  const enriched = Boolean(patrimonio || profissao);
 
   try {
     const resend = new Resend(env.RESEND_API_KEY);
@@ -160,18 +163,18 @@ export async function submitRaioXLead(
     const { error } = await resend.emails.send({
       from: `Midlej Site <onboarding@${env.RESEND_FROM_DOMAIN}>`,
       to: env.LEAD_EMAIL,
-      subject: `Raio-X da Carteira · Lead ${score} — ${name}`,
+      subject: `Raio-X da Carteira · Lead ${score} — ${name}${enriched ? " · atualizado" : ""}`,
       html: `
         <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:32px 24px;background:#F5F7FA;border-radius:12px">
-          <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#B89840">Novo lead · Raio-X da Carteira</p>
+          <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#B89840">${enriched ? "Lead qualificado (atualizado)" : "Novo lead · aguardando qualificação"} · Raio-X da Carteira</p>
           <h2 style="margin:0 0 8px;font-size:22px;color:#2E4659">${name}</h2>
           <p style="margin:0 0 24px;display:inline-block;padding:6px 12px;border-radius:6px;background:#2E4659;color:#fff;font-size:12px;font-weight:700">${SCORE_LABEL[score]}</p>
           <table style="width:100%;border-collapse:collapse">
             <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D;width:130px">WhatsApp</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${whatsapp}</td></tr>
             <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">E-mail</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${email}</td></tr>
             <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">Situação</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${situacao}</td></tr>
-            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">Patrimônio</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${patrimonio}</td></tr>
-            <tr><td style="padding:10px 0;font-size:12px;color:#6B7B8D">Profissão</td><td style="padding:10px 0;font-size:15px;font-weight:600;color:#2E4659">${profissao}</td></tr>
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">Patrimônio</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${patrimonio || "— a confirmar"}</td></tr>
+            <tr><td style="padding:10px 0;font-size:12px;color:#6B7B8D">Profissão</td><td style="padding:10px 0;font-size:15px;font-weight:600;color:#2E4659">${profissao || "— a confirmar"}</td></tr>
           </table>
           <p style="margin:24px 0 0;font-size:11px;color:#9BA8B5">${RAIOX_CONSENT_TEXT}</p>
         </div>

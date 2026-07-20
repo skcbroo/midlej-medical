@@ -44,8 +44,17 @@ export const RaioXLeadSchema = z.object({
   whatsapp,
   email: z.string().trim().email("E-mail inválido").max(120),
   situacao: z.enum(RAIOX_SITUACOES, { message: "Selecione uma opção" }),
-  patrimonio: z.enum(RAIOX_PATRIMONIOS, { message: "Selecione uma faixa" }),
-  profissao: z.enum(RAIOX_PROFISSOES, { message: "Selecione uma opção" }),
+  // Qualificação OPCIONAL (CRO): capturamos o contato primeiro — menos
+  // fricção para o lead de alta intenção — e enriquecemos patrimônio/
+  // profissão depois, na tela de sucesso. "" (não informado) → undefined.
+  patrimonio: z.preprocess(
+    (v) => (v === "" || v == null ? undefined : v),
+    z.enum(RAIOX_PATRIMONIOS, { message: "Selecione uma faixa" }).optional(),
+  ),
+  profissao: z.preprocess(
+    (v) => (v === "" || v == null ? undefined : v),
+    z.enum(RAIOX_PROFISSOES, { message: "Selecione uma opção" }).optional(),
+  ),
 });
 
 export type RaioXLeadInput = z.infer<typeof RaioXLeadSchema>;
@@ -66,6 +75,11 @@ export function raioxScore(lead: RaioXLeadInput): "A" | "B" | "C" {
   }
   if (patrimonio === "R$ 300 mil a R$ 1 milhão") {
     return altaIntencao ? "A" : "B";
+  }
+  if (!patrimonio) {
+    // Lead capturado antes da qualificação (faixa ainda não informada):
+    // prioriza pela intenção da situação. O enriquecimento recalcula.
+    return altaIntencao ? "B" : "C";
   }
   return "C"; // Até R$ 300 mil
 }
