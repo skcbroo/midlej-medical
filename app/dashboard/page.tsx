@@ -154,20 +154,23 @@ export default function DashboardPage() {
         <div className="scroller" style={{ marginTop: "1rem" }}>
           <table>
             <thead>
-              <tr><th>Lead</th><th>Origem</th><th>Etapa em que caiu</th><th>Motivo registrado</th></tr>
+              <tr><th>Onde cai</th><th>Motivo</th><th className="r">Perdidos</th></tr>
             </thead>
             <tbody>
               {PERDAS.map((p) => (
-                <tr key={p.lead}>
-                  <td>{p.lead}</td><td>{p.origem}</td><td>{p.etapa}</td><td>{p.motivo}</td>
+                <tr key={p.etapa}>
+                  <td>{p.etapa}</td>
+                  <td>{p.motivo}</td>
+                  <td className="r num">{p.qtd} de {p.de}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
         <p className="fine">
-          Amostra de {PERDAS.length} — insuficiente para concluir padrão. O que ela
-          sugere: o filtro precisa acontecer antes da pré-venda, não durante.
+          Amostra pequena — insuficiente para concluir padrão. O que ela sugere:
+          o filtro precisa acontecer antes da pré-venda, não durante. O detalhe
+          por lead fica no registro interno, fora desta página.
         </p>
       </section>
 
@@ -293,6 +296,7 @@ const CSS = `
 .dash th { font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3);
   font-weight:600; border-bottom:1px solid var(--rule); }
 .dash tbody tr:last-child td { border-bottom:none; }
+.dash th.r, .dash td.r { text-align:right; }
 .dash .fine { font-size:.78rem; color:var(--ink-3); margin:.6rem 0 0; }
 .dash .legend { display:flex; flex-wrap:wrap; gap:.5rem 1rem; font-size:.75rem; color:var(--ink-3);
   margin-top:.9rem; padding-top:.8rem; border-top:1px solid var(--rule-2); }

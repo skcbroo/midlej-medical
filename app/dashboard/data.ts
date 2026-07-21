@@ -67,10 +67,15 @@ export const PILAR_2: { titulo: string; sub: string; tiles: Tile[] } = {
   ],
 };
 
-/** Perdas registradas — amostra pequena, tratada como tal no texto. */
+/* Perdas — AGREGADO, por linha de corte.
+   O painel está aberto ao público (decisão do Lucas, 21/07). O detalhe
+   por lead descrevia a situação financeira de pessoas identificáveis que
+   deixaram o contato com a Midlej — isso não vai para uma página pública,
+   com ou sem nome. A informação gerencial (onde e por que caem) está
+   preservada na forma agregada abaixo.
+   O detalhe individual continua no registro interno do Lucas. */
 export const PERDAS = [
-  { lead: "Lead 1", origem: "Formulário", etapa: "Pré-venda", motivo: "Sem fit — buscava saldo esquecido/FGTS" },
-  { lead: "Lead 2", origem: "WhatsApp", etapa: "Pré-venda", motivo: "Sem capital para o onboarding" },
+  { etapa: "Pré-venda", qtd: 2, de: 2, motivo: "Sem fit de perfil para a consultoria" },
 ];
 
 export const PILAR_3: { titulo: string; sub: string; tiles: Tile[] } = {

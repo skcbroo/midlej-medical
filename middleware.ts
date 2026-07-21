@@ -39,18 +39,23 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  /* ── painel.* → /dashboard (dados comerciais · SEMPRE protegido) ──
-     Este subdomínio expõe investimento, CAC, receita, leads e motivo de
-     perda. Nunca pode servir sem autenticação: se as variáveis de ambiente
-     não estiverem configuradas, a rota RECUSA em vez de liberar. Falhar
-     fechado é intencional — um deploy sem env não vaza o painel. */
+  /* ── painel.* → /dashboard (painel comercial · acesso controlado) ──
+     Credenciais vêm SEMPRE de variável de ambiente. Este repositório é
+     público no GitHub: uma senha escrita aqui ficaria legível por qualquer
+     pessoa e permaneceria no histórico do git mesmo após ser removida.
+
+     Falha fechada: sem DASHBOARD_USER / DASHBOARD_PASSWORD a rota responde
+     503 em vez de servir. Um deploy sem env não expõe o painel.
+
+     Dados de terceiros (situação financeira de leads identificáveis) seguem
+     agregados em data.ts — não voltam ao detalhe individual. */
   if (host.startsWith("painel.") || pathname.startsWith("/dashboard")) {
     const user = process.env.DASHBOARD_USER;
     const pass = process.env.DASHBOARD_PASSWORD;
 
     if (!user || !pass) {
       return new NextResponse(
-        "Painel indisponível: autenticação não configurada (DASHBOARD_USER / DASHBOARD_PASSWORD).",
+        "Painel indisponível: acesso não configurado (DASHBOARD_USER / DASHBOARD_PASSWORD).",
         { status: 503, headers: { "x-robots-tag": "noindex, nofollow" } },
       );
     }
@@ -67,7 +72,7 @@ export function middleware(request: NextRequest) {
     }
 
     if (!ok) {
-      return new NextResponse("Autenticação necessária.", {
+      return new NextResponse("Acesso restrito.", {
         status: 401,
         headers: {
           "WWW-Authenticate": 'Basic realm="Painel Midlej", charset="UTF-8"',
