@@ -39,45 +39,33 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  /* ── painel.* → /dashboard (painel comercial · acesso controlado) ──
-     Credenciais vêm SEMPRE de variável de ambiente. Este repositório é
-     público no GitHub: uma senha escrita aqui ficaria legível por qualquer
-     pessoa e permaneceria no histórico do git mesmo após ser removida.
-
-     Falha fechada: sem DASHBOARD_USER / DASHBOARD_PASSWORD a rota responde
-     503 em vez de servir. Um deploy sem env não expõe o painel.
+  /* ── painel comercial ──
+     Endereços válidos:
+       midlejcapital.com.br/dashboard/<segredo>
+       painel.midlejcapital.com.br/<segredo>
+     Qualquer outra coisa sob /dashboard responde 404.
 
      Dados de terceiros (situação financeira de leads identificáveis) seguem
      agregados em data.ts — não voltam ao detalhe individual. */
   if (host.startsWith("painel.") || pathname.startsWith("/dashboard")) {
-    const user = process.env.DASHBOARD_USER;
-    const pass = process.env.DASHBOARD_PASSWORD;
+    /* Segmento secreto na URL, sem tela de login (decisão do Lucas, 21/07).
+       O valor padrão está no código e este repositório é PÚBLICO — logo isto
+       é obscuridade, não controle de acesso: quem vir o repo (ou a busca de
+       código do GitHub) descobre o endereço. Serve para não ser tropeçado por
+       acaso, não para resistir a quem procura.
+       DASHBOARD_TOKEN permite trocar o segmento sem alterar o código, se um
+       dia fizer sentido rotacionar. */
+    const SEGREDO = process.env.DASHBOARD_TOKEN || "x7k2m9";
 
-    if (!user || !pass) {
-      return new NextResponse(
-        "Painel indisponível: acesso não configurado (DASHBOARD_USER / DASHBOARD_PASSWORD).",
-        { status: 503, headers: { "x-robots-tag": "noindex, nofollow" } },
-      );
-    }
+    const seg = pathname.split("/").filter(Boolean);
+    const token = host.startsWith("painel.") ? seg[0] : seg[1];
 
-    const header = request.headers.get("authorization") ?? "";
-    let ok = false;
-    if (header.startsWith("Basic ")) {
-      try {
-        const [u, ...rest] = atob(header.slice(6)).split(":");
-        ok = u === user && rest.join(":") === pass;
-      } catch {
-        ok = false;
-      }
-    }
-
-    if (!ok) {
-      return new NextResponse("Acesso restrito.", {
-        status: 401,
-        headers: {
-          "WWW-Authenticate": 'Basic realm="Painel Midlej", charset="UTF-8"',
-          "x-robots-tag": "noindex, nofollow",
-        },
+    /* Sem o segmento certo: 404 seco. Nem 401 nem 403 — não confirmamos que
+       existe algo aqui. */
+    if (token !== SEGREDO) {
+      return new NextResponse("Não encontrado.", {
+        status: 404,
+        headers: { "x-robots-tag": "noindex, nofollow" },
       });
     }
 
@@ -89,13 +77,11 @@ export function middleware(request: NextRequest) {
     const privado = new Headers(request.headers);
     privado.set("x-midlej-private", "1");
 
-    if (host.startsWith("painel.") && !pathname.startsWith("/dashboard")) {
-      url.pathname = pathname === "/" ? "/dashboard" : `/dashboard${pathname}`;
-      const res = NextResponse.rewrite(url, { request: { headers: privado } });
-      res.headers.set("x-robots-tag", "noindex, nofollow");
-      return res;
-    }
-    const res = NextResponse.next({ request: { headers: privado } });
+    /* O segmento secreto é só a chave — a página em si vive em /dashboard.
+       Rewrite (não redirect): a URL na barra continua com o segredo, e o
+       endereço interno nunca é revelado. */
+    url.pathname = "/dashboard";
+    const res = NextResponse.rewrite(url, { request: { headers: privado } });
     res.headers.set("x-robots-tag", "noindex, nofollow");
     return res;
   }
