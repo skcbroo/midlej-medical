@@ -47,7 +47,11 @@ export function middleware(request: NextRequest) {
 
      Dados de terceiros (situação financeira de leads identificáveis) seguem
      agregados em data.ts — não voltam ao detalhe individual. */
-  if (host.startsWith("painel.") || pathname.startsWith("/dashboard")) {
+  /* Comparação em minúsculas: o roteamento do Next é sensível a caixa, então
+     /DASHBOARD dava 404 (não vazava), mas escapava deste bloco e acabava
+     RASTREADO pelo Clarity — expondo a existência do caminho na lista de
+     páginas do painel de analytics. Visto em produção em 21/07. */
+  if (host.startsWith("painel.") || pathname.toLowerCase().startsWith("/dashboard")) {
     /* Segmento secreto na URL, sem tela de login (decisão do Lucas, 21/07).
        O valor padrão está no código e este repositório é PÚBLICO — logo isto
        é obscuridade, não controle de acesso: quem vir o repo (ou a busca de
