@@ -39,6 +39,62 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  /* ── painel.* → /dashboard (dados comerciais · SEMPRE protegido) ──
+     Este subdomínio expõe investimento, CAC, receita, leads e motivo de
+     perda. Nunca pode servir sem autenticação: se as variáveis de ambiente
+     não estiverem configuradas, a rota RECUSA em vez de liberar. Falhar
+     fechado é intencional — um deploy sem env não vaza o painel. */
+  if (host.startsWith("painel.") || pathname.startsWith("/dashboard")) {
+    const user = process.env.DASHBOARD_USER;
+    const pass = process.env.DASHBOARD_PASSWORD;
+
+    if (!user || !pass) {
+      return new NextResponse(
+        "Painel indisponível: autenticação não configurada (DASHBOARD_USER / DASHBOARD_PASSWORD).",
+        { status: 503, headers: { "x-robots-tag": "noindex, nofollow" } },
+      );
+    }
+
+    const header = request.headers.get("authorization") ?? "";
+    let ok = false;
+    if (header.startsWith("Basic ")) {
+      try {
+        const [u, ...rest] = atob(header.slice(6)).split(":");
+        ok = u === user && rest.join(":") === pass;
+      } catch {
+        ok = false;
+      }
+    }
+
+    if (!ok) {
+      return new NextResponse("Autenticação necessária.", {
+        status: 401,
+        headers: {
+          "WWW-Authenticate": 'Basic realm="Painel Midlej", charset="UTF-8"',
+          "x-robots-tag": "noindex, nofollow",
+        },
+      });
+    }
+
+    /* Marca a requisição como área privada. O layout raiz lê este header
+       e NÃO injeta GTM/Clarity aqui — por dois motivos: (1) não mandar
+       dados comerciais internos para gravação de sessão de terceiro;
+       (2) não contaminar as métricas do pixel, que são a régua do
+       experimento da /raiox. */
+    const privado = new Headers(request.headers);
+    privado.set("x-midlej-private", "1");
+
+    if (host.startsWith("painel.") && !pathname.startsWith("/dashboard")) {
+      url.pathname = pathname === "/" ? "/dashboard" : `/dashboard${pathname}`;
+      const res = NextResponse.rewrite(url, { request: { headers: privado } });
+      res.headers.set("x-robots-tag", "noindex, nofollow");
+      return res;
+    }
+    const res = NextResponse.next({ request: { headers: privado } });
+    res.headers.set("x-robots-tag", "noindex, nofollow");
+    return res;
+  }
+
   // education.* → reescreve para /mentoria{path}.
   if (host.startsWith("education.")) {
     // Se já vier prefixado por algum motivo, deixa fluir.

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, Manrope } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import Script from "next/script";
+import { headers } from "next/headers";
 import "./globals.css";
 import { WhatsAppFloat } from "./components/WhatsAppFloat";
 
@@ -67,30 +68,40 @@ export const viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  /* Área privada (painel comercial): o middleware marca a requisição e aqui
+     suprimimos rastreamento e os elementos de site público. Sem isso, o
+     painel entraria nas gravações do Clarity — vazando dado interno e
+     sujando as métricas que usamos para medir a /raiox. */
+  const privado = (await headers()).get("x-midlej-private") === "1";
+
   return (
     <html
       lang="pt-BR"
       className={`${bricolage.variable} ${manrope.variable} h-full antialiased`}
     >
-      <GoogleTagManager gtmId="GTM-MT5BHRDW" />
-      {/* Microsoft Clarity — heatmaps + gravações de sessão (site-wide).
+      {!privado && <GoogleTagManager gtmId="GTM-MT5BHRDW" />}
+      {/* Microsoft Clarity — heatmaps + gravações de sessão (site público).
           Carrega após a hidratação (zero impacto no First Paint). */}
-      <Script
-        id="ms-clarity"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xphq0aw5wg");`,
-        }}
-      />
+      {!privado && (
+        <Script
+          id="ms-clarity"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xphq0aw5wg");`,
+          }}
+        />
+      )}
       <body className="min-h-full flex flex-col">
-        <a href="#main" className="skip-link">
-          Pular para o conteúdo
-        </a>
+        {!privado && (
+          <a href="#main" className="skip-link">
+            Pular para o conteúdo
+          </a>
+        )}
         {children}
-        <WhatsAppFloat />
+        {!privado && <WhatsAppFloat />}
       </body>
     </html>
   );
