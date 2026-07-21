@@ -77,10 +77,17 @@ export function middleware(request: NextRequest) {
     const privado = new Headers(request.headers);
     privado.set("x-midlej-private", "1");
 
-    /* O segmento secreto é só a chave — a página em si vive em /dashboard.
+    /* O segmento secreto é só a chave — as páginas vivem sob /dashboard.
        Rewrite (não redirect): a URL na barra continua com o segredo, e o
-       endereço interno nunca é revelado. */
-    url.pathname = "/dashboard";
+       endereço interno nunca é revelado.
+         /dashboard/<segredo>            → /dashboard
+         /dashboard/<segredo>/comercial  → /dashboard/comercial
+       O token vai num header para o layout montar os links da navegação
+       (a página não conhece o segredo de outra forma). */
+    const resto = (host.startsWith("painel.") ? seg.slice(1) : seg.slice(2)).join("/");
+    privado.set("x-midlej-token", SEGREDO);
+
+    url.pathname = resto ? `/dashboard/${resto}` : "/dashboard";
     const res = NextResponse.rewrite(url, { request: { headers: privado } });
     res.headers.set("x-robots-tag", "noindex, nofollow");
     return res;
