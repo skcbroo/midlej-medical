@@ -84,14 +84,14 @@ export default function SeguroPage() {
       {/* ── Agitação ── */}
       <section className="bg-white">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-          <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-            <div className="col-span-12 md:col-span-5">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
+            <div className="col-span-full md:col-span-5">
               <SectionTag label="O que ninguém te contou" />
               <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[18ch] mb-8 md:mb-0" style={{ color: "#2E4659" }}>
                 O seguro vitalício foi projetado para lucrar, não para proteger.
               </h2>
             </div>
-            <div className="col-span-12 md:col-span-7">
+            <div className="col-span-full md:col-span-7">
               <p className="text-[1.0625rem] leading-[1.65] mb-10 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
                 Três verdades que as seguradoras evitam explicar — e que fazem toda a diferença ao longo de 30 anos de pagamentos.
               </p>
@@ -176,8 +176,8 @@ export default function SeguroPage() {
       {/* ── Solução ── */}
       <section style={{ backgroundColor: "#4a6b8c" }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-          <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
-            <div className="col-span-12 md:col-span-7">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+            <div className="col-span-full md:col-span-7">
               <SectionTag label="Nossa abordagem" dark />
               <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight text-white mb-6 max-w-[22ch]">
                 Alugar a proteção. Ser dono do patrimônio.
@@ -189,7 +189,7 @@ export default function SeguroPage() {
                 Não vendemos seguro. Assessoramos a decisão. Por isso somos pagos por honorários fixos — não por comissão de apólice.
               </p>
             </div>
-            <div className="col-span-12 md:col-span-4 md:col-start-9">
+            <div className="col-span-full md:col-span-4 md:col-start-9">
               <a
                 href="#contato"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold bg-white hover:bg-[#EDEFF2] transition-colors duration-200"
@@ -205,14 +205,14 @@ export default function SeguroPage() {
       {/* ── Como funciona ── */}
       <section className="bg-white">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-          <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-            <div className="col-span-12 md:col-span-4">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
+            <div className="col-span-full md:col-span-4">
               <SectionTag label="Como funciona" />
               <h2 className="text-[clamp(1.625rem,3vw,2.5rem)] font-bold leading-[1.04] tracking-tight max-w-[16ch]" style={{ color: "#2E4659" }}>
                 Três etapas. Um plano integrado.
               </h2>
             </div>
-            <div className="col-span-12 md:col-span-8 md:col-start-5">
+            <div className="col-span-full md:col-span-8 md:col-start-5">
               <ol className="flex flex-col divide-y divide-[#EDEFF2]">
                 {[
                   {

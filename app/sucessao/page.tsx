@@ -84,14 +84,14 @@ export default function SucessaoPage() {
       {/* ── Agitação ── */}
       <section className="bg-white">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-          <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-            <div className="col-span-12 md:col-span-5">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
+            <div className="col-span-full md:col-span-5">
               <SectionTag label="O custo de não planejar" />
               <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[18ch] mb-8 md:mb-0" style={{ color: "#2E4659" }}>
                 O inventário é o imposto que sua família paga pelo que você não fez.
               </h2>
             </div>
-            <div className="col-span-12 md:col-span-7">
+            <div className="col-span-full md:col-span-7">
               <p className="text-[1.0625rem] leading-[1.65] mb-10 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
                 Três números que a maioria das famílias só descobre quando o processo já começou — e não há mais como voltar atrás.
               </p>
@@ -176,8 +176,8 @@ export default function SucessaoPage() {
       {/* ── Solução ── */}
       <section style={{ backgroundColor: "#4a6b8c" }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-          <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
-            <div className="col-span-12 md:col-span-7">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+            <div className="col-span-full md:col-span-7">
               <SectionTag label="Nossa abordagem" dark />
               <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight text-white mb-6 max-w-[22ch]">
                 Constituir em vida o que o inventário dissolve depois da morte.
@@ -189,7 +189,7 @@ export default function SucessaoPage() {
                 A MIDLEJ reúne consultoria financeira e jurídica para entregar o planejamento integrado — finanças e estrutura patrimonial sob o mesmo teto.
               </p>
             </div>
-            <div className="col-span-12 md:col-span-4 md:col-start-9">
+            <div className="col-span-full md:col-span-4 md:col-start-9">
               <a
                 href="#contato"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold bg-white hover:bg-[#EDEFF2] transition-colors duration-200"
@@ -205,14 +205,14 @@ export default function SucessaoPage() {
       {/* ── Como funciona ── */}
       <section className="bg-white">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-          <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-            <div className="col-span-12 md:col-span-4">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
+            <div className="col-span-full md:col-span-4">
               <SectionTag label="Como funciona" />
               <h2 className="text-[clamp(1.625rem,3vw,2.5rem)] font-bold leading-[1.04] tracking-tight max-w-[16ch]" style={{ color: "#2E4659" }}>
                 Três etapas. Uma transição organizada.
               </h2>
             </div>
-            <div className="col-span-12 md:col-span-8 md:col-start-5">
+            <div className="col-span-full md:col-span-8 md:col-start-5">
               <ol className="flex flex-col divide-y divide-[#EDEFF2]">
                 {[
                   {

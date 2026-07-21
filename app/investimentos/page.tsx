@@ -130,9 +130,9 @@ function Marcos() {
         <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-tight tracking-tight mb-12 md:mb-16" style={{ color: "#2E4659" }}>
           Modelo sem conflito de interesse.
         </h2>
-        <div className="grid grid-cols-12 gap-x-8 gap-y-12 border-t border-[#EDEFF2] pt-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12 border-t border-[#EDEFF2] pt-10">
           {items.map((m) => (
-            <div key={m.k} className="col-span-12 md:col-span-6 lg:col-span-3 flex flex-col">
+            <div key={m.k} className="col-span-full md:col-span-6 lg:col-span-3 flex flex-col">
               <p className="text-[0.66rem] font-semibold tracking-[0.16em] uppercase" style={{ color: "#6B7B8D" }}>
                 {m.k}
               </p>
@@ -162,14 +162,14 @@ function Manifesto() {
         <h2 className="text-[clamp(2rem,4.2vw,3.75rem)] font-bold leading-[1.08] tracking-tight max-w-[26ch]" style={{ color: "#2E4659" }}>
           Investir não é comprar um produto. É organizar uma decisão dentro de um patrimônio que já existe.
         </h2>
-        <div className="mt-14 pt-10 border-t border-[#EDEFF2] grid grid-cols-12 gap-8">
-          <p className="col-span-12 md:col-span-6 text-[1.0625rem] leading-[1.7]" style={{ color: "#6B7B8D" }}>
+        <div className="mt-14 pt-10 border-t border-[#EDEFF2] grid grid-cols-1 md:grid-cols-12 gap-8">
+          <p className="col-span-full md:col-span-6 text-[1.0625rem] leading-[1.7]" style={{ color: "#6B7B8D" }}>
             A maior parte dos investidores é atendida por instituições
             remuneradas pela distribuição de produtos. Nós seguimos outro
             modelo: somos remunerados exclusivamente pelo cliente e não
             recebemos rebates ou comissões.
           </p>
-          <p className="col-span-12 md:col-span-6 text-[1.0625rem] leading-[1.7]" style={{ color: "#6B7B8D" }}>
+          <p className="col-span-full md:col-span-6 text-[1.0625rem] leading-[1.7]" style={{ color: "#6B7B8D" }}>
             Isso garante independência para recomendar o que faz sentido
             para o patrimônio da família — e não para terceiros.
           </p>
@@ -187,10 +187,10 @@ function Composicao() {
   return (
     <section style={{ backgroundColor: "#4a6b8c" }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
 
           {/* Esquerda: título + texto + lista */}
-          <div className="col-span-12 md:col-span-5 order-2 md:order-1">
+          <div className="col-span-full md:col-span-5 order-2 md:order-1">
             <SectionTag label="Composição" dark />
             <h2 className="text-[clamp(2rem,3.6vw,3.25rem)] font-bold leading-[1.05] tracking-tight text-white">
               Cada classe<br />tem um papel.
@@ -229,7 +229,7 @@ function Composicao() {
           </div>
 
           {/* Direita: animação */}
-          <div className="col-span-12 md:col-span-7 order-1 md:order-2">
+          <div className="col-span-full md:col-span-7 order-1 md:order-2">
             <div className="w-full aspect-square md:aspect-[4/3]">
               <AllocationRings className="w-full h-full" color="white" markerColor="#dce8f0" />
             </div>
@@ -271,8 +271,8 @@ function ComoConduzimos() {
   return (
     <section style={{ backgroundColor: "#F5F7FA" }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
-        <div className="grid grid-cols-12 gap-8 mb-10 md:mb-14">
-          <div className="col-span-12 md:col-span-9">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10 md:mb-14">
+          <div className="col-span-full md:col-span-9">
             <SectionTag label="Como conduzimos" />
             <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[20ch]" style={{ color: "#2E4659" }}>
               Quatro frentes ativas ao mesmo tempo.
@@ -287,19 +287,19 @@ function ComoConduzimos() {
           {steps.map((s) => (
             <li
               key={s.n}
-              className="border-b border-[#EDEFF2] py-7 md:py-9 grid grid-cols-12 gap-6 items-baseline"
+              className="border-b border-[#EDEFF2] py-7 md:py-9 grid grid-cols-1 md:grid-cols-12 gap-6 items-baseline"
             >
-              <div className="col-span-12 md:col-span-2">
+              <div className="col-span-full md:col-span-2">
                 <span className="text-[clamp(1.875rem,3vw,2.5rem)] font-light leading-none tabular-nums" style={{ color: "#4a6b8c" }}>
                   {s.n}
                 </span>
               </div>
-              <div className="col-span-12 md:col-span-4">
+              <div className="col-span-full md:col-span-4">
                 <h3 className="text-[clamp(1.25rem,1.8vw,1.625rem)] font-bold leading-[1.15] tracking-tight" style={{ color: "#2E4659" }}>
                   {s.title}
                 </h3>
               </div>
-              <div className="col-span-12 md:col-span-6">
+              <div className="col-span-full md:col-span-6">
                 <p className="text-[0.95rem] leading-[1.6] max-w-[52ch]" style={{ color: "#6B7B8D" }}>
                   {s.body}
                 </p>
@@ -320,10 +320,10 @@ function TempoTrabalhando() {
   return (
     <section className="bg-white">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
 
           {/* Esquerda: texto + stats */}
-          <div className="col-span-12 md:col-span-5 order-2 md:order-1">
+          <div className="col-span-full md:col-span-5 order-2 md:order-1">
             <SectionTag label="O ativo principal" />
             <h2 className="text-[clamp(1.875rem,3.2vw,2.75rem)] font-bold leading-[1.04] tracking-tight" style={{ color: "#2E4659" }}>
               O tempo trabalhando.
@@ -365,7 +365,7 @@ function TempoTrabalhando() {
           </div>
 
           {/* Direita: animação */}
-          <div className="col-span-12 md:col-span-7 order-1 md:order-2">
+          <div className="col-span-full md:col-span-7 order-1 md:order-2">
             <div className="w-full aspect-[4/3]">
               <CompoundCurve className="w-full h-full" />
             </div>
@@ -403,19 +403,19 @@ function ParaQuem() {
   return (
     <section id="para-quem" style={{ backgroundColor: "#F5F7FA" }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-8 mb-16 md:mb-20">
-          <div className="col-span-12 md:col-span-9">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16 md:mb-20">
+          <div className="col-span-full md:col-span-9">
             <SectionTag label="Para quem" />
             <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[22ch]" style={{ color: "#2E4659" }}>
               Quem chega geralmente já construiu — e quer organizar.
             </h2>
           </div>
         </div>
-        <div className="grid grid-cols-12 gap-x-8 gap-y-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12">
           {profiles.map((p) => (
             <article
               key={p.tag}
-              className="col-span-12 md:col-span-6 border-t border-[#EDEFF2] pt-8"
+              className="col-span-full md:col-span-6 border-t border-[#EDEFF2] pt-8"
             >
               <p className="text-[0.72rem] font-semibold tracking-[0.18em] uppercase" style={{ color: "#4a6b8c" }}>
                 {p.tag}
@@ -460,11 +460,11 @@ function Depoimentos() {
         <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[22ch] text-white">
           Identidades preservadas, contexto real.
         </h2>
-        <div className="mt-16 md:mt-20 grid grid-cols-12 gap-x-8 gap-y-12">
+        <div className="mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12">
           {quotes.map((q, i) => (
             <figure
               key={i}
-              className="col-span-12 md:col-span-4 border-t border-white/10 pt-8"
+              className="col-span-full md:col-span-4 border-t border-white/10 pt-8"
             >
               <blockquote className="text-[1.125rem] font-medium leading-[1.4] text-white">
                 {q.body}
@@ -515,14 +515,14 @@ function FAQSection() {
   return (
     <section className="bg-white">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-10 md:gap-16">
-          <div className="col-span-12 md:col-span-4">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
+          <div className="col-span-full md:col-span-4">
             <SectionTag label="Dúvidas frequentes" />
             <h2 className="text-[clamp(1.625rem,3vw,2.5rem)] font-bold leading-[1.04] tracking-tight max-w-[16ch]" style={{ color: "#2E4659" }}>
               O que vale saber antes da primeira conversa.
             </h2>
           </div>
-          <div className="col-span-12 md:col-span-8 md:col-start-5">
+          <div className="col-span-full md:col-span-8 md:col-start-5">
             <ul className="border-t border-[#EDEFF2]">
               {faqs.map((f, i) => (
                 <li key={i} className="border-b border-[#EDEFF2]">
@@ -561,8 +561,8 @@ function OutrasFrentes() {
   return (
     <section style={{ backgroundColor: "#F5F7FA" }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        <div className="grid grid-cols-12 gap-8 items-end">
-          <div className="col-span-12 md:col-span-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+          <div className="col-span-full md:col-span-8">
             <SectionTag label="Hub Midlej Capital" />
             <h2 className="text-[clamp(1.625rem,3vw,2.5rem)] font-bold leading-[1.04] tracking-tight max-w-[26ch]" style={{ color: "#2E4659" }}>
               Investimentos é uma das frentes da banca.
@@ -572,7 +572,7 @@ function OutrasFrentes() {
               Operadas sob o mesmo critério, num único interlocutor.
             </p>
           </div>
-          <div className="col-span-12 md:col-span-4 flex md:justify-end">
+          <div className="col-span-full md:col-span-4 flex md:justify-end">
             <Link
               href="/"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200"
@@ -599,8 +599,8 @@ function EspacoSection() {
         <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-tight tracking-tight mb-8" style={{ color: "#2E4659" }}>
           O ambiente onde o trabalho acontece.
         </h2>
-        <div className="grid grid-cols-12 gap-3">
-          <div className="col-span-12 md:col-span-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+          <div className="col-span-full md:col-span-8">
             <Image
               src="/fotos_escritorio/4.jpeg"
               alt="Espaço Midlej Capital"
@@ -609,7 +609,7 @@ function EspacoSection() {
               className="w-full h-[480px] object-cover rounded-xl"
             />
           </div>
-          <div className="col-span-12 md:col-span-4 flex flex-col gap-3">
+          <div className="col-span-full md:col-span-4 flex flex-col gap-3">
             <Image
               src="/fotos_escritorio/2.jpeg"
               alt="Sala de reunião Midlej Capital"
@@ -625,7 +625,7 @@ function EspacoSection() {
               className="w-full h-[232px] object-cover rounded-xl"
             />
           </div>
-          <div className="col-span-12">
+          <div className="col-span-full">
             <Image
               src="/fotos_escritorio/1.jpeg"
               alt="Midlej Capital"
@@ -661,8 +661,8 @@ function Closing() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
 
         {/* ── CTA principal ── */}
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start pb-20 md:pb-24">
-          <div className="col-span-12 md:col-span-5">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start pb-20 md:pb-24">
+          <div className="col-span-full md:col-span-5">
             <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.50)" }}>
               Primeira conversa
             </p>
@@ -678,7 +678,7 @@ function Closing() {
               Somente depois disso discutimos caminhos e soluções.
             </p>
           </div>
-          <div className="col-span-12 md:col-span-6 md:col-start-7">
+          <div className="col-span-full md:col-span-6 md:col-start-7">
             <HubLeadForm tone="dark" submitLabel="Solicitar reunião" origin="Investimentos Midlej Capital" />
           </div>
         </div>
@@ -687,10 +687,10 @@ function Closing() {
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }} className="mb-12 md:mb-14" />
 
         {/* ── Footer info ── */}
-        <div className="grid grid-cols-12 gap-8 items-start mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-10">
 
           {/* Logo + tagline */}
-          <div className="col-span-12 md:col-span-4">
+          <div className="col-span-full md:col-span-4">
             <Image
               src="/midlej_capital.png"
               alt="Midlej Capital"
@@ -705,7 +705,7 @@ function Closing() {
           </div>
 
           {/* Links */}
-          <div className="col-span-6 md:col-span-3 md:col-start-6">
+          <div className="col-span-full md:col-span-6 md:col-span-3 md:col-start-6">
             <p className="text-[0.6rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.35)" }}>
               Soluções
             </p>
@@ -721,7 +721,7 @@ function Closing() {
           </div>
 
           {/* Contato */}
-          <div className="col-span-6 md:col-span-4">
+          <div className="col-span-full md:col-span-6 md:col-span-4">
             <p className="text-[0.6rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.35)" }}>
               Contato
             </p>

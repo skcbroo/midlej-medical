@@ -111,14 +111,14 @@ export default function ConsorcioPage() {
       {/* ── O que é — reframe emocional ── */}
       <section className="bg-white">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-          <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-            <div className="col-span-12 md:col-span-5">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
+            <div className="col-span-full md:col-span-5">
               <SectionTag label="O que é, de verdade" />
               <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[16ch]" style={{ color: "#2E4659" }}>
                 Não é compra parcelada. É um plano de conquista.
               </h2>
             </div>
-            <div className="col-span-12 md:col-span-7">
+            <div className="col-span-full md:col-span-7">
               <p className="text-[1.125rem] leading-[1.65] mb-6 max-w-[52ch]" style={{ color: "#4a6b8c" }}>
                 Imagine ter, no momento certo, o valor à vista para comprar o imóvel ou o ativo real que você quer — sem ter pago um centavo de juros para chegar lá.
               </p>
@@ -184,8 +184,8 @@ export default function ConsorcioPage() {
       {/* ── O custo invisível dos juros — dor emocional ── */}
       <section style={{ backgroundColor: "#4a6b8c" }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-          <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
-            <div className="col-span-12 md:col-span-7">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+            <div className="col-span-full md:col-span-7">
               <SectionTag label="O custo invisível" dark />
               <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight text-white mb-6 max-w-[22ch]">
                 No financiamento, parte do seu sonho vira juros.
@@ -197,7 +197,7 @@ export default function ConsorcioPage() {
                 O consórcio inverte essa lógica: sem juros, com uma taxa de administração definida e transparente, o seu esforço fica concentrado onde importa — em virar patrimônio seu.
               </p>
             </div>
-            <div className="col-span-12 md:col-span-4 md:col-start-9">
+            <div className="col-span-full md:col-span-4 md:col-start-9">
               <div className="rounded-2xl p-8" style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.14)" }}>
                 <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.45)" }}>
                   A pergunta que importa

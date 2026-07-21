@@ -48,8 +48,8 @@ export function LPClosing({
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
 
         {/* CTA + form */}
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start pb-20 md:pb-24">
-          <div className="col-span-12 md:col-span-5">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start pb-20 md:pb-24">
+          <div className="col-span-full md:col-span-5">
             <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.50)" }}>
               {eyebrow}
             </p>
@@ -60,7 +60,7 @@ export function LPClosing({
               {body}
             </p>
           </div>
-          <div className="col-span-12 md:col-span-6 md:col-start-7">
+          <div className="col-span-full md:col-span-6 md:col-start-7">
             {contact === "whatsapp" && whatsappHref ? (
               <div className="flex flex-col gap-5">
                 <a
@@ -91,8 +91,8 @@ export function LPClosing({
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }} className="mb-12 md:mb-14" />
 
         {/* Footer info */}
-        <div className="grid grid-cols-12 gap-8 items-start mb-10">
-          <div className="col-span-12 md:col-span-4">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-10">
+          <div className="col-span-full md:col-span-4">
             <Image
               src="/midlej_capital.png"
               alt="Midlej Capital"
@@ -106,7 +106,7 @@ export function LPClosing({
             </p>
           </div>
 
-          <div className="col-span-6 md:col-span-3 md:col-start-6">
+          <div className="col-span-full md:col-span-6 md:col-span-3 md:col-start-6">
             <p className="text-[0.6rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.35)" }}>
               Soluções
             </p>
@@ -121,7 +121,7 @@ export function LPClosing({
             </ul>
           </div>
 
-          <div className="col-span-6 md:col-span-4">
+          <div className="col-span-full md:col-span-6 md:col-span-4">
             <p className="text-[0.6rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.35)" }}>
               Contato
             </p>

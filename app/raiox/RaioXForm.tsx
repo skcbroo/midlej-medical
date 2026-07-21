@@ -39,7 +39,12 @@ function maskWhatsapp(raw: string): string {
 
 const TOTAL_STEPS = 2; // 0 = situação, 1 = contato (submit)
 
-export function RaioXForm() {
+/**
+ * `instanceId` prefixa os ids dos campos. A página renderiza o form duas vezes
+ * (hero e fechamento) — sem o prefixo os ids colidiriam e cada <label> apontaria
+ * para o campo da primeira instância.
+ */
+export function RaioXForm({ instanceId = "rx" }: { instanceId?: string }) {
   const [state, action, pending] = useActionState(submitRaioXLead, initial);
   const [enrichState, enrichAction, enrichPending] = useActionState(submitRaioXLead, initial);
   const enrichFormRef = useRef<HTMLFormElement>(null);
@@ -137,7 +142,7 @@ export function RaioXForm() {
           Contato recebido ✓
         </p>
         <h3 className="text-[1.25rem] font-bold leading-snug mb-2" style={{ color: "#2E4659" }}>
-          Retornamos pelo WhatsApp em até 4 horas úteis.
+          Nossa equipe entrará em contato pelo WhatsApp.
         </h3>
         <p className="text-[0.9rem] leading-[1.6] mb-6" style={{ color: "#6B7B8D" }}>
           Para já preparar o seu Raio-X e priorizar o atendimento, responda mais duas —
@@ -280,11 +285,11 @@ export function RaioXForm() {
           </h3>
 
           <div>
-            <label htmlFor="rx-name" className={labelClass} style={{ color: "#4a6b8c" }}>
+            <label htmlFor={`${instanceId}-name`} className={labelClass} style={{ color: "#4a6b8c" }}>
               Nome completo
             </label>
             <input
-              id="rx-name"
+              id={`${instanceId}-name`}
               name="name"
               type="text"
               autoComplete="name"
@@ -299,11 +304,11 @@ export function RaioXForm() {
           </div>
 
           <div>
-            <label htmlFor="rx-whatsapp" className={labelClass} style={{ color: "#4a6b8c" }}>
+            <label htmlFor={`${instanceId}-whatsapp`} className={labelClass} style={{ color: "#4a6b8c" }}>
               WhatsApp
             </label>
             <input
-              id="rx-whatsapp"
+              id={`${instanceId}-whatsapp`}
               name="whatsapp"
               type="tel"
               inputMode="tel"
@@ -321,11 +326,11 @@ export function RaioXForm() {
           </div>
 
           <div>
-            <label htmlFor="rx-email" className={labelClass} style={{ color: "#4a6b8c" }}>
+            <label htmlFor={`${instanceId}-email`} className={labelClass} style={{ color: "#4a6b8c" }}>
               E-mail
             </label>
             <input
-              id="rx-email"
+              id={`${instanceId}-email`}
               name="email"
               type="email"
               inputMode="email"
@@ -356,13 +361,13 @@ export function RaioXForm() {
             className="inline-flex items-center justify-center gap-2.5 px-6 py-4 min-h-[52px] rounded-lg text-[1rem] font-semibold text-white shadow-md disabled:opacity-50 transition-colors duration-200"
             style={{ backgroundColor: "#4a6b8c" }}
           >
-            {pending ? "Enviando…" : "Quero o Raio-X da minha carteira"}
+            {pending ? "Enviando…" : "Quero descobrir onde investir"}
             <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden>
               <path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
           <p className="text-[0.75rem] leading-relaxed text-center" style={{ color: "#9BA8B5" }}>
-            Retorno pelo WhatsApp em até 4 horas úteis. Sem compromisso.
+            Retorno pelo WhatsApp. Sem compromisso.
           </p>
         </form>
       )}

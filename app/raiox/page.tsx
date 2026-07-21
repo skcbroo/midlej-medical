@@ -5,6 +5,8 @@ import { InvestimentosHeader } from "../_hub/InvestimentosHeader";
 import { SmoothAnchor } from "../_hub/SmoothAnchor";
 import { StickyCTA } from "../components/StickyCTA";
 import { RaioXForm } from "./RaioXForm";
+import { PonteJK } from "./PonteJK";
+import { FundoProva } from "./FundoProva";
 
 /* ================================================================
    /raiox — LP de resposta direta (serviços financeiros)
@@ -27,7 +29,6 @@ import { RaioXForm } from "./RaioXForm";
    CVM_CONSULTA_URL: trocar pela deep-link da consulta se preferir.
    ---------------------------------------------------------------- */
 const CVM_REGISTRO = "CVM nº 004770-8";
-const CVM_CONSULTA_URL = "https://www.gov.br/cvm";
 const RAZAO_SOCIAL = "Midlej Consultoria de Valores Mobiliários LTDA";
 const CNPJ = "67.608.789/0001-39";
 
@@ -53,34 +54,79 @@ const RESPONSAVEL = {
    grupo de anúncios correspondente no Google Ads (utm_content).
    ---------------------------------------------------------------- */
 type Dor = "heranca" | "parado" | "insatisfeito" | "metodo";
+/* Headlines curtas: o hero agora é de duas colunas (texto + formulário) e
+   títulos longos quebravam em excesso na coluna estreita. */
 const DOR_VARIANTS: Record<Dor, { eyebrow: string; h1: string; sub: string }> = {
   heranca: {
     eyebrow: "Herança · Venda de imóvel · Liquidez",
-    h1: "Recebeu uma herança e não sabe onde investir? A primeira alocação é a que mais pesa — descubra a sua no Raio-X.",
-    sub: "Um valor relevante ingressou de uma só vez e a decisão certa depende do seu caso, não de uma dica genérica. Solicite um Raio-X gratuito da sua carteira — consultoria independente, remunerada por você, não por comissão.",
+    h1: "Recebeu uma herança? Nós te mostramos onde investir.",
+    sub: "A primeira alocação é a que mais pesa. Peça o Raio-X da sua carteira — somos remunerados por você, não por comissão de produto.",
   },
   parado: {
     eyebrow: "Capital parado no banco",
-    h1: "Dinheiro parado no banco? Cada mês no lugar errado é retorno que não volta — e o certo para você, o Raio-X revela.",
-    sub: "Poupança, CDB do banco ou conta corrente rendendo abaixo do potencial enquanto a decisão é adiada. Onde esse dinheiro deveria estar depende do seu caso — solicite um Raio-X gratuito da sua carteira. Consultoria independente, remunerada por você, não por comissão.",
+    h1: "Dinheiro parado no banco? Nós te mostramos onde investir.",
+    sub: "Cada mês no lugar errado é retorno que não volta. Peça o Raio-X da sua carteira — somos remunerados por você, não por comissão de produto.",
   },
   insatisfeito: {
     eyebrow: "Segunda opinião · Sem conflito",
-    h1: "Sente que o banco vende, mas não orienta? Peça uma segunda opinião sem conflito de interesse.",
-    sub: "Se você suspeita que paga taxas em excesso e é direcionado a produtos, um Raio-X gratuito da sua carteira mostra o que ajustar. Consultoria independente, remunerada por você, não por comissão.",
+    h1: "Seu banco vende, mas não orienta? Nós te mostramos onde investir.",
+    sub: "Uma segunda opinião sobre a carteira que você já tem. Peça o Raio-X — somos remunerados por você, não por comissão de produto.",
   },
   metodo: {
     eyebrow: "Método · Responsável por cada recomendação",
-    h1: "Você já investe. Falta um método e um responsável por cada recomendação.",
-    sub: "Uma tese por trás de cada posição e alguém que responde por ela — não um algoritmo genérico. Solicite um Raio-X gratuito da sua carteira: consultoria independente, remunerada por você, não por comissão.",
+    h1: "Você já investe. Falta método — nós te mostramos o seu.",
+    sub: "Uma tese por trás de cada posição e alguém que responde por ela. Peça o Raio-X da sua carteira — somos remunerados por você, não por comissão de produto.",
   },
 };
 
 const HERO_DEFAULT = {
-  eyebrow: "Consultoria de investimentos · Registro CVM",
-  h1: "Onde investir seu dinheiro? A resposta honesta é: depende de você.",
-  sub: "Não existe “melhor investimento” universal — existe a carteira certa para o seu momento, seus objetivos e o que você já tem hoje. O Raio-X da Midlej mostra a sua, de graça e sem compromisso. Consultoria registrada na CVM, remunerada por você — não por comissão.",
+  eyebrow: "Consultoria de investimentos",
+  h1: "Onde investir seu dinheiro? Nós te mostramos.",
+  sub: "Não existe “melhor investimento” universal — existe a carteira certa para o seu momento. O Raio-X da Midlej mostra a sua, sem custo e sem compromisso. Somos remunerados por você, não por comissão de produto.",
 };
+
+/* Números institucionais (mesma fonte da home) — barra de credibilidade do hero. */
+const HERO_STATS = [
+  { v: "R$ 120M+", k: "em patrimônio acompanhado" },
+  { v: "85+", k: "famílias atendidas" },
+];
+
+/* ----------------------------------------------------------------
+   Equipe — mesma fonte da home (app/page.tsx). Substitui o antigo
+   bloco de responsável único: a página passa a mostrar o time inteiro.
+   ---------------------------------------------------------------- */
+const TEAM = [
+  {
+    name: "Lucas Midlej",
+    role: "Sócio-fundador",
+    bio: "Advogado com atuação focada no cruzamento entre direito e mercado financeiro. Especialista em planejamento patrimonial, estruturas societárias e assessoria estratégica para investidores, empresários e famílias.",
+    photo: "/lucas.jpeg",
+  },
+  {
+    name: "Breno Barreto",
+    role: "Sócio",
+    bio: "Responsável pela operação e governança da consultoria. Coordena processos, inovação e segurança das estruturas implementadas, garantindo eficiência e conformidade em cada solução entregue.",
+    photo: "/breno.jpeg",
+  },
+  {
+    name: "Allan Guilherme",
+    role: "Sócio · Consultor de Investimentos",
+    bio: "Atua em análise de investimentos, alocação de ativos e estratégias de preservação e crescimento patrimonial para pessoas físicas e jurídicas.",
+    photo: "/allan2.jpeg",
+  },
+  {
+    name: "Henrique Sgarioni",
+    role: "Gestor Comercial",
+    bio: "MBA em Finanças, Investimentos e Offshore. Especialista em soluções nacionais e internacionais, com foco em planejamento patrimonial, proteção de patrimônio e relacionamento com clientes.",
+    photo: "/henrique.jpeg",
+  },
+  {
+    name: "Guilherme José",
+    role: "Diretor de Tecnologia",
+    bio: "Graduado na área de tecnologia pela Universidade de Brasília. Responsável pelos sistemas, automação de processos e coordenação de projetos da Midlej — trazendo rigor analítico e visão sistêmica para a operação da consultoria.",
+    photo: "/Guilherme.jpeg",
+  },
+];
 
 function resolveDor(raw: string | string[] | undefined): Dor | null {
   const v = Array.isArray(raw) ? raw[0] : raw;
@@ -127,12 +173,12 @@ export async function generateMetadata({
       absolute: "Raio-X gratuito da sua carteira de investimentos | Midlej Capital",
     },
     description:
-      "Herança, venda de imóvel ou capital parado? Peça o Raio-X gratuito da sua carteira. Consultoria registrada na CVM, remunerada por você, sem comissão.",
+      "Herança, venda de imóvel ou capital parado? Nós te mostramos onde investir. Peça o Raio-X da sua carteira — somos remunerados por você, não por comissão.",
     alternates: { canonical: "/raiox" },
     openGraph: {
       title: "Raio-X gratuito da sua carteira de investimentos",
       description:
-        "Segunda opinião independente antes de decidir onde investir. Consultoria registrada na CVM, sem comissão. Análise gratuita.",
+        "Segunda opinião independente antes de decidir onde investir. Somos remunerados por você, não por comissão de produto.",
       type: "website",
       locale: "pt_BR",
       url: "https://midlejcapital.com.br/raiox",
@@ -141,7 +187,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: "Raio-X gratuito da sua carteira de investimentos",
       description:
-        "Segunda opinião independente antes de decidir onde investir. Consultoria registrada na CVM, sem comissão.",
+        "Segunda opinião independente antes de decidir onde investir. Somos remunerados por você, não por comissão de produto.",
     },
     // Variantes de campanha não são indexadas (evita conteúdo duplicado);
     // a canonical acima consolida tudo em /raiox.
@@ -182,16 +228,20 @@ export default async function RaioXPage({
 
       <SmoothAnchor />
       {/* Header minimal: sem menu, logo aponta p/ o topo, CTA unificado (Eixo 3) */}
-      <InvestimentosHeader hideNav ctaLabel="Quero meu Raio-X gratuito" logoHref="#top" />
+      <InvestimentosHeader hideNav ctaLabel="Descubra onde investir" logoHref="#top" />
 
-      {/* Funil de aquisição: O QUÊ (hero+resposta) → COMO → POR QUÊ → QUEM */}
+      {/* Ordem espelhada na estrutura da Assessoria Alpha (ref. 21/07/2026):
+          captura no hero → prova própria → quem somos → método → o resto.
+          A prova e o time sobem para logo depois da captura; o argumento
+          longo (dor, para quem, FAQ) vai para o fim. Sem depoimentos de
+          cliente — ainda não temos. */}
       <Hero hero={hero} />
       <Resposta />
+      <TrackRecord />
+      <Equipe />
       <ComoFunciona />
       <Dor />
-      <TrackRecord />
       <PorQueConfiar />
-      <Autoridade />
       <ParaQuem />
       <FAQSection />
       <Closing />
@@ -230,44 +280,65 @@ function SectionTag({ label, dark = false }: { label: string; dark?: boolean }) 
 
 function Hero({ hero }: { hero: { eyebrow: string; h1: string; sub: string } }) {
   return (
-    <section id="top" className="relative min-h-screen flex items-center">
-      <Image
-        src="/fotos_escritorio/2.jpeg"
-        alt="Espaço Midlej Capital"
-        fill
-        className="object-cover object-center"
-        priority
+    <section
+      id="top"
+      className="relative flex items-center overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(160deg, #16242F 0%, #223849 45%, #2E4659 100%)",
+      }}
+    >
+      {/* Ponte JK — movimento e âncora de território (Brasília) */}
+      <PonteJK />
+
+      {/* Halo atrás do formulário — puxa o olho para a captura */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none z-[2]"
+        style={{
+          background:
+            "radial-gradient(58% 52% at 78% 38%, rgba(143,179,212,0.20) 0%, rgba(143,179,212,0) 70%)",
+        }}
       />
-      <div className="absolute inset-0" style={{ backgroundColor: "rgba(46,70,89,0.62)" }} />
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 pt-40 pb-24 md:pt-56 md:pb-32">
-        <span className="inline-block text-[0.7rem] font-semibold tracking-widest uppercase mb-6 text-white/70">
-          {hero.eyebrow}
-        </span>
-        <h1 className="text-[clamp(2.25rem,5vw,4.25rem)] font-bold leading-[1.05] tracking-tight mb-6 text-white max-w-[20ch]">
-          {hero.h1}
-        </h1>
-        <p className="text-[1.0625rem] leading-[1.65] mb-9 max-w-[52ch] text-white/80">
-          {hero.sub}
-        </p>
-        {/* CTA único e proeminente (Eixo 3 — sem rotas de fuga concorrentes) */}
-        <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
-          <Link
-            href="#contato"
-            className="inline-flex items-center gap-2 px-7 py-4 rounded-lg text-[0.95rem] font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200 shadow-lg"
-          >
-            Descobrir onde investir <Arrow />
-          </Link>
-          <Link
-            href="#track"
-            className="inline-flex items-center gap-1.5 text-[0.9rem] font-medium text-white/75 hover:text-white underline underline-offset-4 transition-colors duration-200"
-          >
-            Ver como investimos
-          </Link>
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 pt-28 pb-16 md:pt-40 md:pb-24">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center">
+
+          {/* Esquerda: promessa */}
+          <div className="col-span-full md:col-span-6">
+            <span className="inline-block text-[0.7rem] font-semibold tracking-widest uppercase mb-5 text-white/70">
+              {hero.eyebrow}
+            </span>
+            <h1 className="text-[clamp(2.125rem,4.4vw,3.75rem)] font-bold leading-[1.05] tracking-tight mb-5 text-white max-w-[16ch]">
+              {hero.h1}
+            </h1>
+            <p className="text-[1.0625rem] leading-[1.65] max-w-[48ch] text-white/80">
+              {hero.sub}
+            </p>
+            <p className="mt-6 text-[0.8rem] text-white/55 max-w-[46ch]">
+              Análise sem custo e sem compromisso. Não solicitamos senha, extrato
+              bancário ou acesso à sua conta.
+            </p>
+          </div>
+
+          {/* Direita: captura acima da dobra (o formulário É o CTA) */}
+          <div className="col-span-full md:col-span-5 md:col-start-8">
+            <RaioXForm instanceId="hero" />
+          </div>
         </div>
-        <p className="mt-6 text-[0.8rem] text-white/55 max-w-[46ch]">
-          Análise sem custo e sem compromisso. Não solicitamos senha, extrato bancário
-          ou acesso à sua conta. A solicitação leva cerca de dois minutos.
-        </p>
+
+        {/* Barra de credibilidade */}
+        <dl className="mt-12 md:mt-16 pt-8 border-t border-white/15 grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-[46rem]">
+          {HERO_STATS.map((s) => (
+            <div key={s.k}>
+              <dt className="text-[clamp(2.25rem,4vw,3.25rem)] font-light leading-[0.95] tabular-nums text-white">
+                {s.v}
+              </dt>
+              <dd className="mt-2.5 text-[0.85rem]" style={{ color: "rgba(255,255,255,0.65)" }}>
+                {s.k}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );
@@ -306,29 +377,28 @@ function Resposta() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
         <SectionTag label="A pergunta que te trouxe aqui" />
         <h2 className="text-[clamp(1.875rem,4vw,3.25rem)] font-bold leading-[1.08] tracking-tight max-w-[24ch]" style={{ color: "#2E4659" }}>
-          “Onde eu invisto meu dinheiro?” — a resposta que ninguém te dá de graça na internet.
+          “Onde eu invisto meu dinheiro?” — nós te mostramos.
         </h2>
         <div className="mt-8 max-w-[60ch] space-y-5 text-[1.0625rem] leading-[1.7]" style={{ color: "#6B7B8D" }}>
           <p>
-            Todo blog vai te empurrar um produto. Todo gerente, o produto do mês. Mas a
-            verdade é simples: <strong style={{ color: "#2E4659" }}>a alocação certa não é a
-            mesma para todo mundo.</strong> Depende de quanto você tem, de quando vai
-            precisar, do risco que topa e do que já carrega na carteira.
+            Todo blog vai te empurrar um produto. Todo gerente, o produto do mês. Nós
+            fazemos o contrário: olhamos o <strong style={{ color: "#2E4659" }}>seu</strong> caso
+            e mostramos onde o seu dinheiro deveria estar — porque{" "}
+            <strong style={{ color: "#2E4659" }}>a alocação certa não é a mesma para todo mundo.</strong>
           </p>
           <p>
-            É exatamente isso que o <strong style={{ color: "#2E4659" }}>Raio-X da Carteira
-            da Midlej</strong> faz: olha o <strong style={{ color: "#2E4659" }}>seu</strong> caso
-            e mostra, sem custo, o que faz sentido ajustar — o que está caro, onde o risco
-            não se justifica e onde o dinheiro pode trabalhar melhor. A resposta para “onde
-            investir” você descobre aqui — sobre a sua realidade, não sobre uma tabela genérica.
+            É isso que o <strong style={{ color: "#2E4659" }}>Raio-X da Carteira da
+            Midlej</strong> entrega, sem custo: o que está caro, onde o risco não se
+            justifica e onde o dinheiro pode trabalhar melhor. Uma resposta construída
+            sobre a sua realidade — não sobre uma tabela genérica.
           </p>
         </div>
 
         <Link
-          href="#contato"
+          href="#top"
           className="mt-9 inline-flex items-center gap-2 px-7 py-4 rounded-lg text-[0.95rem] font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200 shadow-lg"
         >
-          Quero descobrir onde investir <Arrow />
+          Descubra onde investir <Arrow />
         </Link>
 
         <div className="mt-14 pt-10 border-t border-[#E1E6EC] grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10">
@@ -375,7 +445,7 @@ function Dor() {
             {
               k: "Na Midlej",
               v: "Ninguém é remunerado por comissão",
-              note: "Consultoria registrada na CVM, remunerada exclusivamente por você. Sem rebate e sem produto de prateleira. A recomendação existe para servir ao seu patrimônio — e apenas a ele.",
+              note: "Somos remunerados exclusivamente por você. Sem rebate e sem produto de prateleira. A recomendação existe para servir ao seu patrimônio — e apenas a ele.",
             },
           ].map((m) => (
             <div key={m.k} className="col-span-full md:col-span-4 flex flex-col">
@@ -415,44 +485,58 @@ function Dor() {
 
 function TrackRecord() {
   return (
-    <section id="track" style={{ backgroundColor: "#2E4659" }}>
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
-          {/* Esquerda: número + benchmark */}
-          <div className="col-span-full md:col-span-5">
-            <SectionTag label="Transparência" dark />
-            <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight text-white">
-              Você quer ver resultado. Nós mostramos — dentro das regras da CVM.
-            </h2>
-            <p className="mt-6 text-[0.95rem] leading-[1.65]" style={{ color: "rgba(255,255,255,0.75)" }}>
-              Não prometemos ganhos nem indicamos quais ações comprar — a regulação
-              não permite, e com razão. O que apresentamos é o <strong className="text-white/90">nosso
-              próprio resultado</strong> e, sobretudo, <strong className="text-white/90">o método
-              por trás dele</strong>. Na primeira conversa, apresentamos essa metodologia por completo.
-            </p>
-          </div>
+    <section
+      id="track"
+      className="relative overflow-hidden"
+      style={{
+        background: "linear-gradient(155deg, #24394A 0%, #2E4659 55%, #274155 100%)",
+      }}
+    >
+      <FundoProva />
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
+        <div className="max-w-[46ch] mb-12 md:mb-16">
+          <SectionTag label="Prova própria" dark />
+          <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight text-white">
+            Testamos todas as estratégias que aplicamos.
+          </h2>
+          <p className="mt-6 text-[0.95rem] leading-[1.65]" style={{ color: "rgba(255,255,255,0.75)" }}>
+            Nenhuma tese vai para a carteira de um cliente antes de passar pela nossa.
+            O <strong className="text-white/90">Buy and Hold</strong> é uma delas — e este
+            é o resultado que ela entregou na carteira própria da Midlej.
+          </p>
+        </div>
 
-          {/* Direita: card do track record */}
-          <div className="col-span-full md:col-span-7">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
+          {/* Card único: a estratégia Buy and Hold e o resultado dela */}
+          <div className="col-span-full md:col-span-8">
             <div className="rounded-2xl bg-white/[0.06] border border-white/10 p-8 md:p-10">
               <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-2" style={{ color: "rgba(255,255,255,0.50)" }}>
-                O resultado da nossa carteira própria
+                Estratégia Buy and Hold · carteira própria
               </p>
-              <div className="flex flex-wrap items-end gap-x-10 gap-y-6 mt-4">
+              <h3 className="text-[clamp(1.75rem,3.2vw,2.5rem)] font-bold leading-[1.05] tracking-tight text-white mb-2">
+                Buy and Hold
+              </h3>
+              <p className="text-[0.95rem] leading-[1.6] max-w-[46ch]" style={{ color: "rgba(255,255,255,0.75)" }}>
+                Aporte estável, retorno reinvestido e horizonte longo. Em vez de tentar
+                acertar o momento de entrada, a estratégia deixa o tempo trabalhar: o
+                capital permanece investido e o retorno passa a render sobre si mesmo.
+              </p>
+
+              <div className="flex flex-wrap items-end gap-x-12 gap-y-6 mt-8 pt-8 border-t border-white/10">
                 <div>
-                  <p className="text-[clamp(3rem,7vw,5rem)] font-light leading-[0.95] tabular-nums text-white">
+                  <p className="text-[clamp(4rem,10vw,7rem)] font-light leading-[0.88] tabular-nums text-white">
                     23,06%
                   </p>
-                  <p className="mt-2 text-[0.8rem]" style={{ color: "rgba(255,255,255,0.55)" }}>
+                  <p className="mt-3 text-[0.85rem]" style={{ color: "rgba(255,255,255,0.6)" }}>
                     Rentabilidade acumulada no período <br />31/07/2025 a 10/07/2026
                   </p>
                 </div>
-                <div className="h-16 w-px bg-white/15 hidden sm:block" aria-hidden />
+                <div className="h-20 w-px bg-white/15 hidden sm:block" aria-hidden />
                 <div>
-                  <p className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-light leading-[1] tabular-nums" style={{ color: "rgba(255,255,255,0.80)" }}>
+                  <p className="text-[clamp(2.25rem,4.5vw,3.25rem)] font-light leading-[1] tabular-nums" style={{ color: "rgba(255,255,255,0.85)" }}>
                     166,90%
                   </p>
-                  <p className="mt-2 text-[0.8rem]" style={{ color: "rgba(255,255,255,0.55)" }}>
+                  <p className="mt-3 text-[0.85rem]" style={{ color: "rgba(255,255,255,0.6)" }}>
                     do CDI no mesmo <br />período
                   </p>
                 </div>
@@ -460,9 +544,9 @@ function TrackRecord() {
 
               <ul className="mt-8 pt-6 border-t border-white/10 space-y-3">
                 {[
-                  "Este é o nosso resultado — não uma indicação de qual ativo você deve adquirir.",
-                  "O foco é o método: como chegamos até ele, de forma estruturada.",
-                  "A decisão e a custódia permanecem sempre com você. Consultoria, não gestão.",
+                  "Aporte estável, retorno reinvestido, horizonte longo — sem tentar adivinhar o timing.",
+                  "O método é o que apresentamos na primeira conversa. Não uma lista de ativos.",
+                  "A decisão e a custódia permanecem sempre com você.",
                 ].map((t) => (
                   <li key={t} className="flex items-start gap-3 text-[0.9375rem] leading-[1.5] text-white">
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden className="mt-0.5 shrink-0">
@@ -475,13 +559,15 @@ function TrackRecord() {
 
               <Link
                 href="#contato"
-                className="mt-8 inline-flex items-center gap-2 px-6 py-3.5 rounded-lg text-sm font-semibold text-[#2E4659] bg-white hover:bg-[#dce8f0] transition-colors duration-200"
+                className="mt-8 inline-flex items-center gap-2 px-7 py-4 rounded-lg text-[0.95rem] font-semibold text-[#2E4659] bg-white hover:bg-[#dce8f0] transition-colors duration-200 shadow-lg"
               >
-                Quero o método por trás desse resultado <Arrow />
+                Quero entender essa estratégia <Arrow />
               </Link>
             </div>
+          </div>
 
-            {/* Disclaimer CVM — obrigatório */}
+          {/* Disclaimer CVM — obrigatório */}
+          <div className="col-span-full">
             <p className="mt-5 text-[0.72rem] leading-[1.6]" style={{ color: "rgba(255,255,255,0.45)" }}>
               Resultado da carteira própria da Midlej Capital no período de 31/07/2025
               a 10/07/2026: 23,06% de rentabilidade, equivalente a 166,90%
@@ -555,89 +641,53 @@ function ComoFunciona() {
 }
 
 /* ================================================================
-   05 — Quem conduz a sua análise (autoridade · Eixo 4 / Ação 9)
+   05 — Quem conduz a sua análise
    Em ticket alto, confiança é depositada em pessoas antes de
-   instituições. Renderiza o cartão pessoal quando RESPONSAVEL.nome
-   está preenchido; caso contrário, a versão institucional segura.
-   Inclui a verificação pública na CVM (prova verificável).
+   instituições. A identificação regulatória fica na barra legal do
+   rodapé — cumprida, sem virar argumento de venda.
    ================================================================ */
 
-function CvmVerificacao({ dark = false }: { dark?: boolean }) {
-  const sub = dark ? "rgba(255,255,255,0.65)" : "#6B7B8D";
+function Equipe() {
   return (
-    <p className="text-[0.9rem] leading-[1.6]" style={{ color: sub }}>
-      {CVM_REGISTRO ? (
-        <>
-          Registro na CVM: <strong style={{ color: dark ? "#fff" : "#2E4659" }}>{CVM_REGISTRO}</strong>.{" "}
-        </>
-      ) : (
-        <>
-          {RAZAO_SOCIAL} · CNPJ {CNPJ}.{" "}
-        </>
-      )}
-      <a
-        href={CVM_CONSULTA_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="font-semibold underline underline-offset-2"
-        style={{ color: dark ? "#8FB3D4" : "#4a6b8c" }}
-      >
-        Verifique o registro na CVM
-      </a>
-      .
-    </p>
-  );
-}
-
-function Autoridade() {
-  const hasName = RESPONSAVEL.nome.trim().length > 0;
-  return (
-    <section className="bg-white">
+    <section id="equipe" className="bg-white">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        <div className="rounded-2xl border border-[#EDEFF2] bg-[#F5F7FA] overflow-hidden grid grid-cols-1 md:grid-cols-12">
-          {/* Foto */}
-          <div className="col-span-full md:col-span-5 relative min-h-[380px] md:min-h-[420px]">
-            <Image
-              src={RESPONSAVEL.foto}
-              alt={hasName ? RESPONSAVEL.nome : "Equipe Midlej Capital"}
-              fill
-              className="object-cover object-top"
-              sizes="(max-width: 768px) 100vw, 40vw"
-            />
-          </div>
-          {/* Texto */}
-          <div className="col-span-full md:col-span-7 p-8 md:p-12 flex flex-col justify-center">
-            <SectionTag label="Quem conduz a sua análise" />
-            {hasName ? (
-              <>
-                <h2 className="text-[clamp(1.75rem,3.2vw,2.5rem)] font-bold leading-[1.08] tracking-tight" style={{ color: "#2E4659" }}>
-                  {RESPONSAVEL.nome}
-                </h2>
-                <p className="mt-2 text-[0.95rem] font-medium" style={{ color: "#4a6b8c" }}>
-                  {RESPONSAVEL.cargo} · {RESPONSAVEL.credencial}
-                </p>
-                <p className="mt-5 text-[1.0625rem] leading-[1.65] max-w-[52ch]" style={{ color: "#6B7B8D" }}>
-                  {RESPONSAVEL.bio}
-                </p>
-              </>
-            ) : (
-              <>
-                <h2 className="text-[clamp(1.75rem,3.2vw,2.5rem)] font-bold leading-[1.08] tracking-tight max-w-[22ch]" style={{ color: "#2E4659" }}>
-                  Sua análise é conduzida por gente — e assinada por um responsável.
-                </h2>
-                <p className="mt-5 text-[1.0625rem] leading-[1.65] max-w-[52ch]" style={{ color: "#6B7B8D" }}>
-                  O Raio-X é feito por um consultor de valores mobiliários com{" "}
-                  {RESPONSAVEL.credencial}, e não por um algoritmo genérico. A mesma
-                  pessoa que assina o diagnóstico acompanha a relação ao longo do tempo.
-                  Você sabe exatamente quem responde por cada recomendação.
-                </p>
-              </>
-            )}
-            <div className="mt-6 pt-5 border-t border-[#EDEFF2]">
-              <CvmVerificacao />
-            </div>
-          </div>
+        <div className="max-w-[46ch]">
+          <SectionTag label="Quem conduz a sua análise" />
+          <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight" style={{ color: "#2E4659" }}>
+            Seu Raio-X é feito por gente, com nome e rosto.
+          </h2>
+          <p className="mt-6 text-[1.0625rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>
+            Nenhum algoritmo genérico assina a sua análise. Este é o time que responde
+            por cada recomendação — e que continua ao seu lado depois da primeira conversa.
+          </p>
         </div>
+
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+          {TEAM.map((p) => (
+            <article key={p.name} className="flex flex-col">
+              <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-[#F5F7FA]">
+                <Image
+                  src={p.photo}
+                  alt={p.name}
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+              </div>
+              <h3 className="mt-5 text-[1.25rem] font-bold leading-tight tracking-tight" style={{ color: "#2E4659" }}>
+                {p.name}
+              </h3>
+              <p className="mt-1.5 text-[0.85rem] font-medium" style={{ color: "#4a6b8c" }}>
+                {p.role}
+                {p.name === "Allan Guilherme" && ` · ${RESPONSAVEL.credencial}`}
+              </p>
+              <p className="mt-3 text-[0.9375rem] leading-[1.6]" style={{ color: "#6B7B8D" }}>
+                {p.bio}
+              </p>
+            </article>
+          ))}
+        </div>
+
       </div>
     </section>
   );
@@ -649,7 +699,7 @@ function Autoridade() {
 
 function PorQueConfiar() {
   const items = [
-    { k: "Registro", v: "CVM", note: "Consultoria de valores mobiliários registrada e regulada.", verify: true },
+    { k: "Estratégia", v: "Testada em casa", note: "Nenhuma tese vai para a sua carteira antes de passar pela nossa." },
     { k: "Remuneração", v: "Só o cliente", note: "Fee pago por você. Zero rebate, zero comissão de produto." },
     { k: "Custódia", v: "Fica com você", note: "Seu dinheiro nunca passa por conta da Midlej. Acesso e ordem são seus." },
     { k: "Relação", v: "Contínua", note: "Acompanhamento plurianual, não venda pontual de um produto." },
@@ -673,17 +723,6 @@ function PorQueConfiar() {
               <p className="mt-4 text-[0.95rem] leading-[1.55] max-w-[34ch]" style={{ color: "#6B7B8D" }}>
                 {m.note}
               </p>
-              {m.verify && (
-                <a
-                  href={CVM_CONSULTA_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-flex items-center gap-1.5 text-[0.85rem] font-semibold underline underline-offset-2"
-                  style={{ color: "#4a6b8c" }}
-                >
-                  Verificar na CVM <Arrow />
-                </a>
-              )}
             </div>
           ))}
         </div>
@@ -820,17 +859,9 @@ function Closing() {
               do seu caso e retorna pelo WhatsApp para agendar a conversa — on-line ou
               presencial em Brasília.
             </p>
-            {/* SLA de retorno (Eixo 2) — ⚠️ Lucas: ajustar ao SLA real do time */}
-            <p className="mt-5 inline-flex items-center gap-2 text-[0.875rem] font-semibold px-4 py-2.5 rounded-lg" style={{ backgroundColor: "rgba(255,255,255,0.12)", color: "#fff" }}>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-                <circle cx="8" cy="8" r="6.4" stroke="currentColor" strokeWidth="1.3" />
-                <path d="M8 4.6V8l2.4 1.6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              Retornamos pelo WhatsApp em até 4 horas úteis.
-            </p>
           </div>
           <div className="col-span-full md:col-span-6 md:col-start-7">
-            <RaioXForm />
+            <RaioXForm instanceId="closing" />
           </div>
         </div>
 
@@ -849,8 +880,8 @@ function Closing() {
               style={{ filter: "brightness(0) invert(1)" }}
             />
             <p className="text-sm leading-relaxed max-w-[40ch]" style={{ color: "rgba(255,255,255,0.55)" }}>
-              Consultoria de investimentos registrada na CVM. Sem conflito de interesse,
-              sem produto de prateleira.
+              Consultoria de investimentos. Sem conflito de interesse, sem produto
+              de prateleira.
             </p>
           </div>
 
@@ -879,7 +910,7 @@ function Closing() {
             recomendação individualizada ou solicitação de compra ou venda de ativos.
           </p>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-            <span>{RAZAO_SOCIAL} · CNPJ {CNPJ}</span>
+            <span>{RAZAO_SOCIAL} · CNPJ {CNPJ} · {CVM_REGISTRO}</span>
             <span>© {year} Midlej Capital. Todos os direitos reservados.</span>
           </div>
         </div>

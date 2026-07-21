@@ -88,14 +88,14 @@ export default function DolarPage() {
       {/* ── Dois caminhos — stats ── */}
       <section className="bg-white">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-          <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-            <div className="col-span-12 md:col-span-5">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
+            <div className="col-span-full md:col-span-5">
               <SectionTag label="O que os dados mostram" />
               <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[18ch] mb-8 md:mb-0" style={{ color: "#2E4659" }}>
                 Doze anos de diferença visível.
               </h2>
             </div>
-            <div className="col-span-12 md:col-span-7">
+            <div className="col-span-full md:col-span-7">
               <p className="text-[1.0625rem] leading-[1.65] mb-10 max-w-[52ch]" style={{ color: "#6B7B8D" }}>
                 Não é instinto. São três movimentos que quem ficou só no Tesouro não capturou — e que mudaram patrimônios de ordem de grandeza.
               </p>
@@ -180,8 +180,8 @@ export default function DolarPage() {
       {/* ── Solução ── */}
       <section style={{ backgroundColor: "#4a6b8c" }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-          <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
-            <div className="col-span-12 md:col-span-7">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+            <div className="col-span-full md:col-span-7">
               <SectionTag label="Nossa abordagem" dark />
               <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight text-white mb-6 max-w-[22ch]">
                 Não é tirar tudo do Brasil. É proteger o que você já construiu.
@@ -193,7 +193,7 @@ export default function DolarPage() {
                 Montamos carteiras com ativos em dólar acessíveis desde o Brasil, dentro do seu perfil e dentro da lei. Sem produto de prateleira. Sem rebate.
               </p>
             </div>
-            <div className="col-span-12 md:col-span-4 md:col-start-9">
+            <div className="col-span-full md:col-span-4 md:col-start-9">
               <a
                 href="#contato"
                 aria-label={CTA_LABEL}
@@ -210,14 +210,14 @@ export default function DolarPage() {
       {/* ── Como funciona ── */}
       <section className="bg-white">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
-          <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-            <div className="col-span-12 md:col-span-4">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
+            <div className="col-span-full md:col-span-4">
               <SectionTag label="Como funciona" />
               <h2 className="text-[clamp(1.625rem,3vw,2.5rem)] font-bold leading-[1.04] tracking-tight max-w-[16ch]" style={{ color: "#2E4659" }}>
                 Três etapas. Uma estratégia.
               </h2>
             </div>
-            <div className="col-span-12 md:col-span-8 md:col-start-5">
+            <div className="col-span-full md:col-span-8 md:col-start-5">
               <ol className="flex flex-col divide-y divide-[#EDEFF2]">
                 {[
                   {

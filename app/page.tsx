@@ -210,9 +210,9 @@ function S03_Internacionais() {
   return (
     <section id="internacionais" style={{ backgroundColor: "#F5F7FA" }} className="py-20 md:py-28">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
           {/* Copy */}
-          <div className="col-span-12 md:col-span-5 order-2 md:order-1">
+          <div className="col-span-full md:col-span-5 order-2 md:order-1">
             <SectionTag label="Onde o capital mora" />
             <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-tight tracking-tight mb-6" style={{ color: "#2E4659" }}>
               Patrimônio<br />em dólar.
@@ -235,7 +235,7 @@ function S03_Internacionais() {
             </Link>
           </div>
           {/* Globo */}
-          <div className="col-span-12 md:col-span-6 md:col-start-7 order-1 md:order-2">
+          <div className="col-span-full md:col-span-6 md:col-start-7 order-1 md:order-2">
             <div className="w-full aspect-square">
               <Globe className="w-full h-full" />
             </div>
@@ -254,14 +254,14 @@ function S04_Cambio() {
   return (
     <section id="cambio" className="bg-white py-20 md:py-28">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
-          <div className="col-span-12 md:col-span-4">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
+          <div className="col-span-full md:col-span-4">
             <SectionTag label="Operação cambial" />
             <h2 className="text-[clamp(1.875rem,3.4vw,2.75rem)] font-bold leading-tight tracking-tight" style={{ color: "#2E4659" }}>
               Câmbio.
             </h2>
           </div>
-          <div className="col-span-12 md:col-span-7 md:col-start-6">
+          <div className="col-span-full md:col-span-7 md:col-start-6">
             <p className="text-[1.0rem] leading-[1.65] mb-5" style={{ color: "#6B7B8D" }}>
               Compra e envio de dólares americanos para contas no exterior,
               com execução assistida do início ao fim da operação.
@@ -300,8 +300,8 @@ function S05_Seguro() {
   return (
     <section id="seguro" style={{ backgroundColor: "#F5F7FA" }} className="py-20 md:py-28">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
-          <div className="col-span-12 md:col-span-5">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+          <div className="col-span-full md:col-span-5">
             <SectionTag label="Proteção patrimonial" />
             <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-tight tracking-tight mb-3" style={{ color: "#2E4659" }}>
               Seguros.
@@ -321,7 +321,7 @@ function S05_Seguro() {
               Avaliar minha cobertura <Arrow />
             </Link>
           </div>
-          <div className="col-span-12 md:col-span-6 md:col-start-7">
+          <div className="col-span-full md:col-span-6 md:col-start-7">
             <SeguroCompare className="w-full" />
           </div>
         </div>
@@ -353,8 +353,8 @@ function S06_Alternativos() {
           </div>
         </div>
         {/* Copy + CTA abaixo */}
-        <div className="mt-10 grid grid-cols-12 gap-10 md:gap-12 items-start">
-          <div className="col-span-12 md:col-span-6">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
+          <div className="col-span-full md:col-span-6">
             <p className="text-[1.0rem] leading-[1.65] mb-4" style={{ color: "#6B7B8D" }}>
               Ativos com baixa correlação estrutural ao mercado local — private equity, crédito privado estruturado e real assets cujo acesso exige relacionamento direto com gestores e originadores, não uma plataforma aberta.
             </p>
@@ -363,7 +363,7 @@ function S06_Alternativos() {
               Estruturas fora da prateleira de banco.
             </p>
           </div>
-          <div className="col-span-12 md:col-span-6 flex md:justify-end md:items-end">
+          <div className="col-span-full md:col-span-6 flex md:justify-end md:items-end">
             <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
               Ver alternativos em detalhe <Arrow />
             </Link>
@@ -382,13 +382,13 @@ function S07_Previdencia() {
   return (
     <section id="previdencia" style={{ backgroundColor: "#F5F7FA" }} className="py-20 md:py-28">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
-          <div className="col-span-12 md:col-span-4">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+          <div className="col-span-full md:col-span-4">
             <div className="mx-auto w-full max-w-[260px] aspect-[3/4]">
               <PrevidenciaStack className="w-full h-full" />
             </div>
           </div>
-          <div className="col-span-12 md:col-span-7 lg:col-start-6">
+          <div className="col-span-full md:col-span-7 lg:col-start-6">
             <SectionTag label="Composição temporal" />
             <h2 className="text-[clamp(1.875rem,3.4vw,2.75rem)] font-bold leading-tight tracking-tight mb-6" style={{ color: "#2E4659" }}>
               Previdência privada.<br />
@@ -423,14 +423,14 @@ function S08_Workshops() {
   return (
     <section id="workshops" className="bg-white py-20 md:py-28">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-8 items-end mb-10">
-          <div className="col-span-12 md:col-span-7">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end mb-10">
+          <div className="col-span-full md:col-span-7">
             <SectionTag label="Para grupos" />
             <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-tight tracking-tight" style={{ color: "#2E4659" }}>
               Treinamentos<br />e workshops.
             </h2>
           </div>
-          <p className="col-span-12 md:col-span-5 text-[1.0625rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>
+          <p className="col-span-full md:col-span-5 text-[1.0625rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>
             Conteúdo financeiro estratégico, desenvolvido para atender às necessidades
             específicas de executivos, gestores, conselhos, sindicatos e equipes corporativas.
           </p>
@@ -439,15 +439,15 @@ function S08_Workshops() {
         <div className="w-full aspect-[16/8] md:aspect-[16/7]">
           <WorkshopRoom className="w-full h-full" />
         </div>
-        <div className="mt-10 grid grid-cols-12 gap-8 items-end">
-          <div className="col-span-12 md:col-span-7">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+          <div className="col-span-full md:col-span-7">
             <ProofRow items={[
               { k: "Formato curto", v: "1 a 3h" },
               { k: "Programa",      v: "1 a 2 sessões" },
               { k: "Modalidade",    v: "Presencial · remoto" },
             ]} />
           </div>
-          <div className="col-span-12 md:col-span-5 flex md:justify-end">
+          <div className="col-span-full md:col-span-5 flex md:justify-end">
             <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
               Solicitar proposta <Arrow />
             </Link>
@@ -509,8 +509,8 @@ function EspacoSection() {
     <section className="bg-white py-16 md:py-24">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
         <SectionTag label="Nosso espaço" />
-        <div className="grid grid-cols-12 gap-4">
-          <div className="col-span-12 md:col-span-7">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+          <div className="col-span-full md:col-span-7">
             <Image
               src="/fotos_escritorio/3.jpeg"
               alt="Recepção Midlej Capital"
@@ -519,7 +519,7 @@ function EspacoSection() {
               className="w-full h-[440px] object-cover rounded-2xl"
             />
           </div>
-          <div className="col-span-12 md:col-span-5 flex flex-col gap-4">
+          <div className="col-span-full md:col-span-5 flex flex-col gap-4">
             <Image
               src="/fotos_escritorio/5.jpeg"
               alt="Sala de reunião"
@@ -627,8 +627,8 @@ function HomeClosing() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
 
         {/* ── CTA principal ── */}
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start pb-20 md:pb-24">
-          <div className="col-span-12 md:col-span-5">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start pb-20 md:pb-24">
+          <div className="col-span-full md:col-span-5">
             <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.50)" }}>
               Primeira conversa
             </p>
@@ -644,7 +644,7 @@ function HomeClosing() {
               Somente depois disso discutimos caminhos e soluções.
             </p>
           </div>
-          <div className="col-span-12 md:col-span-6 md:col-start-7">
+          <div className="col-span-full md:col-span-6 md:col-start-7">
             <HubLeadForm tone="dark" submitLabel="Solicitar reunião" origin="Hub Midlej Capital" />
           </div>
         </div>
@@ -653,10 +653,10 @@ function HomeClosing() {
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }} className="mb-12 md:mb-14" />
 
         {/* ── Footer info ── */}
-        <div className="grid grid-cols-12 gap-8 items-start mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-10">
 
           {/* Logo + tagline */}
-          <div className="col-span-12 md:col-span-4">
+          <div className="col-span-full md:col-span-4">
             <Image
               src="/midlej_capital.png"
               alt="Midlej Capital"
@@ -671,7 +671,7 @@ function HomeClosing() {
           </div>
 
           {/* Links */}
-          <div className="col-span-6 md:col-span-3 md:col-start-6">
+          <div className="col-span-full md:col-span-6 md:col-span-3 md:col-start-6">
             <p className="text-[0.6rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.35)" }}>
               Soluções
             </p>
@@ -687,7 +687,7 @@ function HomeClosing() {
           </div>
 
           {/* Contato */}
-          <div className="col-span-6 md:col-span-4">
+          <div className="col-span-full md:col-span-6 md:col-span-4">
             <p className="text-[0.6rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.35)" }}>
               Contato
             </p>
@@ -721,10 +721,10 @@ function PortalCliente() {
   return (
     <section style={{ backgroundColor: "#F5F7FA" }} className="py-20 md:py-28">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
 
           {/* Copy */}
-          <div className="col-span-12 md:col-span-4 md:sticky md:top-24">
+          <div className="col-span-full md:col-span-4 md:sticky md:top-24">
             <SectionTag label="Para clientes" />
             <h2 className="text-[clamp(1.625rem,2.8vw,2.25rem)] font-bold leading-tight tracking-tight mb-5" style={{ color: "#2E4659" }}>
               Acompanhe seu patrimônio online.
@@ -756,7 +756,7 @@ function PortalCliente() {
           </div>
 
           {/* Mock UI */}
-          <div className="col-span-12 md:col-span-8">
+          <div className="col-span-full md:col-span-8">
             <PortalMock />
           </div>
 
@@ -774,8 +774,8 @@ function ConhecaInvestimentos() {
   return (
     <section style={{ backgroundColor: "#F5F7FA" }} className="py-16 md:py-24">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-8 items-end">
-          <div className="col-span-12 md:col-span-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+          <div className="col-span-full md:col-span-8">
             <SectionTag label="Banca de investimentos" />
             <h2 className="text-[clamp(1.625rem,3vw,2.5rem)] font-bold leading-tight tracking-tight mb-4" style={{ color: "#2E4659" }}>
               Investimentos é uma frente própria. Tem página própria.
@@ -784,7 +784,7 @@ function ConhecaInvestimentos() {
               Como estruturamos a remuneração por honorário fixo, onde alocamos geograficamente o capital, como construímos a carteira em camadas de liquidez e prazo, o que o tempo composto faz a cada ciclo — e o que acontece no primeiro encontro.
             </p>
           </div>
-          <div className="col-span-12 md:col-span-4 flex md:justify-end">
+          <div className="col-span-full md:col-span-4 flex md:justify-end">
             <Link href="/investimentos" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
               Conheça os investimentos <Arrow />
             </Link>

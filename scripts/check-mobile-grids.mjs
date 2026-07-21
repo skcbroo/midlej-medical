@@ -40,10 +40,24 @@ const GRID_LOW_RE = /\bgrid grid-cols-([2-5])\b/g;
 //    `col-span-full` ocupa a largura total sem criar colunas implícitas —
 //    é seguro em qualquer grid. AUTO-FIX.
 const SPAN_RE = /(?<![\w:-])col-span-([2-9]|1[0-2])\b/g;
-const spanFix = () => `col-span-full`;
+// ⚠️ Preserva o span do desktop. A versão anterior devolvia só
+// `col-span-full`, o que é correto para col-span-12 mas DESTRÓI o layout
+// desktop de qualquer N<12: um par 7/5 virava dois blocos de largura
+// total em todos os breakpoints. (regressão pega em 21/07/2026)
+const spanFix = (_m, n) =>
+  n === "12" ? `col-span-full` : `col-span-full md:col-span-${n}`;
 
 // ── util ────────────────────────────────────────────────────────────────
 function walk(dir, out = []) {
+  // aceita caminho de ARQUIVO além de diretório (ex.: app/page.tsx)
+  try {
+    if (statSync(dir).isFile()) {
+      if (/\.(tsx|jsx)$/.test(dir)) out.push(dir);
+      return out;
+    }
+  } catch {
+    return out;
+  }
   let entries;
   try {
     entries = readdirSync(dir);

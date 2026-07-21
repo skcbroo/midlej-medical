@@ -134,8 +134,8 @@ function TabEvolucao() {
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-3">
-        <div className="col-span-7 bg-white rounded-xl p-3 border border-[#EDEFF2]">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+        <div className="col-span-full md:col-span-7 bg-white rounded-xl p-3 border border-[#EDEFF2]">
           <p className="text-[0.55rem] font-semibold tracking-widest uppercase mb-2" style={{ color: "#6B7B8D" }}>Evolução mensal</p>
           <svg viewBox="0 0 200 82" width="100%" style={{ display: "block" }}>
             <line x1="10" y1="70" x2="195" y2="70" stroke="#EDEFF2" strokeWidth="1" />
@@ -155,7 +155,7 @@ function TabEvolucao() {
             <text x="70" y="6.5" fontSize="5.5" fill="#6B7B8D">Aportes</text>
           </svg>
         </div>
-        <div className="col-span-5 bg-white rounded-xl p-3 border border-[#EDEFF2]">
+        <div className="col-span-full md:col-span-5 bg-white rounded-xl p-3 border border-[#EDEFF2]">
           <p className="text-[0.55rem] font-semibold tracking-widest uppercase mb-2" style={{ color: "#6B7B8D" }}>Carteira</p>
           <svg viewBox="0 0 104 104" width="60" className="mx-auto block mb-2">
             {pieArcs.map((arc, i) => <path key={i} d={arc.d} fill={arc.color} />)}
@@ -204,8 +204,8 @@ function TabPortfolio() {
   return (
     <div className="flex flex-col gap-3">
       {/* Total + pizza */}
-      <div className="grid grid-cols-12 gap-3 items-center">
-        <div className="col-span-5">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+        <div className="col-span-full md:col-span-5">
           <div className="bg-white rounded-xl p-4 border border-[#EDEFF2] mb-3">
             <p className="text-[0.55rem] font-semibold tracking-widest uppercase mb-1" style={{ color: "#6B7B8D" }}>Patrimônio total</p>
             <p className="text-[1.1rem] font-bold tabular-nums" style={{ color: "#2E4659" }}>R$ 842k</p>
@@ -219,7 +219,7 @@ function TabPortfolio() {
         </div>
 
         {/* Alocação */}
-        <div className="col-span-7 bg-white rounded-xl p-3 border border-[#EDEFF2]">
+        <div className="col-span-full md:col-span-7 bg-white rounded-xl p-3 border border-[#EDEFF2]">
           <p className="text-[0.55rem] font-semibold tracking-widest uppercase mb-2.5" style={{ color: "#6B7B8D" }}>Alocação</p>
           {[
             { label: "Renda Fixa",   pct: 38, color: "#2E4659" },
