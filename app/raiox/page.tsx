@@ -662,7 +662,7 @@ function Equipe() {
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+        <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 md:gap-6">
           {TEAM.map((p) => (
             <article key={p.name} className="flex flex-col">
               <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-[#F5F7FA]">
