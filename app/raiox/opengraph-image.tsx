@@ -5,7 +5,7 @@ import { ImageResponse } from "next/og";
    Gerada estaticamente no build — sem assets externos. */
 
 export const alt =
-  "Raio-X gratuito da sua carteira de investimentos · Midlej Capital";
+  "Raio-X da sua carteira de investimentos · Midlej Capital";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -48,7 +48,7 @@ export default function OgImage() {
               maxWidth: 940,
             }}
           >
-            Raio-X gratuito da sua carteira de investimentos
+            Raio-X da sua carteira de investimentos
           </div>
           <div
             style={{

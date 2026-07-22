@@ -82,7 +82,7 @@ const DOR_VARIANTS: Record<Dor, { eyebrow: string; h1: string; sub: string }> = 
 const HERO_DEFAULT = {
   eyebrow: "Consultoria de investimentos",
   h1: "Onde investir seu dinheiro? Nós te mostramos.",
-  sub: "Não existe “melhor investimento” universal — existe a carteira certa para o seu momento. O Raio-X da Midlej mostra a sua, sem custo e sem compromisso. Somos remunerados por você, não por comissão de produto.",
+  sub: "Não existe “melhor investimento” universal — existe a carteira certa para o seu momento. O Raio-X da Midlej mostra a sua, sem compromisso. Somos remunerados por você, não por comissão de produto.",
 };
 
 /* Números institucionais (mesma fonte da home) — barra de credibilidade do hero. */
@@ -139,8 +139,8 @@ function resolveDor(raw: string | string[] | undefined): Dor | null {
    ---------------------------------------------------------------- */
 const FAQ_ITEMS = [
   {
-    q: "O Raio-X é realmente gratuito?",
-    a: "A primeira análise e a conversa são gratuitas e sem compromisso. Só há custo caso você decida contratar a consultoria em seguida — e o valor é conhecido e acordado antes de qualquer aceite.",
+    q: "O Raio-X tem algum custo?",
+    a: "A primeira análise e a conversa são sem compromisso e não têm custo. Há investimento apenas se você decidir contratar a consultoria em seguida — sempre com o valor conhecido e acordado antes de qualquer aceite.",
   },
   {
     q: "A Midlej passa a administrar o meu dinheiro?",
@@ -170,13 +170,13 @@ export async function generateMetadata({
   const dor = resolveDor((await searchParams).dor);
   return {
     title: {
-      absolute: "Raio-X gratuito da sua carteira de investimentos | Midlej Capital",
+      absolute: "Raio-X da sua carteira de investimentos | Midlej Capital",
     },
     description:
       "Herança, venda de imóvel ou capital parado? Nós te mostramos onde investir. Peça o Raio-X da sua carteira — somos remunerados por você, não por comissão.",
     alternates: { canonical: "/raiox" },
     openGraph: {
-      title: "Raio-X gratuito da sua carteira de investimentos",
+      title: "Raio-X da sua carteira de investimentos",
       description:
         "Segunda opinião independente antes de decidir onde investir. Somos remunerados por você, não por comissão de produto.",
       type: "website",
@@ -185,7 +185,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: "Raio-X gratuito da sua carteira de investimentos",
+      title: "Raio-X da sua carteira de investimentos",
       description:
         "Segunda opinião independente antes de decidir onde investir. Somos remunerados por você, não por comissão de produto.",
     },
@@ -246,7 +246,7 @@ export default async function RaioXPage({
       <FAQSection />
       <Closing />
 
-      <StickyCTA label="Quero meu Raio-X gratuito" href="#contato" />
+      <StickyCTA label="Quero meu Raio-X" href="#contato" />
     </main>
   );
 }
@@ -315,7 +315,7 @@ function Hero({ hero }: { hero: { eyebrow: string; h1: string; sub: string } }) 
               {hero.sub}
             </p>
             <p className="mt-6 text-[0.8rem] text-white/55 max-w-[46ch]">
-              Análise sem custo e sem compromisso. Não solicitamos senha, extrato
+              Análise sem compromisso. Não solicitamos senha, extrato
               bancário ou acesso à sua conta.
             </p>
           </div>
@@ -388,7 +388,7 @@ function Resposta() {
           </p>
           <p>
             É isso que o <strong style={{ color: "#2E4659" }}>Raio-X da Carteira da
-            Midlej</strong> entrega, sem custo: o que está caro, onde o risco não se
+            Midlej</strong> entrega: o que está caro, onde o risco não se
             justifica e onde o dinheiro pode trabalhar melhor. Uma resposta construída
             sobre a sua realidade — não sobre uma tabela genérica.
           </p>
@@ -607,7 +607,7 @@ function ComoFunciona() {
     {
       n: "03",
       title: "Você recebe o diagnóstico",
-      body: "Em uma conversa gratuita e confidencial, sem pressão de venda, apresentamos a leitura do seu cenário. Se fizer sentido seguir com a Midlej, a proposta é apresentada com valores conhecidos e acordados antes de qualquer aceite. A custódia e a decisão permanecem sempre com você.",
+      body: "Em uma conversa sem compromisso e confidencial, sem pressão de venda, apresentamos a leitura do seu cenário. Se fizer sentido seguir com a Midlej, a proposta é apresentada com valores conhecidos e acordados antes de qualquer aceite. A custódia e a decisão permanecem sempre com você.",
     },
   ];
   return (
@@ -615,7 +615,7 @@ function ComoFunciona() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
         <SectionTag label="O Raio-X da Carteira" />
         <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[22ch] mb-4" style={{ color: "#2E4659" }}>
-          Gratuito, em três passos.
+          Do seu caso ao diagnóstico, em três passos.
         </h2>
         <p className="text-[1.0625rem] leading-[1.65] max-w-[54ch] mb-12 md:mb-16" style={{ color: "#6B7B8D" }}>
           Uma segunda opinião independente antes de qualquer decisão de investimento.
@@ -845,13 +845,13 @@ function Closing() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start pb-20 md:pb-24">
           <div className="col-span-full md:col-span-5">
             <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.50)" }}>
-              Raio-X gratuito da carteira
+              Raio-X da carteira
             </p>
             <h2 className="text-[clamp(1.875rem,4vw,3rem)] font-bold leading-tight tracking-tight text-white mb-6">
               Descubra onde investir antes de tomar qualquer decisão.
             </h2>
             <p className="text-[1.0625rem] leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.80)" }}>
-              Gratuito, confidencial e sem compromisso. Sem senha, sem extrato
+              Confidencial e sem compromisso. Sem senha, sem extrato
               e sem oferta de produtos.
             </p>
             <p className="text-[0.9375rem] leading-relaxed max-w-[44ch]" style={{ color: "rgba(255,255,255,0.60)" }}>

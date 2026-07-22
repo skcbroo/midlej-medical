@@ -41,7 +41,7 @@ export const CFO_WHATSAPP_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURICompon
 
 // Canal de contato da LP /raiox (investimentos — WhatsApp + formulário).
 export const RAIOX_WHATSAPP_MESSAGE =
-  "Olá! Tenho um valor para investir e quero fazer o Raio-X gratuito da minha carteira com a Midlej.";
+  "Olá! Tenho um valor para investir e quero fazer o Raio-X da minha carteira com a Midlej.";
 export const RAIOX_WHATSAPP_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
   RAIOX_WHATSAPP_MESSAGE,
 )}`;
