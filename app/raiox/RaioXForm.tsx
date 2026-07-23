@@ -62,14 +62,52 @@ export function RaioXForm({ instanceId = "rx" }: { instanceId?: string }) {
   const [patrimonio, setPatrimonio] = useState("");
   const [profissao, setProfissao] = useState("");
 
+  // ── Captura de formulário INCOMPLETO (partial lead) ──
+  // Se o visitante sair sem concluir o envio, mandamos por navigator.sendBeacon
+  // um snapshot do que já preencheu — só quando há contato mínimo e o envio
+  // ainda não foi concluído. Base legal do tratamento: definida pela Midlej.
+  const submittedRef = useRef(false);
+  const partialSentRef = useRef(false);
+  const snapshotRef = useRef({ name: "", wa: "", email: "", situacao: "" });
+  snapshotRef.current = { name, wa, email, situacao };
+
   // Captura concluída → mede a conversão (só em sucesso real) e abre a fase 2.
   useEffect(() => {
+    if (state.kind === "success") submittedRef.current = true;
     if (state.kind === "success" && phase === "form") {
       pushEvent("lead_form_submit", { form_page: "raiox" });
       setPhase("enrich");
     }
     if (state.kind === "error") setStep(TOTAL_STEPS - 1);
   }, [state, phase]);
+
+  // Dispara o resgate do parcial quando o visitante deixa a página ou a aba.
+  useEffect(() => {
+    function flushPartial() {
+      if (partialSentRef.current || submittedRef.current) return;
+      const s = snapshotRef.current;
+      if (!s.wa && !s.email) return; // sem contato mínimo, nada a capturar
+      partialSentRef.current = true;
+      try {
+        const blob = new Blob(
+          [JSON.stringify({ name: s.name, whatsapp: s.wa, email: s.email, situacao: s.situacao })],
+          { type: "application/json" },
+        );
+        navigator.sendBeacon?.("/api/raiox-partial", blob);
+      } catch {
+        /* best-effort: nunca interromper a navegação do usuário */
+      }
+    }
+    function onVisibility() {
+      if (document.visibilityState === "hidden") flushPartial();
+    }
+    window.addEventListener("pagehide", flushPartial);
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      window.removeEventListener("pagehide", flushPartial);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, []);
 
   // Enriquecimento concluído → tela final. Erro é best-effort: o contato já
   // foi capturado na fase 1, então seguimos para a tela final mesmo assim.
