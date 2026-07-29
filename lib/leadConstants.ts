@@ -46,6 +46,18 @@ export const RAIOX_WHATSAPP_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComp
   RAIOX_WHATSAPP_MESSAGE,
 )}`;
 
+/* LP /raiox-b — variante B do teste A/B (27/07/2026).
+   A = /raiox (longa, formulário multi-step + WhatsApp).
+   B = /raiox-b (curta, SOMENTE WhatsApp — sem formulário).
+   ⚠️ A mensagem pré-preenchida é DELIBERADAMENTE diferente da variante A:
+   é o que permite ao time saber, no próprio WhatsApp, de qual LP veio o
+   contato — sem depender de UTM (que se perde na transição pro app). */
+export const RAIOX_B_WHATSAPP_MESSAGE =
+  "Olá! Vi a página do Raio-X e quero saber onde investir meu dinheiro.";
+export const RAIOX_B_WHATSAPP_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
+  RAIOX_B_WHATSAPP_MESSAGE,
+)}`;
+
 /* ─────────────────────────────────────────────────────────
    LP /raiox — Raio-X da Carteira (form de qualificação)
    Opções compartilhadas entre o form (client) e o schema (server).
