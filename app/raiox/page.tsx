@@ -6,12 +6,13 @@ import { SmoothAnchor } from "../_hub/SmoothAnchor";
 import { StickyCTA } from "../components/StickyCTA";
 import { RaioXForm } from "./RaioXForm";
 import { PonteJK } from "./PonteJK";
-import { FundoProva } from "./FundoProva";
 
 /* ================================================================
    /raiox — LP de resposta direta (serviços financeiros)
    Ângulo 1 (hero): alta intenção — "onde investir", "recebi herança".
-   Ângulo 2 (prova): track record da carteira, blindado pela CVM.
+   Ângulo 2 (prova): time com nome/rosto/registro + modelo de remuneração.
+   A vitrine de rentabilidade da carteira própria foi REMOVIDA em
+   29/07/2026 (ver bloco 03 mais abaixo).
    Conversão: RaioXForm (lead_form_submit → GTM/Ads) + WhatsApp.
 
    Auditoria aplicada (brief CMO 15/07/2026):
@@ -235,13 +236,12 @@ export default async function RaioXPage({
       <InvestimentosHeader hideNav ctaLabel="Descubra onde investir" logoHref="#top" />
 
       {/* Ordem espelhada na estrutura da Assessoria Alpha (ref. 21/07/2026):
-          captura no hero → prova própria → quem somos → método → o resto.
-          A prova e o time sobem para logo depois da captura; o argumento
-          longo (dor, para quem, FAQ) vai para o fim. Sem depoimentos de
-          cliente — ainda não temos. */}
+          captura no hero → quem somos → método → o resto. O time sobe para
+          logo depois da captura (com a vitrine de rentabilidade removida em
+          29/07, é ele que carrega a prova); o argumento longo (dor, para
+          quem, FAQ) vai para o fim. Sem depoimentos de cliente — não temos. */}
       <Hero hero={hero} />
       <Resposta />
-      <TrackRecord />
       <Equipe />
       <ComoFunciona />
       <Dor />
@@ -493,134 +493,23 @@ function Dor() {
 }
 
 /* ================================================================
-   03 — Resultado próprio + método (ÂNGULO 2) — BLINDADO CVM
+   03 — [REMOVIDA 29/07/2026] Vitrine de rentabilidade da carteira própria
    ----------------------------------------------------------------
-   ⚠️ ENQUADRAMENTO (definido pelo Lucas / CEA):
-   NÃO recomendamos ativos nem indicamos ações a comprar — isso seria
-   atividade de consultor/analista. Aqui apenas DEMONSTRAMOS o resultado
-   próprio da nossa estratégia e COMO chegamos nele (método/educacional).
-   ----------------------------------------------------------------
-   ⚠️ COMPLIANCE: divulgação de rentabilidade passada.
-   Dados CONFIRMADOS pelo Lucas (15/07/2026):
-     • período: 31/07/2025 a 10/07/2026;
-     • rentabilidade: 23,06%; benchmark: 166,90% do CDI no mesmo período.
-   Rótulo corrigido de "12 meses" p/ "acumulada no período" (Eixo 6:
-   a janela real é ~11 meses e 10 dias — o rótulo agora fecha com as datas).
-   O disclaimer abaixo é obrigatório e não deve ser removido.
+   A seção "Prova própria" (estratégia Buy and Hold + 23,06% no período
+   31/07/2025–10/07/2026 = 166,90% do CDI, com o disclaimer obrigatório)
+   saiu da página a pedido do Lucas. Com ela saíram o número, o benchmark
+   e o disclaimer que os acompanhava — os três andam juntos: se a
+   rentabilidade voltar, o disclaimer volta junto, obrigatoriamente.
+
+   A prova da página passa a ser institucional e humana: time com nome,
+   rosto e registro (Equipe), modelo de remuneração (PorQueConfiar) e
+   identificação regulatória na barra legal do rodapé.
+
+   O componente `FundoProva` (textura de fundo) era usado só aqui e
+   ficou órfão em app/raiox/FundoProva.tsx — mantido no repo caso a
+   seção volte. A âncora #track deixou de existir; nada linkava para ela.
+   Versão anterior recuperável no git: commit 2f6548a.
    ================================================================ */
-
-function TrackRecord() {
-  return (
-    <section
-      id="track"
-      className="relative overflow-hidden"
-      style={{
-        background: "linear-gradient(155deg, #24394A 0%, #2E4659 55%, #274155 100%)",
-      }}
-    >
-      <FundoProva />
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        <div className="max-w-[46ch] mb-12 md:mb-16">
-          <SectionTag label="Prova própria" dark />
-          <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight text-white">
-            Não comentamos o mercado. Operamos nele — com capital próprio.
-          </h2>
-          <p className="text-[0.95rem] leading-[1.65]" style={{ color: "rgba(255,255,255,0.75)", marginTop: "1.5rem" }}>
-            Nenhuma tese vai para a carteira de um cliente antes de passar pela nossa.
-            O <strong className="text-white/90">Buy and Hold</strong> é uma delas — e este
-            é o resultado que ela entregou na carteira própria da Midlej.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
-          {/* Card único: a estratégia Buy and Hold e o resultado dela */}
-          <div className="col-span-full md:col-span-8">
-            <div className="rounded-2xl bg-white/[0.06] border border-white/10 p-8 md:p-10">
-              <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-2" style={{ color: "rgba(255,255,255,0.50)" }}>
-                Estratégia Buy and Hold · carteira própria
-              </p>
-              <h3 className="text-[clamp(1.75rem,3.2vw,2.5rem)] font-bold leading-[1.05] tracking-tight text-white mb-2">
-                Buy and Hold
-              </h3>
-              <p className="text-[0.95rem] leading-[1.6] max-w-[46ch]" style={{ color: "rgba(255,255,255,0.75)" }}>
-                Aporte estável, retorno reinvestido e horizonte longo. Em vez de tentar
-                acertar o momento de entrada, a estratégia deixa o tempo trabalhar: o
-                capital permanece investido e o retorno passa a render sobre si mesmo.
-              </p>
-
-              <div className="flex flex-wrap items-end gap-x-12 gap-y-6 mt-8 pt-8 border-t border-white/10">
-                <div>
-                  <p className="text-[clamp(4rem,10vw,7rem)] font-light leading-[0.88] tabular-nums text-white">
-                    23,06%
-                  </p>
-                  <p className="mt-3 text-[0.85rem]" style={{ color: "rgba(255,255,255,0.6)" }}>
-                    Rentabilidade acumulada no período <br />31/07/2025 a 10/07/2026
-                  </p>
-                </div>
-                <div className="h-20 w-px bg-white/15 hidden sm:block" aria-hidden />
-                <div>
-                  <p className="text-[clamp(2.25rem,4.5vw,3.25rem)] font-light leading-[1] tabular-nums" style={{ color: "rgba(255,255,255,0.85)" }}>
-                    166,90%
-                  </p>
-                  <p className="mt-3 text-[0.85rem]" style={{ color: "rgba(255,255,255,0.6)" }}>
-                    do CDI no mesmo <br />período
-                  </p>
-                </div>
-              </div>
-
-              {/* A pergunta é a única fonte de urgência permitida aqui: devolve ao
-                  leitor a dúvida sobre o próprio resultado. Nunca projetar o passado
-                  para frente nem simular quanto ele teria ganho (compliance CVM). */}
-              <p className="text-[1.125rem] font-bold leading-[1.35] text-white" style={{ marginTop: "2rem" }}>
-                E a sua? Quanto rendeu no mesmo período?
-              </p>
-              <p className="text-[0.9375rem] leading-[1.6]" style={{ color: "rgba(255,255,255,0.7)", marginTop: "0.75rem" }}>
-                A maioria das pessoas não sabe responder. Não saber já é, por si só,
-                metade do diagnóstico.
-              </p>
-
-              <ul className="mt-8 pt-6 border-t border-white/10 space-y-3">
-                {[
-                  "É a carteira própria da Midlej: testamos em casa antes de levar a qualquer cliente.",
-                  "O que apresentamos na primeira conversa é o método. Não uma lista de ativos.",
-                  "A decisão e a custódia permanecem sempre com você.",
-                ].map((t) => (
-                  <li key={t} className="flex items-start gap-3 text-[0.9375rem] leading-[1.5] text-white">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden className="mt-0.5 shrink-0">
-                      <path d="M3.5 9.5l3.5 3.5 7.5-8" stroke="#8FB3D4" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    {t}
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href="#contato"
-                className="mt-8 inline-flex items-center gap-2 px-7 py-4 rounded-lg text-[0.95rem] font-semibold text-[#2E4659] bg-white hover:bg-[#dce8f0] transition-colors duration-200 shadow-lg"
-              >
-                Quero entender essa estratégia <Arrow />
-              </Link>
-            </div>
-          </div>
-
-          {/* Disclaimer CVM — obrigatório */}
-          <div className="col-span-full">
-            <p className="mt-5 text-[0.72rem] leading-[1.6]" style={{ color: "rgba(255,255,255,0.45)" }}>
-              Resultado da carteira própria da Midlej Capital no período de 31/07/2025
-              a 10/07/2026: 23,06% de rentabilidade, equivalente a 166,90%
-              do CDI no mesmo período. <strong style={{ color: "rgba(255,255,255,0.65)" }}>Rentabilidade passada não representa
-              garantia de rentabilidade futura.</strong> Investimentos envolvem risco e
-              podem resultar em perdas. Conteúdo de caráter informativo e educacional,
-              que apenas demonstra o resultado da carteira própria da Midlej e não
-              constitui indicação, recomendação ou oferta de compra ou venda de qualquer
-              ativo. A Midlej Capital não realiza gestão de recursos de terceiros.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ================================================================
    04 — Como funciona o Raio-X (3 passos)
