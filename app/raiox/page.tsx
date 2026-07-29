@@ -59,30 +59,30 @@ type Dor = "heranca" | "parado" | "insatisfeito" | "metodo";
 const DOR_VARIANTS: Record<Dor, { eyebrow: string; h1: string; sub: string }> = {
   heranca: {
     eyebrow: "Herança · Venda de imóvel · Liquidez",
-    h1: "Recebeu uma herança? Nós te mostramos onde investir.",
-    sub: "A primeira alocação é a que mais pesa. Peça o Raio-X da sua carteira — somos remunerados por você, não por comissão de produto.",
+    h1: "Uma geração para construir. Uma decisão para comprometer.",
+    sub: "Quando o patrimônio entra de uma vez, a primeira alocação é a que mais pesa — e é a que mais gente decide sozinha, no susto. O Raio-X mostra onde investir antes de qualquer movimento irreversível.",
   },
   parado: {
     eyebrow: "Capital parado no banco",
-    h1: "Dinheiro parado no banco? Nós te mostramos onde investir.",
-    sub: "Cada mês no lugar errado é retorno que não volta. Peça o Raio-X da sua carteira — somos remunerados por você, não por comissão de produto.",
+    h1: "Dinheiro parado rende. Para o banco.",
+    sub: "Enquanto a decisão é adiada, o capital fica onde é conveniente para a instituição — não para você. O Raio-X mostra onde ele deveria estar. Somos remunerados por você, não por comissão de produto.",
   },
   insatisfeito: {
     eyebrow: "Segunda opinião · Sem conflito",
-    h1: "Seu banco vende, mas não orienta? Nós te mostramos onde investir.",
-    sub: "Uma segunda opinião sobre a carteira que você já tem. Peça o Raio-X — somos remunerados por você, não por comissão de produto.",
+    h1: "Ele te liga para orientar — ou para oferecer?",
+    sub: "Se a resposta é “para oferecer”, você não tem um consultor: tem um canal de distribuição. Peça uma segunda opinião sobre a carteira que você já tem, de quem não ganha comissão por ela.",
   },
   metodo: {
-    eyebrow: "Método · Responsável por cada recomendação",
-    h1: "Você já investe. Falta método — nós te mostramos o seu.",
-    sub: "Uma tese por trás de cada posição e alguém que responde por ela. Peça o Raio-X da sua carteira — somos remunerados por você, não por comissão de produto.",
+    eyebrow: "Método · Alguém que responde por cada posição",
+    h1: "Você investe. Mas cada posição tem uma tese?",
+    sub: "Carteira não é coleção de dicas. Se não dá para justificar por que cada ativo está lá, ele está lá por acaso. O Raio-X mostra o que sustenta a sua — e o que não sustenta.",
   },
 };
 
 const HERO_DEFAULT = {
-  eyebrow: "Consultoria de investimentos",
-  h1: "Onde investir seu dinheiro? Nós te mostramos.",
-  sub: "Não existe “melhor investimento” universal — existe a carteira certa para o seu momento. O Raio-X da Midlej mostra a sua, sem compromisso. Somos remunerados por você, não por comissão de produto.",
+  eyebrow: "Consultoria de investimentos · Registro CVM",
+  h1: "Onde investir sem ser a meta de vendas de alguém.",
+  sub: "Todo gerente tem uma meta. Todo assessor tem um rebate. Nós somos remunerados por uma pessoa só: você. O Raio-X da Midlej mostra onde o seu dinheiro deveria estar — e o que o modelo atual está custando.",
 };
 
 /* Números institucionais (mesma fonte da home) — barra de credibilidade do hero. */
@@ -143,6 +143,10 @@ const FAQ_ITEMS = [
     a: "A primeira análise e a conversa são sem compromisso e não têm custo. Há investimento apenas se você decidir contratar a consultoria em seguida — sempre com o valor conhecido e acordado antes de qualquer aceite.",
   },
   {
+    q: "Vocês indicam qual ação eu devo comprar?",
+    a: "Não é assim que funciona, e desconfie de quem faz isso na primeira conversa. Consultoria de valores mobiliários trata de estratégia, alocação e adequação ao seu caso. Recomendação individualizada existe dentro de um contrato de consultoria, com o seu perfil formalizado — nunca como isca.",
+  },
+  {
     q: "A Midlej passa a administrar o meu dinheiro?",
     a: "Não. A Midlej Capital é consultoria, não gestão de recursos. Recomendamos e acompanhamos, mas a conta, a custódia e as ordens de compra e venda permanecem sempre com você. Em nenhum momento operamos a sua conta.",
   },
@@ -152,7 +156,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Tenho um valor menor para investir. Faz sentido?",
-    a: "Não trabalhamos com um piso rígido. Avaliamos se a consultoria independente é adequada ao seu caso e, seja qual for o caminho, damos clareza sobre o que você estará investindo e os riscos envolvidos — para que a decisão seja sua, com informação.",
+    a: "Não trabalhamos com um piso rígido. O que avaliamos é se a consultoria independente é adequada ao seu caso — e, seja qual for o caminho, você sai da conversa sabendo no que estaria investindo e a que riscos estaria exposto. A decisão é sua, mas com informação.",
   },
 ];
 
@@ -173,12 +177,12 @@ export async function generateMetadata({
       absolute: "Raio-X da sua carteira de investimentos | Midlej Capital",
     },
     description:
-      "Herança, venda de imóvel ou capital parado? Nós te mostramos onde investir. Peça o Raio-X da sua carteira — somos remunerados por você, não por comissão.",
+      "Todo gerente tem uma meta. Todo assessor tem um rebate. Peça o Raio-X da sua carteira e veja onde investir — somos remunerados por você, não por comissão de produto.",
     alternates: { canonical: "/raiox" },
     openGraph: {
       title: "Raio-X da sua carteira de investimentos",
       description:
-        "Segunda opinião independente antes de decidir onde investir. Somos remunerados por você, não por comissão de produto.",
+        "Onde investir sem ser a meta de vendas de alguém. Segunda opinião de quem é remunerado por você, não por comissão de produto.",
       type: "website",
       locale: "pt_BR",
       url: "https://midlejcapital.com.br/raiox",
@@ -187,7 +191,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: "Raio-X da sua carteira de investimentos",
       description:
-        "Segunda opinião independente antes de decidir onde investir. Somos remunerados por você, não por comissão de produto.",
+        "Onde investir sem ser a meta de vendas de alguém. Segunda opinião de quem é remunerado por você, não por comissão de produto.",
     },
     // Variantes de campanha não são indexadas (evita conteúdo duplicado);
     // a canonical acima consolida tudo em /raiox.
@@ -315,8 +319,8 @@ function Hero({ hero }: { hero: { eyebrow: string; h1: string; sub: string } }) 
               {hero.sub}
             </p>
             <p className="mt-6 text-[0.8rem] text-white/55 max-w-[46ch]">
-              Análise sem compromisso. Não solicitamos senha, extrato
-              bancário ou acesso à sua conta.
+              Duas etapas, cerca de dois minutos. Sem senha, sem extrato,
+              sem acesso à sua conta.
             </p>
           </div>
 
@@ -357,19 +361,19 @@ function Resposta() {
   const perguntas = [
     {
       q: "“Onde investir R$ 100 mil, R$ 500 mil, R$ 1 milhão?”",
-      a: "O valor muda as opções, mas não a lógica: a carteira certa é a que cabe no seu caso, não a dica da vez. O Raio-X mostra a sua.",
+      a: "O valor muda as opções. Não muda a lógica: a carteira certa é a que cabe no seu caso, não a dica da vez. O Raio-X mostra a sua.",
     },
     {
       q: "“Onde investir com segurança?”",
-      a: "Segurança se constrói entendendo o risco de cada posição — não fugindo de todas. O Raio-X aponta onde você está exposto sem perceber.",
+      a: "Segurança não é fugir de todo risco — é saber exatamente qual risco você está correndo. O Raio-X aponta onde você está exposto sem perceber.",
     },
     {
       q: "“Quais os melhores investimentos para 2026?”",
-      a: "Não existe uma lista pronta que sirva para todo mundo. “Melhor” é o que atende ao seu objetivo, prazo e risco — o Raio-X aponta o que faz sentido para o seu caso agora.",
+      a: "Se existisse uma lista que serve para todo mundo, ela já teria parado de funcionar. “Melhor” é o que atende ao seu objetivo, prazo e risco — e isso só aparece olhando o seu caso.",
     },
     {
       q: "“Como aplicar meu dinheiro — por onde começar?”",
-      a: "O primeiro passo é entender o que você já tem e onde quer chegar. O Raio-X organiza isso e mostra o próximo passo concreto, sem jargão e sem pressão de venda.",
+      a: "Comece por onde ninguém começa: pelo que você já tem. O Raio-X organiza o cenário atual e mostra o próximo passo concreto, sem jargão e sem pressão de venda.",
     },
   ];
   return (
@@ -377,20 +381,23 @@ function Resposta() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
         <SectionTag label="A pergunta que te trouxe aqui" />
         <h2 className="text-[clamp(1.875rem,4vw,3.25rem)] font-bold leading-[1.08] tracking-tight max-w-[24ch]" style={{ color: "#2E4659" }}>
-          “Onde eu invisto meu dinheiro?” — nós te mostramos.
+          “Onde eu invisto meu dinheiro?” — quem responde de graça, ganha para responder assim.
         </h2>
-        <div className="mt-8 max-w-[60ch] space-y-5 text-[1.0625rem] leading-[1.7]" style={{ color: "#6B7B8D" }}>
+        {/* space-y-* também aplica margin-top nos filhos <p> — anulado pelo reset
+            sem camada do globals.css. Espaçamento por style inline (vence tudo). */}
+        <div className="mt-8 max-w-[60ch] text-[1.0625rem] leading-[1.7]" style={{ color: "#6B7B8D" }}>
           <p>
-            Todo blog vai te empurrar um produto. Todo gerente, o produto do mês. Nós
-            fazemos o contrário: olhamos o <strong style={{ color: "#2E4659" }}>seu</strong> caso
-            e mostramos onde o seu dinheiro deveria estar — porque{" "}
-            <strong style={{ color: "#2E4659" }}>a alocação certa não é a mesma para todo mundo.</strong>
+            Todo blog tem um produto para indicar. Todo gerente tem uma meta para bater.
+            Todo assessor tem um rebate para receber. A resposta que você recebe hoje já
+            chega <strong style={{ color: "#2E4659" }}>contaminada pelo modo como quem responde é pago</strong>.
           </p>
-          <p>
-            É isso que o <strong style={{ color: "#2E4659" }}>Raio-X da Carteira da
-            Midlej</strong> entrega: o que está caro, onde o risco não se
-            justifica e onde o dinheiro pode trabalhar melhor. Uma resposta construída
-            sobre a sua realidade — não sobre uma tabela genérica.
+          <p style={{ marginTop: "1.25rem" }}>
+            A Midlej é remunerada por uma pessoa só: você. É por isso que podemos dizer o
+            que a maioria não diz — inclusive que a sua carteira já está adequada, se
+            estiver. O <strong style={{ color: "#2E4659" }}>Raio-X da Carteira</strong> mostra
+            o que está caro, onde o risco não se justifica e onde o capital pode trabalhar
+            melhor. Uma leitura do <strong style={{ color: "#2E4659" }}>seu</strong> caso —
+            não de uma tabela genérica.
           </p>
         </div>
 
@@ -426,26 +433,35 @@ function Dor() {
   return (
     <section id="manifesto" className="bg-white">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        <SectionTag label="Por que a maioria investe mal" />
+        <SectionTag label="O inimigo" />
         <h2 className="text-[clamp(1.875rem,4vw,3.25rem)] font-bold leading-[1.08] tracking-tight max-w-[24ch]" style={{ color: "#2E4659" }}>
-          O problema não é falta de opções. É o excesso de intermediários remunerados por comissão.
+          Ninguém está sentado do seu lado da mesa.
         </h2>
+        {/* ⚠️ globals.css declara `p { margin: 0 }` FORA de @layer — `mt-*` em <p>
+            é silenciosamente ignorado. Espaçamento vertical de parágrafo aqui vai
+            por wrapper <div> ou style inline. */}
+        <div className="mt-8 max-w-[60ch]">
+          <p className="text-[1.0625rem] leading-[1.7]" style={{ color: "#6B7B8D" }}>
+            O problema não é falta de opção. É que quase todo mundo que te orienta ganha
+            para te orientar daquele jeito.
+          </p>
+        </div>
         <div className="mt-14 pt-10 border-t border-[#EDEFF2] grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10">
           {[
             {
               k: "No banco",
-              v: "Você é uma meta de vendas",
-              note: "O gerente é remunerado para distribuir o produto do momento. O que é mais rentável para a instituição nem sempre é o mais adequado ao seu patrimônio.",
+              v: "Você é uma meta",
+              note: "O gerente é avaliado pelo que distribui, não pelo que o seu patrimônio construiu. O produto do mês existe porque alguém precisa vendê-lo — e o mês que vem terá outro.",
             },
             {
-              k: "Na poupança / CDB",
-              v: "Tempo é retorno que não volta",
-              note: "Cada mês no ativo errado é rendimento que não se recupera. O custo de adiar a decisão costuma superar o de tomá-la ao lado de quem não distribui produtos.",
+              k: "Na assessoria",
+              v: "Você é um rebate",
+              note: "A remuneração vem da instituição que emite o produto, não de quem investe. Quanto mais movimento na carteira, melhor para quem intermedia. Nem sempre para quem é dono do dinheiro.",
             },
             {
               k: "Na Midlej",
-              v: "Ninguém é remunerado por comissão",
-              note: "Somos remunerados exclusivamente por você. Sem rebate e sem produto de prateleira. A recomendação existe para servir ao seu patrimônio — e apenas a ele.",
+              v: "Você é o cliente",
+              note: "Somos remunerados exclusivamente por você. Sem rebate, sem comissão, sem produto de prateleira. A recomendação existe para servir ao seu patrimônio — e apenas a ele.",
             },
           ].map((m) => (
             <div key={m.k} className="col-span-full md:col-span-4 flex flex-col">
@@ -460,6 +476,16 @@ function Dor() {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Nomeia o inimigo (manifesto de marca): a ineficiência é o adversário,
+            nunca o cliente. Sem quantificar perda do leitor — compliance CVM. */}
+        <div className="mt-14 pt-10 border-t border-[#EDEFF2] max-w-[60ch]">
+          <p className="text-[1.0625rem] leading-[1.7]" style={{ color: "#6B7B8D" }}>
+            O inimigo tem nome: <strong style={{ color: "#2E4659" }}>ineficiência patrimonial</strong>.
+            Tributária, alocativa, sucessória. Ela não aparece no extrato, não gera aviso e
+            não dói — até alguém acender a luz. É exatamente isso que o Raio-X faz.
+          </p>
         </div>
       </div>
     </section>
@@ -497,9 +523,9 @@ function TrackRecord() {
         <div className="max-w-[46ch] mb-12 md:mb-16">
           <SectionTag label="Prova própria" dark />
           <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight text-white">
-            Testamos todas as estratégias que aplicamos.
+            Não comentamos o mercado. Operamos nele — com capital próprio.
           </h2>
-          <p className="mt-6 text-[0.95rem] leading-[1.65]" style={{ color: "rgba(255,255,255,0.75)" }}>
+          <p className="text-[0.95rem] leading-[1.65]" style={{ color: "rgba(255,255,255,0.75)", marginTop: "1.5rem" }}>
             Nenhuma tese vai para a carteira de um cliente antes de passar pela nossa.
             O <strong className="text-white/90">Buy and Hold</strong> é uma delas — e este
             é o resultado que ela entregou na carteira própria da Midlej.
@@ -542,10 +568,21 @@ function TrackRecord() {
                 </div>
               </div>
 
+              {/* A pergunta é a única fonte de urgência permitida aqui: devolve ao
+                  leitor a dúvida sobre o próprio resultado. Nunca projetar o passado
+                  para frente nem simular quanto ele teria ganho (compliance CVM). */}
+              <p className="text-[1.125rem] font-bold leading-[1.35] text-white" style={{ marginTop: "2rem" }}>
+                E a sua? Quanto rendeu no mesmo período?
+              </p>
+              <p className="text-[0.9375rem] leading-[1.6]" style={{ color: "rgba(255,255,255,0.7)", marginTop: "0.75rem" }}>
+                A maioria das pessoas não sabe responder. Não saber já é, por si só,
+                metade do diagnóstico.
+              </p>
+
               <ul className="mt-8 pt-6 border-t border-white/10 space-y-3">
                 {[
-                  "Aporte estável, retorno reinvestido, horizonte longo — sem tentar adivinhar o timing.",
-                  "O método é o que apresentamos na primeira conversa. Não uma lista de ativos.",
+                  "É a carteira própria da Midlej: testamos em casa antes de levar a qualquer cliente.",
+                  "O que apresentamos na primeira conversa é o método. Não uma lista de ativos.",
                   "A decisão e a custódia permanecem sempre com você.",
                 ].map((t) => (
                   <li key={t} className="flex items-start gap-3 text-[0.9375rem] leading-[1.5] text-white">
@@ -596,18 +633,18 @@ function ComoFunciona() {
   const steps = [
     {
       n: "01",
-      title: "Você apresenta seu contexto",
-      body: "Em cerca de dois minutos, sem senha ou extrato bancário. Apenas a sua situação atual e o que deseja resolver — herança, capital parado, insatisfação com o banco ou a montagem da primeira carteira.",
+      title: "Você apresenta o seu caso",
+      body: "Duas etapas, cerca de dois minutos. Sem senha, sem extrato, sem acesso à conta. Apenas a sua situação hoje e o que precisa resolver — herança, capital parado, insatisfação com o banco ou a montagem da primeira carteira.",
     },
     {
       n: "02",
-      title: "Fazemos o Raio-X",
-      body: "Nossa equipe analisa o seu cenário e prepara uma leitura do que é adequado ao seu caso — o que ajustar, onde há custos excessivos e onde a exposição a risco não se justifica.",
+      title: "Nós fazemos o Raio-X",
+      body: "A equipe analisa o seu cenário e prepara a leitura: o que está caro, onde o risco não se justifica, o que está exposto sem necessidade e onde o capital pode trabalhar melhor.",
     },
     {
       n: "03",
       title: "Você recebe o diagnóstico",
-      body: "Em uma conversa sem compromisso e confidencial, sem pressão de venda, apresentamos a leitura do seu cenário. Se fizer sentido seguir com a Midlej, a proposta é apresentada com valores conhecidos e acordados antes de qualquer aceite. A custódia e a decisão permanecem sempre com você.",
+      body: "Em uma conversa confidencial, sem pressão de venda. Você sai dela com a leitura do seu cenário — tenha ou não interesse em seguir. Se fizer sentido continuar com a Midlej, a proposta vem com valores conhecidos e acordados antes de qualquer aceite. A custódia e a decisão permanecem sempre com você.",
     },
   ];
   return (
@@ -615,10 +652,11 @@ function ComoFunciona() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
         <SectionTag label="O Raio-X da Carteira" />
         <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[22ch] mb-4" style={{ color: "#2E4659" }}>
-          Do seu caso ao diagnóstico, em três passos.
+          Três passos. Nenhuma proposta comercial antes do diagnóstico.
         </h2>
         <p className="text-[1.0625rem] leading-[1.65] max-w-[54ch] mb-12 md:mb-16" style={{ color: "#6B7B8D" }}>
-          Uma segunda opinião independente antes de qualquer decisão de investimento.
+          O diagnóstico vem primeiro — para você decidir com informação, e para nós
+          avaliarmos se faz sentido conduzir o seu caso.
         </p>
         <ol className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {steps.map((s) => (
@@ -654,11 +692,11 @@ function Equipe() {
         <div className="max-w-[46ch]">
           <SectionTag label="Quem conduz a sua análise" />
           <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight" style={{ color: "#2E4659" }}>
-            Seu Raio-X é feito por gente, com nome e rosto.
+            Alguém assina a sua análise. Com nome, rosto e registro.
           </h2>
-          <p className="mt-6 text-[1.0625rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>
-            Nenhum algoritmo genérico assina a sua análise. Este é o time que responde
-            por cada recomendação — e que continua ao seu lado depois da primeira conversa.
+          <p className="text-[1.0625rem] leading-[1.65]" style={{ color: "#6B7B8D", marginTop: "1.5rem" }}>
+            Nenhum algoritmo genérico assina o seu Raio-X. Este é o time que responde por
+            cada recomendação — e que continua ao seu lado depois da primeira conversa.
           </p>
         </div>
 
@@ -700,9 +738,9 @@ function Equipe() {
 function PorQueConfiar() {
   const items = [
     { k: "Estratégia", v: "Testada em casa", note: "Nenhuma tese vai para a sua carteira antes de passar pela nossa." },
-    { k: "Remuneração", v: "Só o cliente", note: "Fee pago por você. Zero rebate, zero comissão de produto." },
-    { k: "Custódia", v: "Fica com você", note: "Seu dinheiro nunca passa por conta da Midlej. Acesso e ordem são seus." },
-    { k: "Relação", v: "Contínua", note: "Acompanhamento plurianual, não venda pontual de um produto." },
+    { k: "Remuneração", v: "Só o cliente", note: "Fee pago por você. Zero rebate, zero comissão de produto, zero meta de distribuição." },
+    { k: "Custódia", v: "Fica com você", note: "Seu dinheiro nunca passa por conta da Midlej. O acesso e a ordem são sempre seus." },
+    { k: "Relação", v: "Contínua", note: "Acompanhamento plurianual. Não é a venda de um produto que termina no aceite." },
   ];
   return (
     <section className="bg-white">
@@ -739,20 +777,29 @@ function ParaQuem() {
   const profiles = [
     {
       tag: "Recebeu herança ou liquidez",
-      body: "Um valor relevante ingressou de uma só vez — herança, venda de imóvel ou de uma empresa — e você não quer errar a primeira decisão de alocação.",
+      body: "Um valor relevante entrou de uma só vez — herança, venda de imóvel ou de uma empresa. A primeira decisão é a que mais pesa, e você não quer tomá-la no susto nem no balcão.",
     },
     {
       tag: "Tem capital parado",
-      body: "R$ 100 mil, R$ 500 mil ou mais na poupança, no CDB do banco ou em conta corrente, rendendo abaixo do potencial enquanto a decisão é adiada.",
+      body: "R$ 100 mil, R$ 500 mil ou mais na poupança, no CDB do bancão ou na conta corrente. Não é falta de dinheiro: é falta de uma decisão que ninguém tomou por você até hoje.",
     },
     {
       tag: "Insatisfeito com banco ou assessor",
-      body: "Suspeita que paga taxas em excesso, que é direcionado a produtos e que não há ninguém zelando pelos seus interesses. Busca uma segunda opinião sem conflito.",
+      body: "Desconfia que paga taxa que não vê, que é direcionado a produto e que ninguém ali zela pelo seu interesse. Quer uma segunda opinião de quem não ganha nada com a sua escolha.",
     },
     {
       tag: "Quer investir melhor",
-      body: "Já investe por conta própria, mas deseja método, uma tese por trás de cada posição e um responsável pelas recomendações — não um algoritmo genérico.",
+      body: "Você já investe. Falta uma tese por trás de cada posição e alguém com nome para responder por ela — em vez de um algoritmo genérico ou do grupo de dicas.",
     },
+  ];
+
+  /* Filtro explícito. Repele o tráfego que hoje mais consome verba sem virar
+     cliente (busca de valores esquecidos, caçador de dica de ação) e reforça o
+     enquadramento regulatório: consultoria ≠ gestão, consultoria ≠ dica. */
+  const naoEPara = [
+    "Você procura dica de ação, promessa de retorno ou o “investimento que mais rende”.",
+    "Você quer alguém para operar a sua conta. Não fazemos gestão de recursos de terceiros.",
+    "Você busca valores esquecidos ou dinheiro a receber de terceiros — não é o serviço que prestamos.",
   ];
   return (
     <section id="para-quem" style={{ backgroundColor: "#F5F7FA" }}>
@@ -761,7 +808,7 @@ function ParaQuem() {
           <div className="col-span-full md:col-span-9">
             <SectionTag label="Para quem é o Raio-X" />
             <h2 className="text-[clamp(1.875rem,3.6vw,3rem)] font-bold leading-[1.05] tracking-tight max-w-[24ch]" style={{ color: "#2E4659" }}>
-              Se você tem recursos para investir e quer decidir sem pressão de venda, é para você.
+              Quatro situações. Se você se reconhece em uma delas, o Raio-X é para você.
             </h2>
           </div>
         </div>
@@ -771,11 +818,29 @@ function ParaQuem() {
               <p className="text-[0.72rem] font-semibold tracking-[0.18em] uppercase" style={{ color: "#4a6b8c" }}>
                 {p.tag}
               </p>
-              <p className="mt-6 text-[1.0625rem] leading-[1.65] max-w-[48ch]" style={{ color: "#6B7B8D" }}>
+              <p className="text-[1.0625rem] leading-[1.65] max-w-[48ch]" style={{ color: "#6B7B8D", marginTop: "1.5rem" }}>
                 {p.body}
               </p>
             </article>
           ))}
+        </div>
+
+        {/* Contra-filtro: dizer para quem NÃO é qualifica mais do que qualquer
+            promessa — e corta o tráfego que não tem como virar cliente. */}
+        <div className="mt-16 md:mt-20 rounded-2xl border border-[#E1E6EC] bg-white p-8 md:p-10">
+          <p className="text-[0.72rem] font-semibold tracking-[0.18em] uppercase" style={{ color: "#4a6b8c" }}>
+            E não é para você se
+          </p>
+          <ul className="mt-6 space-y-4 max-w-[62ch]">
+            {naoEPara.map((t) => (
+              <li key={t} className="flex items-start gap-3 text-[1rem] leading-[1.6]" style={{ color: "#6B7B8D" }}>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden className="mt-1 shrink-0">
+                  <path d="M5 5l8 8M13 5l-8 8" stroke="#9BA8B5" strokeWidth="1.6" strokeLinecap="round" />
+                </svg>
+                {t}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
@@ -848,16 +913,14 @@ function Closing() {
               Raio-X da carteira
             </p>
             <h2 className="text-[clamp(1.875rem,4vw,3rem)] font-bold leading-tight tracking-tight text-white mb-6">
-              Descubra onde investir antes de tomar qualquer decisão.
+              A próxima decisão do seu patrimônio pode ser a primeira com método.
             </h2>
-            <p className="text-[1.0625rem] leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.80)" }}>
-              Confidencial e sem compromisso. Sem senha, sem extrato
-              e sem oferta de produtos.
+            <p className="text-[1.0625rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.80)" }}>
+              Confidencial e sem compromisso. Sem senha, sem extrato e sem oferta de produto.
             </p>
-            <p className="text-[0.9375rem] leading-relaxed max-w-[44ch]" style={{ color: "rgba(255,255,255,0.60)" }}>
-              Você responde a quatro perguntas rápidas, nossa equipe prepara a análise
-              do seu caso e retorna pelo WhatsApp para agendar a conversa — on-line ou
-              presencial em Brasília.
+            <p className="text-[0.9375rem] leading-relaxed max-w-[44ch]" style={{ color: "rgba(255,255,255,0.60)", marginTop: "1rem" }}>
+              Duas etapas rápidas, a equipe prepara a análise do seu caso e retorna pelo
+              WhatsApp para agendar a conversa — on-line ou presencial em Brasília.
             </p>
           </div>
           <div className="col-span-full md:col-span-6 md:col-start-7">

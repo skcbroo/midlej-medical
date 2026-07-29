@@ -60,8 +60,8 @@ export default function OgImage() {
               maxWidth: 880,
             }}
           >
-            Segunda opinião independente antes de decidir onde investir. Sem
-            comissão. Sem senha, sem extrato.
+            Onde investir sem ser a meta de vendas de alguém. Sem comissão,
+            sem rebate, sem produto de prateleira.
           </div>
         </div>
 
