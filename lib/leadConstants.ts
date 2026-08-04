@@ -139,3 +139,53 @@ export type BlindagemHorizonte = (typeof BLINDAGEM_HORIZONTES)[number];
 
 export const BLINDAGEM_CONSENT_TEXT =
   "Autorizo a Midlej Capital a entrar em contato pelo WhatsApp e e-mail informados sobre proteção patrimonial internacional e concordo com a Política de Privacidade.";
+
+/* ─────────────────────────────────────────────────────────
+   LP /legacy — Midlej Legacy (patrimônio destinado a filhos)
+   Normativo: docs/legacy-plataforma-mensagem.md (revisão 2).
+
+   Os DOIS campos abaixo são exigência de branding (§7) e são a
+   razão de a página existir com formulário próprio:
+     1. idade do filho  → horizonte + é o campo que a pessoa
+        preenche com prazer (o mais emocional da página);
+     2. faixa de aporte MENSAL → é a "porta estreita". O Legacy é
+        plano de FLUXO, não de estoque: perguntar aporte mensal é
+        coerente com a definição nº 2 e é menos invasivo do que
+        perguntar patrimônio. Efeito colateral desejado: pela
+        primeira vez existe DADO para chamar um lead de qualificado.
+   ───────────────────────────────────────────────────────── */
+
+// Faixas de idade em vez de idade exata: 1 toque, zero teclado no
+// mobile (de onde vem a maior parte do tráfego pago). A idade exata
+// é confirmada no retorno pelo WhatsApp.
+export const LEGACY_IDADES = [
+  "0 a 3 anos",
+  "4 a 7 anos",
+  "8 a 11 anos",
+  "12 a 15 anos",
+  "16 anos ou mais",
+] as const;
+export type LegacyIdade = (typeof LEGACY_IDADES)[number];
+
+// Faixas exatas definidas em §7 do documento normativo. Não alterar
+// sem passar pelo branding: elas são o corte de qualificação.
+export const LEGACY_APORTES = [
+  "Até R$ 1.000",
+  "R$ 1.000 a R$ 3.000",
+  "R$ 3.000 a R$ 10.000",
+  "Acima de R$ 10.000",
+] as const;
+export type LegacyAporte = (typeof LEGACY_APORTES)[number];
+
+// Enquadramento obrigatório do campo de faixa (§7). É isto que
+// impede que ele seja lido como barreira.
+export const LEGACY_APORTE_FRAMING =
+  "Para prepararmos o plano, precisamos da ordem de grandeza. Nenhum valor é comprometido agora.";
+
+// SLA de retorno (decisão do Lucas, 04/08/2026). É o ativo comercial
+// mais forte da página. Fonte única: aparece acima da dobra, no
+// fechamento e na tela de sucesso do formulário.
+export const LEGACY_SLA = "Retornamos em até 5 minutos.";
+
+export const LEGACY_CONSENT_TEXT =
+  "Autorizo a Midlej Capital a entrar em contato pelo WhatsApp e e-mail informados sobre o Midlej Legacy e concordo com a Política de Privacidade.";

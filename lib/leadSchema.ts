@@ -9,6 +9,8 @@ import {
   BLINDAGEM_MOTIVACOES,
   BLINDAGEM_FAIXAS,
   BLINDAGEM_HORIZONTES,
+  LEGACY_IDADES,
+  LEGACY_APORTES,
 } from "./leadConstants";
 
 export { CONSENT_TEXT } from "./leadConstants";
@@ -112,4 +114,43 @@ export function blindagemScore(lead: BlindagemLeadInput): "A" | "B" | "C" {
   }
   if (faixa === "R$ 500 mil a R$ 2 milhões") return "B";
   return "C"; // Começando a estruturar / até R$ 500 mil
+}
+
+/* ─────────────────────────────────────────────────────────
+   LP /legacy — Midlej Legacy (patrimônio destinado a filhos)
+   Form de 3 passos: idade do filho → faixa de aporte → contato.
+   Os dois primeiros são OBRIGATÓRIOS (diferente da /raiox, onde a
+   qualificação é opcional): aqui a faixa é a porta estreita, e sem
+   ela o lead não carrega o dado que o torna avaliável.
+   ───────────────────────────────────────────────────────── */
+
+export const LegacyLeadSchema = z.object({
+  name: nome,
+  whatsapp,
+  email: z.string().trim().email("E-mail inválido").max(120),
+  idadeFilho: z.enum(LEGACY_IDADES, { message: "Selecione uma faixa de idade" }),
+  aporte: z.enum(LEGACY_APORTES, { message: "Selecione uma faixa" }),
+});
+
+export type LegacyLeadInput = z.infer<typeof LegacyLeadSchema>;
+
+/**
+ * Score do Legacy. Diferente das outras LPs, aqui o driver é FLUXO
+ * mensal, não estoque de patrimônio — o Legacy é um plano de aporte.
+ *
+ * Corte documentado em §7 do normativo: quem consegue destinar acima
+ * de R$ 3.000/mês tem, por definição, capacidade de contratar o
+ * onboarding. Esse é o primeiro corte de "lead qualificado" que a
+ * operação tem baseado em dado declarado, e não em percepção.
+ *
+ * O score ROTEIA a velocidade do atendimento. Não exclui ninguém: o
+ * SLA de 5 minutos publicado na página vale para todo mundo.
+ */
+export function legacyScore(lead: LegacyLeadInput): "A" | "B" | "C" {
+  const { aporte } = lead;
+  if (aporte === "Acima de R$ 10.000" || aporte === "R$ 3.000 a R$ 10.000") {
+    return "A";
+  }
+  if (aporte === "R$ 1.000 a R$ 3.000") return "B";
+  return "C"; // Até R$ 1.000
 }

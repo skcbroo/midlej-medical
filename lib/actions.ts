@@ -7,9 +7,15 @@ import {
   raioxScore,
   BlindagemLeadSchema,
   blindagemScore,
+  LegacyLeadSchema,
+  legacyScore,
   CONSENT_TEXT,
 } from "./leadSchema";
-import { RAIOX_CONSENT_TEXT, BLINDAGEM_CONSENT_TEXT } from "./leadConstants";
+import {
+  RAIOX_CONSENT_TEXT,
+  BLINDAGEM_CONSENT_TEXT,
+  LEGACY_CONSENT_TEXT,
+} from "./leadConstants";
 import { env } from "./env";
 
 export type LeadFormState =
@@ -284,6 +290,104 @@ export async function submitBlindagemLead(
     return { kind: "success" };
   } catch (err) {
     console.error("[submitBlindagemLead] resend unreachable", err instanceof Error ? err.message : err);
+    return { kind: "error", message: "Não conseguimos enviar agora. Tente novamente em instantes." };
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   LP /legacy — Midlej Legacy (patrimônio destinado a filhos)
+   ───────────────────────────────────────────────────────── */
+
+export type LegacyFormState =
+  | { kind: "idle" }
+  | { kind: "success" }
+  | {
+      kind: "error";
+      message?: string;
+      fields?: Partial<Record<string, string[]>>;
+      values?: {
+        name: string;
+        whatsapp: string;
+        email: string;
+        idadeFilho: string;
+        aporte: string;
+      };
+    };
+
+function readLegacyValues(formData: FormData) {
+  return {
+    name: (formData.get("name") ?? "").toString(),
+    whatsapp: (formData.get("whatsapp") ?? "").toString(),
+    email: (formData.get("email") ?? "").toString(),
+    idadeFilho: (formData.get("idadeFilho") ?? "").toString(),
+    aporte: (formData.get("aporte") ?? "").toString(),
+  };
+}
+
+/* O SLA publicado na página é de 5 MINUTOS para todo lead (decisão do
+   Lucas, 04/08/2026). O score não altera esse compromisso — ele só diz
+   ao time o que esperar da conversa. Prometer 5 min na LP e responder
+   em 2 h destrói o único ativo comercial novo que a página tem. */
+const LEGACY_SCORE_LABEL: Record<"A" | "B" | "C", string> = {
+  A: "A · Aporte declarado a partir de R$ 3.000/mês — capacidade de contratar o onboarding. RETORNO EM ATÉ 5 MIN (SLA publicado).",
+  B: "B · Aporte declarado de R$ 1.000 a R$ 3.000/mês. RETORNO EM ATÉ 5 MIN (SLA publicado).",
+  C: "C · Aporte declarado até R$ 1.000/mês. RETORNO EM ATÉ 5 MIN (SLA publicado).",
+};
+
+export async function submitLegacyLead(
+  _prev: LegacyFormState,
+  formData: FormData,
+): Promise<LegacyFormState> {
+  const honeypot = (formData.get("website") ?? "").toString();
+  if (honeypot.length > 0) return { kind: "success" };
+
+  const values = readLegacyValues(formData);
+  const parsed = LegacyLeadSchema.safeParse(values);
+
+  if (!parsed.success) {
+    return {
+      kind: "error",
+      fields: parsed.error.flatten().fieldErrors as Record<string, string[]>,
+      values,
+    };
+  }
+
+  const { name, whatsapp, email, idadeFilho, aporte } = parsed.data;
+  const score = legacyScore(parsed.data);
+
+  try {
+    const resend = new Resend(env.RESEND_API_KEY);
+
+    const { error } = await resend.emails.send({
+      from: `Midlej Site <onboarding@${env.RESEND_FROM_DOMAIN}>`,
+      to: env.LEAD_EMAIL,
+      subject: `Midlej Legacy · Lead ${score} — ${name} · responder em 5 min`,
+      html: `
+        <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:32px 24px;background:#F5F7FA;border-radius:12px">
+          <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#B89840">Novo lead · Midlej Legacy</p>
+          <h2 style="margin:0 0 8px;font-size:22px;color:#2E4659">${name}</h2>
+          <p style="margin:0 0 20px;padding:10px 14px;border-radius:6px;background:#8B1E1E;color:#fff;font-size:13px;font-weight:700">SLA PUBLICADO NA PÁGINA: RETORNO EM ATÉ 5 MINUTOS</p>
+          <p style="margin:0 0 24px;display:inline-block;padding:6px 12px;border-radius:6px;background:#2E4659;color:#fff;font-size:12px;font-weight:700">${LEGACY_SCORE_LABEL[score]}</p>
+          <table style="width:100%;border-collapse:collapse">
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D;width:150px">WhatsApp</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${whatsapp}</td></tr>
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">E-mail</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${email}</td></tr>
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">Idade do filho</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${idadeFilho}</td></tr>
+            <tr><td style="padding:10px 0;font-size:12px;color:#6B7B8D">Aporte mensal</td><td style="padding:10px 0;font-size:15px;font-weight:600;color:#2E4659">${aporte}</td></tr>
+          </table>
+          <p style="margin:24px 0 0;font-size:12px;line-height:1.6;color:#6B7B8D">Na primeira mensagem: identificar a consultoria e o número de registro, <strong>sem nomear indivíduo</strong>. Não citar rentabilidade, percentual nem ativo. Não oferecer holding, doação, previdência de menor ou seguro (fora de escopo). Encerrar com duas opções concretas de horário.</p>
+          <p style="margin:16px 0 0;font-size:11px;color:#9BA8B5">${LEGACY_CONSENT_TEXT}</p>
+        </div>
+      `,
+    });
+
+    if (error) {
+      console.error("[submitLegacyLead] resend error", JSON.stringify(error));
+      return { kind: "error", message: "Algo deu errado. Tente novamente em instantes." };
+    }
+
+    return { kind: "success" };
+  } catch (err) {
+    console.error("[submitLegacyLead] resend unreachable", err instanceof Error ? err.message : err);
     return { kind: "error", message: "Não conseguimos enviar agora. Tente novamente em instantes." };
   }
 }
