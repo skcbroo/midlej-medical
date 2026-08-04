@@ -429,8 +429,10 @@ body::after {
    próprio. Sem isso, este reset (declarado fora de @layer) vence as
    utilities do Tailwind e faz `mt-*`/`mb-*` serem silenciosamente
    ignorados em títulos e parágrafos. Nada muda para as demais rotas. */
-h1:not(.legacy-root *), h2:not(.legacy-root *),
-h3:not(.legacy-root *), h4:not(.legacy-root *) {
+h1:not(.legacy-root *):not(.eleicoes-root *),
+h2:not(.legacy-root *):not(.eleicoes-root *),
+h3:not(.legacy-root *):not(.eleicoes-root *),
+h4:not(.legacy-root *):not(.eleicoes-root *) {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 600;
@@ -438,7 +440,7 @@ h3:not(.legacy-root *), h4:not(.legacy-root *) {
   text-wrap: balance;
 }
 
-p:not(.legacy-root *) { margin: 0; text-wrap: pretty; }
+p:not(.legacy-root *):not(.eleicoes-root *) { margin: 0; text-wrap: pretty; }
 
 /* Italic synthetics on Manrope look poor — emphasis uses weight contrast instead */
 em {
@@ -1591,21 +1593,33 @@ em {
    a partir dele, mas nenhum deles é usado por outra rota do site.
    ═══════════════════════════════════════════════════════════════════ */
 
+/* As utilities apontam para variáveis, não para valores fixos: /legacy e
+   /eleicoes vieram do Lovable com a mesma gramática de tokens (shadcn) e
+   paletas diferentes. Cada rota redefine as variáveis no próprio escopo,
+   e a mesma classe (`bg-background`) resolve para a cor certa em cada uma. */
 @theme {
-  --color-background: oklch(0.17 0.035 255);
-  --color-foreground: oklch(0.96 0.008 90);
-  --color-card: oklch(0.22 0.038 256);
-  --color-muted-foreground: oklch(0.75 0.02 250);
-  --color-accent: oklch(0.65 0.15 40);
-  --color-border: oklch(1 0 0 / 12%);
-  --color-primary-foreground: oklch(0.18 0.035 255);
-  --color-gold: oklch(0.78 0.12 85);
-  --color-gold-soft: oklch(0.88 0.09 88);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
 }
 
 .legacy-root {
   /* Referenciadas via arbitrary values (bg-[image:var(--gradient-gold)]) */
   --background: oklch(0.17 0.035 255);
+  --foreground: oklch(0.96 0.008 90);
+  --card: oklch(0.22 0.038 256);
+  --muted-foreground: oklch(0.75 0.02 250);
+  --accent: oklch(0.65 0.15 40);
+  --border: oklch(1 0 0 / 12%);
+  --primary-foreground: oklch(0.18 0.035 255);
+  --gold: oklch(0.78 0.12 85);
+  --gold-soft: oklch(0.88 0.09 88);
   --gradient-gold: linear-gradient(100deg, oklch(0.88 0.09 88), oklch(0.78 0.12 85));
   --gradient-deep: linear-gradient(180deg, oklch(0.17 0.035 255), oklch(0.13 0.03 255));
   --shadow-lux: 0 24px 60px -20px oklch(0 0 0 / 0.6);
@@ -1638,4 +1652,80 @@ em {
    clara ao fazer overscroll no iOS. */
 body:has(.legacy-root) {
   background-color: oklch(0.17 0.035 255);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MIDLEJ · /eleicoes
+   Segunda LP vinda do Lovable. Mesma estratégia da /legacy: paleta
+   própria (navy 262 + dourado) resolvida dentro de `.eleicoes-root`,
+   sem tocar em nenhuma outra rota.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.eleicoes-root {
+  --background: oklch(0.16 0.035 262);
+  --foreground: oklch(0.97 0.008 250);
+  --card: oklch(0.21 0.04 262);
+  --muted-foreground: oklch(0.72 0.025 258);
+  --accent: oklch(0.3 0.05 262);
+  --border: oklch(0.32 0.04 262);
+  --primary-foreground: oklch(0.17 0.04 262);
+  --gold: oklch(0.79 0.13 85);
+  --gold-soft: oklch(0.88 0.08 88);
+  --ink: oklch(0.12 0.03 262);
+  --gradient-hero: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--ink) 55%, transparent),
+    color-mix(in oklab, var(--ink) 92%, transparent)
+  );
+  --gradient-gold: linear-gradient(100deg, var(--gold), var(--gold-soft));
+  --shadow-gold: 0 18px 45px -18px color-mix(in oklab, var(--gold) 55%, transparent);
+
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.eleicoes-root h1,
+.eleicoes-root h2,
+.eleicoes-root h3,
+.eleicoes-root .font-display {
+  font-family: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.eleicoes-root .text-gradient-gold {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eleicoes-root .surface-panel {
+  background-color: color-mix(in oklab, var(--card) 85%, transparent);
+  border: 1px solid color-mix(in oklab, var(--gold) 18%, transparent);
+}
+
+.eleicoes-root .cta-gold {
+  background: var(--gradient-gold);
+  color: var(--primary-foreground);
+  box-shadow: var(--shadow-gold);
+}
+
+@keyframes eleicoes-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+.eleicoes-root .animate-rise {
+  animation: eleicoes-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eleicoes-root .animate-rise { animation: none; }
+}
+
+body:has(.eleicoes-root) {
+  background-color: oklch(0.16 0.035 262);
 }
