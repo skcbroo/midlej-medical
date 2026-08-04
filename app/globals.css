@@ -425,7 +425,12 @@ body::after {
   }
 }
 
-h1, h2, h3, h4 {
+/* O `:not(.legacy-root *)` isola a rota /legacy, que tem sistema visual
+   próprio. Sem isso, este reset (declarado fora de @layer) vence as
+   utilities do Tailwind e faz `mt-*`/`mb-*` serem silenciosamente
+   ignorados em títulos e parágrafos. Nada muda para as demais rotas. */
+h1:not(.legacy-root *), h2:not(.legacy-root *),
+h3:not(.legacy-root *), h4:not(.legacy-root *) {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 600;
@@ -433,7 +438,7 @@ h1, h2, h3, h4 {
   text-wrap: balance;
 }
 
-p { margin: 0; text-wrap: pretty; }
+p:not(.legacy-root *) { margin: 0; text-wrap: pretty; }
 
 /* Italic synthetics on Manrope look poor — emphasis uses weight contrast instead */
 em {
@@ -1576,4 +1581,61 @@ em {
   body { font-size: 16px; }
   .hero { min-height: auto; padding-top: 100px; padding-bottom: 80px; }
   .lead-form { padding: 24px 20px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MIDLEJ LEGACY · /legacy
+   Sistema visual próprio (navy escuro + dourado), importado da LP
+   montada no Lovable. Fica isolado em `.legacy-root`: os tokens de
+   cor abaixo entram no @theme porque o Tailwind v4 só gera utilities
+   a partir dele, mas nenhum deles é usado por outra rota do site.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@theme {
+  --color-background: oklch(0.17 0.035 255);
+  --color-foreground: oklch(0.96 0.008 90);
+  --color-card: oklch(0.22 0.038 256);
+  --color-muted-foreground: oklch(0.75 0.02 250);
+  --color-accent: oklch(0.65 0.15 40);
+  --color-border: oklch(1 0 0 / 12%);
+  --color-primary-foreground: oklch(0.18 0.035 255);
+  --color-gold: oklch(0.78 0.12 85);
+  --color-gold-soft: oklch(0.88 0.09 88);
+}
+
+.legacy-root {
+  /* Referenciadas via arbitrary values (bg-[image:var(--gradient-gold)]) */
+  --background: oklch(0.17 0.035 255);
+  --gradient-gold: linear-gradient(100deg, oklch(0.88 0.09 88), oklch(0.78 0.12 85));
+  --gradient-deep: linear-gradient(180deg, oklch(0.17 0.035 255), oklch(0.13 0.03 255));
+  --shadow-lux: 0 24px 60px -20px oklch(0 0 0 / 0.6);
+  --shadow-gold: 0 18px 50px -18px color-mix(in oklab, oklch(0.78 0.12 85) 45%, transparent);
+
+  background-color: oklch(0.17 0.035 255);
+  color: oklch(0.96 0.008 90);
+  font-family: var(--font-karla), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.legacy-root h1,
+.legacy-root h2,
+.legacy-root h3,
+.legacy-root .font-display {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.legacy-root .text-gradient-gold {
+  background-image: var(--gradient-gold);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* A /legacy é dark; o body do site é claro. Sem isto, aparece uma faixa
+   clara ao fazer overscroll no iOS. */
+body:has(.legacy-root) {
+  background-color: oklch(0.17 0.035 255);
 }
