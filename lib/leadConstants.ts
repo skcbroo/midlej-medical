@@ -59,6 +59,40 @@ export const RAIOX_B_WHATSAPP_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURICo
 )}`;
 
 /* ─────────────────────────────────────────────────────────
+   LP /lucas — página pessoal do Lucas Midlej (bio do Instagram).
+   Somente WhatsApp, mensagem pré-preenchida. O tráfego vem da bio,
+   então anexamos as UTMs da URL à mensagem quando presentes — a
+   origem viaja para dentro da conversa (buildLucasWhatsappHref).
+   ───────────────────────────────────────────────────────── */
+
+export const LUCAS_WHATSAPP_MESSAGE = "Vim pela página do Lucas Midlej";
+export const LUCAS_WHATSAPP_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
+  LUCAS_WHATSAPP_MESSAGE,
+)}`;
+
+/**
+ * Monta o link do WhatsApp da /lucas com a mensagem de rastreio. Quando o
+ * visitante chega com UTMs (bio do Instagram, campanhas), elas são anexadas
+ * à mensagem para que a origem viaje para dentro da conversa. Mantido
+ * zod-free / sem dependência de browser: `search` é injetado pelo chamador
+ * (client component lê window.location.search).
+ */
+export function buildLucasWhatsappHref(source: string, search?: string): string {
+  const parts: string[] = [`ref: ${source}`];
+
+  if (search) {
+    const params = new URLSearchParams(search);
+    for (const key of ["utm_source", "utm_medium", "utm_campaign"]) {
+      const value = params.get(key);
+      if (value) parts.push(`${key}: ${value}`);
+    }
+  }
+
+  const message = `${LUCAS_WHATSAPP_MESSAGE} (${parts.join(" | ")})`;
+  return `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(message)}`;
+}
+
+/* ─────────────────────────────────────────────────────────
    LP /raiox — Raio-X da Carteira (form de qualificação)
    Opções compartilhadas entre o form (client) e o schema (server).
    Mantidas zod-free aqui de propósito.

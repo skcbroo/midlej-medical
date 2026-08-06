@@ -429,10 +429,10 @@ body::after {
    próprio. Sem isso, este reset (declarado fora de @layer) vence as
    utilities do Tailwind e faz `mt-*`/`mb-*` serem silenciosamente
    ignorados em títulos e parágrafos. Nada muda para as demais rotas. */
-h1:not(.legacy-root *):not(.eleicoes-root *),
-h2:not(.legacy-root *):not(.eleicoes-root *),
-h3:not(.legacy-root *):not(.eleicoes-root *),
-h4:not(.legacy-root *):not(.eleicoes-root *) {
+h1:not(.legacy-root *):not(.eleicoes-root *):not(.lucas-root *),
+h2:not(.legacy-root *):not(.eleicoes-root *):not(.lucas-root *),
+h3:not(.legacy-root *):not(.eleicoes-root *):not(.lucas-root *),
+h4:not(.legacy-root *):not(.eleicoes-root *):not(.lucas-root *) {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 600;
@@ -440,7 +440,7 @@ h4:not(.legacy-root *):not(.eleicoes-root *) {
   text-wrap: balance;
 }
 
-p:not(.legacy-root *):not(.eleicoes-root *) { margin: 0; text-wrap: pretty; }
+p:not(.legacy-root *):not(.eleicoes-root *):not(.lucas-root *) { margin: 0; text-wrap: pretty; }
 
 /* Italic synthetics on Manrope look poor — emphasis uses weight contrast instead */
 em {
@@ -1607,6 +1607,17 @@ em {
   --color-primary-foreground: var(--primary-foreground);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
+
+  /* Tokens extras usados pela /lucas (shadcn-grammar, escopo .lucas-root).
+     Aditivos: nenhuma outra rota usa bg-secondary/text-accent-foreground. */
+  --color-secondary: var(--secondary);
+  --color-accent-foreground: var(--accent-foreground);
+
+  /* Serif editorial da /lucas. Resolve para "Instrument Serif" só dentro
+     de .lucas-root (onde --font-lucas-serif é injetado via next/font);
+     em qualquer outra rota cai no fallback Georgia — e nenhuma outra rota
+     usa font-serif, então não há mudança visual fora da /lucas. */
+  --font-serif: var(--font-lucas-serif), "Instrument Serif", Georgia, serif;
 }
 
 .legacy-root {
@@ -1728,4 +1739,56 @@ body:has(.legacy-root) {
 
 body:has(.eleicoes-root) {
   background-color: oklch(0.16 0.035 262);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MIDLEJ · /lucas — página pessoal do Lucas Midlej (bio do Instagram)
+   Terceira LP com gramática de tokens shadcn, vinda do Lovable. Mesma
+   estratégia isolada de /legacy e /eleicoes: paleta própria (light,
+   editorial, off-white quente + acento bronze) resolvida dentro de
+   `.lucas-root`, sem tocar em nenhuma outra rota. Títulos serifados
+   (Instrument Serif, injetado via next/font só nesta subárvore).
+   Valores oklch idênticos aos do projeto original (styles.css :root).
+   ═══════════════════════════════════════════════════════════════════ */
+
+.lucas-root {
+  --background: oklch(0.985 0.005 85);
+  --foreground: oklch(0.19 0.012 60);
+  --secondary: oklch(0.958 0.009 80);
+  --muted-foreground: oklch(0.48 0.014 65);
+  --accent: oklch(0.52 0.075 62);
+  --accent-foreground: oklch(0.985 0.005 85);
+  --primary-foreground: oklch(0.985 0.005 85);
+  --border: oklch(0.9 0.012 78);
+
+  background-color: var(--background);
+  color: var(--foreground);
+  /* Corpo na grotesca já carregada da marca (Bricolage); títulos em serif. */
+  font-family: var(--font-brand), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.lucas-root h1,
+.lucas-root h2,
+.lucas-root h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* A /lucas é light; garante o body claro mesmo em overscroll (iOS). */
+body:has(.lucas-root) {
+  background-color: oklch(0.985 0.005 85);
+}
+
+/* Âncora "Como eu atuo" com rolagem suave, sem header fixo a compensar. */
+html:has(.lucas-root) {
+  scroll-behavior: smooth;
+  scroll-padding-top: 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.lucas-root) { scroll-behavior: auto; }
 }
