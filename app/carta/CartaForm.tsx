@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { NEWSLETTER_CONSENT_TEXT } from "@/lib/leadConstants";
 import { submitNewsletterForm, type NewsletterFormState } from "@/lib/actions";
 import { pushEvent } from "@/lib/analytics";
@@ -20,11 +20,21 @@ import { pushEvent } from "@/lib/analytics";
  */
 
 const initial: NewsletterFormState = { kind: "idle" };
-const emptyVals = { name: "", email: "" };
-const FIELD_ORDER = ["name", "email"] as const;
+const emptyVals = { name: "", email: "", whatsapp: "" };
+const FIELD_ORDER = ["name", "email", "whatsapp"] as const;
+
+function maskWhatsapp(raw: string): string {
+  const d = raw.replace(/\D/g, "").slice(0, 11);
+  if (!d) return "";
+  if (d.length <= 2) return `(${d}`;
+  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+}
 
 export function CartaForm() {
   const [state, action, pending] = useActionState(submitNewsletterForm, initial);
+  const [wa, setWa] = useState("");
 
   useEffect(() => {
     if (state.kind !== "error") return;
@@ -116,6 +126,29 @@ export function CartaForm() {
           aria-invalid={!!errors.email}
         />
         {errors.email?.[0] && <span className={errorClass}>{errors.email[0]}</span>}
+      </div>
+
+      <div>
+        <label htmlFor="carta-whatsapp" className={labelClass}>
+          Telefone (WhatsApp)
+        </label>
+        <input
+          id="carta-whatsapp"
+          name="whatsapp"
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel-national"
+          required
+          value={wa || maskWhatsapp(values.whatsapp)}
+          onChange={(e) => setWa(maskWhatsapp(e.target.value))}
+          maxLength={16}
+          placeholder="(11) 91234-5678"
+          className={inputClass}
+          aria-invalid={!!errors.whatsapp}
+        />
+        {errors.whatsapp?.[0] && (
+          <span className={errorClass}>{errors.whatsapp[0]}</span>
+        )}
       </div>
 
       {state.kind === "error" && state.message && (

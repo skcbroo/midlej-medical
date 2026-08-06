@@ -109,6 +109,7 @@ export type BlindagemLeadInput = z.infer<typeof BlindagemLeadSchema>;
 export const NewsletterSchema = z.object({
   name: nome,
   email: z.string().trim().email("E-mail inválido").max(120),
+  whatsapp,
 });
 
 export type NewsletterInput = z.infer<typeof NewsletterSchema>;

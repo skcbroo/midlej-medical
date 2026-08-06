@@ -87,8 +87,7 @@ export default function CartaPage() {
               <p className="t-lede text-[1.0625rem] md:text-[1.2rem] leading-[1.55] mt-7 max-w-[46ch] text-on-ink-soft">
                 Uma leitura curada do que aconteceu no mercado, o contexto macro
                 por trás dos números e os temas que a nossa mesa de investimentos
-                está acompanhando. Sem promessa de retorno, sem indicação de
-                ativo. Clareza para decidir com critério.
+                está acompanhando.
               </p>
 
               <ul className="mt-10 flex flex-col">

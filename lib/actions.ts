@@ -310,13 +310,14 @@ export type NewsletterFormState =
       kind: "error";
       message?: string;
       fields?: Partial<Record<string, string[]>>;
-      values?: { name: string; email: string };
+      values?: { name: string; email: string; whatsapp: string };
     };
 
 function readNewsletterValues(formData: FormData) {
   return {
     name: (formData.get("name") ?? "").toString(),
     email: (formData.get("email") ?? "").toString(),
+    whatsapp: (formData.get("whatsapp") ?? "").toString(),
   };
 }
 
@@ -338,19 +339,22 @@ export async function submitNewsletterForm(
     };
   }
 
-  const { name, email } = parsed.data;
+  const { name, email, whatsapp } = parsed.data;
   const firstName = name.split(/\s+/)[0] ?? name;
 
   const resend = new Resend(env.RESEND_API_KEY);
 
   // Passo 1 (best-effort): grava na Audience do Resend se configurada.
   // Falha aqui NÃO é erro pro usuário — o passo 2 garante o registro.
+  // O telefone segue no e-mail de registro (passo 2) de todo modo; aqui
+  // ele é anexado ao firstName porque a API de contatos do Resend não
+  // tem campo de telefone dedicado — assim o número não se perde na lista.
   if (env.RESEND_AUDIENCE_ID) {
     try {
       const { error } = await resend.contacts.create({
         audienceId: env.RESEND_AUDIENCE_ID,
         email,
-        firstName,
+        firstName: `${firstName} · ${whatsapp}`,
         unsubscribed: false,
       });
       if (error) {
@@ -377,7 +381,8 @@ export async function submitNewsletterForm(
           <h2 style="margin:0 0 24px;font-size:22px;color:#2E4659">Carta Midlej</h2>
           <table style="width:100%;border-collapse:collapse">
             <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D;width:90px">Nome</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${name}</td></tr>
-            <tr><td style="padding:10px 0;font-size:12px;color:#6B7B8D">E-mail</td><td style="padding:10px 0;font-size:15px;font-weight:600;color:#2E4659">${email}</td></tr>
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">E-mail</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${email}</td></tr>
+            <tr><td style="padding:10px 0;font-size:12px;color:#6B7B8D">WhatsApp</td><td style="padding:10px 0;font-size:15px;font-weight:600;color:#2E4659">${whatsapp}</td></tr>
           </table>
           <p style="margin:24px 0 0;font-size:11px;color:#9BA8B5">${NEWSLETTER_CONSENT_TEXT}</p>
         </div>
