@@ -173,3 +173,13 @@ export type BlindagemHorizonte = (typeof BLINDAGEM_HORIZONTES)[number];
 
 export const BLINDAGEM_CONSENT_TEXT =
   "Autorizo a Midlej Capital a entrar em contato pelo WhatsApp e e-mail informados sobre proteção patrimonial internacional e concordo com a Política de Privacidade.";
+
+/* ─────────────────────────────────────────────────────────
+   LP /carta — Carta Midlej (newsletter de mercado)
+   Topo de funil: captura de e-mail para a leitura semanal.
+   Consentimento próprio de newsletter (opt-in de e-mail), com
+   direito de cancelamento explícito.
+   ───────────────────────────────────────────────────────── */
+
+export const NEWSLETTER_CONSENT_TEXT =
+  "Autorizo a Midlej Capital a me enviar a Carta Midlej e comunicações por e-mail. Posso cancelar quando quiser.";

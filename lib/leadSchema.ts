@@ -100,6 +100,19 @@ export const BlindagemLeadSchema = z.object({
 
 export type BlindagemLeadInput = z.infer<typeof BlindagemLeadSchema>;
 
+/* ─────────────────────────────────────────────────────────
+   LP /carta — Carta Midlej (newsletter de mercado)
+   Topo de funil: só o essencial (nome + e-mail) para reduzir
+   fricção. Não é lead qualificado — é inscrição na leitura semanal.
+   ───────────────────────────────────────────────────────── */
+
+export const NewsletterSchema = z.object({
+  name: nome,
+  email: z.string().trim().email("E-mail inválido").max(120),
+});
+
+export type NewsletterInput = z.infer<typeof NewsletterSchema>;
+
 /**
  * Score de atendimento da /blindagem. A = quente, B = morno, C = frio.
  * Roteia a velocidade do contato; não exclui ninguém. Faixa de patrimônio

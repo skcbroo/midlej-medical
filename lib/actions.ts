@@ -7,9 +7,14 @@ import {
   raioxScore,
   BlindagemLeadSchema,
   blindagemScore,
+  NewsletterSchema,
   CONSENT_TEXT,
 } from "./leadSchema";
-import { RAIOX_CONSENT_TEXT, BLINDAGEM_CONSENT_TEXT } from "./leadConstants";
+import {
+  RAIOX_CONSENT_TEXT,
+  BLINDAGEM_CONSENT_TEXT,
+  NEWSLETTER_CONSENT_TEXT,
+} from "./leadConstants";
 import { env } from "./env";
 
 export type LeadFormState =
@@ -284,6 +289,109 @@ export async function submitBlindagemLead(
     return { kind: "success" };
   } catch (err) {
     console.error("[submitBlindagemLead] resend unreachable", err instanceof Error ? err.message : err);
+    return { kind: "error", message: "Não conseguimos enviar agora. Tente novamente em instantes." };
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   LP /carta — Carta Midlej (newsletter de mercado)
+   Topo de funil: inscrição na leitura semanal (nome + e-mail).
+   Persistência em dois passos, tolerante a config faltando:
+     1) Se RESEND_AUDIENCE_ID existir, grava o contato na Audience.
+     2) SEMPRE dispara um e-mail de registro para LEAD_EMAIL como
+        fallback — assim nenhum inscrito se perde antes da Audience
+        existir. Só retorna erro ao usuário se ESTE e-mail falhar.
+   ───────────────────────────────────────────────────────── */
+
+export type NewsletterFormState =
+  | { kind: "idle" }
+  | { kind: "success" }
+  | {
+      kind: "error";
+      message?: string;
+      fields?: Partial<Record<string, string[]>>;
+      values?: { name: string; email: string };
+    };
+
+function readNewsletterValues(formData: FormData) {
+  return {
+    name: (formData.get("name") ?? "").toString(),
+    email: (formData.get("email") ?? "").toString(),
+  };
+}
+
+export async function submitNewsletterForm(
+  _prev: NewsletterFormState,
+  formData: FormData,
+): Promise<NewsletterFormState> {
+  const honeypot = (formData.get("website") ?? "").toString();
+  if (honeypot.length > 0) return { kind: "success" };
+
+  const values = readNewsletterValues(formData);
+  const parsed = NewsletterSchema.safeParse(values);
+
+  if (!parsed.success) {
+    return {
+      kind: "error",
+      fields: parsed.error.flatten().fieldErrors as Record<string, string[]>,
+      values,
+    };
+  }
+
+  const { name, email } = parsed.data;
+  const firstName = name.split(/\s+/)[0] ?? name;
+
+  const resend = new Resend(env.RESEND_API_KEY);
+
+  // Passo 1 (best-effort): grava na Audience do Resend se configurada.
+  // Falha aqui NÃO é erro pro usuário — o passo 2 garante o registro.
+  if (env.RESEND_AUDIENCE_ID) {
+    try {
+      const { error } = await resend.contacts.create({
+        audienceId: env.RESEND_AUDIENCE_ID,
+        email,
+        firstName,
+        unsubscribed: false,
+      });
+      if (error) {
+        console.error("[submitNewsletterForm] audience error", JSON.stringify(error));
+      }
+    } catch (err) {
+      console.error(
+        "[submitNewsletterForm] audience unreachable",
+        err instanceof Error ? err.message : err,
+      );
+    }
+  }
+
+  // Passo 2 (obrigatório): e-mail de registro. É o que garante que a
+  // inscrição chegue mesmo sem Audience configurada.
+  try {
+    const { error } = await resend.emails.send({
+      from: `Midlej Site <onboarding@${env.RESEND_FROM_DOMAIN}>`,
+      to: env.LEAD_EMAIL,
+      subject: "Nova inscrição — Carta Midlej",
+      html: `
+        <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px 24px;background:#F5F7FA;border-radius:12px">
+          <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#B89840">Nova inscrição</p>
+          <h2 style="margin:0 0 24px;font-size:22px;color:#2E4659">Carta Midlej</h2>
+          <table style="width:100%;border-collapse:collapse">
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D;width:90px">Nome</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${name}</td></tr>
+            <tr><td style="padding:10px 0;font-size:12px;color:#6B7B8D">E-mail</td><td style="padding:10px 0;font-size:15px;font-weight:600;color:#2E4659">${email}</td></tr>
+          </table>
+          <p style="margin:24px 0 0;font-size:11px;color:#9BA8B5">${NEWSLETTER_CONSENT_TEXT}</p>
+        </div>
+      `,
+    });
+
+    if (error) {
+      console.error("[submitNewsletterForm] resend error", JSON.stringify(error));
+      return { kind: "error", message: "Algo deu errado. Tente novamente em instantes." };
+    }
+
+    return { kind: "success" };
+  } catch (err) {
+    console.error("[submitNewsletterForm] resend unreachable", err instanceof Error ? err.message : err);
     return { kind: "error", message: "Não conseguimos enviar agora. Tente novamente em instantes." };
   }
 }
