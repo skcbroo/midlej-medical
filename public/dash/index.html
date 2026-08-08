@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Comercial — Midlej Consultoria</title>
+<meta name="description" content="Painel de indicadores comerciais da Midlej Consultoria — funil outbound e inbound, performance individual e diagnóstico de gargalo.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/dash/assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230E1B2E'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia' font-size='17' font-weight='bold' fill='%23C3A15C'%3EM%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header>
+  <div class="mast">
+    <div class="brand">
+      <h1>MIDLEJ <em>·</em> Painel Comercial</h1>
+      <p>Da geração de lead ao fechamento — produtividade, conversão e gargalo por canal</p>
+    </div>
+    <div class="filters">
+      <div class="filter"><label for="fPeriodo">Período</label>
+        <select id="fPeriodo"><option value="30">Últimos 30 dias</option><option value="7">Últimos 7 dias</option></select></div>
+      <div class="filter"><label for="fConsultor">Consultor</label>
+        <select id="fConsultor"><option value="all">Todos</option></select></div>
+      <div class="filter"><label for="fCanal">Canal</label>
+        <select id="fCanal">
+          <option value="all">Todos</option>
+          <option value="out">Outbound (frio)</option>
+          <option value="in">Inbound — todos</option>
+          <option value="Google Ads">Google Ads</option>
+          <option value="Instagram">Instagram</option>
+          <option value="Rede dos sócios">Rede dos sócios</option>
+        </select></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="kpis" id="kpis"></section>
+
+  <section class="row-3">
+    <div class="card">
+      <h3>Funil Outbound <span class="sub">· prospecção fria</span></h3>
+      <div class="funnel" id="funOut"></div>
+    </div>
+    <div class="card">
+      <h3>Funil Inbound <span class="sub">· Google, Instagram e rede dos sócios</span></h3>
+      <div class="funnel" id="funIn"></div>
+    </div>
+    <div class="card">
+      <h3>Qualidade da resposta</h3>
+      <div class="twins" id="quality"></div>
+    </div>
+  </section>
+
+  <section class="row-2">
+    <div class="card">
+      <h3>Leads e conversão por canal</h3>
+      <div class="chan" id="chan"></div>
+    </div>
+    <div class="card">
+      <h3>Evolução semanal <span class="sub">· reuniões realizadas vs meta</span></h3>
+      <div id="weekly"></div>
+      <div class="legend"><span><i style="background:var(--gold)"></i>Realizadas</span><span><i style="background:#B9C2D0"></i>Meta semanal</span></div>
+    </div>
+  </section>
+
+  <section class="row-2b">
+    <div class="card">
+      <h3>Performance por consultor <span class="sub">· receita vs meta individual</span></h3>
+      <div class="cons" id="cons"></div>
+    </div>
+    <div class="card">
+      <h3>Reuniões agendadas vs realizadas</h3>
+      <div class="meetbars" id="meet"></div>
+      <div class="twins" id="meetkpis"></div>
+    </div>
+  </section>
+
+  <section class="diag" id="diag"></section>
+
+  <p class="foot">Dados de exemplo para validação do modelo — substitua no bloco <b>DATA</b> do arquivo ou conecte à sua fonte (CRM / planilha). Benchmarks: padrão B2B consultivo mundial.</p>
+</main>
+
+<script src="/dash/assets/js/data.js"></script>
+<script src="/dash/assets/js/app.js"></script>
+</body>
+</html>
