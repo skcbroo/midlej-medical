@@ -175,6 +175,33 @@ export const BLINDAGEM_CONSENT_TEXT =
   "Autorizo a Midlej Capital a entrar em contato pelo WhatsApp e e-mail informados sobre proteção patrimonial internacional e concordo com a Política de Privacidade.";
 
 /* ─────────────────────────────────────────────────────────
+   LP /objetivos — Planejamento orientado a objetivos de vida
+   Captura direta (script "Riscos Ocultos", 24/08/2026): 4 campos,
+   nome + WhatsApp + patrimônio investido + experiência prévia.
+   As faixas ROTEIAM o atendimento (score interno), não excluem
+   ninguém. Rótulos aplicados EXATAMENTE como no script da LP.
+   ───────────────────────────────────────────────────────── */
+
+export const OBJETIVOS_PATRIMONIOS = [
+  "Até R$ 50k",
+  "R$ 50k–200k",
+  "R$ 200k–500k",
+  "R$ 500k–1M",
+  "Acima de R$ 1M",
+] as const;
+export type ObjetivosPatrimonio = (typeof OBJETIVOS_PATRIMONIOS)[number];
+
+export const OBJETIVOS_EXPERIENCIAS = [
+  "Nunca investi",
+  "Só renda fixa/CDI",
+  "Já diversifiquei",
+] as const;
+export type ObjetivosExperiencia = (typeof OBJETIVOS_EXPERIENCIAS)[number];
+
+export const OBJETIVOS_CONSENT_TEXT =
+  "Autorizo a Midlej Capital a entrar em contato pelo WhatsApp informado sobre o meu planejamento e concordo com a Política de Privacidade.";
+
+/* ─────────────────────────────────────────────────────────
    LP /carta — Carta Midlej (newsletter de mercado)
    Topo de funil: captura de e-mail para a leitura semanal.
    Consentimento próprio de newsletter (opt-in de e-mail), com

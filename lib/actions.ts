@@ -7,12 +7,15 @@ import {
   raioxScore,
   BlindagemLeadSchema,
   blindagemScore,
+  ObjetivosLeadSchema,
+  objetivosScore,
   NewsletterSchema,
   CONSENT_TEXT,
 } from "./leadSchema";
 import {
   RAIOX_CONSENT_TEXT,
   BLINDAGEM_CONSENT_TEXT,
+  OBJETIVOS_CONSENT_TEXT,
   NEWSLETTER_CONSENT_TEXT,
 } from "./leadConstants";
 import { env } from "./env";
@@ -289,6 +292,96 @@ export async function submitBlindagemLead(
     return { kind: "success" };
   } catch (err) {
     console.error("[submitBlindagemLead] resend unreachable", err instanceof Error ? err.message : err);
+    return { kind: "error", message: "Não conseguimos enviar agora. Tente novamente em instantes." };
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   LP /objetivos — Planejamento orientado a objetivos de vida
+   Captura direta: nome + WhatsApp + patrimônio + experiência.
+   ───────────────────────────────────────────────────────── */
+
+export type ObjetivosFormState =
+  | { kind: "idle" }
+  | { kind: "success" }
+  | {
+      kind: "error";
+      message?: string;
+      fields?: Partial<Record<string, string[]>>;
+      values?: {
+        name: string;
+        whatsapp: string;
+        patrimonio: string;
+        experiencia: string;
+      };
+    };
+
+function readObjetivosValues(formData: FormData) {
+  return {
+    name: (formData.get("name") ?? "").toString(),
+    whatsapp: (formData.get("whatsapp") ?? "").toString(),
+    patrimonio: (formData.get("patrimonio") ?? "").toString(),
+    experiencia: (formData.get("experiencia") ?? "").toString(),
+  };
+}
+
+const OBJETIVOS_SCORE_LABEL: Record<"A" | "B" | "C", string> = {
+  A: "A · QUENTE — WhatsApp humano em até 15 min",
+  B: "B · MORNO — WhatsApp em até 2 h",
+  C: "C · FRIO — automação + material educativo",
+};
+
+export async function submitObjetivosLead(
+  _prev: ObjetivosFormState,
+  formData: FormData,
+): Promise<ObjetivosFormState> {
+  const honeypot = (formData.get("website") ?? "").toString();
+  if (honeypot.length > 0) return { kind: "success" };
+
+  const values = readObjetivosValues(formData);
+  const parsed = ObjetivosLeadSchema.safeParse(values);
+
+  if (!parsed.success) {
+    return {
+      kind: "error",
+      fields: parsed.error.flatten().fieldErrors as Record<string, string[]>,
+      values,
+    };
+  }
+
+  const { name, whatsapp, patrimonio, experiencia } = parsed.data;
+  const score = objetivosScore(parsed.data);
+
+  try {
+    const resend = new Resend(env.RESEND_API_KEY);
+
+    const { error } = await resend.emails.send({
+      from: `Midlej Site <onboarding@${env.RESEND_FROM_DOMAIN}>`,
+      to: env.LEAD_EMAIL,
+      subject: `Objetivos · Lead ${score} — ${name}`,
+      html: `
+        <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:32px 24px;background:#F5F7FA;border-radius:12px">
+          <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#B89840">Novo lead · Planejamento orientado a objetivos</p>
+          <h2 style="margin:0 0 8px;font-size:22px;color:#2E4659">${name}</h2>
+          <p style="margin:0 0 24px;display:inline-block;padding:6px 12px;border-radius:6px;background:#2E4659;color:#fff;font-size:12px;font-weight:700">${OBJETIVOS_SCORE_LABEL[score]}</p>
+          <table style="width:100%;border-collapse:collapse">
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D;width:130px">WhatsApp</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${whatsapp}</td></tr>
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">Patrimônio investido</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${patrimonio}</td></tr>
+            <tr><td style="padding:10px 0;font-size:12px;color:#6B7B8D">Já investiu antes?</td><td style="padding:10px 0;font-size:15px;font-weight:600;color:#2E4659">${experiencia}</td></tr>
+          </table>
+          <p style="margin:24px 0 0;font-size:11px;color:#9BA8B5">${OBJETIVOS_CONSENT_TEXT}</p>
+        </div>
+      `,
+    });
+
+    if (error) {
+      console.error("[submitObjetivosLead] resend error", JSON.stringify(error));
+      return { kind: "error", message: "Algo deu errado. Tente novamente em instantes." };
+    }
+
+    return { kind: "success" };
+  } catch (err) {
+    console.error("[submitObjetivosLead] resend unreachable", err instanceof Error ? err.message : err);
     return { kind: "error", message: "Não conseguimos enviar agora. Tente novamente em instantes." };
   }
 }

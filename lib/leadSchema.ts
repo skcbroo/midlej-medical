@@ -9,6 +9,8 @@ import {
   BLINDAGEM_MOTIVACOES,
   BLINDAGEM_FAIXAS,
   BLINDAGEM_HORIZONTES,
+  OBJETIVOS_PATRIMONIOS,
+  OBJETIVOS_EXPERIENCIAS,
 } from "./leadConstants";
 
 export { CONSENT_TEXT } from "./leadConstants";
@@ -99,6 +101,36 @@ export const BlindagemLeadSchema = z.object({
 });
 
 export type BlindagemLeadInput = z.infer<typeof BlindagemLeadSchema>;
+
+/* ─────────────────────────────────────────────────────────
+   LP /objetivos — Planejamento orientado a objetivos de vida
+   Captura direta de 4 campos (todos obrigatórios): nome +
+   WhatsApp + patrimônio investido + experiência prévia.
+   ───────────────────────────────────────────────────────── */
+
+export const ObjetivosLeadSchema = z.object({
+  name: nome,
+  whatsapp,
+  patrimonio: z.enum(OBJETIVOS_PATRIMONIOS, { message: "Selecione uma faixa" }),
+  experiencia: z.enum(OBJETIVOS_EXPERIENCIAS, { message: "Selecione uma opção" }),
+});
+
+export type ObjetivosLeadInput = z.infer<typeof ObjetivosLeadSchema>;
+
+/**
+ * Score de atendimento da /objetivos. A = quente, B = morno, C = frio.
+ * Roteia a velocidade do contato; não exclui ninguém. Faixa de patrimônio
+ * é o principal driver; a experiência prévia desempata.
+ */
+export function objetivosScore(lead: ObjetivosLeadInput): "A" | "B" | "C" {
+  const { patrimonio, experiencia } = lead;
+  if (patrimonio === "Acima de R$ 1M" || patrimonio === "R$ 500k–1M") return "A";
+  if (patrimonio === "R$ 200k–500k") {
+    return experiencia === "Já diversifiquei" ? "A" : "B";
+  }
+  if (patrimonio === "R$ 50k–200k") return "B";
+  return "C"; // Até R$ 50k
+}
 
 /* ─────────────────────────────────────────────────────────
    LP /carta — Carta Midlej (newsletter de mercado)
