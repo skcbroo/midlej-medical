@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ObjetivosForm } from "./ObjetivosForm";
+import { HeroBackdrop } from "./HeroBackdrop";
 
 /* ================================================================
    /objetivos — LP de captura direta · ângulo "objetivos de vida"
@@ -87,10 +88,13 @@ function Hero() {
         background: "linear-gradient(160deg, #16242F 0%, #223849 48%, #2E4659 100%)",
       }}
     >
+      {/* Camada de movimento — trajetória rumo a um alvo (drift lento) */}
+      <HeroBackdrop />
+
       {/* Halo atrás do formulário — puxa o olho para a captura */}
       <div
         aria-hidden
-        className="absolute inset-0 pointer-events-none z-[1]"
+        className="absolute inset-0 pointer-events-none z-[2]"
         style={{
           background:
             "radial-gradient(58% 52% at 80% 34%, rgba(143,179,212,0.20) 0%, rgba(143,179,212,0) 70%)",
