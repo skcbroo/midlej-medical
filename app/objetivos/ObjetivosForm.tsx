@@ -4,7 +4,6 @@ import { useActionState, useEffect, useRef, useState } from "react";
 import {
   OBJETIVOS_PATRIMONIOS,
   OBJETIVOS_EXPERIENCIAS,
-  OBJETIVOS_CONSENT_TEXT,
 } from "@/lib/leadConstants";
 import { submitObjetivosLead, type ObjetivosFormState } from "@/lib/actions";
 import { pushEvent } from "@/lib/analytics";
@@ -250,14 +249,6 @@ export function ObjetivosForm({ instanceId = "obj" }: { instanceId?: string }) {
             </span>
           )}
         </div>
-
-        <label
-          className="flex items-start gap-3 text-[0.8rem] leading-[1.5]"
-          style={{ color: "#6B7B8D" }}
-        >
-          <input type="checkbox" required className="mt-1 shrink-0 accent-[#2E4659]" />
-          <span>{OBJETIVOS_CONSENT_TEXT}</span>
-        </label>
 
         {state.kind === "error" && state.message && (
           <p className={errorClass} style={{ color: "#B23A48" }}>
