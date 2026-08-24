@@ -82,10 +82,10 @@ export function ObjetivosForm({ instanceId = "obj" }: { instanceId?: string }) {
           className="text-[clamp(1.375rem,2.4vw,1.75rem)] font-bold leading-tight mb-4"
           style={{ color: "#2E4659" }}
         >
-          Pronto. Seus números estão com a gente.
+          O primeiro passo para conquista dos seus objetivos foi dado.
         </h3>
         <p className="text-[1.0625rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>
-          Vamos analisar e entrar em contato pelo WhatsApp em até 24 horas.
+          Em até 10 minutos um especialista vai entrar em contato.
         </p>
       </div>
     );
