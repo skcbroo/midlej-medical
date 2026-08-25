@@ -9,6 +9,7 @@ import {
   blindagemScore,
   ObjetivosLeadSchema,
   objetivosScore,
+  ExFindosLeadSchema,
   NewsletterSchema,
   CONSENT_TEXT,
 } from "./leadSchema";
@@ -16,6 +17,7 @@ import {
   RAIOX_CONSENT_TEXT,
   BLINDAGEM_CONSENT_TEXT,
   OBJETIVOS_CONSENT_TEXT,
+  EXFINDOS_CONSENT_TEXT,
   NEWSLETTER_CONSENT_TEXT,
 } from "./leadConstants";
 import { env } from "./env";
@@ -382,6 +384,89 @@ export async function submitObjetivosLead(
     return { kind: "success" };
   } catch (err) {
     console.error("[submitObjetivosLead] resend unreachable", err instanceof Error ? err.message : err);
+    return { kind: "error", message: "Não conseguimos enviar agora. Tente novamente em instantes." };
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   LP /exercicios-findos — Antecipação de exercícios findos
+   Captura direta: nome + WhatsApp + órgão/secretaria + ano(s).
+   Servidor público do DF. Cessão de crédito — NÃO é investimento.
+   ───────────────────────────────────────────────────────── */
+
+export type ExFindosFormState =
+  | { kind: "idle" }
+  | { kind: "success" }
+  | {
+      kind: "error";
+      message?: string;
+      fields?: Partial<Record<string, string[]>>;
+      values?: {
+        name: string;
+        whatsapp: string;
+        orgao: string;
+        ano: string;
+      };
+    };
+
+function readExFindosValues(formData: FormData) {
+  return {
+    name: (formData.get("name") ?? "").toString(),
+    whatsapp: (formData.get("whatsapp") ?? "").toString(),
+    orgao: (formData.get("orgao") ?? "").toString(),
+    ano: (formData.get("ano") ?? "").toString(),
+  };
+}
+
+export async function submitExFindosLead(
+  _prev: ExFindosFormState,
+  formData: FormData,
+): Promise<ExFindosFormState> {
+  const honeypot = (formData.get("website") ?? "").toString();
+  if (honeypot.length > 0) return { kind: "success" };
+
+  const values = readExFindosValues(formData);
+  const parsed = ExFindosLeadSchema.safeParse(values);
+
+  if (!parsed.success) {
+    return {
+      kind: "error",
+      fields: parsed.error.flatten().fieldErrors as Record<string, string[]>,
+      values,
+    };
+  }
+
+  const { name, whatsapp, orgao, ano } = parsed.data;
+
+  try {
+    const resend = new Resend(env.RESEND_API_KEY);
+
+    const { error } = await resend.emails.send({
+      from: `Midlej Site <onboarding@${env.RESEND_FROM_DOMAIN}>`,
+      to: env.LEAD_EMAIL,
+      subject: `Exercícios findos (DF) · Novo lead — ${name}`,
+      html: `
+        <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:32px 24px;background:#F5F7FA;border-radius:12px">
+          <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#B89840">Novo lead · Antecipação de exercícios findos (DF)</p>
+          <h2 style="margin:0 0 24px;font-size:22px;color:#2E4659">${name}</h2>
+          <table style="width:100%;border-collapse:collapse">
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D;width:150px">WhatsApp</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${whatsapp}</td></tr>
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">Órgão / Secretaria</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${orgao}</td></tr>
+            <tr><td style="padding:10px 0;font-size:12px;color:#6B7B8D">Ano(s) dos exercícios findos</td><td style="padding:10px 0;font-size:15px;font-weight:600;color:#2E4659">${ano}</td></tr>
+          </table>
+          <p style="margin:24px 0 0;font-size:11px;color:#9BA8B5">${EXFINDOS_CONSENT_TEXT}</p>
+        </div>
+      `,
+    });
+
+    if (error) {
+      console.error("[submitExFindosLead] resend error", JSON.stringify(error));
+      return { kind: "error", message: "Algo deu errado. Tente novamente em instantes." };
+    }
+
+    return { kind: "success" };
+  } catch (err) {
+    console.error("[submitExFindosLead] resend unreachable", err instanceof Error ? err.message : err);
     return { kind: "error", message: "Não conseguimos enviar agora. Tente novamente em instantes." };
   }
 }

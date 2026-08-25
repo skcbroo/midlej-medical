@@ -133,6 +133,31 @@ export function objetivosScore(lead: ObjetivosLeadInput): "A" | "B" | "C" {
 }
 
 /* ─────────────────────────────────────────────────────────
+   LP /exercicios-findos — Antecipação de exercícios findos
+   Captura direta (4 campos, single-step): nome + WhatsApp +
+   órgão/secretaria + ano(s) dos exercícios findos. Órgão e ano
+   são texto livre — a secretaria varia e o ano pode ser múltiplo
+   ou incerto ("2016", "2012 e 2015", "não sei ao certo").
+   ───────────────────────────────────────────────────────── */
+
+export const ExFindosLeadSchema = z.object({
+  name: nome,
+  whatsapp,
+  orgao: z
+    .string()
+    .trim()
+    .min(2, "Informe o órgão ou secretaria")
+    .max(120, "Muito longo"),
+  ano: z
+    .string()
+    .trim()
+    .min(2, "Informe o ano dos exercícios findos")
+    .max(60, "Muito longo"),
+});
+
+export type ExFindosLeadInput = z.infer<typeof ExFindosLeadSchema>;
+
+/* ─────────────────────────────────────────────────────────
    LP /carta — Carta Midlej (newsletter de mercado)
    Topo de funil: só o essencial (nome + e-mail) para reduzir
    fricção. Não é lead qualificado — é inscrição na leitura semanal.

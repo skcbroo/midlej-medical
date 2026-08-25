@@ -7,6 +7,7 @@ import {
   CONSORCIO_WHATSAPP_HREF,
   CFO_WHATSAPP_HREF,
   RAIOX_WHATSAPP_HREF,
+  EXFINDOS_WHATSAPP_HREF,
 } from "@/lib/leadConstants";
 
 const GENERIC_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
@@ -23,11 +24,12 @@ const PAGE_HREF: Record<string, string> = {
   "/consorcio": CONSORCIO_WHATSAPP_HREF,
   "/cfo": CFO_WHATSAPP_HREF,
   "/raiox": RAIOX_WHATSAPP_HREF,
+  "/exercicios-findos": EXFINDOS_WHATSAPP_HREF,
 };
 
 // LPs que têm barra fixa de CTA no rodapé do mobile — sobe o botão flutuante
 // para não sobrepor a barra. No desktop fica na posição padrão.
-const RAISE_ON_MOBILE = new Set(["/plenomed", "/consorcio", "/cfo", "/raiox"]);
+const RAISE_ON_MOBILE = new Set(["/plenomed", "/consorcio", "/cfo", "/raiox", "/exercicios-findos"]);
 
 export function WhatsAppFloat() {
   const pathname = usePathname();

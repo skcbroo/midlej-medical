@@ -202,6 +202,23 @@ export const OBJETIVOS_CONSENT_TEXT =
   "Autorizo a Midlej Capital a entrar em contato pelo WhatsApp informado sobre o meu planejamento e concordo com a Política de Privacidade.";
 
 /* ─────────────────────────────────────────────────────────
+   LP /exercicios-findos — Antecipação de exercícios findos
+   Público: servidor público do DF com exercícios findos a receber.
+   Produto: cessão de crédito (a Midlej paga à vista e assume a espera).
+   NÃO é investimento — sem CVM, sem promessa de valor/prazo.
+   Canais: formulário (lead por e-mail) + WhatsApp com mensagem própria.
+   ───────────────────────────────────────────────────────── */
+
+export const EXFINDOS_WHATSAPP_MESSAGE =
+  "Olá! Sou servidor público do DF e quero antecipar meus exercícios findos com a Midlej.";
+export const EXFINDOS_WHATSAPP_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
+  EXFINDOS_WHATSAPP_MESSAGE,
+)}`;
+
+export const EXFINDOS_CONSENT_TEXT =
+  "Autorizo a Midlej Capital a entrar em contato pelo WhatsApp informado para analisar a antecipação dos meus exercícios findos e concordo com a Política de Privacidade.";
+
+/* ─────────────────────────────────────────────────────────
    LP /carta — Carta Midlej (newsletter de mercado)
    Topo de funil: captura de e-mail para a leitura semanal.
    Consentimento próprio de newsletter (opt-in de e-mail), com
