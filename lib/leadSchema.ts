@@ -11,6 +11,7 @@ import {
   BLINDAGEM_HORIZONTES,
   OBJETIVOS_PATRIMONIOS,
   OBJETIVOS_EXPERIENCIAS,
+  ADVOGADOS_FAIXAS,
 } from "./leadConstants";
 
 export { CONSENT_TEXT } from "./leadConstants";
@@ -45,10 +46,15 @@ export const RaioXLeadSchema = z.object({
   name: nome,
   whatsapp,
   email: z.string().trim().email("E-mail inválido").max(120),
-  situacao: z.enum(RAIOX_SITUACOES, { message: "Selecione uma opção" }),
-  // Qualificação OPCIONAL (CRO): capturamos o contato primeiro — menos
-  // fricção para o lead de alta intenção — e enriquecemos patrimônio/
-  // profissão depois, na tela de sucesso. "" (não informado) → undefined.
+  // Qualificação OPCIONAL (CRO / reposicionamento Goal-Based 17/08/2026):
+  // o hero captura só o contato mínimo (nome + WhatsApp + e-mail) para o
+  // lead de alta intenção não ter fricção. Situação, patrimônio e profissão
+  // são coletados DEPOIS, na fase de enriquecimento (tela de sucesso), e
+  // por isso são todos opcionais. "" (não informado) → undefined.
+  situacao: z.preprocess(
+    (v) => (v === "" || v == null ? undefined : v),
+    z.enum(RAIOX_SITUACOES, { message: "Selecione uma opção" }).optional(),
+  ),
   patrimonio: z.preprocess(
     (v) => (v === "" || v == null ? undefined : v),
     z.enum(RAIOX_PATRIMONIOS, { message: "Selecione uma faixa" }).optional(),
@@ -170,6 +176,46 @@ export const NewsletterSchema = z.object({
 });
 
 export type NewsletterInput = z.infer<typeof NewsletterSchema>;
+
+/* ─────────────────────────────────────────────────────────
+   LP /advogados — Antecipação de honorários (Nexos Ativos)
+   Captura de baixa fricção (5 campos): nome + nº da OAB + UF +
+   WhatsApp + faixa de honorários. OAB/UF sinaliza que é advogado
+   e ajuda a qualificar. Cessão de crédito — NÃO é investimento.
+   ───────────────────────────────────────────────────────── */
+
+// Número da OAB: dígitos (às vezes com letra de suplência); tolerante
+// a pontos/traços que o advogado possa digitar. Só valida forma mínima.
+const oab = z
+  .string()
+  .trim()
+  .min(3, "Informe o número da sua OAB")
+  .max(20, "Número muito longo")
+  .regex(/^[0-9A-Za-z.\-/\s]+$/, "Use apenas números e letras");
+
+export const AdvogadosLeadSchema = z.object({
+  name: nome,
+  oab,
+  uf: z.enum(BR_UFS, { message: "Selecione a UF da sua OAB" }),
+  whatsapp,
+  faixa: z.enum(ADVOGADOS_FAIXAS, { message: "Selecione uma faixa" }),
+});
+
+export type AdvogadosLeadInput = z.infer<typeof AdvogadosLeadSchema>;
+
+/**
+ * Score de atendimento da /advogados. A = quente, B = morno, C = frio.
+ * Roteia a velocidade do contato; não exclui ninguém. A faixa de
+ * honorários é o principal driver de ticket da operação de cessão.
+ */
+export function advogadosScore(lead: AdvogadosLeadInput): "A" | "B" | "C" {
+  const { faixa } = lead;
+  if (faixa === "Acima de R$ 500 mil" || faixa === "R$ 200 mil a R$ 500 mil") {
+    return "A";
+  }
+  if (faixa === "R$ 50 mil a R$ 200 mil") return "B";
+  return "C"; // Até R$ 50 mil ou "Prefiro informar depois"
+}
 
 /**
  * Score de atendimento da /blindagem. A = quente, B = morno, C = frio.

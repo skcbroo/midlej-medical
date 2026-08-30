@@ -227,3 +227,37 @@ export const EXFINDOS_CONSENT_TEXT =
 
 export const NEWSLETTER_CONSENT_TEXT =
   "Autorizo a Midlej Capital a me enviar a Carta Midlej e comunicações por e-mail. Posso cancelar quando quiser.";
+
+/* ─────────────────────────────────────────────────────────
+   LP /advogados — Antecipação de honorários (Nexos Ativos)
+   Frente B2B jurídica. NÃO é investimento (sem CVM) e NÃO é a
+   marca Midlej/CFO: é a Nexos Ativos (braço de originação do
+   Grupo Midlej) falando com ADVOGADOS trabalhistas.
+   Produto: cessão de crédito (art. 286 CC) dos honorários do
+   próprio advogado — sucumbência (direito autônomo, art. 23
+   EOAB) e/ou contratuais. Pagamento à vista.
+   ⚠️ Sem prometer deságio/valor garantido; sem "grátis"
+   ("sem taxa de análise"); sem comissão por indicação; a Nexos
+   NÃO presta serviços jurídicos.
+   Canais: formulário (lead por e-mail) + WhatsApp próprio.
+   ───────────────────────────────────────────────────────── */
+
+export const ADVOGADOS_WHATSAPP_MESSAGE =
+  "Olá! Sou advogado(a) e quero uma proposta de antecipação dos meus honorários.";
+export const ADVOGADOS_WHATSAPP_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
+  ADVOGADOS_WHATSAPP_MESSAGE,
+)}`;
+
+// Faixa de honorários a antecipar (roteia o atendimento, não exclui).
+// A última opção é escape de baixa fricção para o cético.
+export const ADVOGADOS_FAIXAS = [
+  "Até R$ 50 mil",
+  "R$ 50 mil a R$ 200 mil",
+  "R$ 200 mil a R$ 500 mil",
+  "Acima de R$ 500 mil",
+  "Prefiro informar depois",
+] as const;
+export type AdvogadosFaixa = (typeof ADVOGADOS_FAIXAS)[number];
+
+export const ADVOGADOS_CONSENT_TEXT =
+  "Autorizo a Nexos Ativos (Grupo Midlej) a entrar em contato pelo WhatsApp informado para analisar a antecipação dos meus honorários e concordo com a Política de Privacidade.";

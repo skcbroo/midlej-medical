@@ -11,6 +11,8 @@ import {
   objetivosScore,
   ExFindosLeadSchema,
   NewsletterSchema,
+  AdvogadosLeadSchema,
+  advogadosScore,
   CONSENT_TEXT,
 } from "./leadSchema";
 import {
@@ -19,6 +21,7 @@ import {
   OBJETIVOS_CONSENT_TEXT,
   EXFINDOS_CONSENT_TEXT,
   NEWSLETTER_CONSENT_TEXT,
+  ADVOGADOS_CONSENT_TEXT,
 } from "./leadConstants";
 import { env } from "./env";
 
@@ -163,9 +166,10 @@ export async function submitRaioXLead(
 
   const { name, whatsapp, email, situacao, patrimonio, profissao } = parsed.data;
   const score = raioxScore(parsed.data);
-  // Enriquecido = já veio com a qualificação (patrimônio/profissão) preenchida
-  // na tela de sucesso. Captura = 1º envio, só com contato + situação.
-  const enriched = Boolean(patrimonio || profissao);
+  // Enriquecido = já veio com a qualificação (situação/patrimônio/profissão)
+  // preenchida na tela de sucesso. Captura = 1º envio, só com contato mínimo
+  // (nome + WhatsApp + e-mail — reposicionamento Goal-Based 17/08/2026).
+  const enriched = Boolean(situacao || patrimonio || profissao);
 
   try {
     const resend = new Resend(env.RESEND_API_KEY);
@@ -182,7 +186,7 @@ export async function submitRaioXLead(
           <table style="width:100%;border-collapse:collapse">
             <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D;width:130px">WhatsApp</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${whatsapp}</td></tr>
             <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">E-mail</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${email}</td></tr>
-            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">Situação</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${situacao}</td></tr>
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">Situação</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${situacao || "— a confirmar"}</td></tr>
             <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">Patrimônio</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${patrimonio || "— a confirmar"}</td></tr>
             <tr><td style="padding:10px 0;font-size:12px;color:#6B7B8D">Profissão</td><td style="padding:10px 0;font-size:15px;font-weight:600;color:#2E4659">${profissao || "— a confirmar"}</td></tr>
           </table>
@@ -467,6 +471,100 @@ export async function submitExFindosLead(
     return { kind: "success" };
   } catch (err) {
     console.error("[submitExFindosLead] resend unreachable", err instanceof Error ? err.message : err);
+    return { kind: "error", message: "Não conseguimos enviar agora. Tente novamente em instantes." };
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   LP /advogados — Antecipação de honorários (Nexos Ativos)
+   Captura: nome + OAB + UF + WhatsApp + faixa de honorários.
+   Advogado trabalhista antecipando os PRÓPRIOS honorários por
+   cessão de crédito. NÃO é investimento — sem CVM.
+   ───────────────────────────────────────────────────────── */
+
+export type AdvogadosFormState =
+  | { kind: "idle" }
+  | { kind: "success" }
+  | {
+      kind: "error";
+      message?: string;
+      fields?: Partial<Record<string, string[]>>;
+      values?: {
+        name: string;
+        oab: string;
+        uf: string;
+        whatsapp: string;
+        faixa: string;
+      };
+    };
+
+function readAdvogadosValues(formData: FormData) {
+  return {
+    name: (formData.get("name") ?? "").toString(),
+    oab: (formData.get("oab") ?? "").toString(),
+    uf: (formData.get("uf") ?? "").toString(),
+    whatsapp: (formData.get("whatsapp") ?? "").toString(),
+    faixa: (formData.get("faixa") ?? "").toString(),
+  };
+}
+
+const ADVOGADOS_SCORE_LABEL: Record<"A" | "B" | "C", string> = {
+  A: "A · QUENTE — WhatsApp humano em até 15 min",
+  B: "B · MORNO — WhatsApp em até 2 h",
+  C: "C · FRIO — automação + material",
+};
+
+export async function submitAdvogadosLead(
+  _prev: AdvogadosFormState,
+  formData: FormData,
+): Promise<AdvogadosFormState> {
+  const honeypot = (formData.get("website") ?? "").toString();
+  if (honeypot.length > 0) return { kind: "success" };
+
+  const values = readAdvogadosValues(formData);
+  const parsed = AdvogadosLeadSchema.safeParse(values);
+
+  if (!parsed.success) {
+    return {
+      kind: "error",
+      fields: parsed.error.flatten().fieldErrors as Record<string, string[]>,
+      values,
+    };
+  }
+
+  const { name, oab, uf, whatsapp, faixa } = parsed.data;
+  const score = advogadosScore(parsed.data);
+
+  try {
+    const resend = new Resend(env.RESEND_API_KEY);
+
+    const { error } = await resend.emails.send({
+      from: `Nexos Ativos <onboarding@${env.RESEND_FROM_DOMAIN}>`,
+      to: env.LEAD_EMAIL,
+      subject: `Antecipação de honorários · Lead ${score} — ${name} (OAB ${oab}/${uf})`,
+      html: `
+        <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:32px 24px;background:#F5F7FA;border-radius:12px">
+          <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C9A84C">Novo lead · Nexos Ativos · Antecipação de honorários</p>
+          <h2 style="margin:0 0 8px;font-size:22px;color:#1B2949">${name}</h2>
+          <p style="margin:0 0 24px;display:inline-block;padding:6px 12px;border-radius:6px;background:#1B2949;color:#fff;font-size:12px;font-weight:700">${ADVOGADOS_SCORE_LABEL[score]}</p>
+          <table style="width:100%;border-collapse:collapse">
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D;width:150px">OAB / UF</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#1B2949">${oab} / ${uf}</td></tr>
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">WhatsApp</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#1B2949">${whatsapp}</td></tr>
+            <tr><td style="padding:10px 0;font-size:12px;color:#6B7B8D">Faixa de honorários</td><td style="padding:10px 0;font-size:15px;font-weight:600;color:#1B2949">${faixa}</td></tr>
+          </table>
+          <p style="margin:24px 0 0;font-size:11px;color:#9BA8B5">${ADVOGADOS_CONSENT_TEXT}</p>
+        </div>
+      `,
+    });
+
+    if (error) {
+      console.error("[submitAdvogadosLead] resend error", JSON.stringify(error));
+      return { kind: "error", message: "Algo deu errado. Tente novamente em instantes." };
+    }
+
+    return { kind: "success" };
+  } catch (err) {
+    console.error("[submitAdvogadosLead] resend unreachable", err instanceof Error ? err.message : err);
     return { kind: "error", message: "Não conseguimos enviar agora. Tente novamente em instantes." };
   }
 }
