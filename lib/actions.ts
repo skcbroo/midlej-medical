@@ -13,6 +13,8 @@ import {
   NewsletterSchema,
   AdvogadosLeadSchema,
   advogadosScore,
+  SpecialSituationsLeadSchema,
+  specialScore,
   CONSENT_TEXT,
 } from "./leadSchema";
 import {
@@ -22,6 +24,7 @@ import {
   EXFINDOS_CONSENT_TEXT,
   NEWSLETTER_CONSENT_TEXT,
   ADVOGADOS_CONSENT_TEXT,
+  SPECIAL_CONSENT_TEXT,
 } from "./leadConstants";
 import { env } from "./env";
 
@@ -565,6 +568,98 @@ export async function submitAdvogadosLead(
     return { kind: "success" };
   } catch (err) {
     console.error("[submitAdvogadosLead] resend unreachable", err instanceof Error ? err.message : err);
+    return { kind: "error", message: "Não conseguimos enviar agora. Tente novamente em instantes." };
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   LP /special-situations — Investimento em ativos judiciais
+   trabalhistas. Captação de investidor por AGENDAMENTO de conversa.
+   Captura: nome + e-mail + telefone + faixa de capital (opcional).
+   NÃO é consultoria de valores mobiliários (sem CVM).
+   ───────────────────────────────────────────────────────── */
+
+export type SpecialFormState =
+  | { kind: "idle" }
+  | { kind: "success" }
+  | {
+      kind: "error";
+      message?: string;
+      fields?: Partial<Record<string, string[]>>;
+      values?: {
+        name: string;
+        email: string;
+        whatsapp: string;
+        faixa: string;
+      };
+    };
+
+function readSpecialValues(formData: FormData) {
+  return {
+    name: (formData.get("name") ?? "").toString(),
+    email: (formData.get("email") ?? "").toString(),
+    whatsapp: (formData.get("whatsapp") ?? "").toString(),
+    faixa: (formData.get("faixa") ?? "").toString(),
+  };
+}
+
+const SPECIAL_SCORE_LABEL: Record<"A" | "B" | "C", string> = {
+  A: "A · QUENTE — contato humano em até 15 min",
+  B: "B · MORNO — contato em até 2 h",
+  C: "C · FRIO — automação + material",
+};
+
+export async function submitSpecialLead(
+  _prev: SpecialFormState,
+  formData: FormData,
+): Promise<SpecialFormState> {
+  const honeypot = (formData.get("website") ?? "").toString();
+  if (honeypot.length > 0) return { kind: "success" };
+
+  const values = readSpecialValues(formData);
+  const parsed = SpecialSituationsLeadSchema.safeParse(values);
+
+  if (!parsed.success) {
+    return {
+      kind: "error",
+      fields: parsed.error.flatten().fieldErrors as Record<string, string[]>,
+      values,
+    };
+  }
+
+  const { name, email, whatsapp, faixa } = parsed.data;
+  const score = specialScore(parsed.data);
+
+  try {
+    const resend = new Resend(env.RESEND_API_KEY);
+
+    const { error } = await resend.emails.send({
+      from: `Midlej Site <onboarding@${env.RESEND_FROM_DOMAIN}>`,
+      to: env.LEAD_EMAIL,
+      subject: `Special Situations · Lead ${score} — ${name}`,
+      html: `
+        <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:32px 24px;background:#F5F7FA;border-radius:12px">
+          <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#B89840">Novo lead · Ativos judiciais (Special Situations)</p>
+          <h2 style="margin:0 0 8px;font-size:22px;color:#2E4659">${name}</h2>
+          <p style="margin:0 0 24px;display:inline-block;padding:6px 12px;border-radius:6px;background:#2E4659;color:#fff;font-size:12px;font-weight:700">${SPECIAL_SCORE_LABEL[score]}</p>
+          <table style="width:100%;border-collapse:collapse">
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D;width:150px">E-mail</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${email}</td></tr>
+            <tr><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:12px;color:#6B7B8D">Telefone</td><td style="padding:10px 0;border-bottom:1px solid #EDEFF2;font-size:15px;font-weight:600;color:#2E4659">${whatsapp}</td></tr>
+            <tr><td style="padding:10px 0;font-size:12px;color:#6B7B8D">Faixa de capital</td><td style="padding:10px 0;font-size:15px;font-weight:600;color:#2E4659">${faixa || "— a confirmar na conversa"}</td></tr>
+          </table>
+          <p style="margin:24px 0 0;font-size:11px;color:#9BA8B5">${SPECIAL_CONSENT_TEXT}</p>
+        </div>
+      `,
+    });
+
+    if (error) {
+      console.error("[submitSpecialLead] resend error", JSON.stringify(error));
+      return { kind: "error", message: "Algo deu errado. Tente novamente em instantes." };
+    }
+
+    return { kind: "success" };
+  } catch (err) {
+    console.error("[submitSpecialLead] resend unreachable", err instanceof Error ? err.message : err);
     return { kind: "error", message: "Não conseguimos enviar agora. Tente novamente em instantes." };
   }
 }

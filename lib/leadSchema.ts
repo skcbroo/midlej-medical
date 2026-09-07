@@ -12,6 +12,7 @@ import {
   OBJETIVOS_PATRIMONIOS,
   OBJETIVOS_EXPERIENCIAS,
   ADVOGADOS_FAIXAS,
+  SPECIAL_FAIXAS,
 } from "./leadConstants";
 
 export { CONSENT_TEXT } from "./leadConstants";
@@ -215,6 +216,42 @@ export function advogadosScore(lead: AdvogadosLeadInput): "A" | "B" | "C" {
   }
   if (faixa === "R$ 50 mil a R$ 200 mil") return "B";
   return "C"; // Até R$ 50 mil ou "Prefiro informar depois"
+}
+
+/* ─────────────────────────────────────────────────────────
+   LP /special-situations — Investimento em ativos judiciais
+   Captura de baixa fricção (agendar conversa): nome + e-mail +
+   telefone + faixa de capital (OPCIONAL). A faixa só roteia o
+   atendimento; "" (não informado) → undefined. NÃO é investimento
+   regulado por valores mobiliários (sem CVM).
+   ───────────────────────────────────────────────────────── */
+
+export const SpecialSituationsLeadSchema = z.object({
+  name: nome,
+  email: z.string().trim().email("E-mail inválido").max(120),
+  whatsapp,
+  faixa: z.preprocess(
+    (v) => (v === "" || v == null ? undefined : v),
+    z.enum(SPECIAL_FAIXAS, { message: "Selecione uma faixa" }).optional(),
+  ),
+});
+
+export type SpecialSituationsLeadInput = z.infer<typeof SpecialSituationsLeadSchema>;
+
+/**
+ * Score de atendimento da /special-situations. A = quente, B = morno,
+ * C = frio. Roteia a velocidade do contato; não exclui ninguém. A faixa
+ * de capital é o único driver; sem faixa informada → B (contato veio por
+ * agendamento de alta intenção, mas ainda sem ticket).
+ */
+export function specialScore(lead: SpecialSituationsLeadInput): "A" | "B" | "C" {
+  const { faixa } = lead;
+  if (faixa === "Acima de R$ 2 milhões" || faixa === "R$ 500 mil a R$ 2 milhões") {
+    return "A";
+  }
+  if (faixa === "R$ 100 mil a R$ 500 mil") return "B";
+  if (!faixa || faixa === "Prefiro informar na conversa") return "B";
+  return "C"; // Até R$ 100 mil
 }
 
 /**

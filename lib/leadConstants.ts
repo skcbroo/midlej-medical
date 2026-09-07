@@ -261,3 +261,35 @@ export type AdvogadosFaixa = (typeof ADVOGADOS_FAIXAS)[number];
 
 export const ADVOGADOS_CONSENT_TEXT =
   "Autorizo a Nexos Ativos (Grupo Midlej) a entrar em contato pelo WhatsApp informado para analisar a antecipação dos meus honorários e concordo com a Política de Privacidade.";
+
+/* ─────────────────────────────────────────────────────────
+   LP /special-situations — Investimento em ativos judiciais
+   trabalhistas (special situations / direitos creditórios).
+   Público: investidor com capital buscando um ativo real e
+   descorrelacionado. NÃO é consultoria de valores mobiliários
+   (sem CVM). Captação de investidor por AGENDAMENTO de conversa.
+   ⚠️ Sem prometer rentabilidade/retorno; sem "grátis". A faixa de
+   capital ROTEIA a conversa (score interno) — não exclui ninguém
+   nem aparece como ticket mínimo na copy.
+   ───────────────────────────────────────────────────────── */
+
+export const SPECIAL_WHATSAPP_MESSAGE =
+  "Olá! Tenho capital para investir e quero entender os ativos judiciais trabalhistas da Midlej.";
+export const SPECIAL_WHATSAPP_HREF = `${MIDLEJ_WHATSAPP_HREF}?text=${encodeURIComponent(
+  SPECIAL_WHATSAPP_MESSAGE,
+)}`;
+
+// Faixa de capital disponível para investir (OPCIONAL). Só ROTEIA o
+// atendimento (score interno) — não é barreira de exclusão e não aparece
+// como ticket mínimo na página. Última opção = escape de baixa fricção.
+export const SPECIAL_FAIXAS = [
+  "Até R$ 100 mil",
+  "R$ 100 mil a R$ 500 mil",
+  "R$ 500 mil a R$ 2 milhões",
+  "Acima de R$ 2 milhões",
+  "Prefiro informar na conversa",
+] as const;
+export type SpecialFaixa = (typeof SPECIAL_FAIXAS)[number];
+
+export const SPECIAL_CONSENT_TEXT =
+  "Autorizo a Midlej a entrar em contato pelo telefone e e-mail informados para agendar uma conversa sobre o investimento em ativos judiciais e concordo com a Política de Privacidade.";
